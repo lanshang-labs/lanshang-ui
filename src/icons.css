@@ -1,0 +1,5 @@
+.platform-icon { display:inline-flex; align-items:center; justify-content:center; vertical-align:-.125em; line-height:1; flex-shrink:0; }
+.platform-icon svg {display:block;}
+.platform-icon-spin svg {animation:platform-icon-rotate 1s linear infinite;}
+@keyframes platform-icon-rotate {to{transform:rotate(360deg);}}
+@media(prefers-reduced-motion:reduce){.platform-icon-spin svg{animation:none;}}

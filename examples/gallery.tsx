@@ -1,0 +1,7 @@
+import React from 'react';
+import {createRoot} from 'react-dom/client';
+import {BoomerangProvider,ThemeSwitch,BeautifulSurface,DataTable,TaskRows,CodeBlock,BeautifulTabs} from '../dist/index.js';
+import '../dist/styles.css';
+function Gallery(){const [tab,setTab]=React.useState('components');return <BoomerangProvider><main style={{maxWidth:980,margin:'40px auto',padding:24,color:'var(--ui-text)',fontFamily:'var(--ds-font)'}}><h1>Boomerang UI <small>v0.1</small></h1><p>Ant Design · Beautiful UI · Iconoir</p><ThemeSwitch/><BeautifulTabs items={[{key:'components',label:'组件展示'},{key:'contract',label:'接入约定'}]} activeKey={tab} onChange={setTab}/>{tab==='components'?<div style={{display:'grid',gap:24,marginTop:24}}><BeautifulSurface title="应用与服务"><DataTable rowKey="id" pagination={false} columns={[{title:'服务',dataIndex:'name'},{title:'版本',dataIndex:'version'},{title:'状态',dataIndex:'status'}]} dataSource={[{id:1,name:'系统管理服务',version:'v1.8.1',status:'正常'},{id:2,name:'认证服务',version:'v1.8.1',status:'正常'}]}/></BeautifulSurface><TaskRows rows={[{key:'1',label:'构建完成',amount:'18 秒',status:'done',details:[{label:'产物校验通过',meta:'SHA256'}]},{key:'2',label:'等待发布',amount:'尚未开始',status:'queued',details:[]}]} labels={{completed:'完成',failed:'失败'}}/><CodeBlock/></div>:<p>库负责视觉、主题和交互基础；请求、权限、发布状态及业务规则由应用负责。</p>}</main></BoomerangProvider>}
+createRoot(document.getElementById('root')!).render(<Gallery/>);
+document.body.style.cssText='margin:0;background:var(--ui-canvas)';

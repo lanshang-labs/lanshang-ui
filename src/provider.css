@@ -1,0 +1,6 @@
+.platform-theme-switch { display:flex; align-items:center; justify-content:space-between; gap:8px; padding:16px 18px; border-top:1px solid var(--ui-line); flex-shrink:0; }
+.theme-switch-label { font-size:11px; color:var(--ui-muted); }
+.platform-theme-switch .ant-btn { color:var(--ui-muted); background:transparent; border-color:var(--ui-line); }
+.platform-theme-switch .ant-btn.is-selected { background:var(--ui-selected); color:var(--ui-text); }
+.platform-theme-switch.is-compact { padding:12px 6px; justify-content:center; }
+.platform-theme-switch.is-compact .ant-btn { width:28px; }

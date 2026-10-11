@@ -1,0 +1,29 @@
+/* Platform-owned adapters around the vendored Beautiful UI primitives. */
+.bui { --font-inter:"Inter Variable",Inter,system-ui,sans-serif; --font-jetbrains-mono:ui-monospace,monospace; font-family:var(--font-inter); color:var(--ink); }
+.bui-navigation { flex:1; min-height:0; overflow:auto; padding:0 6px; }
+.bui-navigation .sidebar-row { width:calc(100% - 16px); min-height:34px; cursor:pointer; }
+.bui-navigation .sidebar-row:hover,.bui-top-nav .sidebar-row:hover { background:var(--hover-2); }
+.bui-nav-children { margin-left:23px; border-left:1px solid var(--line-strong); }
+.ant-layout-sider-collapsed .bui-navigation .sidebar-copy { display:none; }
+.ant-layout-sider-collapsed .bui-nav-children { margin-left:0; }
+.ant-layout-sider-collapsed .bui-navigation .sidebar-row { justify-content:center; padding:0; }
+.bui-top-nav { display:flex; align-items:center; gap:4px; min-width:0; overflow-x:auto; }
+.bui-top-nav .sidebar-row { margin:0; padding:0 12px; white-space:nowrap; cursor:pointer; }
+.bui-top-nav .sidebar-row>span:first-child:empty { display:none; }
+.bui-top-nav .sidebar-copy { margin-left:0; font-size:13px; }
+.bui-surface { height:100%; display:flex; flex-direction:column; }
+.bui-surface .primitive-card-bar { min-height:52px; padding:12px 16px; }
+.bui-surface-body { padding:16px; display:flex; flex-direction:column; flex:1; }
+.bui-task-rows { max-width:none!important; min-height:0!important; }
+.bui-code-block { max-width:none!important; max-height:430px; overflow:auto!important; }
+.bui-code-block button { cursor:pointer; }
+.bui-surface .ant-btn,.bui-surface .ant-tag { font-family:inherit; }
+@media(prefers-reduced-motion:reduce){.bui * { animation:none!important; transition:none!important; }}
+
+.bui-top-nav .sidebar-row { width:auto!important; flex-shrink:0; }
+.bui-navigation .sidebar-row {display:flex;align-items:center;justify-content:flex-start;}
+.bui-navigation .sidebar-copy {text-align:left;}
+.bui-top-nav { flex:0 1 auto; }
+.bui-loading-label {display:inline-flex;align-items:center;gap:9px;vertical-align:middle;line-height:1.6;}
+.bui-loading-label>span:last-child {background-clip:text;-webkit-background-clip:text;color:transparent;}
+@media(prefers-reduced-motion:reduce){.bui-loading-label>span:last-child{background:none!important;color:var(--ink-2);}}
