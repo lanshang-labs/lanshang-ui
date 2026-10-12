@@ -15,13 +15,17 @@ export type {PageHeaderProps} from "./PageHeader.js";
 export {ContentState} from "./ContentState.js";
 export type {ContentStateProps} from "./ContentState.js";
 export {MetadataList} from "./MetadataList.js";
-export type {MetadataItem} from "./MetadataList.js";
+export type {MetadataItem, MetadataListProps} from "./MetadataList.js";
 
 export {StatusTag} from "./StatusTag.js";
+export type {StatusTagProps, StatusTone} from "./StatusTag.js";
 
 export {SearchField} from "./SearchField.js";
+export type {InputRef as SearchFieldRef} from "antd";
 export type {SearchFieldProps} from "./SearchField.js";
 export {RowActionButton} from "./RowActionButton.js";
 
 export {NavigationLink} from "./NavigationLink.js";
 export type {NavigationLinkProps} from "./NavigationLink.js";
+
+export type {LoadingLabelProps} from "./beautiful-ui/LoadingLabel.js";

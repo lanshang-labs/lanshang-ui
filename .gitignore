@@ -2,3 +2,7 @@ node_modules/
 dist/
 *.tgz
 site-dist/
+
+.registry-build/
+public/r/
+public/packages/

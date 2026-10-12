@@ -7,5 +7,7 @@
     "examples",
     "website"
   ],
-  "exclude": []
+  "exclude": [
+    "examples/registry-consumer"
+  ]
 }

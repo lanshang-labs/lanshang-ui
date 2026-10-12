@@ -25,7 +25,8 @@ function LoaderGrid({
 }
 
 
-export default function LoadingLabel({label}:{label:string}) {
+export type LoadingLabelProps = {label:string; announce?:boolean};
+export default function LoadingLabel({label,announce=true}:LoadingLabelProps) {
 const resolvedLabel=label;
   const labelEl = (
     <span
@@ -40,5 +41,5 @@ const resolvedLabel=label;
       {resolvedLabel}
     </span>
   );
-return <span role="status" className="bui bui-loading-label"><LoaderGrid delays={Array.from({length:9},(_,i)=>(i%3+Math.abs(Math.floor(i/3)-1))*90)} dur={650} round={false}/>{labelEl}</span>;
+return <span role={announce?"status":undefined} className="bui bui-loading-label"><LoaderGrid delays={Array.from({length:9},(_,i)=>(i%3+Math.abs(Math.floor(i/3)-1))*90)} dur={650} round={false}/>{labelEl}</span>;
 }

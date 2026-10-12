@@ -82,3 +82,21 @@ npm run preview:docs -- --port 5178
 将旧包导入替换为 `@lanshang-labs/ui`，样式路径替换为 `@lanshang-labs/ui/styles.css`，Provider 推荐使用 `LanshangProvider`。`BoomerangProvider` 保留为兼容别名；默认主题存储键暂时保留以兼容既有偏好，新应用应显式传入自己的 `storageKey`。CSS 类名保持兼容，业务权限、路由与请求不进入本库。
 
 本仓库开源不代表已发布 npm 包。当前可运行 `npm ci && npm pack` 生成版本化 tgz，再由项目安装；MIT 和第三方许可包含在包内。
+
+
+## 0.2.1 API 补齐
+
+`StatusTagProps` 继承 AntD TagProps（排除 color，由 tone 管理），支持 title、style、className、aria 属性、关闭事件和 ref。未知状态的文字与提示仍由业务映射。
+
+`SearchField` 支持 `ref<SearchFieldRef>` 的 focus/blur/select；onChange 返回字符串，可直接与 Form.Item name 绑定。Enter 在中文输入组合中或被 onPressEnter.preventDefault() 取消时不会查询；清空继续调用 onClear 和 onSearch("")。
+
+兼容性基线：React / React DOM 18.3.1、AntD 5.22.5；旧 BoomerangProvider 别名保留。React 19、AntD 6 和 SSR 尚未验证，不扩大 peer 声明。
+
+
+## 0.2.2 展示组件 API
+
+PageHeader、ContentState、MetadataList 支持根元素的标准 HTML 属性和 ref（各自内容槽位由专用 props 提供）。PageHeader 的 headingLevel 默认 2，可按文档结构选择 1–6；headingId 用于标题关联，meta={0} 仍然显示。ContentState 默认为 role=status / polite，错误可用 role=alert / assertive；aria-live 可显式覆盖，aria-busy 始终由 loading 决定。组件不自动重试或推断成功。MetadataList 保留 dl/dt/dd 语义以及零值、空字符串和富文本。
+
+### 架构与组合区块
+
+[架构与分发](doc/architecture.md)说明基础组件、AntD 适配与应用源码区块的边界。文档站提供三栏导航、交互预览、代码和列表/详情/侧栏区块源码下载。区块可复制定制，核心仍通过版本包维护；Registry 安装通过官方 shadcn CLI 实现，见 [Registry 接入](doc/registry.md)。

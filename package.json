@@ -1,6 +1,6 @@
 {
   "name": "@lanshang-labs/ui",
-  "version": "0.2.0",
+  "version": "0.2.2",
   "description": "Lanshang UI: compact interfaces built on Ant Design, Beautiful UI and Iconoir",
   "type": "module",
   "license": "MIT",
@@ -35,8 +35,10 @@
     "dev": "vite --host 127.0.0.1",
     "check:examples": "tsc --noEmit -p tsconfig.examples.json",
     "prepack": "npm run build",
-    "build:docs": "npm run build && npm run check:examples && vite build --config vite.docs.config.ts && node scripts/docs-notices.mjs",
-    "preview:docs": "vite preview --config vite.docs.config.ts --host 127.0.0.1"
+    "build:docs": "npm run build && npm run check:examples && LANSHANG_REGISTRY_OUT=.registry-build/public LANSHANG_REGISTRY_BASE=https://lanshang-labs.github.io/lanshang-ui/ node scripts/build-registry.mjs && vite build --config vite.docs.config.ts && node scripts/docs-notices.mjs",
+    "preview:docs": "vite preview --config vite.docs.config.ts --host 127.0.0.1",
+    "build:registry": "npm run build && node scripts/build-registry.mjs",
+    "test:registry": "node scripts/verify-registry.mjs"
   },
   "peerDependencies": {
     "antd": "^5.22.5",
@@ -55,6 +57,7 @@
     "jsdom": "26.1.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",
+    "shadcn": "4.21.4",
     "typescript": "5.7.2",
     "vite": "6.4.4",
     "vitest": "5.0.3"

@@ -1,0 +1,2 @@
+body {margin:0;background:var(--ui-canvas);color:var(--ui-text);font-family:var(--ds-font)}
+main {max-width:960px;margin:40px auto;padding:24px}main>header{display:flex;align-items:center;justify-content:space-between;gap:20px}main>section,main>div{margin-top:32px;padding:24px;border:1px solid var(--ui-line);border-radius:12px}h1{font-size:24px}
