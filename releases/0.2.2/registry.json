@@ -1,0 +1,40 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "lanshang-ui",
+  "homepage": "https://lanshang-labs.github.io/lanshang-ui/",
+  "items": [
+    {
+      "name": "lanshang-provider",
+      "type": "registry:block",
+      "title": "Lanshang Provider",
+      "description": "Application theme provider and package stylesheet.",
+      "dependencies": [
+        "@lanshang-labs/ui@https://lanshang-labs.github.io/lanshang-ui/packages/lanshang-labs-ui-0.2.2-839c09b79a48.tgz",
+        "antd@5.22.5"
+      ],
+      "files": [
+        {
+          "path": "registry/provider.tsx",
+          "type": "registry:file",
+          "target": "src/components/lanshang/provider.tsx"
+        }
+      ]
+    },
+    {
+      "name": "lanshang-blocks",
+      "type": "registry:block",
+      "title": "Lanshang Blocks",
+      "description": "Project list, details and sidebar source examples.",
+      "registryDependencies": [
+        "https://lanshang-labs.github.io/lanshang-ui/r/lanshang-provider.json"
+      ],
+      "files": [
+        {
+          "path": ".registry-build/lanshang-blocks.tsx",
+          "type": "registry:file",
+          "target": "src/components/lanshang/blocks.tsx"
+        }
+      ]
+    }
+  ]
+}

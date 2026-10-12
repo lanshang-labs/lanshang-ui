@@ -6,3 +6,5 @@ site-dist/
 .registry-build/
 public/r/
 public/packages/
+
+!releases/**/*.tgz

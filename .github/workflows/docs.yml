@@ -17,6 +17,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm test
+      - run: npm run check:published-history
+      - run: npm run test:registry:ci
       - run: npm run build:docs
       - uses: actions/upload-pages-artifact@v3
         with:

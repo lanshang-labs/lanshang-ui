@@ -1,3 +1,4 @@
+import {restoreHistory} from './release-history.mjs';
 import {readFileSync, writeFileSync, mkdirSync, renameSync} from 'node:fs';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
@@ -9,6 +10,7 @@ const base=new URL(process.env.LANSHANG_REGISTRY_BASE || 'http://127.0.0.1:5177/
 if(!['http:','https:'].includes(base.protocol)||base.search||base.hash||base.username||base.password) throw new Error('Registry base must be an HTTP(S) directory URL without credentials/query/hash');
 if(!base.pathname.endsWith('/'))base.pathname+='/';
 const output=process.env.LANSHANG_REGISTRY_OUT || 'public';
+const history=restoreHistory(output);
 const pkg=JSON.parse(readFileSync('package.json','utf8'));
 for(const dir of [`${output}/r`,`${output}/packages`,'.registry-build'])mkdirSync(dir,{recursive:true});
 const packed=JSON.parse(execFileSync('npm',['pack','--ignore-scripts','--json','--pack-destination',`${output}/packages`],{encoding:'utf8'}))[0];
@@ -17,6 +19,7 @@ const hash=createHash('sha256').update(readFileSync(packedPath)).digest('hex');
 const filename=`lanshang-labs-ui-${pkg.version}-${hash.slice(0,12)}.tgz`;
 renameSync(packedPath,resolve(`${output}/packages`,filename));
 const url=path=>new URL(path,base).href;
+if(history.includes(pkg.version))throw new Error('Published version is immutable; bump package version before building');
 const file=(path,target)=>({path,type:'registry:file',target});
 const source=readFileSync('website/blocks.tsx','utf8').replace("'../dist/index.js'","'@lanshang-labs/ui'").replace("'../dist/icons.js'","'@lanshang-labs/ui/icons'");
 writeFileSync('.registry-build/lanshang-blocks.tsx',source);
@@ -27,4 +30,11 @@ const items=[
 writeFileSync('.registry-build/registry.json',JSON.stringify({$schema:'https://ui.shadcn.com/schema/registry.json',name:'lanshang-ui',homepage:'https://lanshang-labs.github.io/lanshang-ui/',items},null,2));
 execFileSync(resolve('node_modules/.bin/shadcn'),['build','.registry-build/registry.json','--output',`${output}/r`],{stdio:'inherit'});
 writeFileSync(`${output}/r/build-info.json`,JSON.stringify({version:pkg.version,cli:pkg.devDependencies.shadcn,package:url(`packages/${filename}`),sha256:hash},null,2));
+// Only copy the current entry files; never nest history snapshots.
+for(const name of ['registry.json','lanshang-provider.json','lanshang-blocks.json','build-info.json']){
+ mkdirSync(`${output}/r/v${pkg.version}`,{recursive:true});
+ let data=readFileSync(`${output}/r/${name}`,'utf8').replaceAll(url('r/lanshang-provider.json'),url(`r/v${pkg.version}/lanshang-provider.json`));
+ writeFileSync(`${output}/r/v${pkg.version}/${name}`,data);
+}
+writeFileSync(`${output}/r/versions.json`,JSON.stringify({current:pkg.version,versions:[...history,pkg.version]},null,2));
 console.log(`Registry ready: ${url('r/registry.json')}`);

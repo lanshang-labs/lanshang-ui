@@ -1,0 +1,10 @@
+{
+  "version": "0.2.2",
+  "files": {
+    "build-info.json": "be766d006794dda5c0e2106d0110c26e7368433a0784b899d324a3732ba88be8",
+    "registry.json": "53df3e0476967d37a23e0492e37db7e85ca7fc575e3609d8a8c4efb13b60f6b5",
+    "lanshang-labs-ui-0.2.2-839c09b79a48.tgz": "839c09b79a488097afa090286255730a684c936a01b0a6eafb0e4177fa303fe2",
+    "lanshang-provider.json": "edf2d17d1741ea8b1d7b90607e5e21c95d236a6b21a1e00268931b01d7f193c7",
+    "lanshang-blocks.json": "e17ac6c81d5883848760642e38447d4d6cc150c5056143b8a7bf8f9547475018"
+  }
+}

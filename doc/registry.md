@@ -40,3 +40,11 @@ npm 包尚未发布。构建使用 `npm pack` 生成包含许可证的 tgz，由
 运行 `npm run test:registry`，在全新临时目录执行真实 CLI 安装、独立 TypeScript/Vite 构建、重复安装与 dry-run 保留修改验证；需先启动本地 Registry。临时目录保留用于检查。联网安装依赖需要 npm 与 Registry 可达。
 
 协议参考：[shadcn Registry](https://ui.shadcn.com/docs/registry/getting-started)、[Registry item schema](https://ui.shadcn.com/docs/registry/registry-item-json)。
+
+## 历史版本与 CI（0.2.3）
+
+`releases/<version>/` 在 Git 中保存已发布包的原始字节、Registry 和 SHA-256 清单。构建校验后恢复全部旧 `packages/` 地址，并提供 `r/v<version>/` 固定入口；未带版本的 `r/` 指向当前构建。0.2.2 旧包地址保持不变，历史区块依赖固定到同版本 Provider。
+
+升级流程：先运行 `npm run archive:published` 归档当前线上版本（已有归档无需重复），审核并提交，再递增 package.json/package-lock 版本。禁止覆盖已有归档或复用已发布版本号。Pages 发布前执行 `check:published-history`，线上不可达、未归档或摘要不一致均失败。不要删除历史归档，否则旧 lockfile 会失效。
+
+CI 和 Pages 发布均执行 `npm run test:registry:ci`：启动临时 HTTP Registry，先安装 0.2.2 生成旧 lockfile，再构建新版，使用全新 npm 缓存执行旧项目 npm ci，最后验证新版 CLI 安装、构建、重复安装与 dry-run。临时服务器结束时关闭，不占用开发端口。此自动化不代表平台已上线。
