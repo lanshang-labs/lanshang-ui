@@ -25,3 +25,10 @@ test("disabled navigation cannot change the current page",()=>{
 });
 
 test("disabled sidebar items do not invoke route callbacks",()=>{const click=vi.fn();render(<BeautifulNavigation items={[{key:"x",label:"禁止入口",disabled:true}]} selectedKeys={[]} openKeys={[]} onOpenChange={()=>{}} onClick={click}/>);fireEvent.click(screen.getByRole("button",{name:"禁止入口"}));expect(click).not.toHaveBeenCalled();});
+test("collapsed groups expose children through a keyboard-usable popup",async()=>{
+ const click=vi.fn();render(<BeautifulNavigation collapsed items={[{key:"projects",label:"项目",children:[{key:"groups",label:"项目组"}]}]} selectedKeys={["groups"]} openKeys={[]} onOpenChange={()=>{}} onClick={click}/>);
+ expect(screen.queryByRole("button",{name:"项目组"})).toBeNull();
+ fireEvent.click(screen.getByRole("button",{name:"项目"}));
+ fireEvent.click(await screen.findByRole("button",{name:"项目组"}));
+ expect(click).toHaveBeenCalledWith({key:"groups"});
+});

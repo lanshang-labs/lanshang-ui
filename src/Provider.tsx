@@ -10,7 +10,7 @@ import { designTheme } from "./theme.js";
 type Mode = "light" | "dark";
 const ThemeContext = createContext<{mode:Mode; setMode:(mode:Mode)=>void}>({mode:"dark",setMode:()=>{}});
 export const useTheme = () => useContext(ThemeContext);
-export function BoomerangProvider({children, storageKey="boomerang.ui.theme", defaultMode="dark", locale}: {children:ReactNode; storageKey?:string; defaultMode?:Mode; locale?:ConfigProviderProps["locale"]}) {
+export function LanshangProvider({children, storageKey="boomerang.ui.theme", defaultMode="dark", locale}: {children:ReactNode; storageKey?:string; defaultMode?:Mode; locale?:ConfigProviderProps["locale"]}) {
   const [mode,setMode] = useState<Mode>(()=>{
     try { const saved=localStorage.getItem(storageKey); return saved==="light"||saved==="dark"?saved:defaultMode; } catch { return defaultMode; }
   });
@@ -29,3 +29,6 @@ export function ThemeSwitch({compact=false}:{compact?:boolean}) {
     <Space.Compact><Button aria-label="浅色模式" aria-pressed={mode==="light"} title="浅色模式" className={mode==="light"?"is-selected":""} icon={<SunOutlined/>} onClick={()=>setMode("light")}>{!compact&&"浅色"}</Button><Button aria-label="暗色模式" aria-pressed={mode==="dark"} title="暗色模式" className={mode==="dark"?"is-selected":""} icon={<MoonOutlined/>} onClick={()=>setMode("dark")}>{!compact&&"暗色"}</Button></Space.Compact>
   </div>;
 }
+
+/** @deprecated Use LanshangProvider. Retained for existing consumers. */
+export const BoomerangProvider = LanshangProvider;

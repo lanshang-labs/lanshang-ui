@@ -1,6 +1,6 @@
 .ds-data-table {border:1px solid var(--ui-line);border-radius:var(--ds-radius);overflow:hidden;font-family:var(--ds-font);}
 /* Scoped exception to the legacy global header rule. Other states use AntD tokens. */
-.ds-data-table.ant-table-wrapper .ant-table-thead>tr>th {background:var(--ui-raised);color:var(--ui-secondary);font-weight:500;font-size:12px;white-space:nowrap;}
+.ds-data-table.ant-table-wrapper .ant-table-thead>tr>th {background:var(--ui-surface);color:var(--ui-secondary);font-weight:500;font-size:12px;white-space:nowrap;}
 .ds-data-table.ant-table-wrapper .ant-table-thead>tr>th::before {display:none;}
 .ds-data-table .ant-table-tbody>tr>td {font-size:13px;font-variant-numeric:tabular-nums;}
 .ds-data-table .ant-pagination {margin:0!important;padding:8px 12px;border-top:1px solid var(--ui-line);background:var(--ui-canvas);}

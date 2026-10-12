@@ -18,6 +18,6 @@ No remote scripts, analytics or CDN fonts are used at runtime. Original source h
 - TaskRows.tsx.txt: `7a81c2a264528405826b8ac9db9e92d4c14ef6fa3fcdb39010022df3cf4c0920`
 - styles.css.txt: `6432a0eae15170357ff113d9df594ea73b5ab8f614748834e24057690043ccbb`
 
-Regenerate the scoped stylesheet with `node web/client/src/vendor/beautiful-ui/scope-styles.mjs` from the repository root. Business icon imports go through `src/shared/ui/icons.tsx` using iconoir-react 7.12.1; Ant Design internal icons remain owned by Ant Design.
+Regenerate the scoped stylesheet with `node src/beautiful-ui/scope-styles.mjs` from the repository root. Business icon imports go through `src/shared/ui/icons.tsx` using iconoir-react 7.12.1; Ant Design internal icons remain owned by Ant Design.
 
 LoadingLabel.tsx extracts the upstream LoadingState pixel grid and shimmer label; it is mounted only for real pending reads or a running job. No elapsed-time or status simulation. Inter Variable (OFL, via @fontsource-variable/inter) is bundled locally, with system Chinese fonts as fallbacks.

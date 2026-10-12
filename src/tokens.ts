@@ -5,7 +5,7 @@ export const foundations = {
   mono: 'ui-monospace,SFMono-Regular,monospace',
   fontSize: 13, controlHeight: 28, radius: 8, controlRadius: 6,
   spacing: {xs:4, sm:8, md:12, lg:16, xl:24},
-  table: {compactPadding:6, comfortablePadding:10, horizontalPadding:10},
+  table: {compactPadding:4, comfortablePadding:10, horizontalPadding:10},
 };
 export const palettes = {
   "dark": {
@@ -29,24 +29,24 @@ export const palettes = {
     "success-text": "#8cbba1"
   },
   "light": {
-    "canvas": "#f7f8fa",
-    "error-text": "#bc5050", "error-bg":"#fbefef",
+    "canvas": "#fafafa",
+    "error-text": "#d43e49", "error-bg":"#fbefef",
     "surface": "#ffffff",
-    "raised": "#f0f2f5",
-    "selected": "#e6e9ee",
-    "line": "#e0e3e8",
-    "line-strong": "#cbd0d8",
-    "text": "#25282e",
-    "secondary": "#535b67",
-    "muted": "#707784",
-    "accent": "#3978c9",
-    "info-bg": "#eaf1fa",
+    "raised": "#f2f2f3",
+    "selected": "#eaeaec",
+    "line": "#ededf0",
+    "line-strong": "#d9d9df",
+    "text": "#202124",
+    "secondary": "#62646b",
+    "muted": "#777981",
+    "accent": "#0085ff",
+    "info-bg": "#edf6ff",
     "warning-bg": "#fcf7ec",
     "warning-line": "#e9dcc2",
     "warning-text": "#906a2d",
-    "success-bg": "#eff7f2",
-    "success-line": "#d5e6dd",
-    "success-text": "#398665"
+    "success-bg": "#eaf7ef",
+    "success-line": "#c7e9d4",
+    "success-text": "#168449"
   }
 } as const;
 export function themeVariables(mode: ThemeMode): Record<string,string> {

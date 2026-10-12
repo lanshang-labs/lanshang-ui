@@ -1,4 +1,4 @@
-# Boomerang UI
+# Lanshang UI
 
 - 本仓库拥有公共视觉 tokens、Provider 和通用展示组件；业务请求、权限、状态机归消费者。
 - 保留 Beautiful UI 的来源、原始快照和 MIT 声明。

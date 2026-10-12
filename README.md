@@ -1,14 +1,14 @@
-# Boomerang UI
+# Lanshang UI
 
-`@lanshang-labs/boomerang-ui` 是基于 Ant Design 5、Beautiful UI 适配源码和 Iconoir 的共享设计系统。当前验证 React 18.3.1 / AntD 5.22.5；尚未验证 AntD 6 或 React 19。
+`@lanshang-labs/ui` 是基于 Ant Design 5、Beautiful UI 适配源码和 Iconoir 的共享设计系统。当前验证 React 18.3.1 / AntD 5.22.5；尚未验证 AntD 6 或 React 19。
 
 ## 接入
 
 ```tsx
-import { BoomerangProvider, DataTable, ThemeSwitch } from '@lanshang-labs/boomerang-ui';
-import '@lanshang-labs/boomerang-ui/styles.css';
+import { LanshangProvider, DataTable, ThemeSwitch } from '@lanshang-labs/ui';
+import '@lanshang-labs/ui/styles.css';
 // 可选：应用自行引入 @fontsource-variable/inter。
-<BoomerangProvider storageKey="my-app.theme"><ThemeSwitch /><DataTable columns={[]} dataSource={[]} /></BoomerangProvider>
+<LanshangProvider storageKey="my-app.theme"><ThemeSwitch /><DataTable columns={[]} dataSource={[]} /></LanshangProvider>
 ```
 
 Provider 管理文档级主题变量，单页面使用一个根 Provider。默认暗色，支持 defaultMode、storageKey 和 AntD locale。主题持久化在浏览器本地；无存储权限时仍可切换。图标从 `/icons` 导入；兼容原 AntD 图标命名。
@@ -27,4 +27,58 @@ npm pack
 
 v0 使用版本化 tgz 接入消费者并锁定完整性，避免依赖开发机绝对路径。更改公共 API 或视觉 tokens 后增加版本、测试、打包，在平台验证后更新平台 vendor 包和 lockfile。不要覆盖已经交付的版本包。后续可接私有 registry；当前未公开发布 npm。
 
-Beautiful UI 原始快照、来源与 MIT 声明保存在 `src/beautiful-ui`；改编部分保留其许可证。自有源码当前未授予开源许可。
+Beautiful UI 原始快照、来源与 MIT 声明保存在 `src/beautiful-ui`；改编部分保留其许可证。自有源码采用 MIT，见根目录 LICENSE；第三方代码保留原有版权声明。
+
+## 页面标题（0.1.1）
+
+```tsx
+import { PageHeader } from '@lanshang-labs/ui';
+<PageHeader title="用户管理" description="管理成员账号与项目授权。" meta="12 位成员" />
+```
+
+`title` 为页面标题，`description` 为简短说明，`meta` 为应用提供的数量或状态，`actions` 可放操作按钮。组件不推算数量、不附加权限判断。窄屏自动换行。
+
+## 加载与空状态（0.1.2）
+
+`ContentState` 提供 title、description、icon、action 和 loading。通过 role=status 通知辅助技术；loading 仅显示加载动画，不推断请求结果，不自动转成成功。业务错误及重试由调用方决定。
+
+## 分组导航（0.1.3）
+
+BeautifulNavigation 的 collapsed 开启图标栏模式；分组通过点击浮层访问子项。selectedKeys/openKeys/onOpenChange/onClick 仍由调用方控制，权限过滤与路由映射由应用提供。原生按钮支持 Enter/Space；Escape 关闭浮层并返回触发入口。普通图标入口保留名称提示。平台持有宽度、断点和持久化偏好，库不读取业务路由或存储权限。
+
+## 键值信息（0.1.4）
+
+MetadataList 接收 items: {key, label, value}[]，用语义化 dl/dt/dd 显示详情；value 支持 ReactNode，长文本换行，窄屏切换为上下布局。项目名称、权限和数据获取仍由消费者提供。
+
+## 控件状态展示与使用规范
+
+运行 `npm run build`、`npm run check:examples` 后用 `npm run dev -- --port 5177` 打开本地展示页。“控件状态与交互”覆盖真实表单校验、弹窗、抽屉、危险确认、下拉菜单、搜索空结果和明暗主题；所有反馈仅保存在页面内存。
+
+- [组件选择与验收约定](doc/component-usage.md)
+- [平台剩余样式差异清单](doc/platform-style-audit.md)
+
+展示页与业务验收分开：上传、权限、部署和真实服务请求仍由平台负责验证。
+
+
+## 组件文档站
+
+```sh
+npm run build:docs
+npm run dev -- --port 5177
+# 单独查看静态产物
+npm run preview:docs -- --port 5178
+```
+
+网站源码在 `website/`，从本库构建产物导入组件。构建输出 `site-dist/`，与 npm 包的 `dist/` 分离；使用相对资源和 hash 路由，可部署到 GitHub Pages 的项目子路径。原展示页保留在开发入口 `/gallery.html`。
+
+`.github/workflows/docs.yml` 提供手动 Pages 发布流程：仓库 Pages Source 设置为 GitHub Actions 后，在 Actions 手动运行 Publish component docs。当前工作流不会因普通 push 自动部署。公开仓库前应检查 Git 历史与待提交内容；发布文档不等同于发布 npm 包。
+
+静态构建包含 `licenses.txt`，保留自有与主要第三方许可。交互示例只使用页面内存数据，无业务服务请求。组件说明按实际导出和类型维护；`doc/website-acceptance.md` 记录本轮验证与边界。
+
+## 0.2.0 名称迁移
+
+项目以 **Lanshang UI** 独立维护，GitHub 仓库为 [lanshang-labs/lanshang-ui](https://github.com/lanshang-labs/lanshang-ui)，组件包为 `@lanshang-labs/ui`。维护者：[灰豆儿 · Yifan Wang](https://github.com/huidouer)。
+
+将旧包导入替换为 `@lanshang-labs/ui`，样式路径替换为 `@lanshang-labs/ui/styles.css`，Provider 推荐使用 `LanshangProvider`。`BoomerangProvider` 保留为兼容别名；默认主题存储键暂时保留以兼容既有偏好，新应用应显式传入自己的 `storageKey`。CSS 类名保持兼容，业务权限、路由与请求不进入本库。
+
+本仓库开源不代表已发布 npm 包。当前可运行 `npm ci && npm pack` 生成版本化 tgz，再由项目安装；MIT 和第三方许可包含在包内。
