@@ -1,0 +1,17 @@
+.ls-skeleton { min-width: 0; }
+.ls-skeleton-placeholder { pointer-events: none; }
+.ls-skeleton-label { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.ls-skeleton-placeholder > .ant-skeleton { width: 100%; }
+@media (prefers-reduced-motion: reduce) {
+  :root[data-theme] :is(.ls-skeleton,.ls-skeleton-block,.ls-skeleton-avatar) :is(.ant-skeleton-avatar,.ant-skeleton-title,.ant-skeleton-paragraph > li) {
+    background:var(--ui-selected) !important;
+  }
+}
+[data-ls-motion="reduce"] :is(.ant-skeleton-avatar,.ant-skeleton-title,.ant-skeleton-paragraph > li) {
+  background:var(--ui-selected) !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ls-skeleton .ant-skeleton *::after,
+  .ls-skeleton-block *::after,
+  .ls-skeleton-avatar *::after { animation: none !important; }
+}

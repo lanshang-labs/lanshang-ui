@@ -1,0 +1,4 @@
+.ls-loading-study{display:grid;gap:24px}
+.ls-loading-study section,.ls-loading-lifecycle{padding:18px;border:1px solid var(--ls-surface-edge);border-radius:14px;background:var(--ls-surface-face);box-shadow:var(--ls-surface-shadow);min-width:0}
+.ls-loading-study h3,.ls-loading-lifecycle h3{margin:0 0 14px;font-size:14px}
+@media(max-width:600px){.ls-loading-study section,.ls-loading-lifecycle{padding:14px}}

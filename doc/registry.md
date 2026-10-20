@@ -47,4 +47,6 @@ npm 包尚未发布。构建使用 `npm pack` 生成包含许可证的 tgz，由
 
 升级流程：先运行 `npm run archive:published` 归档当前线上版本（已有归档无需重复），审核并提交，再递增 package.json/package-lock 版本。禁止覆盖已有归档或复用已发布版本号。Pages 发布前执行 `check:published-history`，线上不可达、未归档或摘要不一致均失败。不要删除历史归档，否则旧 lockfile 会失效。
 
-CI 和 Pages 发布均执行 `npm run test:registry:ci`：启动临时 HTTP Registry，先安装 0.2.2 生成旧 lockfile，再构建新版，使用全新 npm 缓存执行旧项目 npm ci，最后验证新版 CLI 安装、构建、重复安装与 dry-run。临时服务器结束时关闭，不占用开发端口。此自动化不代表平台已上线。
+CI 和 Pages 发布均执行 `npm run test:registry:ci`：启动临时 HTTP Registry，先逐一安装已归档版本生成旧 lockfile，再构建新版，使用全新 npm 缓存执行各旧项目 npm ci，最后验证新版 CLI 安装、构建、重复安装与 dry-run。临时服务器结束时关闭，不占用开发端口。此自动化不代表平台已上线。
+
+0.2.4 版本包 `lanshang-labs-ui-0.2.4-86f9e6d775b0.tgz` 的 SHA-256 为 `86f9e6d775b01afbbc0a8945d13e5d3411157b35c90276ba4078f4c3fa44dacf`。Boomerang Platform 测试站已固定接入该包并验证页面资源与构建产物一致；这不代表所有组件或其他项目已经验收。线上 0.2.3 已按原始摘要归档，新版不得复用其版本号或覆盖历史包。其他项目接入时须锁定包地址与完整性，并在自身 React 18 / Ant Design 5 环境验证；实际公开版本以同站点的 `r/build-info.json` 为准。

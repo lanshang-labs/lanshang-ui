@@ -1,0 +1,65 @@
+.ls-stack>p,.ls-stack>h2,.ls-stack>h3{margin:0}
+.ls-inline>*{min-width:0;max-width:100%}
+.ls-form-grid>*{min-width:0;max-width:100%}
+.ls-form-grid>.ant-form-item{margin-bottom:0}
+/* Long validation messages must wrap inside their own field, including identifiers. */
+.ls-form-grid .ant-form-item-explain,
+.ls-form-grid .ant-form-item-extra {overflow-wrap:anywhere;}
+/* Opt-in form dialogs keep actions outside the scrollable content at short heights. */
+.ls-form-dialog.ant-modal {top:clamp(16px,8dvh,100px);padding-bottom:16px;}
+.ls-form-dialog .ant-modal-content {display:flex;flex-direction:column;max-height:calc(100dvh - clamp(16px,8dvh,100px) - 16px);}
+.ls-form-dialog .ant-modal-body {min-height:0;overflow:auto;overscroll-behavior:contain;}
+.ls-form-dialog .ant-modal-footer {flex-shrink:0;display:flex;justify-content:flex-end;flex-wrap:wrap;gap:8px;}
+.ls-form-dialog .ant-modal-footer>.ant-btn+.ant-btn {margin-inline-start:0;}
+.ls-form-drawer .ant-drawer-body {min-height:0;overflow:auto;overscroll-behavior:contain;}
+.ls-form-drawer .ant-drawer-footer {flex-shrink:0;}
+.ls-form-drawer .ant-drawer-footer .ls-inline {justify-content:flex-end;}
+.ls-keyboard-key {display:inline-flex;flex-shrink:0;align-items:center;justify-content:center;min-width:38px;height:22px;padding:0 5px;border:1px solid var(--ui-line);border-radius:5px;background:var(--ui-canvas);color:var(--ui-secondary);font-family:inherit;line-height:1;font-size:12px;letter-spacing:0;white-space:nowrap;box-sizing:border-box;}
+/* Disclosure is one card; native details keeps form state and keyboard behavior. */
+.ls-disclosure {min-width:0;border:1px solid var(--ls-surface-edge,var(--ui-line));border-radius:12px;background:var(--ls-surface-face,var(--ui-surface));box-shadow:var(--ls-surface-shadow,none);}
+.ls-disclosure>summary {display:flex;align-items:center;gap:12px;min-height:42px;cursor:pointer;list-style:none;color:var(--ui-text);padding:10px 14px;border-radius:11px;font-weight:500;transition:background-color var(--ls-motion-state,150ms) var(--ls-ease-standard,ease);}
+.ls-disclosure>summary::-webkit-details-marker {display:none;}
+.ls-disclosure>summary:hover {background:color-mix(in srgb,var(--ui-selected) 35%,transparent);}
+.ls-disclosure>summary:focus-visible {outline:2px solid var(--ui-focus-ring,var(--ui-accent));outline-offset:-3px;}
+.ls-filter-label {flex:1;min-width:0;overflow-wrap:anywhere;}
+.ls-filter-count {font-size:12px;font-weight:400;color:var(--ui-secondary);}
+.ls-filter-chevron {flex:none;color:var(--ui-secondary);transition:transform var(--ls-motion-chevron,200ms) var(--ls-ease-standard,ease);}
+.ls-disclosure[open]>summary {border-radius:11px 11px 0 0;}
+.ls-disclosure[open]>summary .ls-filter-chevron {transform:rotate(180deg);}
+.ls-disclosure>.ls-filter-content {padding:16px 14px;min-width:0;border-top:1px solid var(--ui-line);}
+.ls-disclosure[open]>.ls-filter-content {animation:ls-filter-reveal var(--ls-motion-enter,180ms) var(--ls-ease-standard,ease);}
+@keyframes ls-filter-reveal {from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.ls-disclosure>summary,.ls-filter-chevron{transition:none}.ls-disclosure[open]>.ls-filter-content{animation:none}}
+.ls-action-popover {max-width:calc(100vw - 48px);max-height:calc(100dvh - 96px);display:flex;flex-direction:column;outline:none;}
+.ls-action-popover-heading {display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:12px;}
+.ls-action-popover-heading strong {font-weight:550;}
+.ls-action-popover-body {min-height:0;overflow:auto;overscroll-behavior:contain;}
+.ls-action-popover-footer {display:flex;justify-content:flex-end;gap:8px;padding-top:12px;}
+@media(max-width:600px){.ls-action-popover-overlay.ant-popover {left:12px!important;top:12px!important;max-width:calc(100vw - 24px);}}
+.ls-custom-toolbar {display:flex;align-items:flex-start;gap:8px;min-width:0;}
+.ls-custom-toolbar-items {flex:1;min-width:0;display:flex;align-items:center;flex-wrap:wrap;gap:8px;}
+.ls-toolbar-slot {min-width:0;max-width:100%;display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+.ls-toolbar-slot>.ant-select {width:128px;max-width:100%;}
+.ls-toolbar-slot>.ant-input-affix-wrapper {width:180px;max-width:100%;}
+.ls-toolbar-hint {color:var(--ui-muted);font-size:12px;margin:0 0 12px;}
+.ls-toolbar-settings-group {display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+.ls-toolbar-settings-group>strong {font-size:12px;font-weight:550;color:var(--ui-muted);}
+.ls-toolbar-setting-row {display:flex;align-items:center;gap:4px;}
+.ls-toolbar-setting-row>span {flex:1;min-width:0;overflow-wrap:anywhere;}
+.ls-toolbar-setting-row button[aria-pressed=true] {background:var(--ui-selected);color:var(--ui-text);}
+.ls-toolbar-unpinned {display:flex;flex-direction:column;align-items:stretch;gap:6px;}
+.ls-toolbar-unpinned>label {font-size:12px;color:var(--ui-secondary);}
+@media(max-width:600px){.ls-toolbar-slot{flex:1 1 140px;}.ls-toolbar-slot>.ant-select,.ls-toolbar-slot>.ant-input-affix-wrapper{width:100%;}}
+/* Field rhythm is independent of label length; actions wrap as a separate group. */
+.ls-custom-toolbar-items {align-items:flex-start;column-gap:12px;row-gap:8px;}
+.ls-toolbar-fields {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,140px),1fr));gap:8px;flex:1 1 520px;min-width:0;}
+.ls-toolbar-fields .ls-toolbar-slot {display:flex;align-items:center;min-height:var(--ls-control-middle-height,32px);}
+.ls-toolbar-fields .ls-toolbar-slot>.ant-select,.ls-toolbar-fields .ls-toolbar-slot>.ant-input-affix-wrapper,.ls-toolbar-fields .ls-toolbar-slot>.ant-input {width:100%;min-width:0;}
+.ls-toolbar-actions {display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:8px;margin-left:auto;align-self:flex-end;}
+@media(max-width:600px){.ls-toolbar-fields{flex-basis:100%;grid-template-columns:repeat(2,minmax(0,1fr));}.ls-toolbar-actions{width:100%;}.ls-toolbar-actions .ls-toolbar-slot{flex:0 0 auto;}}
+@media(max-width:360px){.ls-toolbar-fields{grid-template-columns:minmax(0,1fr);}}
+
+.ls-toolbar-settings-trigger{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:4px;max-width:100%;}
+.ls-toolbar-active-summary{font-size:12px!important;color:var(--ui-secondary)!important;}
+
+.ls-action-popover-suspended{visibility:hidden!important;pointer-events:none!important;}

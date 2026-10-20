@@ -1,0 +1,95 @@
+/* Native Radio and Switch behavior, with the same weight and neutral faces as Checkbox. */
+:root[data-theme] .ant-radio {
+ top:0;align-self:center;
+}
+:root[data-theme] .ant-radio .ant-radio-inner {
+ width:20px;height:20px;
+ border:1px solid var(--ls-surface-edge,var(--ui-line-strong));
+ background:var(--ls-surface-face,var(--ui-surface));
+ box-shadow:var(--ls-surface-shadow);
+ transition:background-color var(--ls-motion-state,150ms) var(--ls-ease-standard,ease),border-color var(--ls-motion-state,150ms) var(--ls-ease-standard,ease);
+}
+:root[data-theme] .ant-radio-wrapper:not(.ant-radio-wrapper-disabled):hover .ant-radio-inner,
+:root[data-theme] .ant-radio:not(.ant-radio-disabled):hover .ant-radio-inner {
+ border-color:var(--ui-secondary);
+}
+:root[data-theme] .ant-radio-checked .ant-radio-inner {
+ background:var(--ui-text);border-color:var(--ui-text);box-shadow:none;
+}
+:root[data-theme] .ant-radio .ant-radio-inner::after {
+ position:absolute;left:50%;top:50%;width:9px;height:9px;margin:0;
+ background:var(--ui-surface);transform:translate(-50%,-50%);opacity:0;
+ transition:opacity var(--ls-motion-state,150ms) var(--ls-ease-standard,ease);
+}
+:root[data-theme] .ant-radio-checked .ant-radio-inner::after {opacity:1;}
+:root[data-theme] .ant-radio::after {display:none;}
+:root[data-theme] .ant-radio-disabled .ant-radio-inner {
+ background:var(--ui-raised);border-color:var(--ui-line);box-shadow:none;
+}
+:root[data-theme] .ant-radio-disabled .ant-radio-inner::after {background:var(--ui-muted);}
+:root[data-theme] .ant-radio-wrapper > span:last-child {padding-inline:9px;}
+
+:root[data-theme] {
+ --ls-switch-handle:var(--ui-surface);
+ --ls-switch-handle-checked:var(--ui-surface);
+}
+:root[data-theme="dark"] {
+ --ls-switch-handle:var(--ui-secondary);
+ --ls-switch-handle-checked:var(--ui-canvas);
+}
+:root[data-theme] .ant-switch {
+ --ls-switch-width:var(--ls-control-middle-switch-width,44px);
+ --ls-switch-height:var(--ls-control-middle-switch-height,24px);
+ --ls-switch-handle-size:var(--ls-control-middle-switch-handle,18px);
+ box-sizing:border-box;width:var(--ls-switch-width);min-width:var(--ls-switch-width);height:var(--ls-switch-height);
+ border:1px solid var(--ui-line-strong);
+ background:var(--ui-selected);box-shadow:none;
+ transition:background-color var(--ls-motion-state,150ms) var(--ls-ease-standard,ease),border-color var(--ls-motion-state,150ms) var(--ls-ease-standard,ease);
+}
+:root[data-theme] .ant-switch.ant-switch-small {
+ --ls-switch-width:var(--ls-control-small-switch-width,36px);
+ --ls-switch-height:var(--ls-control-small-switch-height,20px);
+ --ls-switch-handle-size:var(--ls-control-small-switch-handle,14px);
+}
+:root[data-theme] .ls-toggle-switch[data-ls-size=large] {
+ --ls-switch-width:var(--ls-control-large-switch-width,52px);
+ --ls-switch-height:var(--ls-control-large-switch-height,28px);
+ --ls-switch-handle-size:var(--ls-control-large-switch-handle,22px);
+}
+/* Hover stays on the off-state surface; only checked state changes the track. */
+:root[data-theme] .ant-switch:not(.ant-switch-disabled):hover:not(.ant-switch-checked) {
+ background:var(--ui-selected);border-color:var(--ui-line-strong);
+}
+:root[data-theme] .ant-switch.ant-switch-checked,
+:root[data-theme] .ant-switch.ant-switch-checked:not(.ant-switch-disabled):hover {
+ background:var(--ui-text);border-color:var(--ui-text);
+}
+:root[data-theme] .ant-switch .ant-switch-handle {
+ top:2px;left:2px;width:var(--ls-switch-handle-size);height:var(--ls-switch-handle-size);
+ transition:left var(--ls-motion-chevron,200ms) var(--ls-ease-standard,cubic-bezier(.2,.8,.2,1));
+}
+:root[data-theme] .ant-switch.ant-switch-checked .ant-switch-handle {left:calc(var(--ls-switch-width) - var(--ls-switch-handle-size) - 4px);}
+:root[data-theme] .ant-switch .ant-switch-handle::before {
+ border-radius:50%;background:var(--ls-switch-handle);box-shadow:none;
+}
+:root[data-theme] .ant-switch.ant-switch-checked .ant-switch-handle::before {
+ background:var(--ls-switch-handle-checked);
+}
+@media(prefers-reduced-motion:reduce){
+ :root[data-theme] .ant-radio .ant-radio-inner,
+ :root[data-theme] .ant-radio .ant-radio-inner::after,
+ :root[data-theme] .ant-switch,
+ :root[data-theme] .ant-switch .ant-switch-handle {transition:none;}
+}
+:root[data-ls-motion="reduce"] .ant-radio .ant-radio-inner,
+:root[data-ls-motion="reduce"] .ant-radio .ant-radio-inner::after,
+:root[data-ls-motion="reduce"] .ant-switch,
+:root[data-ls-motion="reduce"] .ant-switch .ant-switch-handle {transition:none;}
+@media(forced-colors:active){
+ :root[data-theme] .ant-radio .ant-radio-inner,
+ :root[data-theme] .ant-switch {background:Canvas;border-color:ButtonText;box-shadow:none;}
+ :root[data-theme] .ant-radio-checked .ant-radio-inner,
+ :root[data-theme] .ant-switch.ant-switch-checked {background:Highlight;border-color:Highlight;forced-color-adjust:none;}
+ :root[data-theme] .ant-radio-checked .ant-radio-inner::after,
+ :root[data-theme] .ant-switch.ant-switch-checked .ant-switch-handle::before {background:HighlightText;forced-color-adjust:none;}
+}

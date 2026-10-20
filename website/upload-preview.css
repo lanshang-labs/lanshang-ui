@@ -1,0 +1,13 @@
+.ls-upload-card {padding:16px;border:1px solid var(--ls-surface-edge);border-radius:16px;background:var(--ls-surface-face);box-shadow:var(--ls-surface-shadow);}
+.ls-upload-name {min-width:0;overflow-wrap:anywhere;}
+.ls-upload-card .ant-btn {max-width:100%;height:auto;min-height:var(--ls-control-middle-height,32px);white-space:normal;overflow-wrap:anywhere;}
+.ls-upload-media {display:block;max-width:100%;max-height:55dvh;margin:0 auto;object-fit:contain;}
+
+.ls-upload-example>p,.ls-upload-preview .ant-modal-title,.ls-upload-preview .ant-modal-body p {overflow-wrap:anywhere;}
+.ls-upload-card .ls-progress-info {flex-wrap:wrap;gap:4px 12px;}
+.ls-upload-card .ls-progress-info>span {min-width:0;overflow-wrap:anywhere;}
+.ls-upload-card .ls-progress-value {flex-shrink:0;}
+.ls-upload-receipt {min-width:0;}
+.ls-upload-receipt ul {max-height:180px;overflow:auto;overflow-wrap:anywhere;padding-inline-start:24px;color:var(--ui-muted);}
+
+.ls-upload-receipt ul:focus-visible {outline:2px solid var(--ui-accent);outline-offset:3px;border-radius:8px;}

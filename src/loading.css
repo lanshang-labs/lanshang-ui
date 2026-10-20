@@ -1,0 +1,31 @@
+/* Pixel feedback is reserved for task and content states. */
+.ls-pixel-loader{
+ display:inline-block;position:relative;width:15px;height:15px;flex:none;vertical-align:-2px;color:inherit;
+}
+.ls-pixel-loader::before{
+ content:"";position:absolute;left:0;top:0;width:4px;height:4px;border-radius:1px;background:currentColor;
+ box-shadow:5.5px 0 currentColor,11px 0 currentColor,0 5.5px currentColor,5.5px 5.5px currentColor,11px 5.5px currentColor,0 11px currentColor,5.5px 11px currentColor,11px 11px currentColor;
+ animation:ls-pixel-pulse var(--ls-motion-loading,1600ms) ease-in-out infinite;
+}
+@keyframes ls-pixel-pulse{0%,100%{opacity:.25}50%{opacity:.8}}
+@media(prefers-reduced-motion:reduce){
+ .ls-pixel-loader::before{animation:none;opacity:.65}
+ .bui-loading-label [style*="animation"]{animation:none!important}
+}
+@media(prefers-reduced-motion:reduce){:root[data-theme] :is(.ant-btn-loading-icon,.ant-select-arrow) .anticon-loading,:root[data-theme] :is(.ant-btn-loading-icon,.ant-select-arrow) .anticon-loading svg{animation:none!important}}
+
+/* Shared task shimmer and compact control arcs. */
+:root[data-theme] :is(.ant-btn-loading-icon,.ant-select-arrow)>.anticon-loading{width:14px;height:14px;position:relative;animation:none!important}
+:root[data-theme] :is(.ant-btn-loading-icon,.ant-select-arrow)>.anticon-loading>svg{display:none}
+:root[data-theme] :is(.ant-btn-loading-icon,.ant-select-arrow)>.anticon-loading::before{content:"";display:block;width:14px;height:14px;background:currentColor;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M8 2a6 6 0 0 1 6 6' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat;animation:ls-control-orbit var(--ls-motion-loading,1600ms) linear infinite}
+.bui-loading-label>span:last-child{background-image:linear-gradient(100deg,var(--ui-secondary) 35%,var(--ui-text) 50%,var(--ui-secondary) 65%)!important;animation:shimmer-text var(--ls-motion-loading,1600ms) linear infinite!important}
+[data-ls-motion="reduce"] .bui-loading-label>span:last-child{animation:none!important;background:none!important;color:var(--ui-secondary)}
+.ls-pixel-loader::before{animation-duration:var(--ls-motion-loading,1600ms)}
+@keyframes ls-control-orbit{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){:root[data-theme] :is(.ant-btn-loading-icon,.ant-select-arrow)>.anticon-loading::before,.ls-pixel-loader::before{animation:none}.bui-loading-label>span:last-child{animation:none!important;background:none!important;color:var(--ui-secondary)}}
+@media(forced-colors:active){.bui-loading-label>span:last-child{background:none!important;color:CanvasText}:root[data-theme] :is(.ant-btn-loading-icon,.ant-select-arrow)>.anticon-loading::before{background:ButtonText}}
+
+/* Long status copy wraps without squeezing the status mark. */
+.bui-loading-label{max-width:100%;min-width:0}
+.bui-loading-label>span:last-child{min-width:0;overflow-wrap:anywhere;white-space:normal}
+@media(prefers-reduced-motion:reduce){.bui-task-rows [style*="animation"]{animation:none!important}}

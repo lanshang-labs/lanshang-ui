@@ -1,0 +1,22 @@
+.ls-notification-viewport{position:fixed;right:20px;bottom:20px;z-index:990;width:min(360px,calc(100vw - 32px));max-height:min(600px,calc(100dvh - 40px));overflow:auto;overscroll-behavior:contain;display:grid;grid-auto-rows:max-content;gap:10px;padding:4px;font-family:var(--ds-font);color:var(--ui-text)}
+.ls-notification{position:relative;min-width:0;padding:16px 48px 16px 16px;border:1px solid var(--ls-surface-edge);border-radius:var(--ls-control-middle-popup-radius,12px);background:var(--ls-surface-face);box-shadow:var(--ls-surface-shadow);overflow-wrap:anywhere;animation:ls-notice-in var(--ls-motion-enter,180ms) var(--ls-ease-standard,ease-out)}
+.ls-notification header{display:flex;align-items:center;gap:8px;font-size:13px}.ls-notification strong{flex:1;min-width:0;font-weight:600}
+.ls-notification-dot{width:6px;height:6px;border-radius:50%;flex:none;background:var(--ui-accent)}
+.ls-notification[data-tone=success] .ls-notification-dot{background:var(--ui-success-text)}.ls-notification[data-tone=warning] .ls-notification-dot{background:var(--ui-warning-text)}.ls-notification[data-tone=error] .ls-notification-dot{background:var(--ui-error-text)}
+.ls-notification-description{margin-top:8px;color:var(--ui-secondary);font-size:12px;line-height:1.6}.ls-notification-action{margin-top:12px}
+.ls-notification-close.ant-btn{position:absolute;right:8px;top:8px;width:var(--ls-control-middle-height,32px);height:var(--ls-control-middle-height,32px);padding:0;border-radius:var(--ls-control-middle-radius,10px);color:var(--ui-secondary)}
+@keyframes ls-notice-in{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.ls-notification{animation:none}}
+@media(max-width:600px){.ls-notification-viewport{right:12px;bottom:max(12px,env(safe-area-inset-bottom));width:calc(100vw - 24px);max-height:60dvh}}
+
+
+
+.ls-notification-toolbar{position:sticky;top:0;z-index:1;display:flex;align-items:center;justify-content:space-between;padding:6px 10px;background:var(--ls-surface-face);border:1px solid var(--ls-surface-edge);border-radius:var(--ls-control-middle-radius,10px);color:var(--ui-secondary);font-size:12px}
+.ls-notification-toolbar .bui-row-action.ant-btn{flex:none}
+
+.ls-notification{scroll-margin-top:48px}
+
+/* A bounded neutral tray makes scrolling notifications distinct from the page. */
+.ls-notification-viewport{box-sizing:border-box;padding:8px;background:var(--ls-surface-stage);border:1px solid var(--ls-surface-edge);border-radius:16px;box-shadow:var(--ls-overlay-shadow);isolation:isolate}
+.ls-notification-viewport[hidden]{display:none}
+.ls-notification-toolbar{top:0;box-shadow:0 4px 0 4px var(--ls-surface-stage)}

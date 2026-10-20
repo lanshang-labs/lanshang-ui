@@ -1,0 +1,13 @@
+.ls-size-standard{display:grid;gap:12px;min-width:0;}
+.ls-size-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:12px;min-width:0;}
+.ls-size-card{display:grid;align-content:start;gap:var(--ls-size-gap,8px);min-width:0;padding:14px;border:1px solid var(--ls-surface-edge);border-radius:16px;background:var(--ls-surface-stage);}
+.ls-size-card[data-size="small"]{--ls-size-gap:var(--ls-control-small-gap,4px);}
+.ls-size-card[data-size="middle"]{--ls-size-gap:var(--ls-control-middle-gap,6px);}
+.ls-size-card[data-size="large"]{--ls-size-gap:var(--ls-control-large-gap,8px);}
+.ls-size-card header{display:grid;gap:2px;margin-bottom:4px;}
+.ls-size-card header strong{font-size:13px;font-weight:600;}
+.ls-size-card header span,.ls-size-card .ls-size-label{font-size:12px;color:var(--ui-secondary);}
+.ls-size-card :is(.ls-input-group,.ant-select,.ant-picker,.ant-input-number){width:100%;min-width:0;}
+.ls-size-card :is(.ant-segmented,.ls-radio-group){max-width:100%;}
+.ls-size-pair{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:var(--ls-size-gap,8px);min-width:0;}
+.ls-size-standard output{font-size:12px;color:var(--ui-secondary);}

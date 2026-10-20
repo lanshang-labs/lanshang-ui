@@ -1,0 +1,18 @@
+/* Neutral Agent App feedback: reserve semantic color for a small status cue. */
+.ls-feedback-panel{min-width:0;padding:18px;background:var(--ui-surface);border:1px solid var(--ui-line);border-radius:14px;box-shadow:var(--ls-surface-shadow,none);overflow-wrap:anywhere}
+.ls-feedback-panel header{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.ls-feedback-panel h3{margin:0;font-size:13px;font-weight:600;flex:1;min-width:0}
+.ls-feedback-panel-dot{width:7px;height:7px;flex:none;border-radius:50%;background:var(--ui-accent)}
+.ls-feedback-panel[data-tone=success] .ls-feedback-panel-dot{background:var(--ui-success-text)}
+.ls-feedback-panel[data-tone=warning] .ls-feedback-panel-dot{background:var(--ui-warning-text)}
+.ls-feedback-panel[data-tone=error] .ls-feedback-panel-dot{background:var(--ui-error-text)}
+.ls-feedback-panel-label{color:var(--ui-secondary);background:var(--ui-raised);padding:2px 8px;border-radius:99px;font-size:11px}
+.ls-feedback-panel-body{display:grid;gap:12px;margin-top:12px;font-size:12px;color:var(--ui-secondary)}
+.ls-feedback-panel-body p{margin:0;line-height:1.7}
+
+.ls-feedback-panel-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+@media(max-width:600px){.ls-feedback-panel{padding:14px}}
+.ls-feedback-panel[data-variant=inline]{border:0;border-block:1px solid var(--ls-surface-edge,var(--ui-line));border-radius:0;box-shadow:none;padding:12px 0;background:transparent}
+.ls-feedback-panel[data-variant=inline] h3{font-size:12px;font-weight:500}
+.ls-feedback-panel[data-variant=inline] .ls-feedback-panel-body{margin-top:6px}
+@media(max-width:600px){.ls-feedback-panel[data-variant=inline]{padding:10px 0}}

@@ -1,0 +1,48 @@
+/* Lanshang checkbox: a soft square and a rounded vector mark.
+   Keep AntD's native input, mixed state, group API and form behavior. */
+:root[data-theme] .ant-checkbox {
+ top:0;align-self:center;
+}
+:root[data-theme] .ant-checkbox .ant-checkbox-inner {
+ width:20px;height:20px;border-radius:7px;
+ border:1px solid var(--ls-surface-edge,var(--ui-line-strong));
+ background:var(--ls-surface-face,var(--ui-surface));
+ box-shadow:var(--ls-surface-shadow);
+ transition:background-color var(--ls-motion-state,150ms) var(--ls-ease-standard,ease),border-color var(--ls-motion-state,150ms) var(--ls-ease-standard,ease);
+}
+:root[data-theme] .ant-checkbox-wrapper:not(.ant-checkbox-wrapper-disabled):hover .ant-checkbox-inner,
+:root[data-theme] .ant-checkbox:not(.ant-checkbox-disabled):hover .ant-checkbox-inner {
+ border-color:var(--ui-secondary);
+}
+:root[data-theme] .ant-checkbox:is(.ant-checkbox-checked,.ant-checkbox-indeterminate) .ant-checkbox-inner {
+ background:var(--ui-text);border-color:var(--ui-text);box-shadow:none;
+}
+:root[data-theme] .ant-checkbox .ant-checkbox-inner::after {
+ content:"";position:absolute;inset:auto;left:50%;top:50%;width:14px;height:14px;
+ border:0;margin:0;transform:translate(-50%,-50%);opacity:0;
+ background:var(--ui-surface);
+ mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='m3 8 3.3 3.2L13 4.8' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;
+ transition:opacity var(--ls-motion-state,150ms) var(--ls-ease-standard,ease);
+}
+:root[data-theme] .ant-checkbox-checked .ant-checkbox-inner::after {opacity:1;}
+:root[data-theme] .ant-checkbox-indeterminate .ant-checkbox-inner::after {
+ width:10px;height:2.5px;border-radius:999px;mask:none;opacity:1;
+}
+/* No AntD check zoom or expanding perimeter. */
+:root[data-theme] .ant-checkbox::after {display:none;}
+:root[data-theme] .ant-checkbox-disabled .ant-checkbox-inner {
+ background:var(--ui-raised);border-color:var(--ui-line);box-shadow:none;
+}
+:root[data-theme] .ant-checkbox-disabled .ant-checkbox-inner::after {background:var(--ui-muted);}
+:root[data-theme] .ant-checkbox-wrapper > span:last-child {padding-inline:9px;}
+@media(prefers-reduced-motion:reduce){
+ :root[data-theme] .ant-checkbox .ant-checkbox-inner,:root[data-theme] .ant-checkbox .ant-checkbox-inner::after{transition:none;}
+}
+:root[data-ls-motion="reduce"] .ant-checkbox .ant-checkbox-inner,
+:root[data-ls-motion="reduce"] .ant-checkbox .ant-checkbox-inner::after{transition:none;}
+@media(forced-colors:active){
+ :root[data-theme] .ant-checkbox .ant-checkbox-inner{background:Canvas;border-color:ButtonText;box-shadow:none;}
+ :root[data-theme] .ant-checkbox:is(.ant-checkbox-checked,.ant-checkbox-indeterminate) .ant-checkbox-inner{background:Highlight;border-color:Highlight;forced-color-adjust:none;}
+ :root[data-theme] .ant-checkbox .ant-checkbox-inner::after{background:HighlightText;forced-color-adjust:none;}
+ :root[data-theme] .ant-checkbox-disabled .ant-checkbox-inner{border-color:GrayText;}
+}

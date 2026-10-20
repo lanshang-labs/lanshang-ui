@@ -1,0 +1,42 @@
+import React from 'react';
+import {afterEach,it,expect} from 'vitest';
+import {render,screen,fireEvent,waitFor,cleanup} from '@testing-library/react';
+import {NotificationNestedPreview} from '../website/notification-nested-preview';
+afterEach(cleanup);
+it('keeps updates suspended until both nested overlays close and returns focus by layer',async()=>{
+ render(<NotificationNestedPreview/>);const root=screen.getByRole('button',{name:'打开嵌套通知示例'});root.focus();fireEvent.click(root);
+ const child=await screen.findByRole('button',{name:'打开内层 Drawer'});fireEvent.click(child);
+ await waitFor(()=>expect(document.activeElement).toBe(screen.getByRole('textbox',{name:'内层详情备注'})));
+ fireEvent.click(screen.getByRole('button',{name:'更新内层后台通知'}));fireEvent.click(screen.getByRole('button',{name:'更新内层后台通知'}));expect(screen.queryByRole('complementary',{name:'全局通知'})).toBeNull();
+ fireEvent.click(screen.getByRole('button',{name:'返回工作区'}));await waitFor(()=>expect(document.activeElement).toBe(child));expect(screen.queryByRole('complementary',{name:'全局通知'})).toBeNull();
+ fireEvent.click(screen.getByRole('button',{name:'关闭工作区'}));await waitFor(()=>expect(document.activeElement).toBe(root));expect(await screen.findByRole('button',{name:'关闭通知：后台结果已更新'})).toBeTruthy();expect(screen.getAllByRole('status')).toHaveLength(1);
+});
+it('rapid reopening keeps the new drawer active and notifications paused',async()=>{
+ render(<NotificationNestedPreview/>);fireEvent.click(screen.getByRole('button',{name:'打开嵌套通知示例'}));fireEvent.click(await screen.findByRole('button',{name:'打开内层 Drawer'}));fireEvent.click(await screen.findByRole('button',{name:'更新内层后台通知'}));fireEvent.click(screen.getByRole('button',{name:'快速重开 Drawer'}));
+ await waitFor(()=>expect(screen.getByRole('button',{name:'返回工作区'})).toBeTruthy());
+ await waitFor(()=>expect(document.activeElement).toBe(screen.getByRole('textbox',{name:'内层详情备注'})));
+ expect(screen.queryByRole('complementary',{name:'全局通知'})).toBeNull();
+});
+it('retains long-form input and returns to each footer opener while notifications remain suspended',async()=>{
+ render(<NotificationNestedPreview/>);
+ fireEvent.click(screen.getByRole('checkbox',{name:'长文本与窄屏样例'}));
+ const root=screen.getByRole('button',{name:'打开嵌套通知示例'});root.focus();fireEvent.click(root);
+ const outer=await screen.findByRole('textbox',{name:'工作区备注'});fireEvent.change(outer,{target:{value:'待核对的外层备注'}});
+ const child=screen.getByRole('button',{name:'打开内层 Drawer'});fireEvent.click(child);
+ const field=await screen.findByRole('textbox',{name:'内层详情备注'});
+ await waitFor(()=>expect(document.activeElement).toBe(field));
+ fireEvent.change(field,{target:{value:'保留原始交付记录'}});
+ fireEvent.click(screen.getByRole('button',{name:'更新内层后台通知'}));
+ expect(screen.queryByRole('complementary',{name:'全局通知'})).toBeNull();
+ fireEvent.click(screen.getByRole('button',{name:'返回工作区'}));
+ await waitFor(()=>expect(document.activeElement).toBe(child));
+ expect((outer as HTMLInputElement).value).toBe('待核对的外层备注');
+ fireEvent.click(child);
+ await waitFor(()=>expect(document.activeElement).toBe(screen.getByRole('textbox',{name:'内层详情备注'})));
+ expect((screen.getByRole('textbox',{name:'内层详情备注'}) as HTMLInputElement).value).toBe('保留原始交付记录');
+ fireEvent.click(screen.getByRole('button',{name:'返回工作区'}));
+ await waitFor(()=>expect(document.activeElement).toBe(child));
+ fireEvent.click(screen.getByRole('button',{name:'关闭工作区'}));
+ await waitFor(()=>expect(document.activeElement).toBe(root));
+ expect(await screen.findByRole('button',{name:'关闭通知：后台任务已完成'})).toBeTruthy();
+});

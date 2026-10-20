@@ -3,7 +3,7 @@
  --field:var(--ui-raised); --inset:var(--ui-canvas); --hover:var(--ui-raised); --hover-2:var(--ui-selected);
  --ink:var(--ui-text); --ink-2:var(--ui-secondary); --ink-3:var(--ui-muted);
  --line:var(--ui-line); --line-strong:var(--ui-line-strong);
- --accent:var(--ui-accent); --accent-ink:var(--ui-accent); --accent-tint:var(--ui-info-bg);
+ --accent:var(--ui-accent); --accent-ink:var(--ui-link-text); --accent-tint:var(--ui-info-bg);
  --red:var(--ui-error-text); --red-tint:var(--ui-error-bg);
  --green:var(--ui-success-text); --green-tint:var(--ui-success-bg);
  --orange:var(--ui-warning-text); --orange-tint:var(--ui-warning-bg);

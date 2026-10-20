@@ -2,7 +2,8 @@ import { Code, Check, Copy } from "iconoir-react";
 // Beautiful UI CodeBlock source with platform adapters. MIT — see LICENSE.
 "use client";
 
-import { useCallback, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
+import { RowActionButton } from "../RowActionButton.js";
 
 /* ─────────────────────────────────────────────────────────
  * CODE BLOCK
@@ -146,12 +147,18 @@ export default function CodeBlock({
   const text = { ...DEFAULT_LABELS, ...labels };
   const raw = code ?? lines.join("\n");
 
-  const copy = useCallback(() => {
-    navigator.clipboard.writeText(raw).then(() => {
-      setCopied(true);
-      onCopy?.(raw);
-      setTimeout(() => setCopied(false), 1500);
-    }).catch(() => setCopyFailed(true));
+  const copyRevision=useRef(0),copyTimer=useRef<ReturnType<typeof setTimeout>>();
+  useEffect(()=>{copyRevision.current++;setCopied(false);setCopyFailed(false);return()=>{copyRevision.current++;clearTimeout(copyTimer.current)}},[raw]);
+  const copy = useCallback(async () => {
+    const revision=copyRevision.current;
+    setCopyFailed(false);
+    try {
+      await navigator.clipboard.writeText(raw);
+      if(revision!==copyRevision.current)return;
+      setCopied(true);onCopy?.(raw);
+      clearTimeout(copyTimer.current);
+      copyTimer.current=setTimeout(()=>setCopied(false),1500);
+    } catch {if(revision===copyRevision.current)setCopyFailed(true)}
   }, [raw, onCopy]);
 
   const added = diff.filter((r) => r.type === "add").length;
@@ -172,21 +179,15 @@ export default function CodeBlock({
             <span className="text-red">-{removed}</span>
           </span>
         ) : (
-          <button
-            type="button"
+          <RowActionButton
             aria-label={text.copy}
             onClick={copy}
-            className={`-mr-1 ml-auto flex h-6 items-center gap-1 rounded-[6px] px-1.5 text-[12px]
-              font-medium transition-colors duration-100 hover:bg-hover
-              ${copied ? "text-green" : "text-ink-3 hover:text-ink"}`}
+            data-copied={copied || undefined}
+            className="bui-code-copy ml-auto"
+            icon={copied ? <Check width={14} height={14} strokeWidth={1.8}/> : <Copy width={14} height={14} strokeWidth={1.8}/>}
           >
-            {copied ? (
-              <Check width={11} height={11} strokeWidth={1.5}/>
-            ) : (
-              <Copy width={11} height={11} strokeWidth={1.5}/>
-            )}
             {copied ? text.copied : text.copy}
-          </button>
+          </RowActionButton>
         )}
       </div>
 

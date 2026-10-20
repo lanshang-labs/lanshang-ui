@@ -1,0 +1,190 @@
+/* Shared interaction grammar. The Provider also themes portal-mounted controls. */
+:root[data-theme] {--ui-focus-ring:var(--ui-accent);}
+:root[data-theme] :is(.ant-btn,.ant-switch,.ant-radio-button-wrapper,.ant-tabs-tab-btn,.ant-pagination-item a,.ant-pagination-item-link,.ant-dropdown-menu-item):focus-visible,
+.bui :is(button,a):focus-visible {
+  outline:2px solid var(--ui-focus-ring,var(--ui-accent));outline-offset:2px;
+}
+/* Inset rings remain visible inside clipped tables, compact groups and task rows. */
+:root[data-theme] :is(.ant-space-compact,.ds-data-table,.bui-task-rows,.bui-top-nav,.ant-tabs-nav) :is(button,a,[role=tab]):focus-visible {
+  outline-offset:-2px;
+}
+:root[data-theme] .ant-checkbox-input:focus-visible + .ant-checkbox-inner,
+:root[data-theme] .ant-radio-input:focus-visible + .ant-radio-inner {
+  outline:2px solid var(--ui-focus-ring);outline-offset:2px;
+}
+.bui-top-nav .sidebar-row {border:0;background:transparent;color:var(--ink-2);}
+.bui-top-nav .sidebar-row:hover:not(:disabled) {background:var(--hover);}
+.bui-top-nav .sidebar-row:disabled {opacity:.45;cursor:not-allowed;}
+.bui-top-nav .sidebar-row[aria-current=page] {background:var(--hover-2);color:var(--ink);}
+.bui-task-rows button:hover {background:var(--hover);}
+.platform-theme-switch .ant-btn:not(.is-selected):not(:disabled):hover {background:var(--ui-raised);color:var(--ui-text);}
+.platform-theme-switch .ant-btn.is-selected:hover {background:var(--ui-selected);color:var(--ui-text);}
+/* Focusable unavailable actions keep their explanation path without looking enabled. */
+:root[data-theme] .ant-btn[aria-disabled="true"]:not([aria-busy="true"]),
+:root[data-theme] .ant-btn[aria-disabled="true"]:not([aria-busy="true"]):hover {color:var(--ui-muted);cursor:default;}
+/* Keep a selected record identifiable while a neighbouring row is hovered. */
+.ds-data-table .ant-table-row-selected>td:first-child {box-shadow:inset 2px 0 var(--ui-line-strong);}
+@media(forced-colors:active) {
+  .ds-data-table .ant-table-row-selected>td:first-child {border-inline-start:2px solid Highlight;}
+  .bui-top-nav .sidebar-row[aria-current=page] {outline:1px solid Highlight;outline-offset:-1px;}
+}
+
+:root[data-theme] :is(.ant-modal-close,.ant-drawer-close) {border-radius:var(--ls-control-middle-radius,10px);}
+:root[data-theme] .ant-drawer-close {width:var(--ls-control-middle-height,32px);height:var(--ls-control-middle-height,32px);padding:0;flex:none;align-items:center;justify-content:center;}
+:root[data-theme] :is(.ant-modal-close,.ant-drawer-close):focus-visible {outline:2px solid var(--ui-focus-ring);outline-offset:2px;}
+:root[data-theme] .ant-dropdown-menu-item:focus-visible {outline-offset:-2px;}
+
+@media(forced-colors:active) {
+  :root[data-theme] .ant-select-item-option-active:not(.ant-select-item-option-disabled) {outline:1px solid Highlight;outline-offset:-1px;}
+}
+
+:is(.bui-navigation,.bui-nav-popup,.bui-top-nav) .sidebar-row[aria-current=page] .sidebar-copy {font-weight:600;}
+:is(.bui-navigation,.bui-nav-popup,.bui-top-nav) .sidebar-row:focus-visible:not(:disabled) {background:var(--hover);}
+/* Navigation keeps the current route visible while other destinations are explored. */
+:is(.bui-navigation,.bui-nav-popup,.bui-top-nav) .sidebar-row[aria-current=page]:is(:hover,:focus-visible) {background:var(--hover-2);}
+:is(.bui-navigation,.bui-nav-popup,.bui-top-nav) .sidebar-row {transition:background-color var(--ls-motion-state,150ms) var(--ls-ease-standard,ease),color var(--ls-motion-state,150ms) var(--ls-ease-standard,ease);transform:none;scale:1;}
+@media(prefers-reduced-motion:reduce) {:is(.bui-navigation,.bui-nav-popup,.bui-top-nav) .sidebar-row {transition:none;}}
+
+/* Selection remains legible; only pointer/keyboard exploration paints a menu row. */
+:root[data-theme] .ant-dropdown-menu-item-selected {color:var(--ui-text);font-weight:500;background:transparent;}
+:root[data-theme] .ant-dropdown-menu-item-selected .ant-dropdown-menu-title-content::after {content:"✓";margin-inline-start:16px;float:right;color:var(--ui-secondary);}
+:root[data-theme] .ant-dropdown-menu-item:not(.ant-dropdown-menu-item-disabled):is(:hover,:focus-visible) {background:color-mix(in srgb,var(--ui-selected) 45%,var(--ui-surface));}
+
+/* Keep the active panel identifiable while exploring another tab. */
+:root[data-theme] .ant-tabs-tab-active .ant-tabs-tab-btn {text-shadow:none;}
+:root[data-theme] .ant-tabs-tab:not(.ant-tabs-tab-active):not(.ant-tabs-tab-disabled):is(:hover,:has(.ant-tabs-tab-btn:focus-visible)) {color:var(--ui-text);}
+
+:root[data-theme] .ant-tabs:not(.ant-tabs-top):not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-tab-active {background:var(--ui-selected);}
+
+:root[data-theme] .ant-tabs:not(.ant-tabs-top):not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-ink-bar {display:none;}
+
+/* Compact content tabs share the navigation surface; card tabs retain their panel shape. */
+:root[data-theme] .ant-tabs:not(.ant-tabs-top):not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-tab {min-height:var(--ls-control-middle-height,32px);padding:4px 12px;margin-block:4px;border-radius:var(--ls-control-middle-radius,10px);}
+:root[data-theme] .ant-tabs.ant-tabs-small:not(.ant-tabs-top):not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-tab {min-height:var(--ls-control-small-height,26px);padding-inline:var(--ls-control-small-padding-inline,7px);border-radius:var(--ls-control-small-radius,8px);}
+:root[data-theme] .ant-tabs.ant-tabs-large:not(.ant-tabs-top):not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-tab {min-height:var(--ls-control-large-height,38px);padding-inline:var(--ls-control-large-padding-inline,14px);border-radius:var(--ls-control-large-radius,12px);}
+:root[data-theme] .ant-tabs:not(.ant-tabs-top):not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-tab + .ant-tabs-tab {margin-inline-start:8px;}
+
+:root[data-theme] .ant-segmented-item:has(input:focus-visible) {outline:2px solid var(--ui-focus-ring);outline-offset:-2px;border-radius:999px;}
+:root[data-theme] .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {font-weight:600;}
+:root[data-theme] .ant-radio-button-wrapper:not(.ant-radio-button-wrapper-disabled):is(:hover,:has(input:focus-visible)) {background:var(--ui-raised);color:var(--ui-text);}
+:root[data-theme] .ant-radio-button-wrapper:has(input:focus-visible) {outline:2px solid var(--ui-focus-ring);outline-offset:-2px;}
+.platform-theme-switch .ant-btn.is-selected {font-weight:600;}
+.platform-theme-switch .ant-btn:not(.is-selected):not(:disabled):focus-visible {background:var(--ui-raised);}
+
+
+/* Mixed and checked states share the same filled silhouette.
+   Ant's mixed-state background is important, so match that specificity here. */
+:root[data-theme] .ant-checkbox-indeterminate:not(.ant-checkbox-disabled) .ant-checkbox-inner {
+  background:var(--ui-text) !important;
+  border-color:var(--ui-text) !important;
+}
+:root[data-theme] .ant-checkbox-indeterminate:not(.ant-checkbox-disabled):hover .ant-checkbox-inner,
+:root[data-theme] .ant-checkbox-wrapper:hover .ant-checkbox-indeterminate:not(.ant-checkbox-disabled) .ant-checkbox-inner {
+  background:var(--ui-secondary) !important;
+  border-color:var(--ui-secondary) !important;
+}
+:root[data-theme] .ant-checkbox-indeterminate .ant-checkbox-inner::after {
+  width:10px;height:2px;border-radius:1px;
+  background:var(--ui-surface);
+}
+:root[data-theme] .ant-checkbox-indeterminate.ant-checkbox-disabled .ant-checkbox-inner::after {
+  background:var(--ui-muted);
+}
+@media(forced-colors:active) {
+  :root[data-theme] .ant-checkbox-indeterminate:not(.ant-checkbox-disabled) .ant-checkbox-inner {
+    background:Highlight !important;border-color:Highlight !important;
+    forced-color-adjust:none;
+  }
+  :root[data-theme] .ant-checkbox-indeterminate:not(.ant-checkbox-disabled) .ant-checkbox-inner::after {background:HighlightText;}
+}
+
+/* Persistent navigation selection shares the segmented control's moving surface. */
+.bui-top-nav {position:relative;isolation:isolate;padding:3px;gap:2px;border-radius:999px;background:var(--ui-raised);width:max-content;max-width:100%;}
+.ls-nav-indicator {position:absolute;left:0;top:3px;bottom:3px;pointer-events:none;border-radius:999px;background:var(--ui-surface);box-shadow:var(--ls-selection-shadow);transition:transform var(--ls-motion-selection,280ms) var(--ls-ease-selection,ease),width var(--ls-motion-selection,280ms) var(--ls-ease-selection,ease);}
+.bui-top-nav .sidebar-row {position:relative;z-index:1;border-radius:999px;height:calc(var(--ls-control-middle-height,32px) - 6px);}
+.bui-top-nav .sidebar-row:is([aria-current=page],:hover,:focus-visible),.bui-top-nav .sidebar-row[aria-current=page]:is(:hover,:focus-visible) {background:transparent;}
+.bui-top-nav .sidebar-row:hover:not(:disabled) .sidebar-copy {color:var(--ui-text);}
+.bui-top-nav .sidebar-row[aria-current=page] .sidebar-copy {font-weight:500;}
+:root[data-theme=dark] .ls-nav-indicator {background:color-mix(in srgb,var(--ui-selected) 92%,var(--ui-text));box-shadow:none;}
+/* AntD retains ownership of tab roles, keyboard handling and indicator geometry. */
+:root[data-theme] .ant-tabs-top:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-nav-list {isolation:isolate;}
+:root[data-theme] .ant-tabs-top:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-tab {z-index:1;border-radius:999px;background:transparent;transition:color var(--ls-motion-state,150ms) var(--ls-ease-standard,ease);}
+:root[data-theme] .ant-tabs-top:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-tab-active {background:transparent;}
+:root[data-theme] .ant-tabs-top:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-ink-bar {display:block;top:4px;bottom:4px;height:auto;border-radius:999px;background:var(--ui-selected);z-index:0;pointer-events:none;transition:left var(--ls-motion-selection,280ms) var(--ls-ease-selection,ease),width var(--ls-motion-selection,280ms) var(--ls-ease-selection,ease),transform var(--ls-motion-selection,280ms) var(--ls-ease-selection,ease);}
+:root[data-theme] .ant-tabs-tab-active .ant-tabs-tab-btn {font-weight:500;}
+.ls-disclosure-arrow {flex:none;color:var(--ui-secondary);transition:transform var(--ls-motion-chevron,200ms) var(--ls-ease-standard,ease);}
+.bui-task-rows .ls-task-row {transition:background-color var(--ls-motion-state,150ms) var(--ls-ease-standard,ease);}
+.bui-task-rows .ls-task-row-trigger {transition:background-color var(--ls-motion-state,150ms) var(--ls-ease-standard,ease);}
+.bui-task-rows .ls-task-row-trigger:hover {background:color-mix(in srgb,var(--ui-selected) 40%,transparent);}
+.bui-task-rows button[aria-expanded=true] {box-shadow:none;}
+.ls-task-row-details {transition:grid-template-rows var(--ls-motion-selection,280ms) var(--ls-ease-standard,ease),opacity var(--ls-motion-enter,180ms) var(--ls-ease-standard,ease);}
+@media(prefers-reduced-motion:reduce) {
+ .ls-nav-indicator,.ls-disclosure-arrow,.bui-task-rows .ls-task-row,.bui-task-rows .ls-task-row-trigger,.ls-task-row-details,:root[data-theme] .ant-tabs-top:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-ink-bar {transition:none;}
+ .bui-task-rows * {animation:none!important;}
+}
+
+/* Menus use the same inset rows and detached surface as Select. */
+:root[data-theme] .ant-dropdown .ant-dropdown-menu {padding:6px;border:1px solid var(--ui-line);border-radius:var(--ls-control-middle-popup-radius,12px);background:var(--ui-surface);box-shadow:var(--ls-overlay-shadow);}
+:root[data-theme] .ant-dropdown-menu .ant-dropdown-menu-item,:root[data-theme] .ant-dropdown-menu .ant-dropdown-menu-submenu-title {min-height:var(--ls-control-middle-option-height,28px);border-radius:var(--ls-control-middle-option-radius,8px);padding:4px var(--ls-control-middle-padding-inline,10px);font-size:var(--ls-control-middle-font-size,13px);line-height:20px;transition:background-color var(--ls-motion-state,150ms) var(--ls-ease-standard,ease),color var(--ls-motion-state,150ms) var(--ls-ease-standard,ease);}
+:root[data-theme] .ant-dropdown:is(.ant-slide-up-enter-active,.ant-slide-up-appear-active,.ant-slide-down-enter-active,.ant-slide-down-appear-active) {animation-duration:var(--ls-motion-enter,180ms);animation-timing-function:var(--ls-ease-standard,ease);}
+:root[data-theme] .ant-dropdown:is(.ant-slide-up-leave-active,.ant-slide-down-leave-active) {animation-duration:var(--ls-motion-exit,120ms);}
+/* Card tabs keep their connection to the panel; hover must not mimic selection. */
+:root[data-theme] .ant-tabs-card > .ant-tabs-nav .ant-tabs-tab {transition:background-color var(--ls-motion-state,150ms) var(--ls-ease-standard,ease),color var(--ls-motion-state,150ms) var(--ls-ease-standard,ease),border-color var(--ls-motion-state,150ms) var(--ls-ease-standard,ease);}
+:root[data-theme] .ant-tabs-card > .ant-tabs-nav .ant-tabs-tab:not(.ant-tabs-tab-active):not(.ant-tabs-tab-disabled):hover {background:color-mix(in srgb,var(--ui-selected) 35%,var(--ui-surface));}
+:root[data-theme] .ant-tabs-card > .ant-tabs-nav .ant-tabs-tab-active {background:var(--ui-surface);}
+.bui-group-arrow,:root[data-theme] .ant-collapse-expand-icon .ant-collapse-arrow {transition:transform var(--ls-motion-chevron,200ms) var(--ls-ease-standard,ease);}
+:root[data-theme] .ant-collapse-header {transition:background-color var(--ls-motion-state,150ms) var(--ls-ease-standard,ease);}
+:root[data-theme] .ant-collapse-item:not(.ant-collapse-item-disabled) > .ant-collapse-header:hover {background:color-mix(in srgb,var(--ui-selected) 35%,transparent);}
+:root[data-theme] .ant-card-hoverable {transition:border-color var(--ls-motion-state,150ms) var(--ls-ease-standard,ease),box-shadow var(--ls-motion-state,150ms) var(--ls-ease-standard,ease);}
+:root[data-theme] .ant-card-hoverable:hover {border-color:var(--ui-line-strong);box-shadow:var(--ls-surface-shadow);}
+@media(prefers-reduced-motion:reduce) {
+ :root[data-theme] :is(.ant-dropdown-menu-item,.ant-dropdown-menu-submenu-title,.ant-tabs-tab,.ant-card-hoverable,.ant-collapse-header,.ant-collapse-arrow,.ant-collapse-content),.bui-group-arrow {animation-duration:20ms!important;animation-iteration-count:1!important;transition:none!important;}
+}
+
+/* Single-choice controls share a quiet track and floating selection pill. */
+:root[data-theme] .ant-segmented {padding:3px;border-radius:999px;background:var(--ui-raised);}
+:root[data-theme] .ant-segmented.ant-segmented-sm {height:var(--ls-control-small-height,26px);padding:2px;}
+:root[data-theme] .ant-segmented:not(.ant-segmented-sm):not(.ant-segmented-lg) {height:var(--ls-control-middle-height,32px);}
+:root[data-theme] .ant-segmented.ant-segmented-lg {height:var(--ls-control-large-height,38px);}
+:root[data-theme] .ant-segmented .ant-segmented-group {height:100%;}
+:root[data-theme] .ant-segmented .ant-segmented-item {border-radius:999px;transition:color var(--ls-motion-state,150ms) var(--ls-ease-standard,ease);}
+:root[data-theme] .ant-segmented .ant-segmented-item::after {border-radius:999px;background:transparent;}
+:root[data-theme] .ant-segmented .ant-segmented-item-selected,:root[data-theme] .ant-segmented .ant-segmented-thumb {border-radius:999px;background:var(--ui-surface);box-shadow:var(--ls-selection-shadow);font-weight:500;}
+:root[data-theme] .ant-segmented .ant-segmented-thumb {transition:transform var(--ls-motion-selection,280ms) var(--ls-ease-selection,ease),width var(--ls-motion-selection,280ms) var(--ls-ease-selection,ease);}
+.ls-radio-group {display:inline-flex;position:relative;isolation:isolate;max-width:100%;}
+.ls-radio-group:has(.ant-radio-button-wrapper) {background:var(--ui-raised);border-radius:999px;padding:3px;}
+.ls-radio-group[data-ls-size="small"]:has(.ant-radio-button-wrapper){--ls-radio-height:var(--ls-control-small-height,26px);padding:2px;}
+.ls-radio-group[data-ls-size="middle"]:has(.ant-radio-button-wrapper){--ls-radio-height:var(--ls-control-middle-height,32px);}
+.ls-radio-group[data-ls-size="large"]:has(.ant-radio-button-wrapper){--ls-radio-height:var(--ls-control-large-height,38px);}
+.ls-radio-group .ant-radio-group {position:static;display:flex;flex-wrap:wrap;}
+.ls-radio-indicator {position:absolute;left:0;top:0;pointer-events:none;border-radius:999px;background:var(--ui-surface);box-shadow:var(--ls-selection-shadow);transition:transform var(--ls-motion-selection,280ms) var(--ls-ease-selection,ease),width var(--ls-motion-selection,280ms) var(--ls-ease-selection,ease);}
+:root[data-theme] .ls-radio-group .ant-radio-button-wrapper {position:relative;z-index:1;border:0;border-radius:999px;background:transparent;box-shadow:none;color:var(--ui-secondary);padding-inline:10px;}
+:root[data-theme] .ls-radio-group:has(.ant-radio-button-wrapper) .ant-radio-button-wrapper{height:calc(var(--ls-radio-height,32px) - 6px);line-height:calc(var(--ls-radio-height,32px) - 6px);}
+:root[data-theme] .ls-radio-group[data-ls-size="small"] .ant-radio-button-wrapper{height:calc(var(--ls-radio-height,26px) - 4px);line-height:calc(var(--ls-radio-height,26px) - 4px);padding-inline:7px;}
+:root[data-theme] .ls-radio-group .ant-radio-button-wrapper::before {display:none;}
+:root[data-theme] .ls-radio-group .ant-radio-button-wrapper:not(.ant-radio-button-wrapper-disabled):is(:hover,.ant-radio-button-wrapper-checked) {background:transparent;color:var(--ui-text);box-shadow:none;}
+:root[data-theme] .ls-radio-group .ant-radio-button-wrapper-disabled {color:var(--ui-muted);cursor:not-allowed;opacity:.55;}
+:root[data-theme=dark] .ls-radio-indicator,:root[data-theme=dark] .ant-segmented .ant-segmented-item-selected,:root[data-theme=dark] .ant-segmented .ant-segmented-thumb {background:color-mix(in srgb,var(--ui-selected) 92%,var(--ui-text));box-shadow:none;}
+@media(prefers-reduced-motion:reduce){.ls-radio-indicator,:root[data-theme] .ant-segmented .ant-segmented-thumb,:root[data-theme] .ant-segmented .ant-segmented-item {transition:none!important;}}
+
+/* Opening a menu may give its selected row rc-menu's active class. That is not hover. */
+:root[data-theme] .ant-dropdown-menu .ant-dropdown-menu-item-selected:not(:hover):not(:focus-visible) {background:transparent;}
+/* One selection surface across horizontal navigation, tabs, segmented and radios. */
+:root[data-theme] .ant-tabs-top:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-nav-list {padding:3px;gap:2px;border-radius:999px;background:var(--ui-raised);}
+:root[data-theme] .ant-tabs-top:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-tab {margin:0;height:calc(var(--ls-control-middle-height,32px) - 6px);padding:0 12px;}
+:root[data-theme] .ant-tabs-top.ant-tabs-small:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-nav-list {padding:2px;}
+:root[data-theme] .ant-tabs-top.ant-tabs-small:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-tab {height:calc(var(--ls-control-small-height,26px) - 4px);padding-inline:var(--ls-control-small-padding-inline,7px);}
+:root[data-theme] .ant-tabs-top.ant-tabs-large:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-tab {height:calc(var(--ls-control-large-height,38px) - 6px);padding-inline:var(--ls-control-large-padding-inline,14px);}
+:root[data-theme] .ant-tabs-top:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-tab + .ant-tabs-tab {margin-inline-start:0;}
+:root[data-theme] .ant-tabs-top:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-ink-bar {top:3px;bottom:3px;background:var(--ui-surface);box-shadow:var(--ls-selection-shadow);}
+:root[data-theme] .ant-tabs-top.ant-tabs-small:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-ink-bar {top:2px;bottom:2px;}
+:root[data-theme=dark] .ant-tabs-top:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-ink-bar {background:color-mix(in srgb,var(--ui-selected) 92%,var(--ui-text));box-shadow:none;}
+:root[data-theme] .ls-radio-group .ant-radio-button-wrapper-checked {font-weight:500;}
+
+/* Theme choices use the same persistent surface as other single-selection controls. */
+:root[data-theme] .platform-theme-switch .ls-button-group--sliding > .ant-btn {border-radius:999px;transition:color var(--ls-motion-state,150ms) var(--ls-ease-standard,ease);}
+:root[data-theme] .platform-theme-switch .ls-button-group--sliding > .ant-btn:is(.is-selected,:hover,:focus-visible) {background:transparent;box-shadow:none;}
+:root[data-theme] .platform-theme-switch .ls-button-group--sliding > .ant-btn.is-selected {font-weight:500;color:var(--ui-text);}
+
+/* Hover/press must not leave a second pill under the moving segmented thumb. */
+:root[data-theme] .ant-segmented .ant-segmented-item:not(.ant-segmented-item-disabled):is(:hover,:active)::after {background:transparent;}

@@ -1,14 +1,168 @@
-.bui-search-field.ant-input-affix-wrapper {padding-inline:10px;gap:6px;}
+.bui-search-field.ant-input-affix-wrapper {height:var(--ls-control-middle-height,32px);padding-block:0;padding-inline:var(--ls-control-middle-padding-inline,10px);gap:var(--ls-control-middle-gap,6px);}
+.bui-search-field.ant-input-affix-wrapper-sm {height:var(--ls-control-small-height,26px);padding-inline:var(--ls-control-small-padding-inline,7px);gap:var(--ls-control-small-gap,4px);}
+.bui-search-field.ant-input-affix-wrapper-lg {height:var(--ls-control-large-height,38px);padding-inline:var(--ls-control-large-padding-inline,14px);gap:var(--ls-control-large-gap,8px);}
 .bui-search-field .ant-input-suffix {color:var(--ui-muted);gap:6px;}
-.bui-search-field .ant-input-suffix .ant-btn {height:22px;width:24px;padding:0;}
-.bui-row-action.ant-btn {padding-inline:7px;border-radius:6px;font-weight:400;}
+.bui-search-field .ant-input-suffix .ant-btn {height:24px;width:24px;padding:0;}
+.bui-search-field.ant-input-affix-wrapper-sm .ant-input-suffix .ant-btn {height:20px;width:20px;}
+.bui-search-field.ant-input-affix-wrapper-lg .ant-input-suffix .ant-btn {height:28px;width:28px;}
+.bui-row-action.ant-btn {padding-inline:var(--ls-control-middle-padding-inline,10px);border-radius:var(--ls-control-middle-radius,10px);font-weight:400;}
+.bui-row-action.ant-btn-sm {height:var(--ls-control-small-height,26px);padding-inline:var(--ls-control-small-padding-inline,7px);border-radius:var(--ls-control-small-radius,8px);}
+.bui-row-action.ant-btn-lg {padding-inline:var(--ls-control-large-padding-inline,14px);border-radius:var(--ls-control-large-radius,12px);}
 .bui-row-action.ant-btn:not(.ant-btn-dangerous):not(:disabled) {color:var(--ui-secondary);}
-.bui-row-action.ant-btn:not(:disabled):hover {background:var(--ui-raised);}
+.bui-row-action.ant-btn:not(.ant-btn-dangerous):not(:disabled):is(:hover,:active) {background:var(--ui-selected);color:var(--ui-text);}
 .bui-row-action.ant-btn:focus-visible {outline:2px solid var(--ui-accent);outline-offset:2px;}
 
-a.bui-navigation-link {color:var(--ui-accent);font:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;border-radius:4px;}
-a.bui-navigation-link:hover {color:var(--ui-accent);text-decoration:underline;text-underline-offset:3px;}
+a.bui-navigation-link {display:inline-flex;align-items:center;gap:0;max-width:100%;box-sizing:border-box;color:var(--ui-secondary);font:inherit;text-decoration:none;border-radius:4px;}
+a.bui-navigation-link:hover {color:var(--ui-text);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:var(--ui-line-strong);}
 a.bui-navigation-link:focus-visible {outline:2px solid var(--ui-accent);outline-offset:3px;}
-a.bui-navigation-link--action {display:inline-flex;align-items:center;gap:5px;padding:4px 7px;min-height:28px;box-sizing:border-box;color:var(--ui-secondary);white-space:nowrap;text-decoration:none;}
-a.bui-navigation-link--action:hover {background:var(--ui-raised);color:var(--ui-text);text-decoration:none;}
-a.bui-navigation-link--action svg {flex-shrink:0;}
+a.bui-navigation-link--action {padding:4px var(--ls-control-middle-padding-inline,10px);min-height:var(--ls-control-middle-height,32px);border-radius:var(--ls-control-middle-radius,10px);}
+a.bui-navigation-link>span:first-child {min-width:0;overflow-wrap:anywhere;}
+a.bui-navigation-link .bui-navigation-link__icon {display:inline-flex;align-items:center;justify-content:center;flex:none;width:.75em;height:.75em;box-sizing:content-box;margin-inline-start:.25em;padding-bottom:.375em;opacity:.6;pointer-events:none;transition:opacity var(--ls-motion-state,150ms) var(--ls-ease-standard,ease);}
+a.bui-navigation-link .bui-navigation-link__icon svg {display:block;width:100%;height:100%;flex:none;}
+a.bui-navigation-link:is(:hover,:focus-visible,:active) .bui-navigation-link__icon {opacity:1;}
+@media(prefers-reduced-motion:reduce){a.bui-navigation-link .bui-navigation-link__icon{transition:none;}}
+.bui-row-action.ant-btn-dangerous:not(:disabled):hover {background:var(--ui-error-bg);}
+
+/* Danger text and a filled danger action need separate contrast surfaces. */
+:root[data-theme] .ant-btn.ant-btn-primary.ant-btn-dangerous:not(:disabled){background:var(--ui-danger-fill);border-color:var(--ui-danger-fill);color:#fff;}
+:root[data-theme] .ant-btn.ant-btn-primary.ant-btn-dangerous:not(:disabled):hover{background:var(--ui-danger-fill-hover);border-color:var(--ui-danger-fill-hover);color:#fff;}
+:root[data-theme] .ant-btn.ant-btn-primary.ant-btn-dangerous:not(:disabled):active{background:var(--ui-danger-fill-active);border-color:var(--ui-danger-fill-active);color:#fff;}
+
+.bui-row-action.ant-btn[aria-pressed="true"]:not(:disabled):not(.ant-btn-dangerous) {background:var(--ui-selected);color:var(--ui-text);font-weight:500;}
+.bui-row-action.ant-btn[aria-pressed="true"]:not(:disabled):hover {background:var(--ui-selected);}
+
+/* Select popovers share one card silhouette; the wrapper supplies size-specific
+   option heights to both CSS and rc-select's virtual-list measurement. */
+:root[data-theme] .ant-select-dropdown {
+  padding:6px;
+  border:1px solid var(--ui-line);
+  border-radius:var(--ls-control-middle-popup-radius,12px);
+  background:var(--ui-surface);
+  box-shadow:var(--ls-overlay-shadow);
+}
+:root[data-theme] .ant-select-dropdown .ant-select-item {border-radius:var(--ls-control-middle-option-radius,8px);padding-inline:12px;transition:background-color var(--ls-motion-state,150ms) var(--ls-ease-standard,ease);}
+/* All Select popovers, including those inside overlays, follow their trigger size. */
+:root[data-theme] .ant-select-dropdown.ls-select-popup-small{padding:4px;border-radius:var(--ls-control-small-popup-radius,10px);}
+:root[data-theme] .ant-select-dropdown.ls-select-popup-middle{padding:6px;border-radius:var(--ls-control-middle-popup-radius,12px);}
+:root[data-theme] .ant-select-dropdown.ls-select-popup-large{padding:8px;border-radius:var(--ls-control-large-popup-radius,14px);}
+:root[data-theme] .ant-select-dropdown.ls-select-popup-small .ant-select-item{min-height:var(--ls-control-small-option-height,24px);padding:2px var(--ls-control-small-padding-inline,7px);border-radius:var(--ls-control-small-option-radius,6px);font-size:var(--ls-control-small-font-size,12px);line-height:20px;}
+:root[data-theme] .ant-select-dropdown.ls-select-popup-middle .ant-select-item{min-height:var(--ls-control-middle-option-height,28px);padding:4px var(--ls-control-middle-padding-inline,10px);border-radius:var(--ls-control-middle-option-radius,8px);font-size:var(--ls-control-middle-font-size,13px);line-height:20px;}
+:root[data-theme] .ant-select-dropdown.ls-select-popup-large .ant-select-item{min-height:var(--ls-control-large-option-height,32px);padding:6px var(--ls-control-large-padding-inline,14px);border-radius:var(--ls-control-large-option-radius,10px);font-size:var(--ls-control-large-font-size,14px);line-height:20px;}
+:root[data-theme] .ant-select-dropdown[class*="ls-select-popup-"] .ant-select-item-option-state .ls-control-icon{font-size:var(--ls-control-middle-icon,14px);}
+:root[data-theme] .ant-select-dropdown.ls-select-popup-small .ant-select-item-option-state .ls-control-icon{font-size:var(--ls-control-small-icon,12px);}
+:root[data-theme] .ant-select-dropdown.ls-select-popup-large .ant-select-item-option-state .ls-control-icon{font-size:var(--ls-control-large-icon,16px);}
+:root[data-theme] .ant-select-dropdown[class*="placement-bottom"] {translate:0 6px;}
+:root[data-theme] .ant-select-dropdown[class*="placement-top"] {translate:0 -6px;}
+
+/* Keep natural label spacing, including Chinese two-character actions. */
+:root[data-theme] .ant-btn{letter-spacing:normal}
+:root[data-theme] :is(.ant-input-sm,.ant-input-affix-wrapper-sm,.ant-input-number-sm,.ant-picker-small,.ant-btn-sm,.ant-segmented-sm,.ls-select.ant-select-sm,.ls-radio-group[data-ls-size="small"] .ant-radio-button-wrapper){font-size:var(--ls-control-small-font-size,12px);}
+:root[data-theme] :is(.ant-picker-small .ant-picker-input input,.ls-select.ant-select-sm .ant-select-selection-item,.ls-select.ant-select-sm .ant-select-selection-placeholder,.ant-segmented-sm .ant-segmented-item){font-size:var(--ls-control-small-font-size,12px);}
+:root[data-theme] :is(.ant-segmented-lg .ant-segmented-item,.ls-radio-group[data-ls-size="large"] .ant-radio-button-wrapper){font-size:var(--ls-control-large-font-size,14px);}
+
+/* Remove inline SVG baseline space inside the already centered button slot. */
+:root[data-theme] .ant-btn .ant-btn-icon {display:inline-flex;align-items:center;justify-content:center;}
+:root[data-theme] .ant-btn .ant-btn-icon > svg {display:block;flex-shrink:0;}
+:root[data-theme] .ant-badge-count {font-variant-numeric:tabular-nums;}
+
+/* Rounded six-ray mark: a vector silhouette, never a blurred font glyph. */
+:root[data-theme] .ant-form-item-label > label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
+ content:"" !important;display:inline-block;width:10px;height:10px;flex:0 0 10px;margin-inline-end:4px;align-self:center;line-height:1;
+ background:var(--ls-required-mark,#b85c61);
+ mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M6 2v8M2.54 4l6.92 4M2.54 8l6.92-4' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") center/10px 10px no-repeat;
+}
+:root[data-theme="dark"]{--ls-required-mark:#dc9296}
+:root[data-theme="light"]{--ls-required-mark:#b85c61}
+@media(forced-colors:active){:root[data-theme] .ant-form-item-label > label.ant-form-item-required::before{background:CanvasText;forced-color-adjust:none}}
+.ls-file-picker-target{position:relative;display:flex;align-items:center;gap:12px;padding:16px;border:1px dashed var(--ls-surface-edge,var(--ui-line-strong));border-radius:12px;background:var(--ls-surface-face,var(--ui-surface));box-shadow:var(--ls-surface-shadow);cursor:pointer;min-width:0;transition:background-color var(--ls-motion-state,150ms) var(--ls-ease-standard,ease),border-color var(--ls-motion-state,150ms) var(--ls-ease-standard,ease)}
+.ls-file-picker:not([data-disabled]) .ls-file-picker-target:hover{background:var(--ls-surface-stage);border-color:var(--ui-line-strong)}
+.ls-file-picker-target:focus-within{outline:2px solid var(--ui-accent);outline-offset:2px}
+.ls-file-picker-target input{position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:inherit}
+.ls-file-picker-icon{display:grid;place-items:center;width:36px;height:36px;border-radius:10px;background:var(--ui-raised);font-size:20px;flex:none;color:var(--ui-secondary)}
+.ls-file-picker-copy{display:grid;gap:4px;min-width:0;color:var(--ui-text);font-size:13px}.ls-file-picker-copy strong{font-weight:500;overflow-wrap:anywhere}.ls-file-picker-copy>span{font-size:12px;color:var(--ui-muted)}
+.ls-file-picker-hint{position:absolute;width:1px;height:1px;clip-path:inset(50%);overflow:hidden}
+.ls-file-picker>.ant-btn{margin-top:8px}
+.ls-file-picker[data-disabled]{opacity:.5}.ls-file-picker[data-disabled] label{cursor:not-allowed}
+.ls-upload-drop.ant-upload-wrapper .ant-upload-drag {border-color:var(--ls-surface-edge);border-radius:16px;background:var(--ls-surface-face);box-shadow:var(--ls-surface-shadow);}
+.ls-upload-drop.ant-upload-wrapper .ant-upload-drag:hover,.ls-upload-drop.ant-upload-wrapper .ant-upload-drag-hover {border-color:var(--ui-line-strong);background:var(--ls-surface-stage);}
+.ls-upload-drop .ant-upload-btn:focus-visible {outline:2px solid var(--ui-accent);outline-offset:-3px;border-radius:14px;}
+
+/* White editable surfaces in light mode; disabled controls retain their neutral fill. */
+:root[data-theme="light"] :is(.ant-input-outlined,.ant-input-affix-wrapper-outlined,.ant-input-number-outlined,.ant-picker-outlined):not([disabled]):not(.ant-input-disabled):not(.ant-input-affix-wrapper-disabled):not(.ant-input-number-disabled):not(.ant-picker-disabled) {box-shadow:0 1px 2px #20212408;}
+
+/* Quiet pointer focus; keyboard users retain an explicit neutral focus ring. */
+:root[data-theme] .ls-select.ant-select-focused:not(.ant-select-disabled) .ant-select-selector{border-color:var(--ui-line);box-shadow:none;}
+:root[data-theme] .ls-select[data-ls-keyboard=true] .ant-select-selector{outline:none;}
+:root[data-theme] .ls-select[data-ls-keyboard=true] .ant-select-selection-item{text-decoration:underline;text-decoration-color:var(--ui-secondary);text-underline-offset:4px;}
+.ls-select-chevron{transition:transform var(--ls-motion-chevron,200ms) var(--ls-ease-standard,cubic-bezier(.2,.8,.2,1));}
+.ant-select-open .ls-select-chevron{transform:rotate(180deg);}
+:root[data-theme] .ant-select-dropdown .ant-select-item-option-selected:not(.ant-select-item-option-disabled){background:transparent;font-weight:400;}
+:root[data-theme] .ant-select-dropdown .ant-select-item-option-active:not(.ant-select-item-option-disabled){background:transparent;}
+:root[data-theme] .ant-select-dropdown .ant-select-item-option-state{color:var(--ui-text);}
+@keyframes ls-select-in{from{opacity:0;transform:scale(.97) translateY(-3px)}to{opacity:1;transform:scale(1) translateY(0)}}
+@keyframes ls-select-out{from{opacity:1;transform:scale(1)}to{opacity:0;transform:scale(.98)}}
+:root[data-theme] .ant-select-dropdown:is(.ant-slide-up-enter-active,.ant-slide-up-appear-active){animation-name:ls-select-in;animation-duration:var(--ls-motion-enter,180ms);animation-timing-function:var(--ls-ease-standard,cubic-bezier(.2,.8,.2,1));}
+:root[data-theme] .ant-select-dropdown.ant-slide-up-leave-active{animation-name:ls-select-out;animation-duration:var(--ls-motion-exit,120ms);}
+@media(prefers-reduced-motion:reduce){.ls-select-chevron{transition:none;} :root[data-theme] .ant-select-dropdown .ant-select-item{transition:none;}}
+
+/* Selection is the checkmark; highlight follows pointer or keyboard navigation only. */
+:root[data-theme] .ant-select-dropdown .ant-select-item-option:not(.ant-select-item-option-disabled):hover,
+:root[data-theme] .ant-select-dropdown.ls-select-popup-keyboard .ant-select-item-option-active:not(.ant-select-item-option-disabled){background:color-mix(in srgb,var(--ui-selected) 45%,var(--ui-surface));}
+
+:root[data-theme] .ls-select:not(.ant-select-disabled) .ant-select-arrow{color:var(--ui-secondary);}
+.ls-action-rotate{display:inline-flex;align-items:center;justify-content:center;transition:transform var(--ls-motion-refresh,550ms) var(--ls-ease-feedback,cubic-bezier(.22,.7,.3,1));}
+@media(prefers-reduced-motion:reduce){.ls-action-rotate{transition:none;}}
+
+.ls-action-search{display:inline-flex;align-items:center;justify-content:center;transform-origin:center;}
+.ls-action-search[data-active=true]{animation:ls-search-pulse var(--ls-motion-search,420ms) var(--ls-ease-feedback,cubic-bezier(.22,.7,.3,1));}
+@keyframes ls-search-pulse{0%,100%{transform:scale(1) rotate(0)}40%{transform:scale(1.16) rotate(-12deg)}70%{transform:scale(1.04) rotate(5deg)}}
+@media(prefers-reduced-motion:reduce){.ls-action-search[data-active=true]{animation:none;}}
+
+/* Input and action families share the compound control's quiet geometry.
+   Selection marks, status colors and native disabled behavior stay semantic. */
+:root[data-theme] :is(.ant-picker-suffix,.ant-input-number-handler,.ant-input-clear-icon) {color:var(--ui-secondary);}
+:root[data-theme] .ant-input-number-handler-wrap {background:var(--ls-surface-stage);border-inline-start:1px solid var(--ls-surface-edge);}
+:root[data-theme] .ant-picker-dropdown .ant-picker-panel-container {border:1px solid var(--ls-surface-edge);border-radius:var(--ls-control-middle-popup-radius,12px);box-shadow:var(--ls-overlay-shadow);}
+:root[data-theme] .ant-picker-dropdown.ls-date-popup-small .ant-picker-panel-container{border-radius:var(--ls-control-small-popup-radius,10px);}
+:root[data-theme] .ant-picker-dropdown.ls-date-popup-large .ant-picker-panel-container{border-radius:var(--ls-control-large-popup-radius,14px);}
+.ls-date-popup-small{--ls-date-panel-width:264px;--ls-date-header-height:34px;--ls-date-body-padding:6px 12px;--ls-date-cell-size:24px;--ls-date-cell-padding:4px;--ls-date-font-size:12px;}
+.ls-date-popup-middle{--ls-date-panel-width:309px;--ls-date-header-height:40px;--ls-date-body-padding:8px 18px;--ls-date-cell-size:26px;--ls-date-cell-padding:6px;--ls-date-font-size:13px;}
+.ls-date-popup-large{--ls-date-panel-width:352px;--ls-date-header-height:46px;--ls-date-body-padding:10px 20px;--ls-date-cell-size:30px;--ls-date-cell-padding:8px;--ls-date-font-size:14px;}
+:root[data-theme] .ls-date-popup .ant-picker-panel{width:var(--ls-date-panel-width);font-size:var(--ls-date-font-size);}
+:root[data-theme] .ls-date-popup .ant-picker-date-panel{width:100%;min-width:0;}
+:root[data-theme] .ls-date-popup .ant-picker-header{width:100%;min-width:0;height:var(--ls-date-header-height);font-size:var(--ls-date-font-size);}
+:root[data-theme] .ls-date-popup .ant-picker-body{width:100%;min-width:0;padding:var(--ls-date-body-padding);}
+:root[data-theme] .ls-date-popup .ant-picker-content{width:100%;table-layout:fixed;}
+:root[data-theme] .ls-date-popup .ant-picker-cell{padding-block:var(--ls-date-cell-padding);}
+:root[data-theme] .ls-date-popup .ant-picker-cell-inner{min-width:var(--ls-date-cell-size);width:var(--ls-date-cell-size);height:var(--ls-date-cell-size);line-height:var(--ls-date-cell-size);}
+:root[data-theme] .ls-date-popup .ant-picker-footer{font-size:var(--ls-date-font-size);}
+.ls-date-popup .ant-picker-panel-container {max-width:calc(100vw - 24px);max-height:70dvh;overflow:auto;overscroll-behavior:contain;}
+@media(max-width:600px){
+ .ls-date-popup {position:fixed !important;inset:auto 12px 12px !important;width:auto !important;}
+ .ls-date-popup .ant-picker-range-arrow {display:none;}
+ .ls-date-popup .ant-picker-panel-container {max-height:65dvh;width:100%;}
+ .ls-date-popup .ant-picker-panel-layout,.ls-date-popup .ant-picker-panels,.ls-date-popup .ant-picker-content {width:100%;}
+ :root[data-theme] .ls-date-popup .ant-picker-panel{width:100%;}
+ .ls-date-popup .ant-picker-panels {flex-direction:column;}
+}
+:root[data-theme] .ant-slider .ant-slider-rail {top:2px;height:8px;border-radius:999px;background:var(--ls-surface-track);}
+:root[data-theme] .ant-slider .ant-slider-track {top:2px;height:8px;border-radius:999px;background:var(--ui-secondary);}
+:root[data-theme] .ant-slider:not(.ant-slider-disabled):hover .ant-slider-track {background:var(--ui-text);}
+:root[data-theme] .ant-slider .ant-slider-handle {width:18px;height:18px;margin-top:-4.5px;}
+:root[data-theme] .ant-slider .ant-slider-handle::after {width:18px;height:18px;background:var(--ls-surface-face);box-shadow:inset 0 0 0 2px var(--ui-secondary),var(--ls-surface-shadow);transition:box-shadow var(--ls-motion-state,150ms) var(--ls-ease-standard,ease),background-color var(--ls-motion-state,150ms) var(--ls-ease-standard,ease);}
+:root[data-theme] .ant-slider:not(.ant-slider-disabled) .ant-slider-handle:is(:hover,:active)::after {box-shadow:inset 0 0 0 2px var(--ui-text),var(--ls-surface-shadow);}
+:root[data-theme] .ant-slider .ant-slider-handle:focus-visible::after {box-shadow:inset 0 0 0 2px var(--ui-text),0 0 0 3px var(--ui-accent);}
+:root[data-theme] .ant-slider.ant-slider-disabled .ant-slider-handle::after {box-shadow:inset 0 0 0 2px var(--ui-muted);}
+@media(prefers-reduced-motion:reduce){:root[data-theme] .ant-slider .ant-slider-handle::after {transition:none;}}
+:root[data-ls-motion="reduce"] .ant-slider .ant-slider-handle::after {transition:none;}
+:root[data-theme] :is(.ant-checkbox-wrapper,.ant-radio-wrapper) {align-items:center;column-gap:2px;line-height:1.6;}
+:root[data-theme] .ant-form-item-extra {margin-top:6px;font-size:12px;line-height:1.6;}
+@media(prefers-reduced-motion:reduce){.ls-file-picker-target{transition:none;}}
+:root[data-ls-motion="reduce"] .ls-file-picker-target{transition:none;}
+
+:root[data-theme] .ant-upload-wrapper .ant-upload-drag {border-color:var(--ls-surface-edge);border-radius:12px;background:var(--ls-surface-face);box-shadow:var(--ls-surface-shadow);}
+:root[data-theme] .ant-upload-wrapper .ant-upload-drag:not(.ant-upload-disabled):is(:hover,.ant-upload-drag-hover) {border-color:var(--ui-line-strong);background:var(--ls-surface-stage);}
+.ls-password-visibility { display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; padding:0; border:0; border-radius:var(--ls-control-small-radius,8px); background:transparent; color:var(--ui-muted); cursor:pointer; }
+.ls-password-visibility:hover { color:var(--ui-text); background:var(--ui-raised); }
+.ls-password-visibility:focus-visible { outline:2px solid var(--ui-accent); outline-offset:1px; }
+.ls-password-visibility:disabled { cursor:not-allowed; opacity:.45; }

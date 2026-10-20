@@ -1,0 +1,46 @@
+/* One centered slot for each disclosure and icon; no Ant triangle or hover tile. */
+.bui-resource-tree.ant-tree { background:transparent; color:var(--ui-text); font-size:13px; }
+.bui-resource-tree.ant-tree .ant-tree-treenode { align-items:center; gap:0; padding:0; width:100%; }
+.bui-resource-tree.ant-tree .ant-tree-indent-unit { width:14px; }
+.bui-resource-tree.ant-tree .ant-tree-switcher {
+ display:inline-flex; align-items:center; justify-content:center;
+ flex:0 0 16px; width:16px; min-width:16px; height:var(--ls-control-middle-height,32px); line-height:1;
+ margin:0; background:transparent; border-radius:0; color:var(--ui-secondary);
+}
+.bui-resource-tree.ant-tree .ant-tree-switcher:before { display:none; }
+.bui-resource-tree.ant-tree .ant-tree-switcher svg { display:block; transition:transform var(--ls-motion-chevron,200ms) var(--ls-ease-standard,ease); }
+.bui-resource-tree.ant-tree .ant-tree-switcher_open svg { transform:rotate(90deg); }
+.bui-resource-tree.ant-tree .ant-tree-switcher_close svg { transform:none; }
+.bui-resource-tree.ant-tree .ant-tree-switcher-noop { visibility:hidden; }
+.bui-resource-tree.ant-tree .ant-tree-node-content-wrapper {
+ display:flex; align-items:center; gap:4px; min-height:var(--ls-control-middle-height,32px); line-height:20px;
+ padding:0 5px 0 1px; border-radius:var(--ls-control-middle-radius,10px); min-width:0;
+}
+.bui-resource-tree.ant-tree .ant-tree-iconEle {
+ display:inline-flex; align-items:center; justify-content:center;
+ flex:0 0 18px; width:18px; height:18px; line-height:1;
+}
+.bui-resource-icon { display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; flex:none; color:var(--ui-secondary); }
+.bui-resource-icon svg { display:block; flex:none; }
+.bui-resource-tree.ant-tree .ant-tree-title { min-width:0; flex:1; }
+.bui-resource-tree.ant-tree .ant-tree-node-content-wrapper:hover:not(.ant-tree-node-selected) { background:var(--ui-raised); color:var(--ui-text); }
+.bui-resource-tree.ant-tree .ant-tree-node-selected { background:var(--ui-selected); color:var(--ui-text); }
+@media(prefers-reduced-motion:reduce){.bui-resource-tree.ant-tree .ant-tree-switcher svg{transition:none}}
+
+.bui-resource-chevron { display:inline-flex; align-items:center; justify-content:center; width:16px; height:18px; flex:0 0 16px; vertical-align:middle; color:var(--ui-secondary); }
+.bui-resource-chevron svg { display:block; }
+.bui-resource-chevron[data-expanded="true"] svg { transform:rotate(90deg); }
+
+/* Truncate only the title: icons, disclosure and selected hit area stay stable. */
+.bui-resource-tree.ant-tree .ant-tree-node-content-wrapper { flex:1; overflow:hidden; }
+.bui-resource-tree.ant-tree .ant-tree-title {
+ overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.bui-resource-tree.ant-tree .ant-tree-indent { flex:none; max-width:30%; overflow:hidden; }
+
+.bui-resource-name { display:block; min-width:0; max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.bui-resource-tree.ant-tree .ant-tree-treenode-active .ant-tree-node-content-wrapper { outline:1px solid var(--ui-accent); outline-offset:-1px; }
+@media(forced-colors:active){
+ .bui-resource-tree.ant-tree .ant-tree-node-selected {outline:1px solid Highlight;outline-offset:-1px;}
+ .bui-resource-tree.ant-tree .ant-tree-treenode-active .ant-tree-node-content-wrapper {outline:2px solid Highlight;outline-offset:-2px;}
+}

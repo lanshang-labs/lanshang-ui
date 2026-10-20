@@ -1,10 +1,13 @@
-// Platform-owned icon entrypoint. Iconoir MIT; legacy export names avoid changing callers.
+// Shared Iconoir entrypoint. Iconoir MIT; legacy export names avoid changing callers.
 import type { ComponentType, SVGProps } from "react";
-import {ArrowLeft,ArrowRight,Check,CheckCircle,Clock,ClockRotateRight,CloudUpload,Code,Collapse,Copy,Database,Download,EditPencil,Expand,Eye,EyeClosed,Folder,Frame,Globe,Group,HalfMoon,Link,LogOut,MessageText,Minus,MoreVert,Network,Play,Plus,Position,Refresh,Search,Settings,ShieldCheck,SidebarCollapse,SidebarExpand,SunLight,Trash,Upload,ViewGrid,WarningCircle,ZoomIn,ZoomOut} from "iconoir-react";
+import {User,Lock,ArrowLeft,ArrowRight,NavArrowLeft,NavArrowRight,NavArrowDown,Cloud,Page,PlugTypeA,DesignPencil,Xmark,Check,CheckCircle,Clock,ClockRotateRight,CloudUpload,Code,Collapse,Copy,Database,Download,EditPencil,Expand,Eye,EyeClosed,Folder,Frame,Globe,Group,HalfMoon,Link,LogOut,MessageText,Minus,MoreVert,Network,Play,Plus,Position,Refresh,Search,Settings,ShieldCheck,SidebarCollapse,SidebarExpand,SunLight,Trash,Upload,ViewGrid,WarningCircle,ZoomIn,ZoomOut} from "iconoir-react";
+// Decorative composition icons share the package entrypoint with semantic icons.
+export {ArrowUpRight,Book,HomeSimple} from "iconoir-react";
+export {Check,Folder,Settings};
 type Props = SVGProps<SVGSVGElement> & {spin?:boolean;rotate?:number};
 function icon(Component:ComponentType<SVGProps<SVGSVGElement>>, label:string, spinning=false) {
  return function PlatformIcon({spin=spinning,rotate,className="",style,...props}:Props) {
-  return <span role="img" aria-label={label} className={`anticon platform-icon ${spin?"platform-icon-spin":""} ${className}`} style={style}><Component {...props} aria-hidden="true" width="1em" height="1em" strokeWidth={1.5} style={rotate?{transform:`rotate(${rotate}deg)`}:undefined}/></span>;
+  return <span role="img" aria-label={label} className={`anticon platform-icon ${spin?"platform-icon-spin":""} ${className}`} style={style}><Component {...props} aria-hidden="true" width="1em" height="1em" strokeWidth={1.8} style={rotate?{transform:`rotate(${rotate}deg)`}:undefined}/></span>;
  };
 }
 export const AimOutlined=icon(Position,"aim",false);
@@ -52,3 +55,17 @@ export const TeamOutlined=icon(Group,"team",false);
 export const UploadOutlined=icon(Upload,"upload",false);
 export const ZoomInOutlined=icon(ZoomIn,"zoom-in",false);
 export const ZoomOutOutlined=icon(ZoomOut,"zoom-out",false);
+
+// Semantic exports for application navigation; route ownership stays with consumers.
+export const CloudOutlined=icon(Cloud,"cloud");
+export const FileTextOutlined=icon(Page,"file-text");
+export const ConnectorOutlined=icon(PlugTypeA,"connector");
+export const DesignOutlined=icon(DesignPencil,"design");
+export const CloseOutlined=icon(Xmark,"close");
+
+export const ChevronLeftOutlined=icon(NavArrowLeft,"chevron-left");
+export const ChevronRightOutlined=icon(NavArrowRight,"chevron-right");
+export const ChevronDownOutlined=icon(NavArrowDown,"chevron-down");
+
+export const UserOutlined=icon(User,"user");
+export const LockOutlined=icon(Lock,"lock");

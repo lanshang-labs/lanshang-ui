@@ -1,0 +1,71 @@
+.ls-progress{min-width:0;color:var(--ui-text);font-family:var(--ds-font);--progress-ink:var(--ui-accent)}
+.ls-progress[data-status=success]{--progress-ink:var(--ui-success-text)}
+.ls-progress[data-status=failed]{--progress-ink:var(--ui-error-text)}
+.ls-progress[data-status=blocked],.ls-progress[data-status=paused]{--progress-ink:var(--ui-warning-text)}
+.ls-progress[data-status=queued],.ls-progress[data-status=cancelled],.ls-progress[data-status=unknown]{--progress-ink:var(--ui-muted)}
+.ls-progress-meter{height:5px;background:var(--ui-selected);border-radius:99px;overflow:hidden}
+.ls-progress-fill{display:block;height:100%;background:var(--progress-ink);border-radius:inherit;transition:width var(--ls-motion-state,150ms) var(--ls-ease-standard,ease)}
+.ls-progress-info{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:9px;font-size:12px;overflow-wrap:anywhere}
+.ls-progress-value{color:var(--ui-secondary);font-variant-numeric:tabular-nums}
+.ls-progress-description{color:var(--ui-secondary);font-size:12px;margin-top:6px;overflow-wrap:anywhere}
+.ls-progress--circle{display:grid;grid-template-columns:36px minmax(0,1fr);gap:0 10px;align-items:center}
+.ls-progress--circle .ls-progress-meter{width:36px;height:36px;background:none}
+.ls-progress--circle .ls-progress-info{margin-top:0}
+.ls-progress--circle .ls-progress-description{grid-column:2}
+.ls-progress--circle svg{width:36px;height:36px;transform:rotate(-90deg)}
+.ls-progress--circle circle{fill:none;stroke-width:2.5}
+.ls-progress-track{stroke:var(--ui-selected)}
+.ls-progress--circle .ls-progress-fill{stroke:var(--progress-ink);stroke-linecap:round}
+.ls-progress--line .is-indeterminate .ls-progress-fill{animation:ls-progress-slide var(--ls-motion-progressCycle,1400ms) ease-in-out infinite}
+.ls-progress--circle .is-indeterminate svg{animation:ls-progress-spin var(--ls-motion-progressCycle,1400ms) linear infinite}
+@keyframes ls-progress-slide{0%{transform:translateX(-100%)}100%{transform:translateX(360%)}}
+@keyframes ls-progress-spin{to{transform:rotate(270deg)}}
+.ls-task-progress-block{padding:20px;border:1px solid var(--ls-surface-edge);border-radius:14px;background:var(--ls-surface-face);box-shadow:var(--ls-surface-shadow);min-width:0;display:grid;gap:16px}
+.ls-task-progress-block header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.ls-task-progress-block h3{font-size:15px;font-weight:600;margin:0}
+.ls-task-progress-block header p,.ls-task-progress-note{font-size:12px;color:var(--ui-secondary);margin:0;overflow-wrap:anywhere}
+.ls-task-progress-actions{max-width:100%}
+.ls-task-progress-block .bui-task-rows{box-shadow:none;border:1px solid var(--ls-surface-edge)}
+.bui-task-rows .ls-task-row-trigger{height:auto;min-height:44px;flex-wrap:wrap;padding-block:9px;border:0;background:transparent;cursor:pointer}
+.bui-task-rows .ls-task-row-name{flex:1 1 120px;white-space:normal;overflow-wrap:anywhere}
+.bui-task-rows .ls-task-row-amount{max-width:100%;overflow-wrap:anywhere}
+.ls-task-row-extra{padding:0 12px 12px 46px;display:grid;gap:10px}
+.ls-task-row-extra:empty{display:none}
+.ls-task-row-actions{display:flex;gap:6px;flex-wrap:wrap}
+.ls-task-row-status{font-size:11px;color:var(--ui-secondary)}
+.bui-task-rows .ls-task-detail{gap:12px;flex-wrap:wrap;overflow-wrap:anywhere}
+@media(prefers-reduced-motion:reduce){.ls-progress *{animation:none!important;transition:none!important}}
+/* Activity-first surfaces: measured bars remain available for transfer metrics. */
+.ls-task-progress--activity{padding:24px;gap:16px}
+.ls-task-activity{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--ui-secondary);min-height:28px}
+.ls-task-activity-meta{font-family:var(--ds-mono);font-size:11px;color:var(--ui-muted);font-variant-numeric:tabular-nums}
+.ls-task-progress-block>*{min-width:0}
+.ls-task-activity{overflow-wrap:anywhere}
+.ls-task-activity>*{min-width:0;max-width:100%}
+.ls-task-activity .bui-loading-label{white-space:normal;overflow-wrap:anywhere}
+.ls-task-activity .bui-loading-label>span{min-width:0}
+.ls-task-progress--activity .bui-task-rows{border:1px solid var(--ls-surface-edge);border-radius:12px;overflow:hidden;box-shadow:none;background:var(--ls-surface-stage);gap:0}
+.ls-task-progress--activity .bui-task-rows>.ls-task-row{border:0;border-bottom:1px solid var(--ls-surface-edge);border-radius:0!important;box-shadow:none;background:transparent;animation:none!important}
+.ls-task-progress--activity .bui-task-rows>.ls-task-row:last-child{border-bottom:0}
+.ls-task-progress--activity .bui-task-rows>.bui-content-state{border:0;box-shadow:none}
+.ls-task-progress--activity .ls-task-row-trigger{min-height:46px}
+.ls-task-row-trigger:not(button){cursor:default!important}
+@media(max-width:600px){
+ .ls-task-progress--activity{padding:14px}
+ .bui-task-rows .ls-task-row-trigger{display:grid;grid-template-columns:24px minmax(0,1fr) auto;gap:6px 8px}
+ .ls-task-row-trigger>span:first-child{grid-column:1;grid-row:1}
+ .ls-task-row-trigger>.ls-task-row-name{grid-column:2;grid-row:1}
+ .ls-task-row-trigger>.ls-task-row-amount{grid-column:2;grid-row:2;font-size:11px}
+ .ls-task-row-trigger>span:nth-child(4){grid-column:3;grid-row:2}
+ .ls-task-row-trigger>span:last-child{grid-column:3;grid-row:1}
+ .ls-task-row-extra{padding-left:12px}
+}
+
+.ls-task-row-detail-content{padding:0 12px 14px 46px;}
+.ls-task-row:has(.ls-task-row-trigger:focus-visible){outline:2px solid var(--ui-accent);outline-offset:-2px;}
+.ls-task-row .ls-task-row-trigger:focus-visible{outline:none;}
+@media(max-width:480px){.ls-task-row-detail-content{padding-left:12px}}
+@media(prefers-reduced-motion:reduce){.bui-task-rows *{animation:none!important;transition:none!important}}
+/* Hover belongs to the complete step, including its expanded content. */
+.ls-task-progress--activity .bui-task-rows>.ls-task-row:hover{background:var(--ui-raised)}
+.bui-task-rows .ls-task-row-trigger:is(:hover,:active){background:transparent!important}

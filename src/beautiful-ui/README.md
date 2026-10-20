@@ -20,4 +20,4 @@ No remote scripts, analytics or CDN fonts are used at runtime. Original source h
 
 Regenerate the scoped stylesheet with `node src/beautiful-ui/scope-styles.mjs` from the repository root. Business icon imports go through `src/shared/ui/icons.tsx` using iconoir-react 7.12.1; Ant Design internal icons remain owned by Ant Design.
 
-LoadingLabel.tsx extracts the upstream LoadingState pixel grid and shimmer label; it is mounted only for real pending reads or a running job. No elapsed-time or status simulation. Inter Variable (OFL, via @fontsource-variable/inter) is bundled locally, with system Chinese fonts as fallbacks.
+LoadingLabel.tsx extracts the upstream LoadingState pixel grid and shimmer label; it is mounted only for real pending reads or a running job. No elapsed-time or status simulation. Inter Variable and Noto Sans SC Variable (OFL, via Fontsource) are bundled locally by the package build. The Provider owns the shared font family, with system fonts as loading fallbacks.

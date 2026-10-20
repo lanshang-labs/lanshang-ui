@@ -1,0 +1,18 @@
+.ls-layout-spec{display:grid;gap:32px;width:100%;min-width:0;}
+.ls-layout-spec-section{display:grid;gap:16px;min-width:0;}
+.ls-layout-spec-heading{display:grid;gap:4px;}
+.ls-layout-spec-heading>span{color:var(--ui-muted);font-size:11px;font-weight:600;letter-spacing:.06em;}
+.ls-layout-spec-heading h3{margin:0;font-size:16px;line-height:1.4;}
+.ls-layout-spec-heading p{margin:0;color:var(--ui-secondary);font-size:12px;line-height:1.7;}
+.ls-layout-scale,.ls-layout-pattern{border:1px solid var(--ls-surface-edge);border-radius:12px;background:var(--ls-surface-face);}
+.ls-layout-scale{display:grid;padding:12px 16px;}
+.ls-layout-scale-row{display:grid;grid-template-columns:30px 40px minmax(0,1fr) 90px;align-items:center;gap:12px;min-height:34px;font-size:12px;}
+.ls-layout-scale-row+.ls-layout-scale-row{border-top:1px solid var(--ls-surface-edge);}
+.ls-layout-scale-row strong{font-weight:600;}.ls-layout-scale-row code{color:var(--ui-secondary);font-size:11px;}.ls-layout-scale-row>span:last-child{color:var(--ui-muted);}
+.ls-layout-scale-track{display:flex;align-items:center;height:24px;}.ls-layout-scale-track i{display:block;max-width:100%;height:8px;border-radius:999px;background:var(--ui-secondary);}
+.ls-layout-patterns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
+.ls-layout-pattern{display:grid;align-content:start;gap:16px;min-width:0;padding:16px;}.ls-layout-pattern>strong{font-size:12px;}.ls-layout-pattern>small{color:var(--ui-muted);font-size:11px;}.ls-layout-pattern-wide{grid-column:1/-1;}
+.ls-layout-demo-bar,.ls-layout-demo-field,.ls-layout-demo-chip{display:block;padding:7px 10px;border:1px solid var(--ls-surface-edge);border-radius:8px;background:var(--ls-surface-stage);font-size:11px;}
+.ls-layout-demo-bar:nth-child(1){width:35%;}.ls-layout-demo-bar:nth-child(2){width:60%;}.ls-layout-demo-chip{white-space:nowrap;}.ls-layout-demo-field{min-width:0;}
+.ls-layout-scenarios{min-width:0;}.ls-layout-scenario-body{display:grid;gap:16px;min-width:0;}
+@media(max-width:640px){.ls-layout-patterns{grid-template-columns:1fr;}.ls-layout-pattern-wide{grid-column:auto;}.ls-layout-scale-row{grid-template-columns:26px 34px minmax(0,1fr);gap:8px;}.ls-layout-scale-row>span:last-child{display:none;}}

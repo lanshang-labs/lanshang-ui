@@ -1,0 +1,4 @@
+.ls-number-parameter {display:grid;grid-template-columns:minmax(128px,.42fr) minmax(0,1fr);align-items:center;gap:20px;min-width:0;}
+.ls-number-parameter .ant-input-number {width:100%;}
+.ls-number-parameter .ant-slider {min-width:0;margin-inline:6px;}
+@media(max-width:480px){.ls-number-parameter{grid-template-columns:120px minmax(0,1fr);gap:12px;}}

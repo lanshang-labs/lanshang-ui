@@ -1,8 +1,7 @@
 /* Platform-owned adapters around the vendored Beautiful UI primitives. */
-.bui { --font-inter:"Inter Variable",Inter,system-ui,sans-serif; --font-jetbrains-mono:ui-monospace,monospace; font-family:var(--font-inter); color:var(--ink); }
+.bui { --font-inter:var(--ds-font); --font-jetbrains-mono:ui-monospace,monospace; font-family:var(--font-inter); color:var(--ink); }
 .bui-navigation { flex:1; min-height:0; overflow:auto; padding:0 6px; }
-.bui-navigation .sidebar-row { width:calc(100% - 16px); min-height:34px; cursor:pointer; }
-.bui-navigation .sidebar-row:hover,.bui-top-nav .sidebar-row:hover { background:var(--hover-2); }
+.bui-navigation .sidebar-row { width:calc(100% - 16px); min-height:var(--ls-control-middle-height,32px); cursor:pointer; }
 .bui-nav-children { margin-left:23px; border-left:1px solid var(--line-strong); }
 .bui-top-nav { display:flex; align-items:center; gap:4px; min-width:0; overflow-x:auto; }
 .bui-top-nav .sidebar-row { margin:0; padding:0 12px; white-space:nowrap; cursor:pointer; }
@@ -14,6 +13,7 @@
 .bui-task-rows { max-width:none!important; min-height:0!important; }
 .bui-code-block { max-width:none!important; max-height:430px; overflow:auto!important; }
 .bui-code-block button { cursor:pointer; }
+.bui-code-block .bui-code-copy[data-copied=true] { color:var(--ui-success-text); }
 .bui-surface .ant-btn,.bui-surface .ant-tag { font-family:inherit; }
 @media(prefers-reduced-motion:reduce){.bui * { animation:none!important; transition:none!important; }}
 
@@ -24,4 +24,33 @@
 .bui-loading-label {display:inline-flex;align-items:center;gap:9px;vertical-align:middle;line-height:1.6;}
 .bui-loading-label>span:last-child {background-clip:text;-webkit-background-clip:text;color:transparent;}
 @media(prefers-reduced-motion:reduce){.bui-loading-label>span:last-child{background:none!important;color:var(--ink-2);}}
-.bui-navigation .sidebar-row{border:0;background-color:transparent;color:var(--ink-2)}.bui-navigation .sidebar-row[aria-current=page]{background:var(--hover-2);color:var(--ink)}.bui-navigation .sidebar-row:focus-visible,.bui-nav-popup .sidebar-row:focus-visible{outline:2px solid var(--ui-accent);outline-offset:-2px}.bui-group-arrow{margin-left:auto;transition:transform .15s}.bui-group-arrow.is-open{transform:rotate(180deg)}.bui-navigation.is-collapsed .sidebar-copy,.bui-navigation.is-collapsed .bui-group-arrow{display:none}.bui-navigation.is-collapsed .sidebar-row{justify-content:center;height:36px;padding:0}.bui-nav-popup{min-width:160px}.bui-nav-popup .sidebar-row{display:flex;width:calc(100% - 16px);border:0;cursor:pointer}.bui-nav-popup .sidebar-row:hover{background:var(--hover-2)}.bui-nav-popup .sidebar-row>span:first-child:empty{display:none}.bui-nav-children{margin:4px 10px 8px 23px}.bui-nav-children .sidebar-row{height:32px}.bui-nav-children .sidebar-copy{font-size:13px;font-weight:400}.bui-navigation .sidebar-row:disabled{opacity:.45;cursor:not-allowed}
+.bui-navigation .sidebar-row{border:0;background-color:transparent;color:var(--ink-2)}.bui-navigation .sidebar-row[aria-current=page]{background:var(--hover-2);color:var(--ink)}.bui-navigation .sidebar-row:focus-visible,.bui-nav-popup .sidebar-row:focus-visible{outline:2px solid var(--ui-accent);outline-offset:-2px}.bui-group-arrow{margin-left:auto;transition:transform var(--ls-motion-chevron,200ms) var(--ls-ease-standard,ease)}.bui-group-arrow.is-open{transform:rotate(180deg)}.bui-navigation.is-collapsed .sidebar-copy,.bui-navigation.is-collapsed .bui-group-arrow{display:none}.bui-navigation.is-collapsed .sidebar-row{justify-content:center;height:var(--ls-control-middle-height,32px);padding:0}.bui-nav-popup{min-width:160px}.bui-nav-popup .sidebar-row{display:flex;width:calc(100% - 16px);border:0;cursor:pointer}.bui-nav-popup .sidebar-row>span:first-child:empty{display:none}.bui-nav-children{margin:4px 10px 8px 23px}.bui-nav-children .sidebar-row{height:var(--ls-control-middle-height,32px)}.bui-nav-children .sidebar-copy{font-size:13px;font-weight:400}.bui-navigation .sidebar-row:disabled{opacity:.45;cursor:not-allowed}
+
+/* Group context stays quiet; only the current destination receives a selection. */
+.bui-navigation .sidebar-row,.bui-nav-popup .sidebar-row {
+  margin-top:3px; margin-bottom:3px; border-radius:var(--ls-control-middle-radius,10px);
+  background-color:transparent; color:var(--ink-2);
+}
+.bui-navigation .sidebar-row:hover:not(:disabled),.bui-nav-popup .sidebar-row:hover:not(:disabled) {background:var(--hover);}
+.bui-navigation .sidebar-row[aria-current=page],.bui-nav-popup .sidebar-row[aria-current=page] {background:var(--hover-2);color:var(--ink);}
+.bui-navigation .sidebar-row[data-child-active] .sidebar-copy {color:var(--ink);}
+.bui-navigation.is-collapsed .sidebar-row[data-child-active] {background:var(--hover-2);}
+.bui-nav-children {margin-top:5px;margin-bottom:10px;border-color:var(--line);}
+.bui-nav-children .sidebar-row {min-height:var(--ls-control-middle-height,32px);height:var(--ls-control-middle-height,32px);}
+.bui-nav-children .sidebar-row[aria-current=page] .sidebar-copy {font-weight:500;}
+
+.bui-nav-popup .sidebar-row:disabled {opacity:.45;cursor:not-allowed;}
+
+/* Navigation icons use a stable optical size independent of label typography. */
+.bui-nav-icon {font-size:16px;line-height:1;}
+
+/* Section grouping lets child panels own their frames. */
+.bui.bui-surface.bui-surface-section{background:transparent;border:0;box-shadow:none;border-radius:0;}
+.bui-surface-section > .primitive-card-bar{min-height:0;padding:0 0 10px;border-bottom:0;background:transparent;}
+.bui-surface-section > .bui-surface-body{padding:0;}
+
+@media(prefers-reduced-motion:reduce){.bui-group-arrow{transition:none}}
+@media(forced-colors:active){
+ .bui-navigation .sidebar-row[aria-current=page],.bui-nav-popup .sidebar-row[aria-current=page]{outline:1px solid Highlight;outline-offset:-1px;}
+ .bui-navigation .sidebar-row:focus-visible,.bui-nav-popup .sidebar-row:focus-visible{outline:2px solid Highlight;outline-offset:-2px;}
+}

@@ -1,0 +1,72 @@
+.ls-motion-icon{display:inline-flex;align-items:center;justify-content:center;flex:none}.ls-motion-icon>svg{display:block;width:100%;height:100%;flex:none}.ls-motion-icon.is-playing{animation-duration:var(--icon-duration);animation-timing-function:var(--ls-ease-standard);animation-iteration-count:1}.ls-motion-icon[data-effect=spin].is-playing{animation-name:ls-icon-spin}.ls-motion-icon[data-effect=scan].is-playing{animation-name:ls-icon-scan}.ls-motion-icon[data-effect=pop].is-playing{animation-name:ls-icon-pop}.ls-motion-icon[data-effect=fade].is-playing{animation-name:ls-icon-fade}.ls-motion-icon[data-effect=shift].is-playing{animation-name:ls-icon-shift}.ls-motion-icon[data-effect=up].is-playing{animation-name:ls-icon-up}.ls-motion-icon[data-effect=down].is-playing{animation-name:ls-icon-down}.ls-motion-icon[data-effect=ring].is-playing{animation-name:ls-icon-ring}.ls-motion-icon[data-effect=turn][data-turned=true]{transform:rotate(180deg);animation-name:ls-icon-turn}.ls-motion-icon[data-effect=turn][data-turned=false].is-playing{animation-name:ls-icon-return}
+@keyframes ls-icon-spin{to{transform:rotate(360deg)}}@keyframes ls-icon-scan{50%{transform:translate(2px,-2px) scale(1.08)}}@keyframes ls-icon-pop{50%{transform:scale(1.15)}}@keyframes ls-icon-fade{from{opacity:.45}to{opacity:1}}@keyframes ls-icon-shift{50%{transform:translate(2px,-2px)}}@keyframes ls-icon-up{50%{transform:translateY(-3px)}}@keyframes ls-icon-down{50%{transform:translateY(3px)}}@keyframes ls-icon-ring{25%{transform:rotate(12deg)}65%{transform:rotate(-8deg)}}@keyframes ls-icon-turn{from{transform:rotate(0)}to{transform:rotate(180deg)}}@keyframes ls-icon-return{from{transform:rotate(180deg)}to{transform:rotate(0)}}
+@media(prefers-reduced-motion:reduce){.ls-motion-icon{animation:none!important}}
+
+.ls-icon-trash-lid{transform-origin:5px 7px}.is-playing[data-effect=lid] .ls-icon-trash-lid{animation:ls-icon-lid var(--icon-duration) var(--ls-ease-standard)}
+@keyframes ls-icon-lid{0%,100%{transform:translateY(0) rotate(0)}35%,60%{transform:translateY(-2px) rotate(-25deg)}}
+.ls-icon-theme-cut{transition:transform var(--icon-duration) var(--ls-ease-standard)}
+.ls-icon-theme-rays{transform-origin:12px 12px;transition:transform var(--icon-duration) var(--ls-ease-standard),opacity var(--icon-duration) var(--ls-ease-standard)}
+[data-effect=theme][data-turned=true] .ls-icon-theme-cut{transform:translate(-9px,9px)}
+[data-effect=theme][data-turned=true] .ls-icon-theme-rays{opacity:0;transform:rotate(45deg) scale(.5)}
+@media(prefers-reduced-motion:reduce){.ls-icon-trash-lid{animation:none!important}.ls-icon-theme-cut,.ls-icon-theme-rays{transition:none!important}}
+
+/* The lifted lid extends beyond the 24px SVG viewport during its arc. */
+.ls-motion-icon[data-effect=lid],.ls-motion-icon[data-effect=lid]>svg{overflow:visible}
+
+.ls-motion-icon[data-effect=close].is-playing{animation-name:ls-icon-close;transform-origin:center}
+@keyframes ls-icon-close{0%{transform:rotate(0) scale(1);opacity:1}45%{transform:rotate(90deg) scale(.65);opacity:.55}75%{transform:rotate(90deg) scale(1.08);opacity:1}100%{transform:rotate(90deg) scale(1);opacity:1}}
+
+.ls-motion-icon[data-effect=wrap].is-playing[data-turned=true] .ls-icon-wrap-return{animation:ls-icon-wrap-on var(--icon-duration) var(--ls-ease-standard)}
+.ls-motion-icon[data-effect=wrap].is-playing[data-turned=false] .ls-icon-wrap-return{animation:ls-icon-wrap-off var(--icon-duration) var(--ls-ease-standard)}
+@keyframes ls-icon-wrap-on{0%{transform:translateX(3px);opacity:.5}65%{transform:translateX(-2px);opacity:1}100%{transform:translateX(0);opacity:1}}
+@keyframes ls-icon-wrap-off{0%{transform:translateX(-3px);opacity:.5}65%{transform:translateX(2px);opacity:1}100%{transform:translateX(0);opacity:1}}
+
+/* Paired states retain their DOM so rapid clicks reverse from the current frame. */
+.ls-motion-icon[data-effect=pair]{position:relative}
+.ls-motion-icon[data-effect=pair]>svg{position:absolute;inset:0;transition:opacity var(--icon-duration) var(--ls-ease-standard),transform var(--icon-duration) var(--ls-ease-standard)}
+.ls-icon-pair-second{opacity:0;transform:scale(.65)}
+[data-turned=true]>.ls-icon-pair-first{opacity:0;transform:scale(.65)}
+[data-turned=true]>.ls-icon-pair-second{opacity:1;transform:scale(1)}
+.ls-icon-folder-front{transform-origin:12px 20px;transition:transform var(--icon-duration) var(--ls-ease-standard)}
+[data-effect=folder][data-turned=true] .ls-icon-folder-front{transform:skewX(-12deg) scaleY(.65)}
+.ls-icon-lock-shackle{transform-origin:16px 10px;transition:transform var(--icon-duration) var(--ls-ease-standard)}
+[data-effect=lock][data-turned=true] .ls-icon-lock-shackle{transform:rotate(35deg)}
+.ls-motion-icon[data-effect=lock]>svg{overflow:visible}
+.ls-motion-icon[data-effect=left].is-playing{animation-name:ls-icon-left}
+.ls-motion-icon[data-effect=right].is-playing{animation-name:ls-icon-right}
+.ls-motion-icon[data-effect=filter].is-playing{animation-name:ls-icon-filter}
+.ls-motion-icon[data-effect=stop].is-playing{animation-name:ls-icon-stop}
+.ls-motion-icon[data-effect=breathe].is-playing{animation-name:ls-icon-breathe}
+.ls-motion-icon[data-effect=float].is-playing{animation-name:ls-icon-float}
+.ls-motion-icon[data-effect=gear].is-playing{animation-name:ls-icon-gear}
+@keyframes ls-icon-left{45%{transform:translateX(-4px)}}
+@keyframes ls-icon-right{45%{transform:translateX(4px)}}
+@keyframes ls-icon-filter{45%{transform:translateY(2px) scaleX(.85)}}
+@keyframes ls-icon-stop{40%{transform:scale(.75)}75%{transform:scale(1.04)}}
+@keyframes ls-icon-breathe{50%{transform:scale(1.08);opacity:.7}}
+@keyframes ls-icon-float{50%{transform:translateY(-2px)}}
+@keyframes ls-icon-gear{65%,100%{transform:rotate(60deg)}}
+@media(prefers-reduced-motion:reduce){.ls-motion-icon[data-effect=pair]>svg,.ls-icon-folder-front,.ls-icon-lock-shackle{transition:none!important}}
+
+.ls-motion-icon{vertical-align:middle}
+
+[data-ls-motion="reduce"] .ls-motion-icon,[data-ls-motion="reduce"] .ls-motion-icon *{animation:none!important;transition:none!important}
+
+.ls-motion-icon[data-effect=turn]{transition:transform var(--icon-duration) var(--ls-ease-standard);animation:none!important}
+@media(prefers-reduced-motion:reduce){.ls-motion-icon,.ls-motion-icon *{animation:none!important;transition:none!important}}
+
+/* Save keeps the same bold, centered silhouette while its stroke hands off to a single arc. */
+.ls-motion-icon[data-effect=save]{position:relative;overflow:visible}
+.ls-motion-icon[data-effect=save]>svg{overflow:visible}
+.ls-icon-save-check{stroke-dasharray:25;stroke-dashoffset:0}
+.ls-icon-save-arc{opacity:0;transform-origin:12px 12px}
+.ls-motion-icon[data-effect=save].is-playing:not([data-pending=true]) .ls-icon-save-check{animation:ls-save-draw var(--icon-duration) var(--ls-ease-standard)}
+.ls-motion-icon[data-effect=save][data-pending=true] .ls-icon-save-check{opacity:0}
+.ls-motion-icon[data-effect=save][data-pending=true].is-playing .ls-icon-save-check{animation:ls-save-check-out 260ms var(--ls-ease-standard) both}
+.ls-motion-icon[data-effect=save][data-pending=true] .ls-icon-save-arc{opacity:1;animation:ls-save-spin var(--ls-motion-iconSpin,1000ms) linear infinite,ls-save-arc-in 260ms var(--ls-ease-standard) both}
+@keyframes ls-save-draw{0%{stroke-dashoffset:25}100%{stroke-dashoffset:0}}
+@keyframes ls-save-check-out{0%,35%{opacity:1;stroke-dashoffset:0}100%{opacity:0;stroke-dashoffset:-25}}
+@keyframes ls-save-arc-in{0%,40%{opacity:0}100%{opacity:1}}
+@keyframes ls-save-spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.ls-motion-icon[data-effect=save] .ls-icon-save-check,.ls-motion-icon[data-effect=save] .ls-icon-save-arc{animation:none!important;transition:none!important}}
+[data-ls-motion="reduce"] .ls-motion-icon[data-effect=save] .ls-icon-save-check,[data-ls-motion="reduce"] .ls-motion-icon[data-effect=save] .ls-icon-save-arc{animation:none!important;transition:none!important}

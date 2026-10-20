@@ -1,0 +1,13 @@
+.type-comparison {min-width:0;display:grid;gap:16px;}
+.type-comparison > p {margin:0;}
+.type-comparison-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;}
+.type-sample {min-width:0;background:var(--ls-surface-face);border:1px solid var(--ls-surface-edge);border-radius:14px;box-shadow:var(--ls-surface-shadow);overflow:hidden;line-height:1.65;}
+.type-sample header {padding:16px;border-bottom:1px solid var(--ls-surface-edge);}
+.type-sample header h3 {font-size:16px;line-height:1.5;margin:0 0 4px;font-weight:600;}
+.type-sample header span {font-size:12px;color:var(--ui-muted);}
+.type-sample-body {display:grid;gap:20px;padding:16px;min-width:0;}
+.type-probe {margin:0;overflow-wrap:anywhere;}
+.type-weights {display:grid;gap:8px;}
+.type-record-code {display:block;color:var(--ui-muted);font-size:12px;}
+.type-numbers {font-variant-numeric:tabular-nums;}
+@media(max-width:1000px){.type-comparison-grid {grid-template-columns:minmax(0,1fr);}}

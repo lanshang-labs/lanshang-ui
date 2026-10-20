@@ -1,0 +1,6 @@
+.ls-overlay-spec{display:grid;gap:28px;min-width:0;width:100%;}
+.ls-overlay-spec-intro{padding:16px 18px;border-left:3px solid var(--ui-accent);background:var(--ls-surface-face);border-radius:0 10px 10px 0;}
+.ls-overlay-spec-intro strong{font-size:14px;}.ls-overlay-spec-intro p{margin:5px 0 0;color:var(--ui-secondary);font-size:12px;line-height:1.7;}
+.ls-overlay-spec-section{display:grid;gap:12px;min-width:0;}.ls-overlay-spec-section>header{display:grid;gap:3px;}.ls-overlay-spec-section>header span{font-size:11px;letter-spacing:.06em;font-weight:600;color:var(--ui-muted);}.ls-overlay-spec-section>header h3{margin:0;font-size:16px;}.ls-overlay-spec-section>header p{margin:0;font-size:12px;color:var(--ui-secondary);line-height:1.7;}
+.ls-overlay-spec-body{display:grid;gap:18px;min-width:0;padding:20px;border:1px solid var(--ls-surface-edge);border-radius:12px;background:var(--ls-surface-face);}.ls-overlay-spec-body :is(.ls-overlay-demo,.ls-overlay-controls,.ls-overlay-async-select){min-width:0;}.ls-overlay-spec-divider{height:1px;background:var(--ls-surface-edge);}
+@media(max-width:640px){.ls-overlay-spec{gap:24px;}.ls-overlay-spec-body{padding:16px;}}

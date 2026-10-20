@@ -14,6 +14,12 @@ it("preserves accessible attributes, styles and native ref",()=>{
 it("allows consumers to cancel close without losing their status",()=>{
  const close=vi.fn(event=>event.preventDefault());
  render(<StatusTag closable onClose={close}>进行中</StatusTag>);
- fireEvent.click(screen.getByRole("img",{name:"close"})); expect(close).toHaveBeenCalledOnce();
+ expect(screen.getByRole('img',{name:'移除标签'}).querySelector('.ls-motion-icon')).toBeTruthy();
+ fireEvent.click(screen.getByRole("img",{name:"移除标签"})); expect(close).toHaveBeenCalledOnce();
  expect(screen.getByText("进行中").closest('.ant-tag')?.classList.contains('ant-tag-hidden')).toBe(false);
+});
+it('keeps caller close icon overrides',()=>{
+ render(<StatusTag closable closeIcon={<span data-testid="caller-close">×</span>}>自定义</StatusTag>);
+ expect(screen.getByTestId('caller-close')).toBeTruthy();
+ expect(screen.queryByRole('img',{name:'移除标签'})).toBeNull();
 });

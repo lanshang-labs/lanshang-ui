@@ -1,0 +1,18 @@
+/* Explicit opt-out may only reduce motion, never override the OS preference.
+   Place portal popovers inside the scope via getPopupContainer when scoped. */
+:is([data-ls-motion="reduce"],[data-ls-motion="reduce"] *):not(.ant-select-dropdown,.ant-picker-dropdown,.ant-dropdown),
+:is([data-ls-motion="reduce"],[data-ls-motion="reduce"] *)::before,
+:is([data-ls-motion="reduce"],[data-ls-motion="reduce"] *)::after{
+ /* Portal overlays keep their own motion lifecycle so alignment can complete. */
+ animation-duration:20ms!important;animation-delay:0ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important;transition-delay:0ms!important;scroll-behavior:auto!important;
+}
+
+@media(prefers-reduced-motion:reduce){
+ :root[data-theme] *:not(.ant-select-dropdown,.ant-picker-dropdown,.ant-dropdown),:root[data-theme] *::before,:root[data-theme] *::after{animation-duration:20ms!important;animation-delay:0ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important;transition-delay:0ms!important;scroll-behavior:auto!important;}
+}
+
+/* Keep rc-motion's completion signal while removing visible overlay travel. */
+:is([data-ls-motion="reduce"] .ant-select-dropdown,[data-ls-motion="reduce"] .ant-picker-dropdown,[data-ls-motion="reduce"] .ant-dropdown):is(.ant-slide-up-enter,.ant-slide-up-appear,.ant-slide-down-enter,.ant-slide-down-appear){opacity:1!important;transform:none!important;}
+@media(prefers-reduced-motion:reduce){
+ :root[data-theme] :is(.ant-select-dropdown,.ant-picker-dropdown,.ant-dropdown):is(.ant-slide-up-enter,.ant-slide-up-appear,.ant-slide-down-enter,.ant-slide-down-appear){opacity:1!important;transform:none!important;}
+}

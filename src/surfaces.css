@@ -1,0 +1,172 @@
+/* Shared neutral surfaces: appearance only; interaction and timing stay with controls. */
+:root[data-theme] {
+ --ls-surface-edge:color-mix(in srgb,var(--ui-secondary) 12%,transparent);
+ --ls-surface-highlight:transparent;
+ --ls-surface-shadow:0 1px 2px rgb(20 30 50 / 5%),0 3px 8px rgb(20 30 50 / 3%);
+ --ls-surface-shadow-compact:0 1px 2px rgb(20 30 50 / 4%);
+ --ls-overlay-shadow:0 8px 24px rgb(20 30 50 / 10%),0 2px 6px rgb(20 30 50 / 4%);
+ --ls-selection-shadow-compact:0 0 0 1px var(--ls-surface-edge),0 1px 2px rgb(0 0 0 / 5%);
+ --ls-selection-shadow:0 0 0 1px var(--ls-surface-edge),0 2px 4px rgb(0 0 0 / 10%);
+ --ls-surface-face:var(--ui-surface);
+ --ls-surface-track:color-mix(in srgb,var(--ui-raised) 75%,var(--ui-line));
+ --ls-surface-stage:color-mix(in srgb,var(--ui-raised) 60%,var(--ui-surface));
+}
+:root[data-theme="dark"] {
+ --ls-surface-edge:rgb(255 255 255 / 9%);
+ --ls-surface-highlight:transparent;
+ --ls-surface-shadow:0 0 0 transparent;
+ --ls-surface-shadow-compact:none;
+ --ls-overlay-shadow:none;
+ --ls-selection-shadow-compact:none;
+ --ls-selection-shadow:none;
+ --ls-surface-face:var(--ui-raised);
+ --ls-surface-track:color-mix(in srgb,var(--ui-surface) 85%,black);
+ --ls-surface-stage:var(--ui-surface);
+}
+:root[data-theme] .ls-input-group {
+ background:var(--ls-surface-face);
+ border-color:var(--ls-surface-edge);
+ box-shadow:var(--ls-surface-shadow);
+}
+:root[data-theme] .ls-input-group-actions {
+ border-left-color:var(--ls-surface-edge);
+}
+:root[data-theme] .ls-input-group-control:hover {
+ background:color-mix(in srgb,var(--ui-selected) 28%,transparent);
+}
+:root[data-theme] .ls-input-group .ls-button-group>button:not(:disabled):hover {
+ background:color-mix(in srgb,var(--ui-selected) 55%,transparent);
+}
+:root[data-theme] .ls-input-group .ls-button-group>button:not(:disabled):active {
+ background:var(--ui-selected);
+ box-shadow:none;
+}
+:root[data-theme] .ls-button-group--sliding {
+ background:var(--ls-surface-track);
+ box-shadow:none;
+}
+:root[data-theme] .ls-button-group--sliding>.ls-button-group-indicator {
+ background:var(--ls-surface-face);
+ box-shadow:var(--ls-selection-shadow);
+}
+:root[data-theme] .bui-alert.ant-alert {
+ border-color:var(--ls-surface-edge);
+ border-radius:18px;
+ padding:16px 18px;
+ background:var(--ls-surface-face);
+ box-shadow:var(--ls-surface-shadow);
+}
+:root[data-theme] .bui-alert.ant-alert-info .ant-alert-message {color:var(--ui-link-text)}
+:root[data-theme] .bui-alert.ant-alert-warning .ant-alert-message {color:var(--ui-warning-text)}
+:root[data-theme] .bui-alert.ant-alert-success .ant-alert-message {color:var(--ui-success-text)}
+:root[data-theme] .bui-alert.ant-alert-error .ant-alert-message {color:var(--ui-error-text)}
+@media(forced-colors:active){
+:root[data-theme] .ls-input-group,:root[data-theme] .bui-alert.ant-alert,
+ :root[data-theme] .ls-button-group--sliding>.ls-button-group-indicator {background:Canvas;border:1px solid CanvasText;box-shadow:none}
+}
+
+/* Independent fields use the same face; compound interiors and focus/error
+   treatment remain owned by their existing controls. */
+:root[data-theme] :is(.ant-input-outlined,.ant-input-affix-wrapper-outlined,.ant-input-number-outlined,.ant-picker-outlined):not(:disabled):not([class*="-disabled"]):not([class*="-status-"]):not(:focus-within):not(.ls-input-group *):not(.ant-input-affix-wrapper .ant-input),
+:root[data-theme] .ls-select:not(.ant-select-disabled):not(.ant-select-focused):not([class*="-status-"]):not(.ls-input-group *) .ant-select-selector {
+ background:var(--ls-surface-face);
+ border-color:var(--ls-control-edge,var(--ls-surface-edge));
+ box-shadow:var(--ls-control-shadow,var(--ls-surface-shadow));
+}
+/* Date fields keep the same quiet pointer focus as the shared input group. */
+:root[data-theme] .ant-picker.ant-picker-focused:not(.ant-picker-status-error):not(.ant-picker-status-warning) {
+ border-color:var(--ls-control-edge,var(--ls-surface-edge));
+ box-shadow:var(--ls-control-shadow,var(--ls-surface-shadow));
+}
+:root[data-theme] .ant-picker .ant-picker-input > input:focus-visible {
+ text-decoration:underline;
+ text-decoration-color:var(--ui-secondary);
+ text-underline-offset:4px;
+}
+
+/* Dense controls retain the same surface with a quieter shadow. */
+:root[data-theme] .ls-input-group[data-ls-size="small"],
+:root[data-theme] :is(.ant-input-sm,.ant-input-affix-wrapper-sm,.ant-input-number-sm,.ant-picker-small),
+:root[data-theme] .ls-select.ant-select-sm {
+ --ls-control-shadow:var(--ls-surface-shadow-compact);
+}
+:root[data-theme] .ls-input-group[data-ls-size="small"]{box-shadow:var(--ls-surface-shadow-compact);}
+:root[data-theme] .ant-picker.ant-picker-small{height:var(--ls-control-small-height,26px);border-radius:var(--ls-control-small-radius,8px);}
+:root[data-theme] .ant-picker.ant-picker-large{border-radius:var(--ls-control-large-radius,12px);}
+
+/* All single-selection controls share the same track and moving face. */
+:root[data-theme] .bui-top-nav,
+:root[data-theme] .ls-radio-group:has(.ant-radio-button-wrapper),
+:root[data-theme] .ant-segmented,
+:root[data-theme] .ant-tabs-top:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-nav-list {
+ background:var(--ls-surface-track);
+ box-shadow:none;
+}
+:root[data-theme] .ls-nav-indicator,
+:root[data-theme] .ls-radio-indicator,
+:root[data-theme] .ant-segmented .ant-segmented-item-selected,
+:root[data-theme] .ant-segmented .ant-segmented-thumb,
+:root[data-theme] .ant-tabs-top:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-ink-bar {
+ background:var(--ls-surface-face);
+ box-shadow:var(--ls-selection-shadow);
+}
+:root[data-theme] .ls-radio-group[data-ls-size="small"] .ls-radio-indicator,
+:root[data-theme] .ant-segmented.ant-segmented-sm :is(.ant-segmented-item-selected,.ant-segmented-thumb){box-shadow:var(--ls-selection-shadow-compact);}
+/* Feedback cards share the material, without adding hover or lift behavior. */
+:root[data-theme] .bui-surface:not(.bui-surface-section),
+:root[data-theme] .ls-feedback-panel,
+:root[data-theme] .bui-task-rows .ls-task-row {
+ background:var(--ls-surface-face);
+ border-color:var(--ls-surface-edge);
+ box-shadow:var(--ls-surface-shadow);
+}
+:root[data-theme] .ls-feedback-panel[data-variant=inline]{background:transparent;border-color:var(--ls-surface-edge);box-shadow:none}
+/* Elevated menus keep flat option rows and their existing selection/hover rules. */
+:root[data-theme] .ant-popover .ant-popover-inner,
+:root[data-theme] .ant-select-dropdown,
+:root[data-theme] .ant-dropdown .ant-dropdown-menu {
+ border-color:var(--ls-surface-edge);
+ box-shadow:var(--ls-overlay-shadow);
+}
+@media(forced-colors:active) {
+ :root[data-theme] {
+  --ls-surface-face:Canvas;--ls-surface-track:Canvas;--ls-surface-edge:CanvasText;
+  --ls-surface-highlight:transparent;--ls-surface-shadow:none;--ls-overlay-shadow:none;--ls-selection-shadow:none;--ls-selection-shadow-compact:none;--ls-surface-stage:Canvas;
+ }
+ :root[data-theme] :is(.ls-nav-indicator,.ls-radio-indicator,.ant-segmented-thumb,.ant-segmented-item-selected),
+ :root[data-theme] .ant-tabs-top:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-ink-bar {outline:1px solid Highlight;box-shadow:none}
+}
+
+/* Popover content shares the card face; portal positioning and motion stay native. */
+:root[data-theme] .ant-popover .ant-popover-inner {background:var(--ls-surface-face);border:1px solid var(--ls-surface-edge);}
+:root[data-theme] .ls-confirm-popover .ant-popover-inner {padding:16px;border-radius:var(--ls-control-large-radius,12px);}
+:root[data-theme] .ls-confirm-popover .ant-popconfirm-message-icon {color:var(--ui-secondary);}
+:root[data-theme] .ls-confirm-popover .ls-confirm-icon {display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;vertical-align:middle;}
+:root[data-theme] .ls-confirm-popover .ant-popconfirm-title {font-size:14px;font-weight:500;}
+:root[data-theme] .ls-confirm-popover .ant-popconfirm-description {margin-top:10px;}
+:root[data-theme] .ls-confirm-popover--custom-actions .ant-popconfirm-buttons {display:none;}
+@media(max-width:600px){
+ /* Keep confirmation actions in reach even when the trigger sits inside a scroller. */
+ :root[data-theme] .ls-confirm-popover {position:fixed!important;top:auto!important;right:12px!important;bottom:max(12px,env(safe-area-inset-bottom))!important;left:12px!important;width:auto;max-width:none;}
+ :root[data-theme] .ls-confirm-popover .ant-popover-arrow {display:none;}
+ :root[data-theme] .ls-confirm-popover .ant-popover-inner {max-height:min(70vh,480px);overflow:auto;}
+}
+:root[data-theme] .ls-hint-tooltip .ant-tooltip-inner {background:var(--ls-surface-face);color:var(--ui-text);border:1px solid var(--ls-surface-edge);box-shadow:var(--ls-overlay-shadow);font-size:12px;}
+:root[data-theme] .ls-hint-tooltip .ant-tooltip-arrow {--antd-arrow-background-color:var(--ls-surface-face);}
+:root[data-theme] :is(.ls-dialog .ant-modal-content,.ls-drawer-panel .ant-drawer-content,.ls-drawer-panel.ant-drawer-content) {background:var(--ls-surface-face);color:var(--ui-text);border:1px solid var(--ls-surface-edge);}
+:root[data-theme] .ls-dialog .ant-modal-content,:root[data-theme] .ant-drawer-content-wrapper {box-shadow:var(--ls-overlay-shadow);}
+
+/* Dark controls are flat; state remains expressed by fill and keyboard focus. */
+:root[data-theme=dark] :is(.ls-button-group--sliding>.ls-button-group-indicator,.ls-nav-indicator,.ls-radio-indicator,.ant-segmented .ant-segmented-item-selected,.ant-segmented .ant-segmented-thumb),
+:root[data-theme=dark] .ant-tabs-top:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-ink-bar {background:var(--ui-selected);box-shadow:none;}
+:root[data-theme=dark] :is(.bui-top-nav,.ls-radio-group,.ant-segmented,.ls-button-group--sliding),
+:root[data-theme=dark] .ant-tabs-top:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-nav-list {box-shadow:none;}
+/* Nested task cards need a quiet backdrop rather than white on white. */
+:root[data-theme] .bui-task-rows {background:var(--ls-surface-stage);padding:8px;border-radius:16px;}
+:root[data-theme=dark] :is(.bui-surface:not(.bui-surface-section),.ls-feedback-panel,.bui-alert.ant-alert,.ls-filter-disclosure) {background:var(--ui-surface);}
+/* A progress panel groups its steps into one inset list; standalone TaskRows keep separate cards. */
+:root[data-theme] .ls-task-progress--activity .bui-task-rows {padding:0;border:1px solid var(--ls-surface-edge);border-radius:12px;background:var(--ls-surface-stage);box-shadow:none;}
+:root[data-theme] .ls-task-progress--activity .bui-task-rows>.ls-task-row {border:0;border-bottom:1px solid var(--ls-surface-edge);border-radius:0!important;background:transparent;box-shadow:none;}
+:root[data-theme] .ls-task-progress--activity .bui-task-rows>.ls-task-row:last-child {border-bottom:0;}
+:root[data-theme] .ls-task-progress--activity .bui-task-rows>.ls-task-row:hover {background:var(--ui-selected);}
+:root[data-theme=dark] .ls-task-progress-block {background:var(--ui-surface);}

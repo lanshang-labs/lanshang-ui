@@ -1,0 +1,114 @@
+import {afterEach,expect,it,vi} from 'vitest';
+import {cleanup,fireEvent,render,screen,waitFor,within} from '@testing-library/react';
+import {SizePreview} from '../website/size-preview';
+import {controlSizes} from '../src/tokens';
+import {NumberStepper} from '../src/NumberStepper';
+import {ConfigProvider,Form} from 'antd';
+afterEach(cleanup);
+
+it('renders three working control families from shared size tokens',()=>{
+ render(<SizePreview/>);
+ const standard=screen.getByRole('region',{name:'控件尺寸规范'});
+ for(const [size,label] of [['small','小'],['middle','中'],['large','大']] as const){
+  const card=standard.querySelector(`.ls-size-card[data-size="${size}"]`)!;
+  expect(card.querySelector('.ls-input-group')?.getAttribute('data-ls-size')).toBe(size);
+  expect(card.querySelector('[aria-label$="组合按钮"]')?.getAttribute('data-ls-size')).toBe(size);
+  const groupButton=within(card as HTMLElement).getByRole('button',{name:'靠左'});
+  expect(groupButton.classList.contains('ant-btn-sm')).toBe(size==='small');
+  expect(groupButton.classList.contains('ant-btn-lg')).toBe(size==='large');
+  expect((card.querySelector('.ls-motion-icon') as HTMLElement).style.width).toBe(`${controlSizes[size].icon}px`);
+  expect(within(card as HTMLElement).getByRole('textbox',{name:`${label}号搜索关键词`})).toBeTruthy();
+  expect(within(card as HTMLElement).getByRole('spinbutton',{name:`${label}号数字输入`})).toBeTruthy();
+  expect(within(card as HTMLElement).getByRole('button',{name:`${label}号数字输入减少`})).toBeTruthy();
+  expect(within(card as HTMLElement).getByRole('button',{name:`${label}号数字输入增加`})).toBeTruthy();
+  expect(card.querySelector(size==='small'?'.ant-tabs-small':size==='large'?'.ant-tabs-large':'.ant-tabs:not(.ant-tabs-small):not(.ant-tabs-large)')).toBeTruthy();
+  const toggle=within(card as HTMLElement).getByRole('switch',{name:`${label}号开关`});
+  expect(toggle.getAttribute('data-ls-size')).toBe(size);
+  expect(toggle.classList.contains('ant-switch-small')).toBe(size==='small');
+  fireEvent.click(within(card as HTMLElement).getByRole('tab',{name:'活动'}));
+  expect(within(card as HTMLElement).getByText('当前为活动')).toBeTruthy();
+  fireEvent.click(within(card as HTMLElement).getByRole('button',{name:'居中'}));
+  expect(within(card as HTMLElement).getByRole('button',{name:'居中'}).getAttribute('aria-pressed')).toBe('true');
+ }
+ const small=standard.querySelector('.ls-size-card[data-size="small"]') as HTMLElement;
+ fireEvent.click(within(small).getByRole('button',{name:'小号数字输入增加'}));
+ expect((within(small).getByRole('spinbutton',{name:'小号数字输入'}) as HTMLInputElement).value).toBe('5');
+ fireEvent.click(within(small).getByRole('button',{name:'小号数字输入减少'}));
+ expect((within(small).getByRole('spinbutton',{name:'小号数字输入'}) as HTMLInputElement).value).toBe('4');
+ fireEvent.click(within(small).getByRole('button',{name:/确\s*认/}));
+ expect(within(standard).getByRole('status').textContent).toBe('已点击小号确认');
+ fireEvent.click(within(standard).getAllByRole('button',{name:'搜索'})[2]);
+ expect(within(standard).getByRole('status').textContent).toBe('已点击大号搜索');
+},30000);
+it('keeps the same controls available when local motion is reduced',()=>{
+ render(<SizePreview reduce/>);
+ const standard=screen.getByRole('region',{name:'控件尺寸规范'});
+ expect(standard.getAttribute('data-ls-motion')).toBe('reduce');
+ fireEvent.click(within(standard).getAllByRole('button',{name:'搜索'})[0]);
+ expect(within(standard).getByRole('status').textContent).toBe('已点击小号搜索');
+ const small=standard.querySelector('.ls-size-card[data-size="small"]') as HTMLElement;
+ fireEvent.click(within(small).getByRole('button',{name:'居中'}));
+ expect(within(small).getByRole('button',{name:'居中'}).getAttribute('aria-pressed')).toBe('true');
+});
+it('keeps selector and calendar popups inside the local reduced-motion scope',async()=>{
+ render(<SizePreview reduce/>);
+ const standard=screen.getByRole('region',{name:'控件尺寸规范'});
+ const small=standard.querySelector('.ls-size-card[data-size="small"]') as HTMLElement;
+ fireEvent.mouseDown(within(small).getByRole('combobox',{name:'小号选择器'}));
+ await waitFor(()=>expect(small.querySelector('.ant-select-dropdown:not(.ant-select-dropdown-hidden)')).toBeTruthy());
+ fireEvent.keyDown(within(small).getByRole('combobox',{name:'小号选择器'}),{key:'Escape',keyCode:27});
+ fireEvent.click(within(small).getByRole('textbox',{name:'小号日期选择'}));
+ await waitFor(()=>expect(small.querySelector('.ant-picker-dropdown:not(.ant-picker-dropdown-hidden)')).toBeTruthy());
+});
+it('keeps typed input and step actions within the numeric bounds',()=>{
+ render(<NumberStepper aria-label="数量" defaultValue={1} min={1} max={2}/>);
+ const input=screen.getByRole('spinbutton',{name:'数量'}) as HTMLInputElement;
+ expect(screen.getByRole('button',{name:'数量减少'}).hasAttribute('disabled')).toBe(true);
+ fireEvent.click(screen.getByRole('button',{name:'数量增加'}));
+ expect(input.value).toBe('2');
+ expect(screen.getByRole('button',{name:'数量增加'}).hasAttribute('disabled')).toBe(true);
+ fireEvent.change(input,{target:{value:'1'}});
+ expect(input.value).toBe('1');
+});
+it('inherits numeric control size and lets an explicit stepper size win',()=>{
+ const {container,rerender}=render(<ConfigProvider componentSize="small"><NumberStepper aria-label="数量" defaultValue={1}/></ConfigProvider>);
+ expect(container.querySelector('.ls-number-stepper[data-ls-size="small"] .ant-input-number-sm')).toBeTruthy();
+ rerender(<ConfigProvider componentSize="small"><NumberStepper aria-label="数量" size="large" defaultValue={1}/></ConfigProvider>);
+ expect(container.querySelector('.ls-number-stepper[data-ls-size="large"] .ant-input-number-lg')).toBeTruthy();
+ fireEvent.click(screen.getByRole('button',{name:'数量增加'}));
+ expect((screen.getByRole('spinbutton',{name:'数量'}) as HTMLInputElement).value).toBe('2');
+});
+it('keeps every numeric step action immutable in read-only and inherited disabled states',()=>{
+ const changed=vi.fn();
+ const {rerender}=render(<NumberStepper aria-label="数量" readOnly defaultValue={3} onChange={changed}/>);
+ const decrement=()=>screen.getByRole('button',{name:'数量减少'}) as HTMLButtonElement;
+ const increment=()=>screen.getByRole('button',{name:'数量增加'}) as HTMLButtonElement;
+ expect((screen.getByRole('spinbutton',{name:'数量'}) as HTMLInputElement).readOnly).toBe(true);
+ expect(decrement().disabled).toBe(true);
+ expect(increment().disabled).toBe(true);
+ fireEvent.click(increment());
+ expect(changed).not.toHaveBeenCalled();
+ rerender(<ConfigProvider componentDisabled><NumberStepper aria-label="数量" defaultValue={3} onChange={changed}/></ConfigProvider>);
+ expect((screen.getByRole('spinbutton',{name:'数量'}) as HTMLInputElement).disabled).toBe(true);
+ expect(decrement().disabled).toBe(true);
+ expect(increment().disabled).toBe(true);
+ fireEvent.click(increment());
+ expect(changed).not.toHaveBeenCalled();
+ rerender(<Form disabled><NumberStepper aria-label="数量" defaultValue={3} onChange={changed}/></Form>);
+ expect((screen.getByRole('spinbutton',{name:'数量'}) as HTMLInputElement).disabled).toBe(true);
+ expect(decrement().disabled).toBe(true);
+ expect(increment().disabled).toBe(true);
+ fireEvent.click(increment());
+ expect(changed).not.toHaveBeenCalled();
+});
+it('allows an explicit enabled override and keeps step bounds',()=>{
+ const changed=vi.fn();
+ render(<ConfigProvider componentDisabled><NumberStepper aria-label="数量" disabled={false} defaultValue={1} min={1} max={2} onChange={changed}/></ConfigProvider>);
+ const decrement=screen.getByRole('button',{name:'数量减少'}) as HTMLButtonElement;
+ const increment=screen.getByRole('button',{name:'数量增加'}) as HTMLButtonElement;
+ expect((screen.getByRole('spinbutton',{name:'数量'}) as HTMLInputElement).disabled).toBe(false);
+ expect(decrement.disabled).toBe(true);
+ fireEvent.click(increment);
+ expect(changed).toHaveBeenCalledWith(2);
+ expect(increment.disabled).toBe(true);
+});

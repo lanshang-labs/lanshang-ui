@@ -1,0 +1,24 @@
+.ls-splitter{min-width:0;border:1px solid var(--ls-surface-edge);border-radius:14px;overflow:hidden;background:var(--ls-surface-face);box-shadow:var(--ls-surface-shadow);color:var(--ui-text)}
+.ls-splitter-toolbar{display:flex;flex-wrap:wrap;gap:8px;padding:8px 12px;border-bottom:1px solid var(--ls-surface-edge);background:var(--ls-surface-stage)}
+.ls-splitter-panels{display:flex;height:440px;max-height:65dvh;min-height:220px;min-width:0}
+.ls-splitter-panel{flex-shrink:0;min-width:0;overflow:auto;overscroll-behavior:contain;padding:16px;box-sizing:border-box;overflow-wrap:anywhere}
+.ls-splitter-panel[hidden]{display:none}
+.ls-splitter-secondary{flex:1;min-width:0}
+.ls-splitter-handle{flex:0 0 9px;position:relative;cursor:col-resize;touch-action:none;outline:none}
+.ls-splitter-handle:before{content:'';position:absolute;width:1px;left:4px;top:0;bottom:0;background:var(--ui-line)}
+.ls-splitter-handle:after{content:'';position:absolute;width:3px;left:3px;top:calc(50% - 18px);height:36px;border-radius:3px;background:var(--ui-secondary);opacity:0;transition:opacity var(--ls-motion-state,150ms) var(--ls-ease-standard,ease)}
+.ls-splitter-handle:hover:after,.ls-splitter-handle:focus-visible:after{opacity:1}
+.ls-splitter-handle:focus-visible{box-shadow:inset 0 0 0 2px var(--ui-focus-ring);border-radius:4px}
+@media(prefers-reduced-motion:reduce){.ls-splitter-handle:after{transition:none}}
+
+.ls-splitter-panel:focus-visible{outline:2px solid var(--ui-focus-ring);outline-offset:-3px}
+
+.ls-splitter-panel{min-height:0}
+.ls-splitter[data-orientation=vertical]>.ls-splitter-panels{flex-direction:column}
+.ls-splitter[data-orientation=vertical]>.ls-splitter-panels>.ls-splitter-handle{cursor:row-resize}
+.ls-splitter[data-orientation=vertical]>.ls-splitter-panels>.ls-splitter-handle:before{width:auto;height:1px;left:0;right:0;top:4px;bottom:auto}
+.ls-splitter[data-orientation=vertical]>.ls-splitter-panels>.ls-splitter-handle:after{width:36px;height:3px;left:calc(50% - 18px);top:3px}
+.ls-splitter-panel>.ls-splitter{height:100%;display:flex;flex-direction:column;box-sizing:border-box;box-shadow:none}
+.ls-splitter-panel>.ls-splitter>.ls-splitter-toolbar{flex-shrink:0}
+.ls-splitter-panel>.ls-splitter>.ls-splitter-panels{flex:1;min-height:0;max-height:none}
+.ls-splitter-toolbar .ant-btn{max-width:100%;height:auto;min-height:var(--ls-control-middle-height,32px);white-space:normal;overflow-wrap:anywhere}

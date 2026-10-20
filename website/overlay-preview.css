@@ -1,0 +1,57 @@
+.ls-overlay-content p{margin:0;color:var(--ui-secondary);font-size:12px;line-height:1.7;overflow-wrap:anywhere}
+.ls-overlay-demo-popup .ant-popover-inner{max-width:min(360px,calc(100vw - 24px))}
+.ls-overlay-demo-popup .ant-popconfirm-description{margin-inline-start:0!important}
+.ls-overlay-demo-popup .ant-btn{white-space:normal;height:auto;min-height:var(--ls-control-middle-height,32px)}
+.ls-overlay-actions{display:flex;justify-content:flex-end;border-top:1px solid var(--ui-line);padding-top:12px;margin-top:0}
+/* Body takes remaining height after the actual wrapped header and footer. */
+:is(.ls-overlay-demo-popup,.ls-notification-overlay) .ant-modal{top:24px;padding-bottom:0}
+:is(.ls-overlay-demo-popup,.ls-notification-overlay) .ant-modal-content{display:flex;flex-direction:column;max-height:calc(100dvh - 48px)}
+:is(.ls-overlay-demo-popup,.ls-notification-overlay) .ant-modal-body{min-height:0;overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable}
+:is(.ls-overlay-demo-popup,.ls-notification-overlay) :is(.ant-modal-header,.ant-modal-footer,.ant-drawer-header,.ant-drawer-footer){flex-shrink:0}
+:is(.ls-overlay-demo-popup,.ls-notification-overlay) :is(.ant-modal-title,.ant-drawer-title){overflow-wrap:anywhere;padding-inline-end:16px}
+.ls-notification-overlay .ant-drawer-body{min-height:0;overscroll-behavior:contain}
+.ls-notification-long{overflow-wrap:anywhere}
+:is(.ls-overlay-demo-popup,.ls-notification-overlay) .ls-inline>.ant-btn{max-width:100%;height:auto;white-space:normal;overflow-wrap:anywhere}
+@media(max-width:600px){.ls-notification-overlay .ant-drawer-body{padding:16px}}
+.ls-overlay-demo-popup .ant-drawer-body{min-height:0;overscroll-behavior:contain}
+.ls-overlay-long{max-height:45dvh;overflow:auto;overscroll-behavior:contain;overflow-wrap:anywhere;padding:0 8px;scrollbar-gutter:stable}
+.ls-overlay-long p{font-size:13px;line-height:1.8;color:var(--ui-secondary);padding-bottom:12px;border-bottom:1px solid var(--ui-line)}
+.ls-overlay-long:focus-visible{outline:2px solid var(--ui-focus-ring);outline-offset:-2px;border-radius:6px}
+@media(max-width:600px){.ls-overlay-demo-popup .ant-drawer-body{padding:16px}}
+.ls-overlay-control-host{position:relative;min-width:0}
+.ls-overlay-control-scroll{max-height:42dvh;overflow:auto;overscroll-behavior:contain;padding:6px;scrollbar-gutter:stable}
+.ls-overlay-control-scroll p,.ls-overlay-control-host>p{font-size:12px;line-height:1.8;color:var(--ui-secondary);overflow-wrap:anywhere}
+.ls-overlay-control-scroll:focus-visible{outline:2px solid var(--ui-focus-ring);outline-offset:-2px;border-radius:6px}
+.ls-overlay-control-host .ant-space{max-width:100%}
+
+/* Long popup content keeps its full meaning within the active overlay. */
+.ls-overlay-control-select,.ls-overlay-control-menu{max-width:calc(100vw - 48px)}
+.ls-overlay-control-select .ant-select-item-option-content{white-space:normal;overflow-wrap:anywhere;line-height:1.65}
+.ls-overlay-control-menu .ant-dropdown-menu-title-content{white-space:normal;overflow-wrap:anywhere;max-width:240px;line-height:1.65}
+.ls-overlay-control-tooltip{max-width:min(280px,calc(100vw - 48px));overflow-wrap:anywhere}
+.ls-overlay-no-results{padding:12px 8px;color:var(--ui-secondary);font-size:12px;line-height:1.7;white-space:normal}
+
+.ls-async-teams{overflow-wrap:anywhere}
+.ls-async-teams p{margin:0;color:var(--ui-secondary);font-size:12px;line-height:1.7}
+.ls-async-teams .ant-select-selection-item{max-width:100%}
+.ls-async-teams>*{min-width:0;max-width:100%}
+.ls-async-teams .ant-select-selector,.ls-async-teams .ant-select-selection-overflow{min-width:0;max-width:100%}
+.ls-async-teams .ant-select-selection-overflow-item{max-width:100%;min-width:0}
+.ls-async-teams .ant-select-selection-item-content{min-width:0;overflow:hidden;text-overflow:ellipsis}
+
+/* Inline owns wrapping and gap; overlay footers only own alignment and dividers. */
+.ls-overlay-footer{justify-content:flex-end}
+.ls-notification-overlay .ant-btn{white-space:normal;height:auto;min-height:var(--ls-control-middle-height,32px)}
+.ls-notification-overlay .ls-stack>p{overflow-wrap:anywhere;line-height:1.7;color:var(--ui-secondary)}
+.ls-overlay-demo-popup .ant-modal-footer,.ls-notification-overlay .ant-modal-footer{margin-top:16px}
+
+/* Portal roots must not be the scroll-clipped modal/drawer body. */
+.ls-overlay-demo-popup :is(.ant-modal-content,.ant-drawer-content){position:relative;overflow:visible;}
+.ls-overlay-control-select .ant-select-item-option-content {word-break:normal;overflow-wrap:anywhere;}
+.ls-overlay-control-select {min-width:min(300px,calc(100vw - 48px));}
+
+.ls-notification-demo{gap:22px;}
+.ls-notification-demo>p{margin:0;}
+.ls-notification-demo>section{display:grid;gap:10px;}
+.ls-notification-demo h3{margin:0;font-size:13px;font-weight:600;}
+.ls-notification-boundaries p{margin:0;}

@@ -1,0 +1,12 @@
+.ls-form-example {padding:20px;border:1px solid var(--ls-surface-edge);border-radius:16px;background:var(--ls-surface-stage);}
+.ls-form-example h3,.ls-form-example p {margin:0;}
+.ls-form-setting-row {display:flex;align-items:center;justify-content:space-between;gap:16px;min-width:0;}
+.ls-form-setting-row>div {min-width:0;overflow-wrap:anywhere;}
+.ls-form-setting-row .ant-switch {flex-shrink:0;}
+.ls-form-setting-row p {margin:4px 0 0;}
+.ls-form-advanced {margin-top:4px;}
+.ls-form-example .ant-radio-wrapper,.ls-form-example .ant-checkbox-wrapper {white-space:normal;}
+@media(max-width:480px){.ls-form-example{padding:14px;}.ls-form-example .ant-btn{max-width:100%;height:auto;min-height:var(--ls-control-middle-height,32px);white-space:normal;}}
+
+/* Reserve a line for the textarea counter before help/error text. */
+.ls-form-example .ant-input-textarea-show-count {margin-bottom:22px;}

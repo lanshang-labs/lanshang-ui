@@ -1,0 +1,20 @@
+import {afterEach,expect,it,vi} from 'vitest';
+import {act,cleanup,fireEvent,render,screen} from '@testing-library/react';
+import {NestedOverlayPreview} from '../website/nested-overlay-preview';
+afterEach(()=>{cleanup();vi.useRealTimers()});
+async function tick(){await act(async()=>vi.advanceTimersByTimeAsync(700))}
+it('closes nested confirmation, drawer and modal in order and restores each opener',async()=>{
+ vi.useFakeTimers();render(<NestedOverlayPreview/>);const root=screen.getByRole('button',{name:'打开嵌套长内容示例'});fireEvent.click(root);await tick();const child=screen.getByRole('button',{name:'打开嵌套抽屉'});expect(document.activeElement).toBe(child);fireEvent.click(child);await tick();const confirm=screen.getByRole('button',{name:'打开嵌套确认'});fireEvent.click(confirm);await tick();expect(screen.getByRole('button',{name:'返回工作区'}).hasAttribute('disabled')).toBe(true);const safe=screen.getByRole('button',{name:'继续检查'});expect(document.activeElement).toBe(safe);fireEvent.keyDown(safe,{key:'Escape'});await tick();expect(document.activeElement).toBe(confirm);expect(screen.getByText('交付详情')).toBeTruthy();fireEvent.click(screen.getByRole('button',{name:'返回工作区'}));await tick();expect(document.activeElement).toBe(child);fireEvent.click(screen.getByRole('button',{name:'关闭工作区'}));await tick();expect(document.activeElement).toBe(root);
+});
+it('keeps detail context after confirming and exposes focusable scroll regions',async()=>{
+ vi.useFakeTimers();render(<NestedOverlayPreview/>);fireEvent.click(screen.getByRole('button',{name:'打开嵌套长内容示例'}));await tick();expect(screen.getByRole('region',{name:'长内容滚动区'}).getAttribute('tabindex')).toBe('0');fireEvent.click(screen.getByRole('button',{name:'打开嵌套抽屉'}));await tick();fireEvent.click(screen.getByRole('button',{name:'打开嵌套确认'}));await tick();fireEvent.click(screen.getByRole('button',{name:'确认采用'}));await tick();expect(screen.getByText('交付详情')).toBeTruthy();expect(document.activeElement).toBe(screen.getByRole('button',{name:'打开嵌套确认'}));
+});
+it('cycles Tab inside the top confirmation and makes the obscured modal inert',async()=>{
+ vi.useFakeTimers();render(<NestedOverlayPreview/>);fireEvent.click(screen.getByRole('button',{name:'打开嵌套长内容示例'}));await tick();fireEvent.click(screen.getByRole('button',{name:'打开嵌套抽屉'}));await tick();expect(document.querySelector('[inert]')?.textContent).toContain('项目工作区');fireEvent.click(screen.getByRole('button',{name:'打开嵌套确认'}));await tick();const safe=screen.getByRole('button',{name:'继续检查'}),accept=screen.getByRole('button',{name:'确认采用'});fireEvent.keyDown(safe,{key:'Tab',shiftKey:true});expect(document.activeElement).toBe(accept);fireEvent.keyDown(accept,{key:'Tab'});expect(document.activeElement).toBe(safe);fireEvent.keyDown(safe,{key:'Escape'});await tick();fireEvent.click(screen.getByRole('button',{name:'返回工作区'}));await tick();expect(document.querySelector('[inert]')).toBeNull();
+});
+it('mask closes the drawer before the underlying modal',async()=>{
+ vi.useFakeTimers();render(<NestedOverlayPreview/>);fireEvent.click(screen.getByRole('button',{name:'打开嵌套长内容示例'}));await tick();fireEvent.click(screen.getByRole('button',{name:'打开嵌套抽屉'}));await tick();const mask=document.querySelector('.ant-drawer-mask')!;fireEvent.click(mask);await tick();expect(screen.queryByText('交付详情')).toBeNull();expect(screen.getByText('项目工作区')).toBeTruthy();expect(document.activeElement).toBe(screen.getByRole('button',{name:'打开嵌套抽屉'}));
+});
+it('does not cascade an outside click through a closing confirmation into the drawer',async()=>{
+ vi.useFakeTimers();render(<NestedOverlayPreview/>);fireEvent.click(screen.getByRole('button',{name:'打开嵌套长内容示例'}));await tick();fireEvent.click(screen.getByRole('button',{name:'打开嵌套抽屉'}));await tick();fireEvent.click(screen.getByRole('button',{name:'打开嵌套确认'}));await tick();const mask=document.querySelector('.ant-drawer-mask')!;act(()=>{fireEvent.pointerDown(mask);fireEvent.mouseDown(mask);fireEvent.click(mask)});await tick();expect(screen.queryByRole('button',{name:'继续检查'})).toBeNull();expect(screen.getByText('交付详情')).toBeTruthy();fireEvent.click(mask);await tick();expect(screen.queryByText('交付详情')).toBeNull();
+});

@@ -1,0 +1,7 @@
+.ls-date-card {padding:20px;border:1px solid var(--ls-surface-edge);border-radius:16px;background:var(--ls-surface-stage);}
+.ls-date-card h3,.ls-date-card p {margin:0;}
+.ls-date-control {width:100%;}
+.ls-date-card .ant-btn {max-width:100%;height:auto;min-height:var(--ls-control-middle-height,32px);white-space:normal;}
+@media(max-width:600px){
+ .ls-date-card {padding:14px;}
+}

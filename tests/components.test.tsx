@@ -10,12 +10,17 @@ test("failed deployment never transitions to success on the demo timeline",()=>{
  act(()=>vi.advanceTimersByTime(30000));
  expect(screen.queryByText("已完成")).toBeNull();
  expect(screen.getByText("失败")).toBeTruthy();
+ const details=document.getElementById(screen.getByRole("button",{name:/发布失败/}).getAttribute("aria-controls")!);
+ expect(details?.getAttribute("aria-hidden")).toBe("true");
  fireEvent.click(screen.getByRole("button",{name:/发布失败/}));
+ expect(details?.getAttribute("aria-hidden")).toBe("false");
  expect(screen.getByRole("button",{name:/发布失败/}).getAttribute("aria-expanded")).toBe("true");
 });
 test("navigation preserves platform route and group callbacks",()=>{
  const click=vi.fn(),open=vi.fn();
  render(<BeautifulNavigation items={[{key:"projects",label:"项目",children:[{key:"/groups",label:"项目组"}]}]} selectedKeys={["/groups"]} openKeys={["projects"]} onClick={click} onOpenChange={open}/>);
+ expect(screen.getByRole("button",{name:"项目"}).getAttribute("aria-current")).toBeNull();
+ expect(screen.getByRole("button",{name:"项目组"}).getAttribute("aria-current")).toBe("page");
  fireEvent.click(screen.getByRole("button",{name:"项目组"}));expect(click).toHaveBeenCalledWith({key:"/groups"});
  fireEvent.click(screen.getByRole("button",{name:"项目"}));expect(open).toHaveBeenCalledWith([]);
 });
@@ -31,4 +36,9 @@ test("collapsed groups expose children through a keyboard-usable popup",async()=
  fireEvent.click(screen.getByRole("button",{name:"项目"}));
  fireEvent.click(await screen.findByRole("button",{name:"项目组"}));
  expect(click).toHaveBeenCalledWith({key:"groups"});
+});
+test('inline child selection keeps focus on the chosen destination',()=>{
+ render(<BeautifulNavigation items={[{key:'group',label:'分组',children:[{key:'item',label:'子页面'}]}]} selectedKeys={[]} openKeys={['group']} onOpenChange={()=>{}} onClick={()=>{}}/>);
+ const child=screen.getByRole('button',{name:'子页面'});child.focus();fireEvent.click(child);
+ expect(document.activeElement).toBe(child);
 });

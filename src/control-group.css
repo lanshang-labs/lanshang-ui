@@ -1,0 +1,68 @@
+.ls-input-group,.ls-button-group{display:inline-flex;align-items:center;min-width:0;max-width:100%;box-sizing:border-box;border:1px solid var(--ui-line);border-radius:var(--ls-control-middle-radius,10px);background:var(--ui-raised);color:var(--ui-text);vertical-align:middle;}
+.ls-input-group{width:100%;min-height:var(--ls-input-group-height,26px);border-radius:var(--ls-input-group-radius,8px);background:var(--ui-surface);}
+.ls-input-group[data-ls-size="small"]{--ls-input-group-height:var(--ls-control-small-height,26px);--ls-input-group-radius:var(--ls-control-small-radius,8px);--ls-input-group-padding:var(--ls-control-small-padding-inline,7px);}
+.ls-input-group[data-ls-size="middle"]{--ls-input-group-height:var(--ls-control-middle-height,32px);--ls-input-group-radius:var(--ls-control-middle-radius,10px);--ls-input-group-padding:var(--ls-control-middle-padding-inline,10px);}
+.ls-input-group[data-ls-size="large"]{--ls-input-group-height:var(--ls-control-large-height,38px);--ls-input-group-radius:var(--ls-control-large-radius,12px);--ls-input-group-padding:var(--ls-control-large-padding-inline,14px);}
+:root[data-theme="dark"] .ls-input-group{background:var(--ui-raised);}
+.ls-input-group-control{flex:1;min-width:0;align-self:stretch;display:flex;align-items:stretch;}
+.ls-input-group-control>.ant-select{width:100%;height:auto;min-height:calc(var(--ls-input-group-height,26px) - 2px);}
+.ls-input-group-control>.ant-input,.ls-input-group-control>.ant-input-affix-wrapper{width:100%;min-height:calc(var(--ls-input-group-height,26px) - 2px);}
+:root[data-theme] .ls-input-group-control>:is(.ant-select,.ant-input,.ant-input-affix-wrapper,.ant-input-number,.ant-picker){height:calc(var(--ls-input-group-height,26px) - 2px);min-height:0;}
+.ls-input-group-control>.ant-select .ant-select-selector{height:100%!important;}
+.ls-input-group .ls-input-group-control :is(.ant-select-selector,.ant-input,.ant-input-affix-wrapper){border-color:transparent!important;background:transparent!important;box-shadow:none!important;border-radius:calc(var(--ls-input-group-radius,8px) - 1px) 0 0 calc(var(--ls-input-group-radius,8px) - 1px)!important;}
+/* Focus belongs to the active segment, never to the entire compound control. */
+.ls-input-group-control{border-radius:calc(var(--ls-input-group-radius,8px) - 1px) 0 0 calc(var(--ls-input-group-radius,8px) - 1px);}
+.ls-input-group-control:focus-within{position:relative;z-index:1;outline:none;background:transparent;}
+.ls-input-group-control:hover{background:color-mix(in srgb,var(--ui-selected) 45%,var(--ui-surface));}
+.ls-input-group-actions{align-self:stretch;}
+.ls-input-group .ls-button-group>button:not(:disabled):is(:hover,:active){background:var(--ui-selected);}
+.ls-input-group .ls-button-group>button:focus-visible{outline-offset:-2px;}
+.ls-button-group>button[aria-pressed=true]:not(:disabled){box-shadow:none;background:var(--ui-selected);}
+
+.ls-input-group-actions{display:flex;flex:none;align-items:center;border-left:1px solid var(--ui-line);padding:0;}
+.ls-input-group-actions>.ls-button-group{align-self:stretch;align-items:stretch;border:0;padding:0;background:transparent;border-radius:0 calc(var(--ls-input-group-radius,8px) - 1px) calc(var(--ls-input-group-radius,8px) - 1px) 0;}
+.ls-input-group .ls-button-group>button{height:calc(var(--ls-input-group-height,26px) - 2px);min-height:0;align-self:stretch;border-radius:0;margin:0;padding-inline:var(--ls-input-group-padding,7px);}
+.ls-input-group .ls-button-group>button:last-child{border-radius:0 calc(var(--ls-input-group-radius,8px) - 1px) calc(var(--ls-input-group-radius,8px) - 1px) 0;}
+.ls-input-group .ls-button-group>button+button::before{left:0;}
+.ls-button-group{--ls-button-group-radius:var(--ls-control-middle-radius,10px);padding:0;gap:0;align-items:stretch;border-radius:var(--ls-button-group-radius);}
+.ls-button-group[data-ls-size="small"]{--ls-button-group-radius:var(--ls-control-small-radius,8px);}
+.ls-button-group[data-ls-size="large"]{--ls-button-group-radius:var(--ls-control-large-radius,12px);}
+.ls-button-group>button{position:relative;flex:none;border:0;box-shadow:none;background:transparent;border-radius:0;}
+.ls-button-group>button:first-of-type{border-radius:calc(var(--ls-button-group-radius) - 1px) 0 0 calc(var(--ls-button-group-radius) - 1px);}
+.ls-button-group>button:last-child{border-radius:0 calc(var(--ls-button-group-radius) - 1px) calc(var(--ls-button-group-radius) - 1px) 0;}
+.ls-button-group>button:only-child{border-radius:calc(var(--ls-button-group-radius) - 1px);}
+.ls-button-group>button+button{margin-left:0;}
+.ls-button-group>button+button::before{content:"";position:absolute;left:0;top:25%;height:50%;border-left:1px solid var(--ui-line-strong);}
+.ls-button-group>button:focus-visible{z-index:1;outline:2px solid var(--ui-accent);outline-offset:-2px;}
+.ls-button-group>button:not(:disabled):hover{background:var(--ui-selected);}
+.ls-button-group>button[aria-pressed=true]{background:var(--ui-selected);color:var(--ui-text);}
+.ls-button-group>button:disabled{cursor:not-allowed;}
+.ls-button-group .bui-row-action.ant-btn[aria-pressed=true]:not(:disabled):not(.ant-btn-dangerous){background:var(--ui-selected);box-shadow:none;}
+
+/* A single persistent selection moves as one surface; action buttons never opt in. */
+.ls-button-group{position:relative;isolation:isolate;}
+.ls-button-group-indicator{position:absolute;pointer-events:none;left:0;top:0;bottom:0;border-radius:8px;background:var(--ui-surface);box-shadow:var(--ls-selection-shadow);transition:transform var(--ls-motion-selection,280ms) var(--ls-ease-selection,cubic-bezier(.22,1.12,.36,1)),width var(--ls-motion-selection,280ms) var(--ls-ease-selection,cubic-bezier(.22,1.12,.36,1));}
+.ls-button-group--sliding{padding:3px;border:0;border-radius:999px;background:var(--ui-raised);}
+:root[data-theme="dark"] .ls-button-group--sliding{background:var(--ui-surface);}
+:root[data-theme="dark"] .ls-button-group-indicator{background:color-mix(in srgb,var(--ui-selected) 86%,var(--ui-text));box-shadow:none;}
+.ls-button-group--sliding>button{z-index:1;}
+.ls-button-group--sliding .bui-row-action.ant-btn[aria-pressed=true]:not(:disabled):not(.ant-btn-dangerous){background:transparent;box-shadow:none;font-weight:500;}
+@media(prefers-reduced-motion:reduce){.ls-button-group-indicator{transition:none;}}
+
+.ls-input-group-control:has(.ls-select):focus-within{outline:none;background:transparent;}
+.ls-input-group-control:has(.ls-select[data-ls-keyboard=true]):focus-within{outline:none;}
+
+/* Compound actions share the outside contour; interior seams are always square. */
+.ls-input-group .ls-input-group-actions .ls-button-group>button{border-radius:0;margin:0;}
+.ls-input-group .ls-input-group-actions .ls-button-group>button:last-child{border-radius:0 calc(var(--ls-input-group-radius,8px) - 1px) calc(var(--ls-input-group-radius,8px) - 1px) 0;}
+
+.ls-input-group-control .ant-input:focus-visible{text-decoration:underline;text-decoration-color:var(--ui-secondary);text-underline-offset:4px;}
+
+/* Compact segmented selection: quiet track, floating pill, and soft label feedback. */
+.ls-button-group--sliding>.ls-button-group-indicator{top:3px;bottom:3px;border-radius:999px;box-shadow:var(--ls-selection-shadow);}
+:root[data-theme="dark"] .ls-button-group--sliding>.ls-button-group-indicator{background:color-mix(in srgb,var(--ui-selected) 92%,var(--ui-text));box-shadow:none;}
+.ls-button-group--sliding .bui-row-action.ant-btn{border-radius:999px;padding-inline:10px;transition:color var(--ls-motion-state,150ms) var(--ls-ease-standard,ease),opacity var(--ls-motion-state,150ms) var(--ls-ease-standard,ease);}
+.ls-button-group--sliding .bui-row-action.ant-btn:not(.ant-btn-dangerous):not(:disabled):hover{background:transparent;color:var(--ui-text);}
+.ls-button-group--sliding>button+button::before{border-color:color-mix(in srgb,var(--ui-secondary) 20%,transparent);transition:opacity var(--ls-motion-state,150ms) var(--ls-ease-standard,ease);}
+.ls-button-group--sliding>button[aria-pressed=true]::before,.ls-button-group--sliding>button[aria-pressed=true]+button::before{opacity:0;}
+@media(prefers-reduced-motion:reduce){.ls-button-group--sliding .bui-row-action.ant-btn,.ls-button-group--sliding>button+button::before{transition:none;}}

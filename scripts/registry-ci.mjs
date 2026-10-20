@@ -19,21 +19,28 @@ await new Promise(ok=>server.listen(0,'127.0.0.1',ok));
 const base=`http://127.0.0.1:${server.address().port}/`;
 const env={LANSHANG_REGISTRY_BASE:base,LANSHANG_REGISTRY_OUT:output,ALL_PROXY:'',all_proxy:'',NO_PROXY:'127.0.0.1,localhost',no_proxy:'127.0.0.1,localhost'};
 try {
- restoreHistory(output);
- const info=JSON.parse(readFileSync('releases/0.2.2/build-info.json','utf8'));
- const name=new URL(info.package).pathname.split('/').pop();
- const oldUrl=base+'packages/'+name;
- const consumer=mkdtempSync(join(tmpdir(),'lanshang-old-lock-'));
- writeFileSync(join(consumer,'package.json'),JSON.stringify({private:true,dependencies:{'@lanshang-labs/ui':oldUrl,react:'18.3.1','react-dom':'18.3.1',antd:'5.22.5'}}));
- await run('npm',['install','--ignore-scripts','--no-audit','--no-fund'],consumer,env);
- const lock=readFileSync(join(consumer,'package-lock.json'),'utf8');
+ const versions=restoreHistory(output);
+ const oldConsumers=[];
+ for(const version of versions) {
+  const info=JSON.parse(readFileSync(`releases/${version}/build-info.json`,'utf8'));
+  const name=new URL(info.package).pathname.split('/').pop();
+  const oldUrl=base+'packages/'+name;
+  const consumer=mkdtempSync(join(tmpdir(),`lanshang-${version}-lock-`));
+  writeFileSync(join(consumer,'package.json'),JSON.stringify({private:true,dependencies:{'@lanshang-labs/ui':oldUrl,react:'18.3.1','react-dom':'18.3.1',antd:'5.22.5'}}));
+  await run('npm',['install','--ignore-scripts','--no-audit','--no-fund'],consumer,env);
+  oldConsumers.push({version,consumer,lock:readFileSync(join(consumer,'package-lock.json'),'utf8')});
+ }
  await run('npm',['run','build:registry'],process.cwd(),env);
- assert.equal(digest(readFileSync(join(output,'packages',name))),info.sha256);
- // npm ci removes node_modules; a fresh cache forces downloading the retained old URL.
- await run('npm',['ci','--ignore-scripts','--no-audit','--no-fund','--cache',mkdtempSync(join(tmpdir(),'lanshang-empty-cache-'))],consumer,env);
- assert.equal(readFileSync(join(consumer,'package-lock.json'),'utf8'),lock);
+ for(const {version,consumer,lock} of oldConsumers) {
+  const info=JSON.parse(readFileSync(`releases/${version}/build-info.json`,'utf8'));
+  const name=new URL(info.package).pathname.split('/').pop();
+  assert.equal(digest(readFileSync(join(output,'packages',name))),info.sha256);
+  // npm ci removes node_modules; a fresh cache forces downloading each retained URL.
+  await run('npm',['ci','--ignore-scripts','--no-audit','--no-fund','--cache',mkdtempSync(join(tmpdir(),'lanshang-empty-cache-'))],consumer,env);
+  assert.equal(readFileSync(join(consumer,'package-lock.json'),'utf8'),lock);
+ }
  await run('npm',['run','test:registry'],process.cwd(),env);
  const current=JSON.parse(readFileSync('package.json','utf8')).version;
  assert(existsSync(join(output,'r',`v${current}`,'lanshang-blocks.json')));
- console.log('PASS: old lockfile clean-cache install survives new release; new Registry consumer passed.');
+ console.log(`PASS: archived ${versions.join(', ')} lockfiles survive clean-cache install; new Registry consumer passed.`);
 } finally {server.close()}

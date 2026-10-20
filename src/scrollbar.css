@@ -1,0 +1,11 @@
+/* Native and rc-virtual-list scrollbars share a quiet, theme-aware surface.
+   Keep the full virtual rail available for pointer dragging. */
+:root[data-theme]{--ls-scrollbar-thumb:color-mix(in srgb,var(--ui-secondary) 35%,transparent);--ls-scrollbar-hover:color-mix(in srgb,var(--ui-secondary) 60%,transparent);--rc-virtual-list-scrollbar-bg:var(--ls-scrollbar-thumb);scrollbar-color:var(--ls-scrollbar-thumb) transparent;scrollbar-width:thin}
+:root[data-theme] *{scrollbar-color:var(--ls-scrollbar-thumb) transparent;scrollbar-width:thin}
+:root[data-theme] ::-webkit-scrollbar{width:8px;height:8px}
+:root[data-theme] ::-webkit-scrollbar-track,:root[data-theme] ::-webkit-scrollbar-corner{background:transparent}
+:root[data-theme] ::-webkit-scrollbar-thumb{background:var(--ls-scrollbar-thumb);border:2px solid transparent;background-clip:padding-box;border-radius:99px}
+:root[data-theme] ::-webkit-scrollbar-thumb:hover{background-color:var(--ls-scrollbar-hover)}
+:root[data-theme] .rc-virtual-list-scrollbar-thumb{box-sizing:border-box;border:2px solid transparent;background-clip:padding-box!important}
+:root[data-theme] .rc-virtual-list-scrollbar:hover{--rc-virtual-list-scrollbar-bg:var(--ls-scrollbar-hover)}
+@media(forced-colors:active){:root[data-theme]{--ls-scrollbar-thumb:ButtonText;--ls-scrollbar-hover:Highlight}:root[data-theme],:root[data-theme] *{scrollbar-color:auto}}

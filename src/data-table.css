@@ -1,8 +1,87 @@
-.ds-data-table {border:1px solid var(--ui-line);border-radius:var(--ds-radius);overflow:hidden;font-family:var(--ds-font);}
+.ds-data-table {border:1px solid var(--ls-surface-edge);border-radius:12px;overflow:hidden;font-family:var(--ds-font);}
 /* Scoped exception to the legacy global header rule. Other states use AntD tokens. */
-.ds-data-table.ant-table-wrapper .ant-table-thead>tr>th {background:var(--ui-surface);color:var(--ui-secondary);font-weight:500;font-size:12px;white-space:nowrap;}
+.ds-data-table.ant-table-wrapper .ant-table-thead>tr>th {background:var(--ui-raised);color:var(--ui-secondary);font-weight:500;font-size:12px;white-space:nowrap;}
 .ds-data-table.ant-table-wrapper .ant-table-thead>tr>th::before {display:none;}
+.ds-data-table .ls-table-sort-icon{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;width:14px;height:16px;color:var(--ui-muted);vertical-align:middle}
+.ds-data-table .ls-table-sort-icon svg{width:11px;height:11px;flex:none;margin-block:-2px;stroke-width:2}
+.ds-data-table .ls-table-sort-icon[data-order=ascend] svg:first-child,.ds-data-table .ls-table-sort-icon[data-order=descend] svg:last-child{color:var(--ui-text)}
+.ds-data-table .ls-table-filter-icon{display:inline-grid;place-items:center;width:16px;height:16px}
+.ds-data-table .ls-table-filter-icon svg{width:14px;height:14px;stroke-width:1.8}
+.ds-data-table .ls-table-filter-label{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
 .ds-data-table .ant-table-tbody>tr>td {font-size:13px;font-variant-numeric:tabular-nums;}
 .ds-data-table .ant-pagination {margin:0!important;padding:8px 12px;border-top:1px solid var(--ui-line);background:var(--ui-canvas);}
 .ds-column-label {display:inline-block;max-width:100%;overflow:hidden;text-overflow:ellipsis;vertical-align:middle;}
 .ds-column-label:focus-visible {outline:2px solid var(--ui-accent);outline-offset:2px;}
+/* Pagination shares the table's neutral hierarchy; accent is reserved for focus. */
+.ds-data-table .ant-pagination {display:flex;flex-wrap:wrap;align-items:center;gap:4px;row-gap:8px;}
+.ds-data-table .ant-pagination > li {margin-inline-end:0;}
+.ds-data-table .ant-pagination .ant-pagination-total-text {margin-inline-end:auto;color:var(--ui-secondary);font-size:12px;}
+.ds-data-table .ant-pagination .ant-pagination-item {border-color:transparent;border-radius:var(--ls-control-middle-radius,10px);}
+.ds-data-table .ant-pagination .ant-pagination-item-active {background:var(--ui-selected);border-color:var(--ui-line-strong);font-weight:500;}
+.ds-data-table .ant-pagination .ant-pagination-item:not(.ant-pagination-item-active):hover {background:var(--ui-raised);}
+.ds-data-table .ant-pagination .ant-pagination-options {margin-inline-start:8px;}
+.ds-data-table .ant-pagination .ant-pagination-options-quick-jumper input {background:var(--ls-surface-face);border-color:var(--ls-surface-edge);border-radius:var(--ls-control-middle-radius,10px);box-shadow:var(--ls-surface-shadow-compact);}
+.ds-data-table .ant-pagination .ant-pagination-options-quick-jumper input:focus-visible {outline:2px solid var(--ui-accent);outline-offset:2px;}
+.ds-data-table .ant-pagination.ant-pagination-disabled .ant-pagination-item:hover {background:transparent;}
+.ds-data-table .ant-pagination.ant-pagination-disabled .ant-pagination-item-active {background:var(--ui-raised);}
+@media(max-width:600px) {
+ .ds-data-table .ant-pagination .ant-pagination-total-text {flex-basis:100%;}
+ .ds-data-table .ant-pagination .ant-pagination-options {display:flex;flex-wrap:wrap;gap:8px;margin-inline-start:0;max-width:100%;}
+ .ds-data-table .ant-pagination .ant-pagination-options-quick-jumper {margin-inline-start:0;}
+}
+/* Keep AntD's pending overlay and caller overrides; replace only the default indicator. */
+.ds-data-table .ant-spin .ds-table-loading {width:max-content;height:auto;margin:0;transform:translate(-50%,-50%);font-size:13px;line-height:1.5;}
+.ds-data-table .ds-table-loading .bui-loading-label {padding:8px 12px;border:1px solid var(--ls-surface-edge);border-radius:var(--ls-control-small-radius,8px);background:var(--ls-surface-face);box-shadow:var(--ls-surface-shadow-compact);}
+.ds-data-table .ant-table-row-expand-icon {color:var(--ui-secondary);background:var(--ui-surface);border-color:var(--ui-line-strong);border-radius:var(--ls-control-small-radius,8px);}
+.ds-data-table .ant-table-row-expand-icon:hover {color:var(--ui-text);background:var(--ui-raised);}
+.ds-data-table .ant-table-row-expand-icon:focus-visible,
+.ds-data-table .ant-table-filter-trigger:focus-visible,
+.ds-data-table th.ant-table-column-has-sorters:focus-visible {outline:2px solid var(--ui-accent);outline-offset:-2px;}
+.ds-data-table .ant-table-expanded-row > td {background:var(--ui-canvas);}
+.ds-data-table .ant-table-filter-trigger.active {color:var(--ui-text);background:var(--ui-selected);}
+/* Pinned cells must be opaque so scrolling text never bleeds through. */
+.ds-data-table .ant-table-tbody > tr > td:is(.ant-table-cell-fix-left,.ant-table-cell-fix-right) {background:var(--ui-surface);}
+.ds-data-table .ant-table-tbody > tr > td:is(.ant-table-cell-fix-left,.ant-table-cell-fix-right).ant-table-cell-row-hover {background:var(--ui-raised);}
+.ds-data-table .ant-table-tbody > tr.ant-table-row-selected > td:is(.ant-table-cell-fix-left,.ant-table-cell-fix-right) {background:var(--ui-selected);}
+
+/* AntD virtual rows use div cells rather than tbody/tr/td. */
+.ds-data-table .ant-table-tbody-virtual .ant-table-cell {font-size:13px;font-variant-numeric:tabular-nums;}
+.ds-data-table .ant-table-tbody-virtual :is(.ant-table-cell-fix-left,.ant-table-cell-fix-right) {background:var(--ui-surface);}
+.ds-data-table .ant-table-tbody-virtual .ant-table-cell-row-hover {background:var(--ui-raised);}
+.ds-data-table .ant-table-tbody-virtual .ant-table-row-selected > .ant-table-cell {background:var(--ui-selected);}
+.ds-data-table .ant-table-tbody-virtual .ant-table-row-selected > .ant-table-cell:first-child {box-shadow:inset 2px 0 var(--ui-line-strong);}
+@media(forced-colors:active) {
+ .ds-data-table .ant-table-tbody-virtual .ant-table-row-selected > .ant-table-cell:first-child {border-inline-start:2px solid Highlight;}
+}
+
+.ds-data-table .ant-table-summary > tr > td {background:var(--ui-canvas);color:var(--ui-text);font-size:13px;font-weight:500;font-variant-numeric:tabular-nums;border-top:1px solid var(--ui-line-strong);}
+
+/* Inset details belong to the preceding row; the muted gutter separates levels. */
+.ds-data-table.ant-table-wrapper .ant-table-tbody > .ant-table-expanded-row > td,
+.ds-data-table.ant-table-wrapper .ant-table-tbody > .ant-table-expanded-row:hover > td {
+ background:var(--ui-raised);padding:12px 12px 14px 32px!important;
+}
+.ds-table-expanded-content {
+ min-width:0;padding:8px 14px;background:var(--ls-surface-face);
+ border:1px solid var(--ls-surface-edge);border-radius:var(--ls-control-middle-radius,10px);box-shadow:var(--ls-surface-shadow);
+}
+.ds-table-expanded-content > .bui-metadata-list > .bui-metadata-row {
+ grid-template-columns:80px minmax(0,1fr);gap:12px;padding:5px 0;border:0;
+}
+.ds-table-expanded-content > .bui-metadata-list > .bui-metadata-row dt {font-size:12px;color:var(--ui-secondary);}
+.ds-table-expanded-content > .bui-metadata-list > .bui-metadata-row dd {font-size:13px;font-weight:400;}
+@media(max-width:480px){
+ .ds-data-table.ant-table-wrapper .ant-table-tbody > .ant-table-expanded-row > td{padding-inline:24px 8px!important}
+ .ds-table-expanded-content{padding:8px 10px}
+ .ds-table-expanded-content > .bui-metadata-list > .bui-metadata-row{grid-template-columns:64px minmax(0,1fr);gap:8px}
+}
+
+/* Keep hover and selection distinct from the recessed detail area. */
+.ds-data-table.ant-table-wrapper .ant-table-tbody > .ant-table-row > td.ant-table-cell-row-hover {background:color-mix(in srgb,var(--ui-surface) 55%,var(--ui-raised));}
+.ds-data-table.ant-table-wrapper .ant-table-tbody > .ant-table-row-selected > td,
+.ds-data-table.ant-table-wrapper .ant-table-tbody > .ant-table-row-selected > td.ant-table-cell-row-hover {background:var(--ui-selected);}
+.ds-data-table.ant-table-wrapper .ant-table-tbody > .ant-table-row-selected > td:first-child {box-shadow:inset 2px 0 var(--ui-line-strong);}
+.ds-data-table.ant-table-wrapper .ant-table-tbody > .ant-table-row:has(+ .ant-table-expanded-row:not([style*="display: none"])) > td {border-bottom-color:transparent;}
+
+/* A code panel already owns its frame and spacing. */
+.ds-table-expanded-content:has(> .ls-code-block:only-child){padding:0;border:0;background:transparent;}

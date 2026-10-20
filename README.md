@@ -7,7 +7,7 @@
 ```tsx
 import { LanshangProvider, DataTable, ThemeSwitch } from '@lanshang-labs/ui';
 import '@lanshang-labs/ui/styles.css';
-// 可选：应用自行引入 @fontsource-variable/inter。
+// styles.css 已包含本地 Inter + Noto Sans SC 字体声明。
 <LanshangProvider storageKey="my-app.theme"><ThemeSwitch /><DataTable columns={[]} dataSource={[]} /></LanshangProvider>
 ```
 
@@ -100,3 +100,19 @@ PageHeader、ContentState、MetadataList 支持根元素的标准 HTML 属性和
 ### 架构与组合区块
 
 [架构与分发](doc/architecture.md)说明基础组件、AntD 适配与应用源码区块的边界。文档站提供三栏导航、交互预览、代码和列表/详情/侧栏区块源码下载。区块可复制定制，核心仍通过版本包维护；Registry 安装通过官方 shadcn CLI 实现，见 [Registry 接入](doc/registry.md)。
+
+### 默认与自定义字体
+
+默认使用 Inter + Noto Sans SC，字体文件与 OFL 许可证随包分发。`styles.css` 使用相对 URL、`font-display: swap` 和中文 `unicode-range` 分片；加载期间回退到系统字体。
+
+业务可使用 `<LanshangProvider fontFamily="Business Sans, system-ui, sans-serif">` 覆盖 AntD 和公共组件字体；自定义字体资源由业务自行加载。一个文档只使用一个根 Provider，代码区保持等宽字体。新字体方案与覆盖属性尚未发布，当前请从本地源码构建接入。
+
+### 单按钮主题切换
+
+`<ThemeSwitch variant="toggle" />` 以太阳/月亮图标显示下一次切换的目标主题，适合登录页等简洁界面。按钮保留可访问名称、原位焦点与 Provider 的主题记忆；默认分段形态不变。页面负责按钮位置，建议在窄屏留出安全边距。
+
+### 全局工作区布局（本地预览）
+
+`WorkspaceLayout` 组合 `sidebar`、`header` 和内容；内容默认铺满，`contentWidth="reading"` 可限制为 1500px。`WorkspaceSidebar` 默认展开 224px / 收起 72px，在 992px 以下通过 `onCollapsedChange(true)` 通知应用收起，回到宽屏时再通知恢复进入窄屏前的展开偏好；手动切换与偏好存储由应用控制。`WorkspaceHeader` 默认 48px，组合 `BeautifulTabs` 形成顶部导航，窄屏允许账户区换行。侧栏导航和内容各自滚动，主题继承 `LanshangProvider`。
+
+标准交互样例位于文档站「布局与展示 / 全局布局」。路由、权限、登录状态、搜索与业务数据仍归消费者；布局不依赖任何平台品牌或 API。

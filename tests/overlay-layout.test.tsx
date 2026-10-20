@@ -1,0 +1,24 @@
+import {afterEach,it,expect,vi} from 'vitest';
+import {act,cleanup,fireEvent,render,screen} from '@testing-library/react';
+import {NotificationPreview} from '../website/notification-preview';
+afterEach(()=>{cleanup();vi.useRealTimers()});
+for(const kind of ['Modal','Drawer'])it(`${kind} footer restores focus and resumes a notification received inside the form`,async()=>{
+ vi.useFakeTimers();render(<NotificationPreview/>);
+ const trigger=screen.getByRole('button',{name:`通知与 ${kind}`});trigger.focus();fireEvent.click(trigger);
+ await act(async()=>vi.advanceTimersByTimeAsync(600));
+ const field=screen.getByRole('textbox',{name:'通知浮层备注'});
+ expect(document.activeElement).toBe(field);
+ fireEvent.change(field,{target:{value:'保留备注'}});
+ fireEvent.click(screen.getByRole('button',{name:'模拟浮层期间收到通知'}));
+ await act(async()=>vi.advanceTimersByTimeAsync(6000));
+ expect(screen.queryByRole('complementary',{name:'全局通知'})).toBeNull();
+ const close=document.querySelector<HTMLButtonElement>(kind==='Modal'?'.ant-modal-footer button':'.ant-drawer-footer button');
+ expect(close?.textContent).toContain(kind==='Modal'?'关闭模态框':'关闭抽屉');
+ close!.focus();fireEvent.click(close!);
+ await act(async()=>vi.advanceTimersByTimeAsync(600));
+ expect(document.activeElement).toBe(trigger);
+ expect(screen.getByRole('button',{name:'关闭通知：浮层期间后台任务完成'})).toBeTruthy();
+ await act(async()=>vi.advanceTimersByTimeAsync(5000));
+ expect(screen.queryByRole('button',{name:'关闭通知：浮层期间后台任务完成'})).toBeNull();
+ expect(document.activeElement).toBe(trigger);
+});
