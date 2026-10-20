@@ -41,7 +41,7 @@ npm 包尚未发布。构建使用 `npm pack` 生成包含许可证的 tgz，由
 
 协议参考：[shadcn Registry](https://ui.shadcn.com/docs/registry/getting-started)、[Registry item schema](https://ui.shadcn.com/docs/registry/registry-item-json)。
 
-## 历史版本与 CI（0.2.3）
+## 历史版本与 CI
 
 `releases/<version>/` 在 Git 中保存已发布包的原始字节、Registry 和 SHA-256 清单。构建校验后恢复全部旧 `packages/` 地址，并提供 `r/v<version>/` 固定入口；未带版本的 `r/` 指向当前构建。0.2.2 旧包地址保持不变，历史区块依赖固定到同版本 Provider。
 
@@ -49,4 +49,4 @@ npm 包尚未发布。构建使用 `npm pack` 生成包含许可证的 tgz，由
 
 CI 和 Pages 发布均执行 `npm run test:registry:ci`：启动临时 HTTP Registry，先逐一安装已归档版本生成旧 lockfile，再构建新版，使用全新 npm 缓存执行各旧项目 npm ci，最后验证新版 CLI 安装、构建、重复安装与 dry-run。临时服务器结束时关闭，不占用开发端口。此自动化不代表平台已上线。
 
-0.2.4 版本包 `lanshang-labs-ui-0.2.4-86f9e6d775b0.tgz` 的 SHA-256 为 `86f9e6d775b01afbbc0a8945d13e5d3411157b35c90276ba4078f4c3fa44dacf`。Boomerang Platform 测试站已固定接入该包并验证页面资源与构建产物一致；这不代表所有组件或其他项目已经验收。线上 0.2.3 已按原始摘要归档，新版不得复用其版本号或覆盖历史包。其他项目接入时须锁定包地址与完整性，并在自身 React 18 / Ant Design 5 环境验证；实际公开版本以同站点的 `r/build-info.json` 为准。
+0.2.4 版本包 `lanshang-labs-ui-0.2.4-86f9e6d775b0.tgz` 的 SHA-256 为 `86f9e6d775b01afbbc0a8945d13e5d3411157b35c90276ba4078f4c3fa44dacf`。Boomerang Platform 测试站已固定接入该包并验证页面资源与构建产物一致；这不代表所有组件或其他项目已经验收。线上 0.2.4 已按原始摘要归档。0.2.5 仅修正文档与接入示例，组件实现保持不变；其版本包 `lanshang-labs-ui-0.2.5-ae87395a6d01.tgz` 的 SHA-256 为 `ae87395a6d014ab24193eff6d8325ad240eb7b899b918c0c71d0f27c28e3f585`。新版不得复用已发布版本号或覆盖历史包。其他项目接入时须锁定包地址与完整性，并在自身 React 18 / Ant Design 5 环境验证；实际公开版本以同站点的 `r/build-info.json` 为准。
