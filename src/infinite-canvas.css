@@ -1,0 +1,18 @@
+.ls-infinite-canvas,.ls-canvas-toolbar,.ls-canvas-surface,.ls-canvas-node{box-sizing:border-box}
+.ls-infinite-canvas{display:flex;flex-direction:column;gap:12px;min-width:0;color:var(--ui-text);font-family:var(--ds-font)}
+.ls-canvas-toolbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.ls-canvas-controls{display:flex;align-items:center;gap:4px;min-width:0;flex-wrap:wrap}
+.ls-canvas-scale{min-width:48px;text-align:center;font-size:12px;font-variant-numeric:tabular-nums;color:var(--ui-secondary)}
+.ls-canvas-toolbar-divider{height:16px;width:1px;background:var(--ui-line);margin-inline:4px}
+.ls-canvas-surface{position:relative;isolation:isolate;overflow:hidden;width:100%;min-width:0;min-height:180px;border:1px solid var(--ui-line);border-radius:14px;background-color:var(--ui-canvas);background-image:radial-gradient(var(--ui-line) 1px,transparent 1px);cursor:grab;outline:none}
+.ls-canvas-pan-target{position:absolute;inset:0;touch-action:none}
+.ls-canvas-surface:focus-visible{outline:2px solid var(--ui-accent);outline-offset:2px}
+.ls-canvas-surface[data-gesture=pan],.ls-canvas-surface[data-gesture=node]{cursor:grabbing;user-select:none}
+.ls-canvas-world{position:absolute;inset:0 auto auto 0;width:0;height:0;transform-origin:0 0}
+.ls-canvas-node{position:absolute;cursor:default;overflow:visible}
+.ls-canvas-node[data-dragging=true]{z-index:1}
+.ls-canvas-node [data-canvas-drag-handle]{cursor:grab;touch-action:none;user-select:none;outline-offset:2px}
+.ls-canvas-node[data-dragging=true] [data-canvas-drag-handle]{cursor:grabbing}
+.ls-canvas-node [data-canvas-drag-handle]:focus-visible{outline:2px solid var(--ui-accent);border-radius:6px}
+.ls-canvas-empty{position:absolute;inset:24px;display:flex;align-items:center;justify-content:center;color:var(--ui-secondary);cursor:default;text-align:center}
+.ls-canvas-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}

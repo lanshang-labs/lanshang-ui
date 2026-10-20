@@ -52,3 +52,5 @@ CI 和 Pages 发布均执行 `npm run test:registry:ci`：启动临时 HTTP Regi
 0.2.4 版本包 `lanshang-labs-ui-0.2.4-86f9e6d775b0.tgz` 的 SHA-256 为 `86f9e6d775b01afbbc0a8945d13e5d3411157b35c90276ba4078f4c3fa44dacf`。Boomerang Platform 测试站已固定接入该包并验证页面资源与构建产物一致；这不代表所有组件或其他项目已经验收。0.2.5 仅修正文档与接入示例，其版本包 `lanshang-labs-ui-0.2.5-ae87395a6d01.tgz` 的 SHA-256 为 `ae87395a6d014ab24193eff6d8325ad240eb7b899b918c0c71d0f27c28e3f585`。两版已按线上原始摘要归档。
 
 0.2.6 修复 WorkspaceLayout 在应用未使用全局 CSS reset 时的内容溢出；版本包 `lanshang-labs-ui-0.2.6-014dae5bcd05.tgz` 的 SHA-256 为 `014dae5bcd05d85e4fc762a5cee9260cbea753c56919e9c307b16dd294bfb61f`。新版不得复用已发布版本号或覆盖历史包。其他项目接入时须锁定包地址与完整性，并在自身 React 18 / Ant Design 5 环境验证；实际公开版本以同站点的 `r/build-info.json` 为准。
+
+0.2.7 正式提供 `InfiniteCanvas` 与通用几何工具；版本包 `lanshang-labs-ui-0.2.7-c01203b30655.tgz` 的 SHA-256 为 `c01203b30655b313bc9d7d2dbca2ef4d410a8882e379f5c0671f4901e4f4e1b4`。运行代码与已完成样例消费验收的 `0.2.7-canvas.1` 一致，正式版更新包版本、README 和文档。线上 0.2.6 已按原始字节归档；本地候选包及消费者的旧包、审核反馈分别由其原所有者保留，升级样例不等于修改正式导出。

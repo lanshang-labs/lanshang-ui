@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "lanshang-provider",
+  "title": "Lanshang Provider",
+  "description": "Application theme provider and package stylesheet.",
+  "dependencies": [
+    "@lanshang-labs/ui@https://lanshang-labs.github.io/lanshang-ui/packages/lanshang-labs-ui-0.2.6-014dae5bcd05.tgz",
+    "antd@5.22.5"
+  ],
+  "files": [
+    {
+      "path": "registry/provider.tsx",
+      "content": "'use client';\nimport type {ReactNode} from 'react';\nimport {LanshangProvider} from '@lanshang-labs/ui';\nimport '@lanshang-labs/ui/styles.css';\n\n/** Mount once at the application root. Business state remains in the application. */\nexport function AppUIProvider({children}: {children: ReactNode}) {\n  return <LanshangProvider storageKey=\"lanshang-app.theme\">{children}</LanshangProvider>;\n}\n",
+      "type": "registry:file",
+      "target": "src/components/lanshang/provider.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

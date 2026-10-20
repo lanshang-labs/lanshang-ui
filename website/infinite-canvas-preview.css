@@ -1,0 +1,6 @@
+.docs-canvas-card{box-sizing:border-box;height:100%;border:1px solid var(--ui-line);border-radius:14px;background:var(--ui-surface);box-shadow:var(--ls-surface-shadow);overflow:hidden}
+.docs-canvas-card[data-moving=true]{border-color:var(--ui-secondary)}
+.docs-canvas-card-title{display:flex;align-items:center;gap:8px;box-sizing:border-box;height:44px;padding:0 14px;border-bottom:1px solid var(--ui-line);font-size:13px}
+.docs-canvas-card-title>span{color:var(--ui-secondary)}
+.docs-canvas-card-body{display:flex;flex-direction:column;align-items:flex-start;gap:12px;box-sizing:border-box;padding:14px;font-size:13px}
+.docs-canvas-card-body p{margin:0;color:var(--ui-secondary);line-height:1.7}

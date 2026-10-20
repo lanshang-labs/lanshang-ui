@@ -116,3 +116,27 @@ PageHeader、ContentState、MetadataList 支持根元素的标准 HTML 属性和
 `WorkspaceLayout` 组合 `sidebar`、`header` 和内容；内容默认铺满，`contentWidth="reading"` 可限制为 1500px。`WorkspaceSidebar` 默认展开 224px / 收起 72px，在 992px 以下通过 `onCollapsedChange(true)` 通知应用收起，回到宽屏时再通知恢复进入窄屏前的展开偏好；手动切换与偏好存储由应用控制。`WorkspaceHeader` 默认 48px，组合 `BeautifulTabs` 形成顶部导航，窄屏允许账户区换行。侧栏导航和内容各自滚动，主题继承 `LanshangProvider`。
 
 标准交互样例位于文档站「布局与展示 / 全局布局」。路由、权限、登录状态、搜索与业务数据仍归消费者；布局不依赖任何平台品牌或 API。
+
+## 无限画布（0.2.7）
+
+`InfiniteCanvas<T>` 提供平移、指针锚点缩放、节点拖动、键盘移动和标准图标工具栏。应用持有 `nodes`（id、x、y、width、height、data、可选 label）与 `viewport`（x、y、scale），通过 `onNodesChange` / `onViewportChange` 接受变更提议；组件不请求资源或保存业务数据。
+
+```tsx
+import { useState } from 'react';
+import { InfiniteCanvas, type CanvasNode } from '@lanshang-labs/ui';
+
+export function Board() {
+  const [nodes, setNodes] = useState<CanvasNode<string>[]>([
+    { id: 'card', label: '内容卡片', x: 0, y: 0, width: 240, height: 160, data: '内容' },
+  ]);
+  const [viewport, setViewport] = useState({ x: 24, y: 24, scale: 1 });
+  return <InfiniteCanvas nodes={nodes} viewport={viewport}
+    onNodesChange={setNodes} onViewportChange={setViewport}
+    renderNode={(node, { dragHandleProps }) => <article>
+      <div {...dragHandleProps}>{node.label}</div>
+      <div data-canvas-interactive>{node.data}</div>
+    </article>} />;
+}
+```
+
+移动柄透传 `dragHandleProps`；按钮、输入和链接保留自身行为，滚动面板或图片预览区域使用 `data-canvas-interactive`。`ref<InfiniteCanvasRef>` 提供 fitView、zoomIn、zoomOut、resetView、arrange、focus、getViewportSize。`arrange` 仅提议节点位置；应用接受后可调用 fitView，或组合导出的 `arrangeCanvasNodes`、`fitCanvasViewport` 同步更新节点和视口。完整 API 和可运行示例见[无限画布文档](https://lanshang-labs.github.io/lanshang-ui/#/components/infinite-canvas)。

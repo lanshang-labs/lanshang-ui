@@ -31,6 +31,7 @@
 @import './workspace-header.css';
 
 @import "./workspace-layout.css";
+@import "./infinite-canvas.css";
 
 @import "./control-group.css";
 
