@@ -16,6 +16,7 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci
+      - run: npm run build
       - run: node scripts/run-tests.mjs
       - run: npm run check:published-history
       - run: npm run test:registry:ci
