@@ -58,4 +58,4 @@ CI 和 Pages 发布均执行 `npm run test:registry:ci`：启动临时 HTTP Regi
 
 0.2.8 正式提供共用画框的 `ImageCard` 与 `ImageDeck`；版本包 `lanshang-labs-ui-0.2.8-2fe0726f1a39.tgz` 的 SHA-256 为 `2fe0726f1a393562d9792c183ea4f195c1e96b54cc0f186e083b4c925788d70a`。运行文件与已通过真实样例消费验证的 `0.2.8-image-deck.1` 逐字一致，正式版仅更新版本、README 与接入文档。线上 0.2.7 原包和 Registry 按原始字节归档；本地 .0 / .1 候选及消费者的原包、审核反馈继续保留。此次样例升级不改正式导出。
 
-0.2.9 正式提供 `Markdown`，包含 CommonMark、GFM、共享代码与图片展示，以及固定 KaTeX 0.19.0 的公式运行文件、本地字体和完整许可。`images="local"` 可限制离线样例只加载相对/当前源路径图片；原始 HTML 不执行。版本包 `lanshang-labs-ui-0.2.9-ef5ca0e5a0c1.tgz` 的 SHA-256 为 `ef5ca0e5a0c1dea7c20358bd9a88a6c6cbdd278eacfe31cd2161be216f67c31e`。线上 0.2.8 原包与 Registry 原字节归档；消费者升级仅在独立新样例中调整渲染，原始提示词/说明、旧包和审核反馈保留，正式导出不动。
+0.2.9 正式提供 `Markdown`，包含 CommonMark、GFM、共享代码与图片展示，以及固定 KaTeX 0.19.0 的公式运行文件、本地字体和完整许可。`images="local"` 可限制离线样例只加载相对/当前源路径图片；原始 HTML 不执行。版本包 `lanshang-labs-ui-0.2.9-d256db9dac9b.tgz` 的 SHA-256 为 `d256db9dac9bf39b4617b8bca0116ee0f907037ef3c12f991cad2298f815ac4d`。线上 0.2.8 原包与 Registry 原字节归档；消费者升级仅在独立新样例中调整渲染，原始提示词/说明、旧包和审核反馈保留，正式导出不动。

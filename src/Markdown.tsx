@@ -26,6 +26,13 @@ function textContent(node:ElementContent):string{return node.type==='text'?node.
 
 const languages:Record<string,SourceCodeBlockProps['language']>={js:'javascript',javascript:'javascript',ts:'typescript',typescript:'typescript',jsx:'javascript',tsx:'tsx',json:'json',css:'css',sh:'bash',shell:'bash',bash:'bash',text:'text',txt:'text',plaintext:'text'};
 function hasImage(node:ElementContent):boolean{return node.type==='element'&&(node.tagName==='img'||node.children.some(hasImage));}
+function isLocalImage(src:string):boolean {
+ // Browsers normalize backslashes and ASCII controls before resolving a URL.
+ const normalized=src.replace(/[\u0000-\u0020\u007f]/g,'').split('\\').join('/');
+ if(/^(?:[a-z][\w+.-]*:|\/\/)/i.test(normalized))return false;
+ try{return new URL(normalized,'https://markdown.invalid/').origin==='https://markdown.invalid';}catch{return false;}
+}
+
 
 /** CommonMark + GFM with shared Lanshang code and image presentation. */
 export function Markdown({children,size,math=true,codePreviewLines=12,images='all',onImagePreview,className='',...props}:MarkdownProps){
@@ -46,7 +53,7 @@ export function Markdown({children,size,math=true,codePreviewLines=12,images='al
    ?<div className="ls-markdown-paragraph">{content}</div>:<p {...rest}>{content}</p>,
   img:({src,alt='',title})=>{
    const linked=useContext(LinkedImageContext);
-   if(images==='none'||images==='local'&&src&&/^(?:[a-z][\w+.-]*:|\/\/)/i.test(src.trim()))return <span className="ls-markdown-missing-image" role="img" aria-label={`${alt||'图片'}，未加载`}>{alt||'图片'}（未加载）</span>;
+   if(images==='none'||images==='local'&&src&&!isLocalImage(src))return <span className="ls-markdown-missing-image" role="img" aria-label={`${alt||'图片'}，未加载`}>{alt||'图片'}（未加载）</span>;
    if(!src)return <span className="ls-markdown-missing-image">{alt||'未提供图片'}</span>;
    const image={src,alt,title};
    return <ImageCard {...image} onPreview={onImagePreview&&!linked?()=>onImagePreview(image):undefined}/>;

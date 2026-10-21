@@ -86,3 +86,13 @@ it('can keep offline documents from requesting external or any image resources',
  expect(screen.getByRole('img',{name:'远程，未加载'})).toBeTruthy();
  view.rerender(<Markdown images="none">{text}</Markdown>);expect(document.querySelector('img')).toBeNull();
 });
+
+it('only creates locally resolved images after browser path normalization in offline mode',()=>{
+ const slash=String.fromCharCode(92);
+ const variants=['//example.test/a.png',slash.repeat(4)+'example.test/a.png','/'+slash.repeat(2)+'example.test/a.png','https://example.test/a.png'];
+ render(<Markdown images="local">{variants.map((url,index)=>`![外链${index}](<${url}>)`).join('\n\n')}</Markdown>);
+ for(const image of document.querySelectorAll('img'))expect(new URL(image.getAttribute('src')!, 'https://local.test/').origin).toBe('https://local.test');
+ expect(screen.getByRole('img',{name:'外链0，未加载'})).toBeTruthy();
+ expect(screen.getByRole('img',{name:'外链3，未加载'})).toBeTruthy();
+ expect(screen.getAllByRole('img')).toHaveLength(4);
+});
