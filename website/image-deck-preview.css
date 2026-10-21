@@ -1,0 +1,5 @@
+.docs-deck-intro{display:flex;flex-direction:column;gap:8px}
+.docs-deck-eyebrow{font-size:10px;letter-spacing:.12em;color:var(--ui-secondary)}
+.docs-deck-intro h3{font-size:20px;line-height:1.5;font-weight:600;letter-spacing:-.035em;margin:0}
+.docs-deck-intro p{font-size:13px;line-height:1.7;color:var(--ui-secondary);margin:0}
+.docs-deck-original{display:block;max-width:100%;max-height:65vh;margin:auto;border-radius:10px}

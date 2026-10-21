@@ -32,6 +32,8 @@
 
 @import "./workspace-layout.css";
 @import "./infinite-canvas.css";
+@import "./image-card.css";
+@import "./image-deck.css";
 
 @import "./control-group.css";
 

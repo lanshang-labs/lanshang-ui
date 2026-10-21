@@ -1,0 +1,6 @@
+.docs-image-card-heading{display:flex;flex-direction:column;gap:8px}
+.docs-image-card-heading>span{font-size:10px;letter-spacing:.25em;color:var(--ui-secondary)}
+.docs-image-card-heading h3{margin:0;font-size:20px;font-weight:600;line-height:1.5;letter-spacing:-.03em}
+.docs-image-card-heading p{margin:0;font-size:13px;line-height:1.7;color:var(--ui-secondary)}
+.docs-image-card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));align-items:start;gap:20px;max-width:680px;width:100%}
+.docs-image-card-original{display:block;width:100%;height:auto;max-height:70vh;object-fit:contain;border-radius:10px}

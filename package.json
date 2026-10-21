@@ -1,6 +1,6 @@
 {
   "name": "@lanshang-labs/ui",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "Lanshang UI: compact interfaces built on Ant Design, Beautiful UI and Iconoir",
   "type": "module",
   "license": "MIT",

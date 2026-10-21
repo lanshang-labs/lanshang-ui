@@ -1,0 +1,24 @@
+.ls-image-card,.ls-image-card *{box-sizing:border-box}
+.ls-image-card{position:relative;display:flex;flex-direction:column;min-width:0;width:100%;margin:0;padding:6px 6px 0;border:1px solid var(--ui-line);border-radius:14px;background:var(--ui-surface);color:var(--ui-text);box-shadow:var(--ls-surface-shadow);font-family:var(--ds-font);font-size:13px;transition:border-color var(--ls-motion-state,150ms) ease}
+.ls-image-card[data-caption=false]{padding-bottom:6px}
+.ls-image-card-media{position:relative;min-width:0;min-height:0;overflow:hidden;border-radius:9px;background:var(--ui-surface)}
+.ls-image-card-media img{display:block;width:100%;height:auto;user-select:none}
+.ls-image-card-media[data-fixed-aspect=true] img{position:absolute;inset:0;width:100%;height:100%}
+.ls-image-card-caption{min-width:0;padding:0 4px}
+.ls-image-card-caption-line{display:flex;align-items:center;justify-content:space-between;gap:8px;height:29px;min-width:0;font-size:12px;font-weight:500}
+.ls-image-card-title{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ls-image-card-index{flex-shrink:0;color:var(--ui-secondary);font-size:10px;font-weight:400;letter-spacing:.08em;font-variant-numeric:tabular-nums}
+.ls-image-card-description{padding:0 0 8px;font-size:12px;line-height:1.6;color:var(--ui-secondary);overflow-wrap:anywhere}
+.ls-image-card-action{position:absolute;inset:0;appearance:none;margin:0;padding:0;border:0;border-radius:14px;background:transparent;color:inherit;font:inherit;cursor:zoom-in;-webkit-tap-highlight-color:transparent}
+.ls-image-card-action:focus-visible{outline:2px solid var(--ui-accent);outline-offset:3px}
+.ls-image-card-action:disabled{cursor:default}
+.ls-image-card-preview-hint{position:absolute;right:12px;top:12px;display:grid;place-items:center;width:32px;height:32px;border:1px solid var(--ui-line);border-radius:10px;background:var(--ui-surface);color:var(--ui-text);box-shadow:var(--ls-surface-shadow);opacity:0;translate:0 3px;transition:opacity var(--ls-motion-enter,180ms) ease,translate var(--ls-motion-enter,180ms) var(--ls-ease-standard)}
+.ls-image-card[data-preview=true]:hover{border-color:var(--ui-line-strong)}
+.ls-image-card[data-preview=true]:hover .ls-image-card-preview-hint,.ls-image-card-action:focus-visible .ls-image-card-preview-hint{opacity:1;translate:0 0}
+.ls-image-card-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:120px;padding:16px;color:var(--ui-secondary);font-size:12px;text-align:center;background:var(--ui-canvas)}
+.ls-image-card-media[data-fixed-aspect=true] .ls-image-card-placeholder{height:100%;min-height:0}
+.ls-image-card-retry{position:relative;z-index:2;pointer-events:auto}
+@media(hover:none){.ls-image-card[data-preview=true] .ls-image-card-preview-hint{opacity:1;translate:none}}
+@media(prefers-reduced-motion:reduce){.ls-image-card,.ls-image-card *{transition:none!important;animation:none!important}}
+[data-ls-motion=reduce] .ls-image-card,[data-ls-motion=reduce] .ls-image-card *{transition:none!important;animation:none!important}
+@media(forced-colors:active){.ls-image-card{border:1px solid CanvasText;box-shadow:none}.ls-image-card-action:focus-visible{outline-color:Highlight}}

@@ -71,6 +71,10 @@ export {WorkspaceHeader} from './WorkspaceHeader.js';
 
 export * from "./WorkspaceLayout.js";
 export {InfiniteCanvas} from './InfiniteCanvas.js';
+export {ImageDeck} from './ImageDeck.js';
+export {ImageCard} from './ImageCard.js';
+export type {ImageCardProps} from './ImageCard.js';
+export type {ImageDeckProps,ImageDeckItem} from './ImageDeck.js';
 export type {InfiniteCanvasProps,InfiniteCanvasRef,CanvasChangeDetails,CanvasNodeRenderContext,CanvasDragHandleProps} from './InfiniteCanvas.js';
 export {arrangeCanvasNodes,fitCanvasViewport,zoomCanvasAt,getCanvasBounds} from './canvas-geometry.js';
 export type {CanvasNode,CanvasViewport,CanvasSize,CanvasPoint,CanvasScaleLimits,CanvasFitOptions,CanvasArrangeOptions} from './canvas-geometry.js';

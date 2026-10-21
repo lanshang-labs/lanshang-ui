@@ -140,3 +140,23 @@ export function Board() {
 ```
 
 移动柄透传 `dragHandleProps`；按钮、输入和链接保留自身行为，滚动面板或图片预览区域使用 `data-canvas-interactive`。`ref<InfiniteCanvasRef>` 提供 fitView、zoomIn、zoomOut、resetView、arrange、focus、getViewportSize。`arrange` 仅提议节点位置；应用接受后可调用 fitView，或组合导出的 `arrangeCanvasNodes`、`fitCanvasViewport` 同步更新节点和视口。完整 API 和可运行示例见[无限画布文档](https://lanshang-labs.github.io/lanshang-ui/#/components/infinite-canvas)。
+
+
+## 图片卡片与叠卡（0.2.8）
+
+`ImageCard` 与 `ImageDeck` 共用纸片画框、内嵌标题和预览入口。单图默认保留自然比例与完整构图；叠卡可通过滚轮或方向键切换，点击后展开为自适应网格，Escape 收起。触屏可使用上一张、下一张与展开按钮。浅暗主题不改变图片颜色，减少动态效果时直接显示目标状态。
+
+```tsx
+import { ImageCard, ImageDeck } from '@lanshang-labs/ui';
+
+const images = [
+  { id: 'front', src: '/images/front.jpg', alt: '正面形态', title: '正面' },
+  { id: 'side', src: '/images/side.jpg', alt: '侧面形态', title: '侧面' },
+];
+
+<ImageCard src={images[0].src} alt={images[0].alt}
+  title="形态参考" description="按原始比例完整展示" />
+<ImageDeck items={images} aria-label="形态参考" objectFit="contain" />
+```
+
+原图、资源权限与审核反馈由应用持有。`ImageCard.onPreview` 与 `ImageDeck.onImageClick` 将打开原图或详情的动作交给应用，不自动导航。缩略图可通过 `fallbackSrc` 回退原图；再次失败显示可重新加载的占位。`activeId` / `expanded` 可受控，回调只提议更新，父组件接受后才改变。完整属性与交互示例见[图片卡片](https://lanshang-labs.github.io/lanshang-ui/#/components/image-card)和[图片叠卡](https://lanshang-labs.github.io/lanshang-ui/#/components/image-deck)。
