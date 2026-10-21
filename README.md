@@ -171,3 +171,7 @@ import '@lanshang-labs/ui/styles.css';
 ```
 
 支持 CommonMark、GFM 表格/任务列表/自动链接/删除线/脚注，以及行内与块级数学公式。代码复用 SourceCodeBlock，图片复用 ImageCard；大小继承 Provider，表格与公式在窄容器内滚动。KaTeX 字体随包提供，无需 CDN。原始 HTML 不执行；这不是编辑器、MDX 或 Mermaid 执行环境。`math={false}` 可将 `$` 作为普通文本，`onImagePreview` 将图片预览交给应用。自 0.2.9 起随正式版本包提供。离线资料可用 `images="local"` 只加载相对路径图片；`images="none"` 不创建图片元素。公式运行代码和完整第三方许可随包固定，不依赖消费者的 overrides。
+
+### 0.2.10 阅读兼容修正
+
+列表标记由组件恢复，不随宿主的菜单/列表重置样式消失；任务列表仍保持只读复选框。`breaks` 默认 false，提示词可设为 true 保留单换行；`links="text"` 只展示链接标签，适合不应导航到业务标识的提示词。说明文档默认保留 CommonMark 软换行与正常链接导航。经安全过滤后为空的链接显示为普通文字。这些设置只改变阅读呈现，不改写 children 原字符串。

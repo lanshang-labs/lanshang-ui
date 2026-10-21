@@ -43,3 +43,11 @@
 @media(forced-colors:active){.ls-markdown :is(blockquote,.ls-markdown-table-scroll){border-color:CanvasText}.ls-markdown a{color:LinkText}.ls-markdown :is(a,.ls-markdown-table-scroll):focus-visible{outline-color:Highlight}}
 
 .ls-markdown [align=center]{text-align:center}.ls-markdown [align=right]{text-align:right}.ls-markdown [align=left]{text-align:left}
+
+/* Own list markers even when the host resets list-style for application menus. */
+.ls-markdown ul.ls-markdown-list{list-style-type:disc;list-style-position:outside}
+.ls-markdown ol.ls-markdown-list{list-style-type:decimal;list-style-position:outside}
+.ls-markdown :where(ul) ul.ls-markdown-list{list-style-type:circle}
+.ls-markdown :where(ul ul) ul.ls-markdown-list{list-style-type:square}
+.ls-markdown .ls-markdown-list-item{display:list-item;list-style-type:inherit}
+.ls-markdown ul.ls-markdown-list.contains-task-list{list-style-type:none}

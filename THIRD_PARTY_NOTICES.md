@@ -10,4 +10,4 @@ Inter and Noto Sans SC variable fonts are self-hosted via Fontsource. Both retai
 
 ## Markdown rendering
 
-Markdown consumes react-markdown and remark-gfm (MIT) as runtime dependencies. Its math module bundles remark-math, rehype-katex and KaTeX 0.19.0 with their dependencies, keeping the verified engine independent of consumer dependency resolution. Full bundled notices, version inventory, unchanged KaTeX CSS, local fonts and license are included in dist/math. The documentation license bundle includes these projects.
+Markdown consumes react-markdown, remark-gfm and remark-breaks (MIT) as runtime dependencies. Its math module bundles remark-math, rehype-katex and KaTeX 0.19.0 with their dependencies, keeping the verified engine independent of consumer dependency resolution. Full bundled notices, version inventory, unchanged KaTeX CSS, local fonts and license are included in dist/math. The documentation license bundle includes these projects.

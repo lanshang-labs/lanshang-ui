@@ -50,7 +50,7 @@ it('uses natural-ratio ImageCard and lets the application open a preview',()=>{
 it('ignores executable HTML and removes unsafe links and image URLs',()=>{
  render(<Markdown>{'<script>window.attacked=true</script>\n\n<img src="x" onerror="alert(1)">\n\n[危险](javascript:alert%281%29)\n\n![危险图](javascript:alert%281%29)'}</Markdown>);
  expect(document.querySelector('script')).toBeNull();expect(document.querySelector('[onerror]')).toBeNull();
- expect(screen.getByText('危险').getAttribute('href')).toBe('');expect(document.querySelector('img')).toBeNull();
+ expect(screen.getByText('危险').closest('a')).toBeNull();expect(document.querySelector('img')).toBeNull();
 });
 it('renders inline and block math, rejects trusted HTML commands and can disable the extension',()=>{
  const view=render(<Markdown>{'公式 $E=mc^2$\n\n$$\n\\frac{1}{n}\\sum x_i\n$$\n\n$\\href{javascript:alert(1)}{bad}$'}</Markdown>);
@@ -95,4 +95,21 @@ it('only creates locally resolved images after browser path normalization in off
  expect(screen.getByRole('img',{name:'外链0，未加载'})).toBeTruthy();
  expect(screen.getByRole('img',{name:'外链3，未加载'})).toBeTruthy();
  expect(screen.getAllByRole('img')).toHaveLength(4);
+});
+
+it('does not turn unsupported prompt identifier protocols into empty navigation links',()=>{
+ render(<Markdown>{'参考 <realform:example:form-1>；[其他](unsupported:record-2)'}</Markdown>);
+ expect(screen.queryByRole('link')).toBeNull();expect(screen.getByText(/realform:example:form-1/)).toBeTruthy();
+});
+it('can preserve prompt soft breaks without doubling hard breaks or changing fenced code',()=>{
+ render(<Markdown breaks>{'镜头组：1\n总时长：5.5s  \n角色：示例\n场景：山谷\n\n```text\nline one\nline two\n```'}</Markdown>);
+ expect(document.querySelectorAll('p br')).toHaveLength(3);
+ expect(document.querySelector('.ls-code-block')?.textContent).toContain('line one');
+ expect(document.querySelector('.ls-code-block')?.textContent).toContain('line two');
+});
+
+it('can show business prompt link labels as plain text while documents keep normal navigation',()=>{
+ const source='参考 real[form:sample:1](character) 和 [文档](./guide.md)';
+ const view=render(<Markdown links="text">{source}</Markdown>);expect(screen.queryByRole('link')).toBeNull();expect(screen.getByText(/form:sample:1/)).toBeTruthy();
+ view.rerender(<Markdown>{source}</Markdown>);expect(screen.getAllByRole('link')).toHaveLength(2);expect(screen.getByRole('link',{name:'文档'}).getAttribute('href')).toBe('./guide.md');
 });

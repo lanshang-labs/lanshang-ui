@@ -34,7 +34,7 @@ export function MarkdownPreview(){
   <SegmentedControl aria-label="展示宽度" options={['宽容器','窄容器']} value={width} onChange={value=>setWidth(String(value))} style={{alignSelf:'flex-start'}}/>
   <div style={{width:'100%',maxWidth:width==='窄容器'?320:undefined,minWidth:0}}>
   <TabStrip defaultActiveKey="prompt" items={[
-   {key:'prompt',label:'提示词',children:<Markdown aria-label="准备包提示词">{prompt}</Markdown>},
+   {key:'prompt',label:'提示词',children:<Markdown breaks links="text" aria-label="准备包提示词">{prompt}</Markdown>},
    {key:'document',label:'完整语法',children:<Markdown aria-label="Markdown 完整语法" onImagePreview={setPreview}>{document.replace('./markdown-landscape.svg',landscapeUrl)}</Markdown>},
   ]}/>
   </div>

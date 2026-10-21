@@ -2,6 +2,7 @@ import {createContext,useContext,useId,useMemo,useRef,type HTMLAttributes} from 
 import {ConfigProvider} from 'antd';
 import ReactMarkdown,{type Components} from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import remarkBreaks from 'remark-breaks';
 import {remarkMath,rehypeKatex} from './markdown-math.js';
 import type {ElementContent} from 'hast';
 import {ImageCard} from './ImageCard.js';
@@ -15,6 +16,10 @@ export interface MarkdownProps extends Omit<HTMLAttributes<HTMLDivElement>,'chil
  size?:ControlSize;
  /** Enable inline $…$ and block $$…$$ formulas. Default true. */
  math?:boolean;
+ /** Preserve paragraph soft line breaks, for prompts and message-like documents. Default false. */
+ breaks?:boolean;
+ /** Render link labels without navigation for prompt-like content. Default navigate. */
+ links?:'navigate'|'text';
  codePreviewLines?:number;
  /** Local accepts only relative/current-origin paths; none does not create image elements. */
  images?:'all'|'local'|'none';
@@ -35,7 +40,7 @@ function isLocalImage(src:string):boolean {
 
 
 /** CommonMark + GFM with shared Lanshang code and image presentation. */
-export function Markdown({children,size,math=true,codePreviewLines=12,images='all',onImagePreview,className='',...props}:MarkdownProps){
+export function Markdown({children,size,math=true,breaks=false,links='navigate',codePreviewLines=12,images='all',onImagePreview,className='',...props}:MarkdownProps){
  const {componentSize}=ConfigProvider.useConfig();
  const root=useRef<HTMLDivElement>(null),id=useId();
  const prefix=`ls-md-${id.replace(/[^a-zA-Z0-9_-]/g,'')}-`;
@@ -59,6 +64,7 @@ export function Markdown({children,size,math=true,codePreviewLines=12,images='al
    return <ImageCard {...image} onPreview={onImagePreview&&!linked?()=>onImagePreview(image):undefined}/>;
   },
   a:({node:_,href,children:content,...rest})=>{
+   if(!href||links==='text')return <>{content}</>;
    const external=/^https?:\/\//i.test(href??'')||href?.startsWith('//');
    return <LinkedImageContext.Provider value={true}><a {...rest} aria-describedby={rest['aria-describedby']==='footnote-label'?`${prefix}footnote-label`:rest['aria-describedby']} href={href} target={external?'_blank':undefined} rel={external?'noopener noreferrer':undefined} onClick={event=>{
     if(!href?.startsWith('#')||event.button!==0||event.metaKey||event.ctrlKey||event.altKey||event.shiftKey)return;
@@ -67,11 +73,13 @@ export function Markdown({children,size,math=true,codePreviewLines=12,images='al
     if(anchor){event.preventDefault();anchor.scrollIntoView?.({block:'nearest'});anchor.tabIndex=-1;anchor.focus({preventScroll:true});}
    }}>{content}</a></LinkedImageContext.Provider>;
   },
-  li:({node,children:content,...rest})=><TaskLabelContext.Provider value={node?.children.map(textContent).join(' ').trim()||'任务项'}><li {...rest}>{content}</li></TaskLabelContext.Provider>,
+  ul:({node:_,className:listClass='',...rest})=><ul {...rest} className={`ls-markdown-list ${listClass}`}/>,
+  ol:({node:_,className:listClass='',...rest})=><ol {...rest} className={`ls-markdown-list ${listClass}`}/>,
+  li:({node,children:content,className:itemClass='',...rest})=><TaskLabelContext.Provider value={node?.children.map(textContent).join(' ').trim()||'任务项'}><li {...rest} className={`ls-markdown-list-item ${itemClass}`}>{content}</li></TaskLabelContext.Provider>,
   input:({node:_,...rest})=>{const label=useContext(TaskLabelContext);return <input {...rest} aria-label={label}/>;},
   table:({node:_,children:content,...rest})=><div className="ls-markdown-table-scroll" role="region" aria-label="Markdown 表格" tabIndex={0}><table {...rest}>{content}</table></div>,
- }),[codePreviewLines,onImagePreview,images,prefix]);
+ }),[codePreviewLines,onImagePreview,images,links,prefix]);
  return <div {...props} ref={root} className={`ls-markdown ${className}`} data-ls-size={size??componentSize??'middle'}>
-  <ReactMarkdown remarkPlugins={math?[remarkGfm,remarkMath]:[remarkGfm]} rehypePlugins={math?[[rehypeKatex,{trust:false,strict:'ignore',maxSize:10,maxExpand:1000}]]:[]} remarkRehypeOptions={{clobberPrefix:prefix,footnoteLabel:'注释',footnoteBackLabel:'返回引用'}} skipHtml components={components}>{children}</ReactMarkdown>
+  <ReactMarkdown remarkPlugins={[remarkGfm,...(math?[remarkMath]:[]),...(breaks?[remarkBreaks]:[])]} rehypePlugins={math?[[rehypeKatex,{trust:false,strict:'ignore',maxSize:10,maxExpand:1000}]]:[]} remarkRehypeOptions={{clobberPrefix:prefix,footnoteLabel:'注释',footnoteBackLabel:'返回引用'}} skipHtml components={components}>{children}</ReactMarkdown>
  </div>;
 }
