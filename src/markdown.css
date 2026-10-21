@@ -1,0 +1,45 @@
+.ls-markdown{min-width:0;max-width:100%;color:var(--ui-text);font:13px/1.85 var(--ds-font);overflow-wrap:anywhere;--ls-markdown-gap:12px}
+.ls-markdown[data-ls-size=small]{font-size:12px;--ls-markdown-gap:10px}
+.ls-markdown[data-ls-size=large]{font-size:14px;--ls-markdown-gap:16px}
+.ls-markdown> :first-child{margin-top:0}
+.ls-markdown> :last-child{margin-bottom:0}
+.ls-markdown :is(p,.ls-markdown-paragraph,ul,ol,blockquote,.ls-code-block,.ls-markdown-table-scroll,.katex-display){margin-block:var(--ls-markdown-gap)}
+.ls-markdown :is(h1,h2,h3,h4,h5,h6){margin:1.5em 0 .55em;color:var(--ui-text);font-weight:600;line-height:1.5;letter-spacing:-.025em;scroll-margin-top:80px}
+.ls-markdown h1{font-size:1.85em}.ls-markdown h2{font-size:1.5em}.ls-markdown h3{font-size:1.25em}.ls-markdown h4{font-size:1.1em}.ls-markdown :is(h5,h6){font-size:1em}
+.ls-markdown :is(ul,ol){padding-inline-start:1.65em}
+.ls-markdown li{padding-inline-start:.15em;margin-block:.25em}
+.ls-markdown li> :is(ul,ol){margin-block:.3em}
+.ls-markdown li>p{margin-block:.45em}
+.ls-markdown li::marker{color:var(--ui-secondary)}
+.ls-markdown strong{font-weight:600}.ls-markdown del{color:var(--ui-secondary)}
+.ls-markdown a{color:var(--ui-link-text);text-decoration:underline;text-underline-offset:3px;text-decoration-color:color-mix(in srgb,currentColor 35%,transparent)}
+.ls-markdown a:hover{text-decoration-color:currentColor}
+.ls-markdown :is(a,.ls-markdown-table-scroll):focus-visible{outline:2px solid var(--ui-accent);outline-offset:3px;border-radius:3px}
+.ls-markdown blockquote{padding:8px 14px;margin-inline:0;border-inline-start:3px solid var(--ui-line-strong);border-radius:0 8px 8px 0;background:var(--ui-canvas);color:var(--ui-secondary)}
+.ls-markdown blockquote> :first-child{margin-top:0}.ls-markdown blockquote> :last-child{margin-bottom:0}
+.ls-markdown hr{border:0;border-top:1px solid var(--ui-line);margin-block:24px}
+.ls-markdown :not(pre)>code{padding:2px 5px;border:1px solid var(--ui-line);border-radius:5px;background:var(--ui-canvas);font:.92em/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;box-decoration-break:clone}
+.ls-markdown .ls-code-block code{padding:0;border:0;border-radius:0;background:none;font:inherit}
+.ls-markdown .ls-code-block pre{margin:0}
+.ls-markdown-table-scroll{max-width:100%;overflow:auto;border:1px solid var(--ui-line);border-radius:var(--ls-control-middle-radius,10px)}
+.ls-markdown table{width:100%;border-collapse:collapse;border-spacing:0;font-size:inherit;line-height:1.65}
+.ls-markdown :is(th,td){min-width:100px;padding:7px 10px;border-bottom:1px solid var(--ui-line);text-align:start;vertical-align:top}
+.ls-markdown th{background:var(--ui-canvas);font-weight:500;color:var(--ui-secondary)}
+.ls-markdown tr:last-child td{border-bottom:0}
+.ls-markdown[data-ls-size=small] :is(th,td){padding:5px 8px}
+.ls-markdown[data-ls-size=large] :is(th,td){padding:9px 12px}
+.ls-markdown .contains-task-list{list-style:none;padding-inline-start:.25em}
+.ls-markdown .task-list-item{position:relative;padding-inline-start:1.7em}
+.ls-markdown .task-list-item input{position:absolute;inset-inline-start:0;top:.4em;width:1em;height:1em;margin:0;accent-color:var(--ui-text);opacity:1}
+.ls-markdown .ls-image-card{display:inline-flex;vertical-align:top;max-width:640px;margin-block:8px}
+.ls-markdown .ls-image-card :is(figcaption,.ls-image-card-caption-line){margin:0}
+.ls-markdown .ls-image-card-title{overflow:hidden;white-space:nowrap}
+.ls-markdown .ls-markdown-missing-image{color:var(--ui-secondary)}
+.ls-markdown .footnotes{margin-top:24px;padding-top:12px;border-top:1px solid var(--ui-line);font-size:.92em;color:var(--ui-secondary)}
+.ls-markdown .footnotes>h2{font-size:1em;margin:0 0 8px}
+.ls-markdown .katex-display{max-width:100%;overflow:auto;padding:4px 0}
+.ls-markdown .katex{font-size:1.1em;overflow-wrap:normal}
+@media(max-width:480px){.ls-markdown :is(th,td){min-width:85px}.ls-markdown blockquote{padding-inline:10px}}
+@media(forced-colors:active){.ls-markdown :is(blockquote,.ls-markdown-table-scroll){border-color:CanvasText}.ls-markdown a{color:LinkText}.ls-markdown :is(a,.ls-markdown-table-scroll):focus-visible{outline-color:Highlight}}
+
+.ls-markdown [align=center]{text-align:center}.ls-markdown [align=right]{text-align:right}.ls-markdown [align=left]{text-align:left}

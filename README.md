@@ -160,3 +160,14 @@ const images = [
 ```
 
 原图、资源权限与审核反馈由应用持有。`ImageCard.onPreview` 与 `ImageDeck.onImageClick` 将打开原图或详情的动作交给应用，不自动导航。缩略图可通过 `fallbackSrc` 回退原图；再次失败显示可重新加载的占位。`activeId` / `expanded` 可受控，回调只提议更新，父组件接受后才改变。完整属性与交互示例见[图片卡片](https://lanshang-labs.github.io/lanshang-ui/#/components/image-card)和[图片叠卡](https://lanshang-labs.github.io/lanshang-ui/#/components/image-deck)。
+
+## Markdown（0.2.9）
+
+```tsx
+import {Markdown} from '@lanshang-labs/ui';
+import '@lanshang-labs/ui/styles.css';
+
+<Markdown>{promptText}</Markdown>
+```
+
+支持 CommonMark、GFM 表格/任务列表/自动链接/删除线/脚注，以及行内与块级数学公式。代码复用 SourceCodeBlock，图片复用 ImageCard；大小继承 Provider，表格与公式在窄容器内滚动。KaTeX 字体随包提供，无需 CDN。原始 HTML 不执行；这不是编辑器、MDX 或 Mermaid 执行环境。`math={false}` 可将 `$` 作为普通文本，`onImagePreview` 将图片预览交给应用。自 0.2.9 起随正式版本包提供。离线资料可用 `images="local"` 只加载相对路径图片；`images="none"` 不创建图片元素。公式运行代码和完整第三方许可随包固定，不依赖消费者的 overrides。

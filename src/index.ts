@@ -97,3 +97,6 @@ export type {InputRef as TextInputRef,TableProps as DataTableProps,RefSelectProp
 export {default as zhCNDatePickerLocale} from 'antd/es/date-picker/locale/zh_CN.js';
 export {default as zhCNLocale} from 'antd/es/locale/zh_CN.js';
 export type {DataNode as ResourceTreeNode} from 'antd/es/tree';
+
+export {Markdown} from './Markdown.js';
+export type {MarkdownProps,MarkdownImage} from './Markdown.js';

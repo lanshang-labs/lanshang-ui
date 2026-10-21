@@ -48,3 +48,6 @@
 @import "./checkbox.css";
 @import "./radio-switch.css";
 @import "./number-stepper.css";
+
+@import "./math/katex.css";
+@import "./markdown.css";

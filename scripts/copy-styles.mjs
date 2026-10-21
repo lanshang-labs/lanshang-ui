@@ -16,3 +16,10 @@ for (const name of ['inter', 'noto-sans-sc']) {
   fontCss += css.replaceAll('./files/', `./fonts/${name}/`);
 }
 await writeFile('dist/fonts.css', fontCss);
+
+// KaTeX uses local fonts so Markdown formulas also work without a CDN.
+await mkdir('dist/math/fonts',{recursive:true});
+await copyFile('node_modules/katex/dist/katex.min.css','dist/math/katex.css');
+await copyFile('node_modules/katex/LICENSE','dist/math/LICENSE');
+for(const file of await readdir('node_modules/katex/dist/fonts'))
+ await copyFile(`node_modules/katex/dist/fonts/${file}`,`dist/math/fonts/${file}`);
