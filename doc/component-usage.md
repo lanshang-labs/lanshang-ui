@@ -37,3 +37,8 @@
 ## 验证边界
 
 展示页仅用本地内存样例，无网络请求。表单提交、删除确认、重试都明确展示本地反馈；不代表真实权限、上传、部署或网络恢复已验收。公共接口或 token 变化需增加包版本并验证消费者；仅文档和展示页变化无需重新发包。
+
+
+## 统计与图表（0.2.11）
+
+基础入口提供 StatisticCard / ChartCard / RankingBarList / LoadingContainer；绘图从独立 /charts 入口导入，应用显式安装可选 @ant-design/plots@2.6.8。只有图表消费者加载引擎，普通 UI 不导入 AntV。详见[接入与范围](statistics-and-charts.md)。

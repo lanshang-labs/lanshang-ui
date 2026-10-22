@@ -51,3 +51,6 @@
 
 @import "./math/katex.css";
 @import "./markdown.css";
+
+@import './loading-container.css';
+@import './statistics.css';

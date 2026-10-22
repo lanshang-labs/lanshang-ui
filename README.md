@@ -175,3 +175,21 @@ import '@lanshang-labs/ui/styles.css';
 ### 0.2.10 阅读兼容修正
 
 列表标记由组件恢复，不随宿主的菜单/列表重置样式消失；任务列表仍保持只读复选框。`breaks` 默认 false，提示词可设为 true 保留单换行；`links="text"` 只展示链接标签，适合不应导航到业务标识的提示词。说明文档默认保留 CommonMark 软换行与正常链接导航。经安全过滤后为空的链接显示为普通文字。这些设置只改变阅读呈现，不改写 children 原字符串。
+
+## 统计与图表（0.2.11）
+
+基础入口新增 `StatisticCard`、`RankingBarList`、`ChartCard` 及共用的 `LoadingContainer`。折线、面积、柱形、条形、环图、迷你趋势从独立 `@lanshang-labs/ui/charts` 导入；只用基础统计不安装绘图引擎。绘图项目显式安装可选 peer `@ant-design/plots@2.6.8`，仍使用根 LanshangProvider 和一次 styles.css 导入。
+
+```tsx
+import {StatisticCard, ChartCard} from '@lanshang-labs/ui';
+import {LineChart} from '@lanshang-labs/ui/charts';
+import '@lanshang-labs/ui/styles.css';
+
+<StatisticCard label="已完成" value={31} unit="集" />
+<ChartCard title="生产趋势" hasContent={hasResult} loading={pending}
+  error={readError} onRetry={reload}>
+  <LineChart label="生产趋势" data={rows} xField="date" yField="count" />
+</ChartCard>
+```
+
+浅暗主题共用稳定分类色，提供语义摘要和可展开原始数据；零值、成功空结果与失败分别呈现。同一请求驱动的多卡用父级 LoadingContainer 管理成功快照，刷新和失败保留整组旧结果。请求、单位、统计口径及重试策略由应用拥有。多条临近或交叉序列优先折线、分面或筛选，不用多层面积混色比较。详见[统计与图表接入](doc/statistics-and-charts.md)。

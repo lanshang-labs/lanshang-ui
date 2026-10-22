@@ -61,3 +61,6 @@ CI 和 Pages 发布均执行 `npm run test:registry:ci`：启动临时 HTTP Regi
 0.2.9 正式提供 `Markdown`，包含 CommonMark、GFM、共享代码与图片展示，以及固定 KaTeX 0.19.0 的公式运行文件、本地字体和完整许可。`images="local"` 可限制离线样例只加载相对/当前源路径图片；原始 HTML 不执行。版本包 `lanshang-labs-ui-0.2.9-d256db9dac9b.tgz` 的 SHA-256 为 `d256db9dac9bf39b4617b8bca0116ee0f907037ef3c12f991cad2298f815ac4d`。线上 0.2.8 原包与 Registry 原字节归档；消费者升级仅在独立新样例中调整渲染，原始提示词/说明、旧包和审核反馈保留，正式导出不动。
 
 0.2.10 修复 Markdown 在 Beautiful UI 宿主列表重置下的标记缺失，增加可选 `breaks` 与 `links="text"` 展示配置，并把被过滤为空的地址恢复为普通文字。默认标准文档模式与原字符串不变。版本包 `lanshang-labs-ui-0.2.10-96e79498af3d.tgz` 的 SHA-256 为 `96e79498af3d41b1392ad28adedde5c29112df6b7d87419645bded7383299c77`。0.2.9 线上包与 Registry 按原字节归档，旧样例和反馈保留；新样例仅开启提示词展示选项，正式导出不动。
+
+
+0.2.11 正式提供 StatisticCard、ChartCard、RankingBarList、LoadingContainer，以及独立 /charts 入口中的折线、面积、柱形、条形、环图和迷你趋势。版本包 `lanshang-labs-ui-0.2.11-c27403664b2c.tgz` 的 SHA-256 为 `c27403664b2c2a7404d04caade43671a959b83046297e95ef99a51e9f15b6e6e`。绘图使用可选 peer @ant-design/plots，基础统计不加载引擎；原 0.2.10 包与 Registry 已按原始字节归档。用户工作区中的其他未发布改动不包含在此隔离版本中。

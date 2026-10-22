@@ -1,0 +1,10 @@
+.ls-analytics-example{display:grid;gap:16px;width:100%;min-width:0}
+.ls-analytics-toolbar{display:flex;align-items:center;flex-wrap:wrap;gap:12px}
+.ls-analytics-toolbar>.ant-btn{margin-left:auto}
+.ls-analytics-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:stretch}
+.ls-analytics-secondary{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+.ls-analytics-example>.docs-muted{margin:0;line-height:1.7}
+.ls-analytics-content,.ls-analytics-placeholder{display:grid;gap:16px;min-width:0}
+.ls-analytics-boundary[data-variant=page]>.ls-loading-container-stage>.ls-loading-container-body{padding-top:0}
+.ls-analytics-boundary .ls-loading-container-notice[data-visible=true]{padding-bottom:16px}
+@media(max-width:760px){.ls-analytics-metrics{grid-template-columns:1fr}.ls-analytics-secondary{grid-template-columns:1fr}.ls-analytics-toolbar{gap:10px}}

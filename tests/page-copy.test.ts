@@ -26,3 +26,12 @@ it('gives every component page a discoverable API reference',()=>{
  const missing=pages.filter(page=>page.id.startsWith('components/')&&!page.props?.length).map(page=>page.id);
  expect(missing).toEqual([]);
 });
+
+it('publishes chart installation with its optional engine and public source entrypoint',()=>{
+ const page=pages.find(item=>item.id==='components/analytics')!;
+ const markdown=pageMarkdown(page);
+ expect(markdown).not.toContain('该组件尚未发布');
+ expect(markdown).toContain('npm install @ant-design/plots@2.6.8');
+ expect(markdown).toContain("from '@lanshang-labs/ui/charts'");
+ expect(markdown).not.toContain('../dist/charts.js');
+});

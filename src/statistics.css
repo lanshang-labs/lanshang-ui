@@ -1,0 +1,33 @@
+.ls-statistic-card{position:relative;min-width:0;padding:18px 20px;border:1px solid var(--ls-surface-edge,var(--ui-line));border-radius:14px;background:var(--ls-surface-face,var(--ui-surface));box-shadow:var(--ls-surface-shadow);color:var(--ui-text);overflow-wrap:anywhere}
+.ls-statistic-card>h3{margin:0 0 10px;font-size:12px;font-weight:500;color:var(--ui-secondary)}
+.ls-statistic-value{display:flex;align-items:baseline;flex-wrap:wrap;gap:6px;font-variant-numeric:tabular-nums;line-height:1.2}
+.ls-statistic-value>strong{font-size:28px;font-weight:600;letter-spacing:-.04em}
+.ls-statistic-value>span{font-size:12px;color:var(--ui-secondary)}
+.ls-statistic-trend{display:flex;align-items:center;gap:4px;margin-top:10px;font-size:12px;color:var(--ui-secondary)}
+.ls-statistic-trend>svg{flex:none}
+.ls-statistic-trend[data-tone=success]{color:var(--ui-success-text)}
+.ls-statistic-trend[data-tone=warning]{color:var(--ui-warning-text)}
+.ls-statistic-trend[data-tone=error]{color:var(--ui-error-text)}
+.ls-statistic-description,.ls-chart-description{margin:10px 0 0;font-size:12px;line-height:1.6;color:var(--ui-muted)}
+.ls-statistic-visualization{margin-top:12px;min-width:0}
+.ls-chart-description{margin:0 0 16px}
+.ls-chart-footer{margin-top:16px;padding-top:12px;border-top:1px solid var(--ui-line);color:var(--ui-muted);font-size:12px}
+.ls-ranking-bars{display:grid;gap:8px;list-style:none;padding:0;margin:0;min-width:0;font-size:12px}
+.ls-ranking-bars>li{position:relative;isolation:isolate;display:flex;align-items:center;gap:12px;padding:8px 10px;min-height:34px;min-width:0;overflow:hidden;border-radius:6px}
+.ls-ranking-bar-fill{position:absolute;z-index:-1;left:0;top:0;bottom:0;background:var(--ui-selected);border-radius:6px}
+.ls-ranking-bar-label{min-width:0;overflow-wrap:anywhere;color:var(--ui-secondary)}
+.ls-ranking-bar-value{margin-left:auto;flex:none;font-variant-numeric:tabular-nums;color:var(--ui-text)}
+.ls-ranking-bars-empty{color:var(--ui-muted)}
+.ls-chart{position:relative;min-width:0;max-width:100%;font-family:var(--ds-font)}
+.ls-chart-canvas{min-width:0;width:100%}
+.ls-chart-summary{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.ls-chart details{margin-top:8px;font-size:12px;color:var(--ui-secondary)}
+.ls-chart summary{width:max-content;max-width:100%;cursor:pointer;padding:4px 0}
+.ls-chart summary:focus-visible{outline:2px solid var(--ui-accent);outline-offset:2px;border-radius:4px}
+.ls-chart-data-scroll{overflow:auto;max-height:220px;margin-top:8px}
+.ls-chart-data{width:100%;border-collapse:collapse;font-size:12px;text-align:left;font-variant-numeric:tabular-nums}
+.ls-chart-data th,.ls-chart-data td{padding:6px 8px;border-bottom:1px solid var(--ui-line);overflow-wrap:anywhere}
+.ls-chart-data th{font-weight:500;color:var(--ui-secondary);position:sticky;top:0;background:var(--ui-surface)}
+.ls-chart :is(.g2-tooltip,.g2-tooltip-title,.g2-tooltip-list-item){font-family:var(--ds-font)!important;font-size:12px!important;color:var(--ui-text)!important}
+.ls-chart .g2-tooltip{background:var(--ui-surface)!important;border:1px solid var(--ui-line)!important;border-radius:10px!important;box-shadow:var(--ls-overlay-shadow)!important}
+@media(max-width:600px){.ls-statistic-card{padding:14px 16px}.ls-statistic-value>strong{font-size:24px}}

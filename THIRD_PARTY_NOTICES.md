@@ -11,3 +11,7 @@ Inter and Noto Sans SC variable fonts are self-hosted via Fontsource. Both retai
 ## Markdown rendering
 
 Markdown consumes react-markdown, remark-gfm and remark-breaks (MIT) as runtime dependencies. Its math module bundles remark-math, rehype-katex and KaTeX 0.19.0 with their dependencies, keeping the verified engine independent of consumer dependency resolution. Full bundled notices, version inventory, unchanged KaTeX CSS, local fonts and license are included in dist/math. The documentation license bundle includes these projects.
+
+## Optional statistical charts
+
+The optional @lanshang-labs/ui/charts entry consumes @ant-design/plots (MIT), based on AntV G2 and its upstream dependencies. Chart consumers supply this optional peer; the base UI entry does not import it. Upstream licenses remain in their packages. Tremor (https://www.tremor.so/, Apache-2.0 for its open-source repository) was evaluated as a design reference for compact dashboards; no Tremor source, templates or Recharts code is copied or bundled by this implementation.
