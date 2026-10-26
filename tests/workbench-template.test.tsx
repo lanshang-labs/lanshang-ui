@@ -15,15 +15,26 @@ it('keeps trend ranges chronological and consistent with the initial project sna
  expect(deliveryData(7).at(-1)?.date).toBe('10/25');
 });
 
-it('filters the project table and lets the empty state recover',async()=>{
- render(<Workbench/>);
- fireEvent.change(screen.getByRole('textbox',{name:'搜索项目'}),{target:{value:'不存在的项目'}});
- expect(await screen.findByText('没有匹配的项目')).toBeTruthy();
- fireEvent.click(screen.getByRole('button',{name:'重置筛选'}));
- expect(within(screen.getByRole('table')).getByRole('button',{name:'品牌官网重构'})).toBeTruthy();
- fireEvent.click(screen.getByRole('tab',{name:/需关注/}));
- expect(within(screen.getByRole('table')).getByRole('button',{name:'客户服务工作台'})).toBeTruthy();
- expect(within(screen.getByRole('table')).queryByRole('button',{name:'品牌官网重构'})).toBeNull();
+it('recovers the project table after an unmatched search',async()=>{
+ const {container}=render(<Workbench/>);
+ const panel=within(container.querySelector<HTMLElement>('.wb-projects-panel')!);
+ const input=panel.getByRole('textbox',{name:'搜索项目'});
+ fireEvent.change(input,{target:{value:'不存在的项目'}});
+ expect(await panel.findByText('没有匹配的项目')).toBeTruthy();
+ fireEvent.click(panel.getByRole('button',{name:'重置筛选'}));
+ expect((input as HTMLInputElement).value).toBe('');
+ expect(within(panel.getByRole('table')).getByRole('button',{name:'品牌官网重构'})).toBeTruthy();
+});
+
+it('filters project rows through the attention status tab',()=>{
+ const {container}=render(<Workbench/>);
+ const panel=within(container.querySelector<HTMLElement>('.wb-projects-panel')!);
+ const tab=panel.getByRole('tab',{name:/需关注/});
+ fireEvent.click(tab);
+ expect(tab.getAttribute('aria-selected')).toBe('true');
+ const table=within(panel.getByRole('table'));
+ expect(table.getByRole('button',{name:'客户服务工作台'})).toBeTruthy();
+ expect(table.queryByRole('button',{name:'品牌官网重构'})).toBeNull();
 });
 
 it('validates project creation and updates the table and completion state',async()=>{
