@@ -31,6 +31,8 @@
 @import './workspace-header.css';
 
 @import "./workspace-layout.css";
+@import "./workbench-page.css";
+@import './workspace-panels.css';
 @import "./infinite-canvas.css";
 @import "./image-card.css";
 @import "./image-deck.css";
@@ -52,5 +54,8 @@
 @import "./math/katex.css";
 @import "./markdown.css";
 
-@import './loading-container.css';
-@import './statistics.css';
+@import "./loading-container.css";
+
+@import "./statistics.css";
+
+@import "./dock.css";

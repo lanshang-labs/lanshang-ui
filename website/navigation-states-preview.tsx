@@ -29,6 +29,7 @@ export function NavigationStatesPreview() {
     <section><h3>内容页签</h3><Tabs items={items.map(item=>({...item,children:<p>{item.label}内容。悬停和移动焦点不会改变当前内容。</p>}))}/></section>
     <section><h3>卡片页签</h3><Tabs type="card" items={items.map(item=>({...item,children:<p>{item.label}内容。</p>}))}/></section>
     <section><h3>纵向页签</h3><Tabs tabPosition="left" items={items.map(item=>({...item,children:<p>{item.label}内容。</p>}))}/></section>
+    <section><h3>底部页签</h3><Tabs tabPosition="bottom" items={items.map(item=>({...item,children:<p>{item.label}内容。</p>}))}/></section>
     <section><h3>分段选择</h3>
       <Segmented aria-label="显示密度" value={density} onChange={setDensity} options={[{value:'compact',label:'紧凑'},{value:'comfortable',label:'舒适'},{value:'disabled',label:'不可用',disabled:true}]}/>
       <p>显示密度：{density==='compact'?'紧凑':'舒适'}</p>

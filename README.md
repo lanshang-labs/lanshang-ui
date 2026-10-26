@@ -15,6 +15,16 @@ Provider 管理文档级主题变量，单页面使用一个根 Provider。默�
 
 库不包含请求、路由、权限、数据库类型推导或部署状态机。组件接收真实状态，应用负责业务行为。复杂 Table/Form/Tree/Select 继续使用 AntD，可叠加本库主题。CSS 必须显式引入一次。
 
+## Dock 与工作台模板（0.2.12）
+
+通过 `@lanshang-labs/ui/dock` 按需接入，使用方显式安装可选 peer `motion@14.6.0`；基础入口不加载 Motion。支持受控选中、原生链接、动作、禁用、键盘和减少动态效果。通过版本化 Registry 包安装；详见 [Dock接入指南](doc/dock.md)。
+
+## 模板组合实验
+
+现有组件和默认入口继续保留。实验室新增 [ImageCard / ImageDeck 独立接入](doc/media.md)，让模板拥有整体视觉，Ant Design 承担成熟交互，Lanshang 维护特色扩展。`/media` 与 `/media.css` 自 0.2.12 正式提供；可在 ShadcnStore 模板的 Resources 对比原模板与局部玻璃材质。
+
+WorkspaceLayout 的 `variant="dock"` 与 WorkbenchPage 统一工作台和底部 Dock、工具栏、页签、面板材质及滚动边界，详见 [模板接入](doc/workbench.md)。
+
 ## 开发与交付
 
 ```sh
@@ -105,7 +115,7 @@ PageHeader、ContentState、MetadataList 支持根元素的标准 HTML 属性和
 
 默认使用 Inter + Noto Sans SC，字体文件与 OFL 许可证随包分发。`styles.css` 使用相对 URL、`font-display: swap` 和中文 `unicode-range` 分片；加载期间回退到系统字体。
 
-业务可使用 `<LanshangProvider fontFamily="Business Sans, system-ui, sans-serif">` 覆盖 AntD 和公共组件字体；自定义字体资源由业务自行加载。一个文档只使用一个根 Provider，代码区保持等宽字体。新字体方案与覆盖属性尚未发布，当前请从本地源码构建接入。
+业务可使用 `<LanshangProvider fontFamily="Business Sans, system-ui, sans-serif">` 覆盖 AntD 和公共组件字体；自定义字体资源由业务自行加载。一个文档只使用一个根 Provider，代码区保持等宽字体。新字体方案与覆盖属性自 0.2.12 提供。
 
 ### 单按钮主题切换
 

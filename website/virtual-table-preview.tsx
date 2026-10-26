@@ -35,9 +35,9 @@ export function VirtualTablePreview(){
     {title:'负责人',dataIndex:'owner',width:120},
     {title:'标识',dataIndex:'identifier',width:320,render:value=><span className="docs-table-truncate" title={value}>{value}</span>},
     {title:'状态',dataIndex:'active',width:100,render:active=><StatusTag tone={active?'success':'neutral'}>{active?'正常':'未启用'}</StatusTag>},
-    {title:'操作',key:'action',width:100,fixed:pin?'right':undefined,render:(_,row)=><RowActionButton size="small" aria-label={`查看虚拟记录 ${row.id}`} onClick={()=>setDetail(row)}>详情</RowActionButton>},
+    {title:'操作',key:'action',width:100,fixed:pin?'right':undefined,render:(_,row)=><RowActionButton size="small" aria-label={`查看虚拟记录 ${row.id}`} onClick={()=>setDetail(row)} motionIcon="visibility" title="详情"/>},
    ]}/>
-  <div className="docs-demo-gap" aria-live="polite">{detail?<><RowActionButton motionIcon="close" onClick={()=>setDetail(null)}>关闭记录详情</RowActionButton><MetadataList items={[
+  <div className="docs-demo-gap" aria-live="polite">{detail?<><RowActionButton motionIcon="close" onClick={()=>setDetail(null)} aria-label="关闭记录详情" title="关闭记录详情"/><MetadataList items={[
    {key:'name',label:'项目',value:detail.name},{key:'id',label:'完整标识',value:detail.identifier},
   ]}/></>:<span className="docs-muted">长内容使用省略与详情查看；此示例不使用动态展开行，保持滚动行高稳定。</span>}</div>
  </section>;

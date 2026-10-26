@@ -70,6 +70,8 @@ export {Alert} from "./Alert.js";
 export {WorkspaceHeader} from './WorkspaceHeader.js';
 
 export * from "./WorkspaceLayout.js";
+export * from "./WorkbenchPage.js";
+export * from './WorkspacePanels.js';
 export {InfiniteCanvas} from './InfiniteCanvas.js';
 export {ImageDeck} from './ImageDeck.js';
 export {ImageCard} from './ImageCard.js';
@@ -99,9 +101,10 @@ export {default as zhCNLocale} from 'antd/es/locale/zh_CN.js';
 export type {DataNode as ResourceTreeNode} from 'antd/es/tree';
 
 export {Markdown} from './Markdown.js';
-export type {MarkdownProps,MarkdownImage} from './Markdown.js';
+export type {MarkdownProps,MarkdownImage,MarkdownMode} from './Markdown.js';
 
 export {LoadingContainer} from './LoadingContainer.js';
 export type {LoadingContainerProps} from './LoadingContainer.js';
+
 export {StatisticCard,ChartCard,RankingBarList} from './Statistics.js';
 export type {StatisticCardProps,ChartCardProps,RankingBarListProps,RankingBarItem} from './Statistics.js';

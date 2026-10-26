@@ -28,10 +28,10 @@ export function FixedTablePreview(){
     {title:'负责人',dataIndex:'owner',width:100},
     {title:'说明',dataIndex:'description',width:300,render:value=><span className="docs-table-wrap">{value}</span>},
     {title:'标识',dataIndex:'identifier',width:300,render:value=><span className="docs-table-wrap">{value}</span>},
-    {title:'操作',key:'actions',width:100,fixed:pin?'right':undefined,render:(_,row)=><RowActionButton size="small" aria-label={`查看项目 ${row.id} 详情`} onClick={()=>setDetail(row)}>查看详情</RowActionButton>},
+    {title:'操作',key:'actions',width:100,fixed:pin?'right':undefined,render:(_,row)=><RowActionButton size="small" aria-label={`查看项目 ${row.id} 详情`} onClick={()=>setDetail(row)} motionIcon="visibility" title="查看详情"/>},
    ]}/>
-  <div aria-live="polite" className="docs-demo-gap">{detail?<><RowActionButton onClick={()=>setDetail(null)}>收起详情</RowActionButton><MetadataList items={[
+  <div aria-live="polite" className="docs-demo-gap">{detail?<><RowActionButton onClick={()=>setDetail(null)} motionIcon="close" aria-label="收起详情" title="收起详情"/><MetadataList items={[
    {key:'name',label:'项目',value:detail.name},{key:'identifier',label:'完整标识',value:detail.identifier},
-  ]}/></>:<span className="docs-muted">点击操作列的“查看详情”，在表格下方查看完整内容。</span>}</div>
+  ]}/></>:<span className="docs-muted">点击操作列的查看图标，在表格下方查看完整内容。</span>}</div>
  </section>;
 }

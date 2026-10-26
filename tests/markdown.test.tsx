@@ -75,7 +75,7 @@ it('inherits global medium sizing and honors explicit small and large overrides'
 });
 it('retains normal CommonMark soft and hard breaks and safely replaces previous content',()=>{
  const view=render(<Markdown>{'普通\n换行\n\n明确  \n换行'}</Markdown>);expect(document.querySelectorAll('br')).toHaveLength(1);
- view.rerender(<Markdown>{''}</Markdown>);expect(document.querySelector('.ls-markdown')?.textContent).toBe('');
+ view.rerender(<Markdown>{''}</Markdown>);expect(document.querySelector('.ls-markdown-content')?.textContent).toBe('');
  view.rerender(<Markdown>{'## 新内容'}</Markdown>);expect(screen.getByRole('heading',{name:'新内容'})).toBeTruthy();
 });
 

@@ -11,7 +11,7 @@ it('routes website and live example controls through the package',()=>{
   for(const statement of source.statements)if(ts.isImportDeclaration(statement)&&ts.isStringLiteral(statement.moduleSpecifier)){
    const dependency=statement.moduleSpecifier.text;
    if(path.startsWith('website/')&&dependency.startsWith('../src/'))violations.push(`${path}: source import`);
-   if(dependency.startsWith('../dist/')&&!['../dist/index.js','../dist/charts.js','../dist/icons.js','../dist/styles.css'].includes(dependency))violations.push(`${path}: package deep import`);
+   if(dependency.startsWith('../dist/')&&!['../dist/index.js','../dist/charts.js','../dist/icons.js','../dist/styles.css','../dist/dock.js','../dist/dock.css'].includes(dependency))violations.push(`${path}: package deep import`);
    if(dependency==='antd'||dependency.startsWith('antd/'))violations.push(`${path}: upstream control import`);
    if(dependency==='iconoir-react')violations.push(`${path}: upstream icon import`);
   }

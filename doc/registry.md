@@ -64,3 +64,6 @@ CI 和 Pages 发布均执行 `npm run test:registry:ci`：启动临时 HTTP Regi
 
 
 0.2.11 正式提供 StatisticCard、ChartCard、RankingBarList、LoadingContainer，以及独立 /charts 入口中的折线、面积、柱形、条形、环图和迷你趋势。版本包 `lanshang-labs-ui-0.2.11-c27403664b2c.tgz` 的 SHA-256 为 `c27403664b2c2a7404d04caade43671a959b83046297e95ef99a51e9f15b6e6e`。绘图使用可选 peer @ant-design/plots，基础统计不加载引擎；原 0.2.10 包与 Registry 已按原始字节归档。用户工作区中的其他未发布改动不包含在此隔离版本中。
+
+
+0.2.12 发布 Dock、Dock 工作台模板及独立媒体入口，并统一浅暗表面、选择、按钮和反馈等场景。版本包及 Registry 使用新的0.2.12身份；0.2.11线上原包与Registry已归档。其他项目使用r/v0.2.12固定入口；启用Dock需显式安装可选peer motion@14.6.0。实验室不作为正式组件API，许可未明确的玻璃文件夹样例留在本地，不进入公开源码或文档站。

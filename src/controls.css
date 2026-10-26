@@ -91,12 +91,12 @@ a.bui-navigation-link:is(:hover,:focus-visible,:active) .bui-navigation-link__ic
 :root[data-theme="light"] :is(.ant-input-outlined,.ant-input-affix-wrapper-outlined,.ant-input-number-outlined,.ant-picker-outlined):not([disabled]):not(.ant-input-disabled):not(.ant-input-affix-wrapper-disabled):not(.ant-input-number-disabled):not(.ant-picker-disabled) {box-shadow:0 1px 2px #20212408;}
 
 /* Quiet pointer focus; keyboard users retain an explicit neutral focus ring. */
-:root[data-theme] .ls-select.ant-select-focused:not(.ant-select-disabled) .ant-select-selector{border-color:var(--ui-line);box-shadow:none;}
+:root[data-theme] .ls-select.ant-select-focused:not(.ant-select-disabled):not(.ant-select-status-error):not(.ant-select-status-warning) .ant-select-selector{border-color:var(--ls-control-edge,var(--ui-line-strong));box-shadow:var(--ls-control-shadow,none);}
 :root[data-theme] .ls-select[data-ls-keyboard=true] .ant-select-selector{outline:none;}
 :root[data-theme] .ls-select[data-ls-keyboard=true] .ant-select-selection-item{text-decoration:underline;text-decoration-color:var(--ui-secondary);text-underline-offset:4px;}
 .ls-select-chevron{transition:transform var(--ls-motion-chevron,200ms) var(--ls-ease-standard,cubic-bezier(.2,.8,.2,1));}
 .ant-select-open .ls-select-chevron{transform:rotate(180deg);}
-:root[data-theme] .ant-select-dropdown .ant-select-item-option-selected:not(.ant-select-item-option-disabled){background:transparent;font-weight:400;}
+:root[data-theme] .ant-select-dropdown .ant-select-item-option-selected:not(.ant-select-item-option-disabled){background:transparent;box-shadow:none;font-weight:400;}
 :root[data-theme] .ant-select-dropdown .ant-select-item-option-active:not(.ant-select-item-option-disabled){background:transparent;}
 :root[data-theme] .ant-select-dropdown .ant-select-item-option-state{color:var(--ui-text);}
 @keyframes ls-select-in{from{opacity:0;transform:scale(.97) translateY(-3px)}to{opacity:1;transform:scale(1) translateY(0)}}
@@ -105,9 +105,9 @@ a.bui-navigation-link:is(:hover,:focus-visible,:active) .bui-navigation-link__ic
 :root[data-theme] .ant-select-dropdown.ant-slide-up-leave-active{animation-name:ls-select-out;animation-duration:var(--ls-motion-exit,120ms);}
 @media(prefers-reduced-motion:reduce){.ls-select-chevron{transition:none;} :root[data-theme] .ant-select-dropdown .ant-select-item{transition:none;}}
 
-/* Selection is the checkmark; highlight follows pointer or keyboard navigation only. */
+/* A check marks selection; pointer and keyboard exploration own the row fill. */
 :root[data-theme] .ant-select-dropdown .ant-select-item-option:not(.ant-select-item-option-disabled):hover,
-:root[data-theme] .ant-select-dropdown.ls-select-popup-keyboard .ant-select-item-option-active:not(.ant-select-item-option-disabled){background:color-mix(in srgb,var(--ui-selected) 45%,var(--ui-surface));}
+:root[data-theme] .ant-select-dropdown.ls-select-popup-keyboard .ant-select-item-option-active:not(.ant-select-item-option-disabled){background:var(--ui-item-hover);}
 
 :root[data-theme] .ls-select:not(.ant-select-disabled) .ant-select-arrow{color:var(--ui-secondary);}
 .ls-action-rotate{display:inline-flex;align-items:center;justify-content:center;transition:transform var(--ls-motion-refresh,550ms) var(--ls-ease-feedback,cubic-bezier(.22,.7,.3,1));}

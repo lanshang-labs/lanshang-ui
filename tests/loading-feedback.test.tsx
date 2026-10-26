@@ -3,8 +3,21 @@ import {act,cleanup,fireEvent,render,screen} from '@testing-library/react';
 import {Button,Select,Spin} from 'antd';
 import {LanshangProvider} from '../src/Provider';
 import LoadingLabel from '../src/beautiful-ui/LoadingLabel';
+import {ContentState} from '../src/ContentState';
 import {LoadingFeedbackPreview,LoadingLifecyclePreview} from '../website/loading-feedback-preview';
 afterEach(()=>{cleanup();vi.useRealTimers()});
+it('keeps standalone pending feedback outside automatic busy semantics and respects explicit ARIA',()=>{
+ const view=render(<ContentState loading title="正在读取记录"/>);
+ expect(screen.getAllByRole('status')).toHaveLength(1);
+ expect(screen.getByRole('status').textContent).toBe('正在读取记录');
+ expect(screen.getByRole('status').closest('[aria-busy="true"]')).toBeNull();
+ view.rerender(<ContentState loading title="显式控制" aria-busy="true" aria-live="off"/>);
+ expect(screen.getByRole('status').getAttribute('aria-busy')).toBe('true');
+ expect(screen.getByRole('status').getAttribute('aria-live')).toBe('off');
+ view.rerender(<ContentState role="alert" title="读取失败"/>);
+ expect(screen.getByRole('alert').getAttribute('aria-live')).toBe('assertive');
+ expect(document.querySelector('.ls-pixel-loader')).toBeNull();
+});
 it('reserves decorative pixels for task labels',()=>{
  const {container}=render(<LoadingLabel label="读取记录"/>);expect(screen.getByRole('status').textContent).toBe('读取记录');expect(container.querySelector('.ls-pixel-loader')?.getAttribute('aria-hidden')).toBe('true');
 });

@@ -3,6 +3,13 @@
 .ls-markdown[data-ls-size=large]{font-size:14px;--ls-markdown-gap:16px}
 .ls-markdown> :first-child{margin-top:0}
 .ls-markdown> :last-child{margin-bottom:0}
+.ls-markdown-content> :first-child{margin-top:0}
+.ls-markdown-content> :last-child{margin-bottom:0}
+.ls-markdown .ls-markdown-modes>.ant-tabs-nav{margin-bottom:var(--ls-markdown-gap)}
+.ls-markdown-source{box-sizing:border-box;max-width:100%;max-height:560px;overflow:auto;margin:0;padding:var(--ls-markdown-gap);border:1px solid var(--ui-line);border-radius:var(--ls-control-middle-popup-radius,12px);background:var(--ui-canvas);color:var(--ui-text);font:inherit;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre;overflow-wrap:normal;tab-size:2}
+.ls-markdown-source>code{font:inherit}
+.ls-markdown-source:focus-visible{outline:2px solid var(--ui-accent);outline-offset:2px}
+.ls-markdown-copy-status{margin-top:8px;color:var(--ui-secondary);font-size:12px}
 .ls-markdown :is(p,.ls-markdown-paragraph,ul,ol,blockquote,.ls-code-block,.ls-markdown-table-scroll,.katex-display){margin-block:var(--ls-markdown-gap)}
 .ls-markdown :is(h1,h2,h3,h4,h5,h6){margin:1.5em 0 .55em;color:var(--ui-text);font-weight:600;line-height:1.5;letter-spacing:-.025em;scroll-margin-top:80px}
 .ls-markdown h1{font-size:1.85em}.ls-markdown h2{font-size:1.5em}.ls-markdown h3{font-size:1.25em}.ls-markdown h4{font-size:1.1em}.ls-markdown :is(h5,h6){font-size:1em}
@@ -21,7 +28,7 @@
 .ls-markdown :not(pre)>code{padding:2px 5px;border:1px solid var(--ui-line);border-radius:5px;background:var(--ui-canvas);font:.92em/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;box-decoration-break:clone}
 .ls-markdown .ls-code-block code{padding:0;border:0;border-radius:0;background:none;font:inherit}
 .ls-markdown .ls-code-block pre{margin:0}
-.ls-markdown-table-scroll{max-width:100%;overflow:auto;border:1px solid var(--ui-line);border-radius:var(--ls-control-middle-radius,10px)}
+.ls-markdown-table-scroll{max-width:100%;overflow:auto;border:1px solid var(--ui-line);border-radius:var(--ls-control-middle-popup-radius,12px)}
 .ls-markdown table{width:100%;border-collapse:collapse;border-spacing:0;font-size:inherit;line-height:1.65}
 .ls-markdown :is(th,td){min-width:100px;padding:7px 10px;border-bottom:1px solid var(--ui-line);text-align:start;vertical-align:top}
 .ls-markdown th{background:var(--ui-canvas);font-weight:500;color:var(--ui-secondary)}
@@ -51,3 +58,12 @@
 .ls-markdown :where(ul ul) ul.ls-markdown-list{list-style-type:square}
 .ls-markdown .ls-markdown-list-item{display:list-item;list-style-type:inherit}
 .ls-markdown ul.ls-markdown-list.contains-task-list{list-style-type:none}
+
+/* The mode toolbar and its document share one reading surface. Plain renderers stay unframed. */
+.ls-markdown .ls-markdown-modes{border:1px solid var(--ls-surface-edge,var(--ui-line));border-radius:var(--ls-control-middle-popup-radius,12px);background:var(--ls-surface-face,var(--ui-surface))}
+.ls-markdown .ls-markdown-modes>.ant-tabs-nav{margin:0;padding:6px 8px}
+.ls-markdown .ls-markdown-modes>.ant-tabs-nav::before{inset-inline:0}
+.ls-markdown-modes>.ant-tabs-content-holder>.ant-tabs-content>.ant-tabs-tabpane>.ls-markdown-content{padding:16px}
+.ls-markdown-modes>.ant-tabs-content-holder>.ant-tabs-content>.ant-tabs-tabpane>.ls-markdown-source{padding:16px;border:0;border-radius:0 0 var(--ls-control-middle-popup-radius,12px) var(--ls-control-middle-popup-radius,12px);background:transparent}
+.ls-markdown .ls-markdown-content>.ls-code-block,.ls-markdown .ls-image-card{box-shadow:none}
+@media(max-width:480px){.ls-markdown-modes>.ant-tabs-content-holder>.ant-tabs-content>.ant-tabs-tabpane>:is(.ls-markdown-content,.ls-markdown-source){padding:12px}}

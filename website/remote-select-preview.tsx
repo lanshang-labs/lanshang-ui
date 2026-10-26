@@ -49,5 +49,5 @@ function RemoteSelectForm(){
 }
 export function RemoteSelectPreview(){
  const [open,setOpen]=useState(false);const trigger=useRef<HTMLButtonElement>(null);
- return <><Button ref={trigger} onClick={()=>setOpen(true)}>远程搜索与分页</Button><Modal rootClassName="ls-overlay-demo-popup" title="团队搜索 · 分页加载" open={open} destroyOnClose onCancel={()=>setOpen(false)} focusTriggerAfterClose={false} afterClose={()=>trigger.current?.focus()} footer={<MotionButton motionIcon="close" onClick={()=>setOpen(false)}>关闭远程搜索</MotionButton>}>{open?<RemoteSelectForm/>:null}</Modal></>;
+ return <><Button ref={trigger} onClick={()=>setOpen(true)}>远程搜索与分页</Button><Modal rootClassName="ls-overlay-demo-popup" title="团队搜索 · 分页加载" open={open} destroyOnClose onCancel={()=>setOpen(false)} focusTriggerAfterClose={false} afterClose={()=>trigger.current?.focus()} footer={<MotionButton onClick={()=>setOpen(false)} aria-label="关闭远程搜索" title="关闭远程搜索">关闭远程搜索</MotionButton>}>{open?<RemoteSelectForm/>:null}</Modal></>;
 }

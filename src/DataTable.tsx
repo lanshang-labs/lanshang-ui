@@ -23,8 +23,8 @@ export function DataTable<T extends object>({density="compact",className="",loca
   ...rowSelection,
   columnTitle:(checkboxNode:React.ReactNode)=>isValidElement(checkboxNode)?cloneElement(checkboxNode as React.ReactElement<{ 'aria-label'?:string}>,{'aria-label':selectionLabel}):checkboxNode,
  }:rowSelection;
- // AntD renders middle table pagination as small; keep pager controls at the standard size.
- const resolvedPagination=pagination===false?false:{itemRender:paginationItemRender,...pagination,size:pagination?.size??'default',showSizeChanger:paginationSizeChanger(pagination?.showSizeChanger)};
+ // Table paging is a compact footer; an explicit default size remains available.
+ const resolvedPagination=pagination===false?false:{itemRender:paginationItemRender,...pagination,size:pagination?.size??'small',showSizeChanger:paginationSizeChanger(pagination?.showSizeChanger)};
  return <ConfigProvider theme={{components:{Table:{cellPaddingBlockSM:cellPaddingBlock,cellPaddingBlockMD:cellPaddingBlock,cellPaddingBlock:cellPaddingBlock}}}}>
   <Table<T> size={resolvedSize} {...props} rowSelection={resolvedRowSelection} columns={withTableColumnIcons(columns,props.sortDirections)} expandable={resolvedExpandable} pagination={resolvedPagination} loading={resolvedLoading} locale={{emptyText:<ContentState title="暂无数据" description="数据准备好后，会显示在这里。"/>,...locale}} className={`ds-data-table ${className}`}/>
  </ConfigProvider>;

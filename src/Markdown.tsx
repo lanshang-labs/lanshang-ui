@@ -1,4 +1,4 @@
-import {createContext,useContext,useId,useMemo,useRef,type HTMLAttributes} from 'react';
+import {createContext,useContext,useEffect,useId,useMemo,useRef,useState,type HTMLAttributes} from 'react';
 import {ConfigProvider} from 'antd';
 import ReactMarkdown,{type Components} from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -7,13 +7,21 @@ import {remarkMath,rehypeKatex} from './markdown-math.js';
 import type {ElementContent} from 'hast';
 import {ImageCard} from './ImageCard.js';
 import {SourceCodeBlock,type SourceCodeBlockProps} from './SourceCodeBlock.js';
+import {TabStrip} from './ComplexControls.js';
+import {RowActionButton} from './RowActionButton.js';
 import type {ControlSize} from './tokens.js';
 
 export interface MarkdownImage {src:string;alt:string;title?:string}
+export type MarkdownMode='preview'|'source';
 export interface MarkdownProps extends Omit<HTMLAttributes<HTMLDivElement>,'children'|'dangerouslySetInnerHTML'> {
  /** Original Markdown text, never interpreted as executable HTML or JSX. */
  children:string;
  size?:ControlSize;
+ /** Show the view/source switch and original Markdown copy action. Default true. */
+ toolbar?:boolean;
+ mode?:MarkdownMode;
+ defaultMode?:MarkdownMode;
+ onModeChange?:(mode:MarkdownMode)=>void;
  /** Enable inline $…$ and block $$…$$ formulas. Default true. */
  math?:boolean;
  /** Preserve paragraph soft line breaks, for prompts and message-like documents. Default false. */
@@ -40,8 +48,20 @@ function isLocalImage(src:string):boolean {
 
 
 /** CommonMark + GFM with shared Lanshang code and image presentation. */
-export function Markdown({children,size,math=true,breaks=false,links='navigate',codePreviewLines=12,images='all',onImagePreview,className='',...props}:MarkdownProps){
+export function Markdown({children,size,toolbar=true,mode,defaultMode='preview',onModeChange,math=true,breaks=false,links='navigate',codePreviewLines=12,images='all',onImagePreview,className='',...props}:MarkdownProps){
  const {componentSize}=ConfigProvider.useConfig();
+ const resolvedSize=size??componentSize??'middle';
+ const [localMode,setLocalMode]=useState<MarkdownMode>(defaultMode),[message,setMessage]=useState('');
+ const activeMode=mode??localMode;
+ const revision=useRef(0),pending=useRef(false);
+ useEffect(()=>{revision.current++;pending.current=false;setMessage('');return()=>{revision.current++}},[children]);
+ async function copyOriginal(){
+  if(pending.current)return;
+  pending.current=true;setMessage('');const version=revision.current;
+  try{await navigator.clipboard.writeText(children);if(version===revision.current)setMessage('已复制原始 Markdown')}
+  catch{if(version===revision.current)setMessage('复制失败，请切换原文后手动选择复制')}
+  finally{if(version===revision.current)pending.current=false}
+ }
  const root=useRef<HTMLDivElement>(null),id=useId();
  const prefix=`ls-md-${id.replace(/[^a-zA-Z0-9_-]/g,'')}-`;
  const components=useMemo<Components>(()=>({
@@ -79,7 +99,10 @@ export function Markdown({children,size,math=true,breaks=false,links='navigate',
   input:({node:_,...rest})=>{const label=useContext(TaskLabelContext);return <input {...rest} aria-label={label}/>;},
   table:({node:_,children:content,...rest})=><div className="ls-markdown-table-scroll" role="region" aria-label="Markdown 表格" tabIndex={0}><table {...rest}>{content}</table></div>,
  }),[codePreviewLines,onImagePreview,images,links,prefix]);
- return <div {...props} ref={root} className={`ls-markdown ${className}`} data-ls-size={size??componentSize??'middle'}>
-  <ReactMarkdown remarkPlugins={[remarkGfm,...(math?[remarkMath]:[]),...(breaks?[remarkBreaks]:[])]} rehypePlugins={math?[[rehypeKatex,{trust:false,strict:'ignore',maxSize:10,maxExpand:1000}]]:[]} remarkRehypeOptions={{clobberPrefix:prefix,footnoteLabel:'注释',footnoteBackLabel:'返回引用'}} skipHtml components={components}>{children}</ReactMarkdown>
+ const preview=<div className="ls-markdown-content"><ReactMarkdown remarkPlugins={[remarkGfm,...(math?[remarkMath]:[]),...(breaks?[remarkBreaks]:[])]} rehypePlugins={math?[[rehypeKatex,{trust:false,strict:'ignore',maxSize:10,maxExpand:1000}]]:[]} remarkRehypeOptions={{clobberPrefix:prefix,footnoteLabel:'注释',footnoteBackLabel:'返回引用'}} skipHtml components={components}>{children}</ReactMarkdown></div>;
+ const source=<pre className="ls-markdown-source" tabIndex={0} aria-label="原始 Markdown"><code>{children}</code></pre>;
+ return <div {...props} ref={root} className={`ls-markdown ${className}`} data-ls-size={resolvedSize}>
+  {toolbar?<TabStrip className="ls-markdown-modes" size={resolvedSize} activeKey={activeMode} destroyInactiveTabPane animated={false} onChange={key=>{const next=key as MarkdownMode;if(mode===undefined)setLocalMode(next);onModeChange?.(next)}} tabBarExtraContent={<RowActionButton size={resolvedSize} motionIcon="copy" aria-label="复制原始 Markdown" title="复制原始 Markdown" onClick={()=>void copyOriginal()}/>} items={[{key:'preview',label:'视图',children:preview},{key:'source',label:'原文',children:source}]}/>:activeMode==='source'?source:preview}
+  {message&&<div className="ls-markdown-copy-status" role="status">{message}</div>}
  </div>;
 }

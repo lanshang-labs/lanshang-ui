@@ -1,0 +1,61 @@
+/* Local AntD adaptation of coss visual reference. No global theme/reset or original component replacement. */
+.foundation-page{min-width:0}
+.foundation-scope{--lf-surface:var(--card);--lf-edge:var(--border);--lf-muted:var(--muted-foreground);color:var(--foreground);font-size:13px}
+.foundation-scope[data-candidate=true]{--lf-surface:#fff;--lf-edge:#00000014;--lf-muted:#696969}
+.foundation-scope[data-candidate=true][data-mode=dark]{--lf-surface:#1b1b1b;--lf-edge:#ffffff0f;--lf-muted:#a3a3a3}
+.foundation-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:24px;align-items:start}
+.foundation-panel{min-width:0;border:1px solid var(--lf-edge);border-radius:12px;background:var(--lf-surface);box-shadow:0 1px 2px #00000005}
+.foundation-panel-header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 22px;border-bottom:1px solid var(--lf-edge)}
+.foundation-panel-header h2{margin:0;font-size:14px;line-height:20px;font-weight:600}
+.foundation-panel-header p{margin:5px 0 0;font-size:12px;line-height:18px;color:var(--lf-muted)}
+.foundation-panel-body{min-width:0;padding:20px 22px}
+.foundation-icon{display:grid;place-items:center;width:30px;height:30px;border:1px solid var(--lf-edge);border-radius:7px;color:var(--lf-muted)}
+.foundation-label{display:block;font-size:12px;color:var(--lf-muted);margin-bottom:12px}
+.foundation-inline{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.foundation-sample+.foundation-sample{margin-top:24px}
+.foundation-tab-copy{margin:0;line-height:1.75;font-size:13px;color:var(--lf-muted)}
+.foundation-toggle-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 20px;padding-bottom:24px}
+.foundation-switch-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-right:10px}
+.foundation-form-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:3px}
+.foundation-save-status{display:flex;align-items:center;gap:5px;min-width:0;font-size:12px;color:var(--lf-muted);overflow-wrap:anywhere}
+.foundation-spaces{margin-top:24px}
+.foundation-count{display:inline-flex;align-items:center;justify-content:center;min-width:20px;margin-left:6px;padding:1px 5px;border:1px solid var(--lf-edge);border-radius:5px;font-size:11px;font-weight:400;color:var(--lf-muted)}
+.foundation-toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.foundation-toolbar>.lf-ant-input-affix-wrapper{width:250px;max-width:100%}
+.foundation-toolbar>.lf-ant-select{width:126px}
+.foundation-space-name{display:grid;gap:3px}
+.foundation-space-name strong{font-size:13px;font-weight:500}
+.foundation-space-name>span{font-size:12px;color:var(--lf-muted)}
+.foundation-status.lf-ant-tag{margin:0;border:1px solid transparent;border-radius:5px;padding-inline:6px;font-size:11px;line-height:19px;background:#00000005;color:var(--lf-muted)}
+.foundation-status.is-active{color:#21674a;background:#2c9d6810;border-color:#2c9d6824}
+.foundation-status.is-pending{color:#8b5f1d;background:#aa742310;border-color:#aa742324}
+[data-mode=dark] .foundation-status.is-active{color:#8dcab1;background:#2c9d6818;border-color:#2c9d6838}
+[data-mode=dark] .foundation-status.is-pending{color:#d6b783;background:#aa74231a;border-color:#aa742338}
+.foundation-source-note{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;margin-top:18px;font-size:11px;color:var(--lf-muted)}
+.foundation-source-note a{display:inline-flex;align-items:center;gap:4px;text-decoration:underline;text-underline-offset:3px}
+.foundation-modal-actions{display:flex;justify-content:flex-end;gap:8px}
+.foundation-detail{display:grid;gap:18px;margin:20px 0 8px;font-size:13px}
+.foundation-detail>div{display:grid;grid-template-columns:85px minmax(0,1fr);gap:12px}
+.foundation-detail dt{color:var(--muted-foreground)}
+.foundation-detail dd{margin:0;overflow-wrap:anywhere}
+/* A single compact tab surface; AntD owns selection, focus and panel identity. */
+.foundation-scope[data-candidate=true] .lf-ant-tabs-nav{margin-bottom:14px}
+.foundation-scope[data-candidate=true] .lf-ant-tabs-nav:before{border:0}
+.foundation-scope[data-candidate=true] .lf-ant-tabs-nav-list{padding:3px;border-radius:8px;background:#00000006}
+.foundation-scope[data-candidate=true][data-mode=dark] .lf-ant-tabs-nav-list{background:#ffffff06}
+.foundation-scope[data-candidate=true] .lf-ant-tabs-tab{padding:3px 11px;margin:0;border-radius:6px;font-size:12px}
+.foundation-scope[data-candidate=true] .lf-ant-tabs-tab-active{background:#fff;box-shadow:0 1px 2px #00000014}
+.foundation-scope[data-candidate=true][data-mode=dark] .lf-ant-tabs-tab-active{background:#353535;box-shadow:none}
+.foundation-scope[data-candidate=true] .lf-ant-tabs-ink-bar{display:none}
+.foundation-scope[data-candidate=true] .lf-ant-tabs-tab-btn:focus-visible{outline:2px solid #8a8a8a;outline-offset:2px}
+.foundation-scope .lf-ant-btn .lf-ant-btn-icon{display:inline-flex;align-items:center;justify-content:center}
+.foundation-scope .lf-ant-btn svg{flex-shrink:0}
+.foundation-scope .lf-ant-table-pagination.lf-ant-pagination{margin:10px 0 0}
+.foundation-scope .lf-ant-pagination .lf-ant-pagination-item{border:0;border-radius:50%;background:transparent}
+.foundation-scope .lf-ant-pagination .lf-ant-pagination-item-active{background:#00000008}
+.foundation-scope[data-mode=dark] .lf-ant-pagination .lf-ant-pagination-item-active{background:#ffffff12}
+@media(max-width:1050px){.foundation-grid{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:560px){.foundation-page{padding-inline:16px}.foundation-panel-header,.foundation-panel-body{padding:16px}.foundation-toggle-grid{grid-template-columns:minmax(0,1fr)}.foundation-toolbar>.lf-ant-input-affix-wrapper{width:100%}.foundation-source-note{line-height:1.8}.foundation-form-footer{align-items:flex-end}.foundation-form-footer>.lf-ant-btn{flex-shrink:0}.lf-ant-modal{max-width:calc(100vw - 24px)}}
+@media(prefers-reduced-motion:reduce){.foundation-scope *{transition:none!important;animation:none!important}}
+.lf-ant-select-dropdown .lf-ant-select-item-option-selected:not(.lf-ant-select-item-option-disabled){box-shadow:0 1px 3px #00000012,0 0 0 1px #00000008}
+.dark .lf-ant-select-dropdown .lf-ant-select-item-option-selected:not(.lf-ant-select-item-option-disabled){box-shadow:none}

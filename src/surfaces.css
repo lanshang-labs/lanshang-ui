@@ -1,8 +1,10 @@
 /* Shared neutral surfaces: appearance only; interaction and timing stay with controls. */
 :root[data-theme] {
- --ls-surface-edge:color-mix(in srgb,var(--ui-secondary) 12%,transparent);
+ --ls-surface-edge:color-mix(in srgb,var(--ui-secondary) 8%,transparent);
+ --ls-control-edge:var(--ui-line-strong);
+ --ls-control-shadow:var(--ls-surface-shadow-compact);
  --ls-surface-highlight:transparent;
- --ls-surface-shadow:0 1px 2px rgb(20 30 50 / 5%),0 3px 8px rgb(20 30 50 / 3%);
+ --ls-surface-shadow:0 1px 2px rgb(20 30 50 / 6%),0 4px 12px rgb(20 30 50 / 5%);
  --ls-surface-shadow-compact:0 1px 2px rgb(20 30 50 / 4%);
  --ls-overlay-shadow:0 8px 24px rgb(20 30 50 / 10%),0 2px 6px rgb(20 30 50 / 4%);
  --ls-selection-shadow-compact:0 0 0 1px var(--ls-surface-edge),0 1px 2px rgb(0 0 0 / 5%);
@@ -21,12 +23,12 @@
  --ls-selection-shadow:none;
  --ls-surface-face:var(--ui-raised);
  --ls-surface-track:color-mix(in srgb,var(--ui-surface) 85%,black);
- --ls-surface-stage:var(--ui-surface);
+ --ls-surface-stage:var(--ui-canvas);
 }
 :root[data-theme] .ls-input-group {
  background:var(--ls-surface-face);
- border-color:var(--ls-surface-edge);
- box-shadow:var(--ls-surface-shadow);
+ border-color:var(--ls-control-edge);
+ box-shadow:var(--ls-control-shadow);
 }
 :root[data-theme] .ls-input-group-actions {
  border-left-color:var(--ls-surface-edge);
@@ -51,10 +53,10 @@
 }
 :root[data-theme] .bui-alert.ant-alert {
  border-color:var(--ls-surface-edge);
- border-radius:18px;
- padding:16px 18px;
- background:var(--ls-surface-face);
- box-shadow:var(--ls-surface-shadow);
+ border-radius:var(--ls-control-middle-popup-radius,12px);
+ padding:12px 14px;
+ background:var(--ui-surface);
+ box-shadow:none;
 }
 :root[data-theme] .bui-alert.ant-alert-info .ant-alert-message {color:var(--ui-link-text)}
 :root[data-theme] .bui-alert.ant-alert-warning .ant-alert-message {color:var(--ui-warning-text)}
@@ -98,7 +100,7 @@
 :root[data-theme] .bui-top-nav,
 :root[data-theme] .ls-radio-group:has(.ant-radio-button-wrapper),
 :root[data-theme] .ant-segmented,
-:root[data-theme] .ant-tabs-top:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-nav-list {
+:root[data-theme] :is(.ant-tabs-top,.ant-tabs-bottom):not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-nav-list {
  background:var(--ls-surface-track);
  box-shadow:none;
 }
@@ -106,12 +108,16 @@
 :root[data-theme] .ls-radio-indicator,
 :root[data-theme] .ant-segmented .ant-segmented-item-selected,
 :root[data-theme] .ant-segmented .ant-segmented-thumb,
-:root[data-theme] .ant-tabs-top:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-ink-bar {
+:root[data-theme] :is(.ant-tabs-top,.ant-tabs-bottom):not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-ink-bar {
  background:var(--ls-surface-face);
  box-shadow:var(--ls-selection-shadow);
 }
 :root[data-theme] .ls-radio-group[data-ls-size="small"] .ls-radio-indicator,
 :root[data-theme] .ant-segmented.ant-segmented-sm :is(.ant-segmented-item-selected,.ant-segmented-thumb){box-shadow:var(--ls-selection-shadow-compact);}
+/* A recessed stage separates raised content from the shell without a second frame. */
+:root[data-theme] .ls-surface-stage {background:var(--ls-surface-stage);border-radius:var(--ls-control-middle-popup-radius,12px);}
+:root[data-theme] .bui-surface:not(.bui-surface-section) {border:1px solid var(--ls-surface-edge);border-radius:var(--ls-control-middle-popup-radius,12px);}
+:root[data-theme] .bui-surface:not(.bui-surface-section) > .primitive-card-bar {background:transparent;border-bottom-color:var(--ls-surface-edge);}
 /* Feedback cards share the material, without adding hover or lift behavior. */
 :root[data-theme] .bui-surface:not(.bui-surface-section),
 :root[data-theme] .ls-feedback-panel,
@@ -130,11 +136,12 @@
 }
 @media(forced-colors:active) {
  :root[data-theme] {
-  --ls-surface-face:Canvas;--ls-surface-track:Canvas;--ls-surface-edge:CanvasText;
+  --ui-shell-canvas:Canvas;--ui-shell-sidebar:Canvas;--ui-shell-line:CanvasText;
+  --ls-surface-face:Canvas;--ls-surface-track:Canvas;--ls-surface-edge:CanvasText;--ls-control-edge:CanvasText;--ls-control-shadow:none;
   --ls-surface-highlight:transparent;--ls-surface-shadow:none;--ls-overlay-shadow:none;--ls-selection-shadow:none;--ls-selection-shadow-compact:none;--ls-surface-stage:Canvas;
  }
  :root[data-theme] :is(.ls-nav-indicator,.ls-radio-indicator,.ant-segmented-thumb,.ant-segmented-item-selected),
- :root[data-theme] .ant-tabs-top:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-ink-bar {outline:1px solid Highlight;box-shadow:none}
+ :root[data-theme] :is(.ant-tabs-top,.ant-tabs-bottom):not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-ink-bar {outline:1px solid Highlight;box-shadow:none}
 }
 
 /* Popover content shares the card face; portal positioning and motion stay native. */
@@ -158,9 +165,9 @@
 
 /* Dark controls are flat; state remains expressed by fill and keyboard focus. */
 :root[data-theme=dark] :is(.ls-button-group--sliding>.ls-button-group-indicator,.ls-nav-indicator,.ls-radio-indicator,.ant-segmented .ant-segmented-item-selected,.ant-segmented .ant-segmented-thumb),
-:root[data-theme=dark] .ant-tabs-top:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-ink-bar {background:var(--ui-selected);box-shadow:none;}
+:root[data-theme=dark] :is(.ant-tabs-top,.ant-tabs-bottom):not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-ink-bar {background:var(--ui-selected);box-shadow:none;}
 :root[data-theme=dark] :is(.bui-top-nav,.ls-radio-group,.ant-segmented,.ls-button-group--sliding),
-:root[data-theme=dark] .ant-tabs-top:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-nav-list {box-shadow:none;}
+:root[data-theme=dark] :is(.ant-tabs-top,.ant-tabs-bottom):not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-nav-list {box-shadow:none;}
 /* Nested task cards need a quiet backdrop rather than white on white. */
 :root[data-theme] .bui-task-rows {background:var(--ls-surface-stage);padding:8px;border-radius:16px;}
 :root[data-theme=dark] :is(.bui-surface:not(.bui-surface-section),.ls-feedback-panel,.bui-alert.ant-alert,.ls-filter-disclosure) {background:var(--ui-surface);}

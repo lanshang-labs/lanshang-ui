@@ -95,3 +95,18 @@ it('demonstrates first-load failure and successful empty results',()=>{
   fireEvent.click(screen.getByRole('button',{name:'刷新概览'}));expect(screen.getByText('暂无生产记录')).toBeTruthy();
   act(()=>vi.advanceTimersByTime(1600));expect(screen.queryByText('正在更新概览，保留上次内容')).toBeNull();
 });
+it('keeps the refresh trigger focusable while blocking repeated reads and result toggles',()=>{
+ vi.useFakeTimers();render(<LoadingContainerPreview/>);act(()=>vi.advanceTimersByTime(1600));
+ const input=screen.getByRole('textbox',{name:'本地备注'}) as HTMLInputElement;
+ fireEvent.change(input,{target:{value:'保留刷新草稿'}});
+ const refresh=screen.getByRole('button',{name:'刷新概览'}) as HTMLButtonElement;
+ refresh.focus();fireEvent.click(refresh);
+ expect(refresh.disabled).toBe(false);expect(refresh.getAttribute('aria-disabled')).toBe('true');
+ expect(document.activeElement).toBe(refresh);
+ fireEvent.click(refresh);fireEvent.click(screen.getByRole('button',{name:'空结果'}));
+ expect(screen.queryByText('暂无生产记录')).toBeNull();
+ act(()=>vi.advanceTimersByTime(1600));
+ expect(screen.getByText('第 2 次成功读取')).toBeTruthy();
+ expect(screen.getByRole('textbox',{name:'本地备注'})).toBe(input);
+ expect(input.value).toBe('保留刷新草稿');expect(document.activeElement).toBe(refresh);
+});

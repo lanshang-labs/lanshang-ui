@@ -1,0 +1,11 @@
+/* Optional, scoped media styles. The host owns AntD configuration and theme. */
+@import './image-card.css';
+@import './image-deck.css';
+
+:is(.ls-image-card,.ls-image-deck) :is(.platform-icon,.ls-motion-icon){display:inline-flex;align-items:center;justify-content:center;flex:none;line-height:1;vertical-align:middle}
+:is(.ls-image-card,.ls-image-deck) .platform-icon svg{display:block;width:1em;height:1em}
+:is(.ls-image-card,.ls-image-deck) .ls-motion-icon>svg{display:block;width:100%;height:100%}
+.ls-image-deck .ls-media-control{display:inline-flex;align-items:center;justify-content:center;width:var(--ls-media-control-size,var(--ls-control-middle-height,32px));min-width:var(--ls-media-control-size,var(--ls-control-middle-height,32px));height:var(--ls-media-control-size,var(--ls-control-middle-height,32px));padding:0;border:0;border-radius:var(--ls-media-control-radius,var(--ls-control-middle-radius,10px));color:var(--ls-media-secondary,var(--ui-secondary,#565860));background:transparent;box-shadow:none}
+.ls-image-deck .ls-media-control:not(:disabled):hover{background:var(--ls-media-control-hover,var(--ui-raised,#f2f2f3));color:var(--ls-media-text,var(--ui-text,#202124))}
+.ls-image-deck .ls-media-control:focus-visible{outline:2px solid var(--ls-media-focus,var(--ui-accent,#0085ff));outline-offset:2px}
+.ls-image-deck .ls-media-control .platform-icon{font-size:var(--ls-media-icon-size,14px)}

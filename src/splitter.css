@@ -4,8 +4,9 @@
 .ls-splitter-panel{flex-shrink:0;min-width:0;overflow:auto;overscroll-behavior:contain;padding:16px;box-sizing:border-box;overflow-wrap:anywhere}
 .ls-splitter-panel[hidden]{display:none}
 .ls-splitter-secondary{flex:1;min-width:0}
+.ls-splitter-primary{background:var(--ui-shell-sidebar,var(--ls-surface-stage))}
 .ls-splitter-handle{flex:0 0 9px;position:relative;cursor:col-resize;touch-action:none;outline:none}
-.ls-splitter-handle:before{content:'';position:absolute;width:1px;left:4px;top:0;bottom:0;background:var(--ui-line)}
+.ls-splitter-handle:before{content:'';position:absolute;width:1px;left:4px;top:0;bottom:0;background:var(--ui-shell-line,var(--ui-line))}
 .ls-splitter-handle:after{content:'';position:absolute;width:3px;left:3px;top:calc(50% - 18px);height:36px;border-radius:3px;background:var(--ui-secondary);opacity:0;transition:opacity var(--ls-motion-state,150ms) var(--ls-ease-standard,ease)}
 .ls-splitter-handle:hover:after,.ls-splitter-handle:focus-visible:after{opacity:1}
 .ls-splitter-handle:focus-visible{box-shadow:inset 0 0 0 2px var(--ui-focus-ring);border-radius:4px}

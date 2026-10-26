@@ -1,23 +1,23 @@
 .ls-image-deck,.ls-image-deck *{box-sizing:border-box}
-.ls-image-deck{min-width:0;width:100%;color:var(--ui-text);font-family:var(--ds-font);font-size:13px}
+.ls-image-deck{min-width:0;width:100%;color:var(--ls-media-text,var(--ui-text,#202124));font-family:var(--ls-media-font,var(--ds-font,inherit));font-size:13px}
 .ls-deck-stage{position:relative;isolation:isolate;width:100%;transition:height var(--ls-motion-selection,280ms) var(--ls-ease-standard,cubic-bezier(.2,.8,.2,1))}
-.ls-deck-card{position:absolute;inset:0 auto auto 0;transform-origin:50% 70%;transition:translate var(--ls-motion-enter,180ms) var(--ls-ease-standard),transform var(--ls-motion-selection,280ms) var(--ls-ease-selection,cubic-bezier(.22,1.12,.36,1)),width var(--ls-motion-selection,280ms) var(--ls-ease-standard),height var(--ls-motion-selection,280ms) var(--ls-ease-standard),opacity var(--ls-motion-enter,180ms) ease;pointer-events:none}
+.ls-deck-card{position:absolute;inset:0 auto auto 0;transform-origin:50% 70%;transition:translate var(--ls-motion-enter,180ms) var(--ls-ease-standard,cubic-bezier(.2,.8,.2,1)),transform var(--ls-motion-selection,280ms) var(--ls-ease-selection,cubic-bezier(.22,1.12,.36,1)),width var(--ls-motion-selection,280ms) var(--ls-ease-standard,cubic-bezier(.2,.8,.2,1)),height var(--ls-motion-selection,280ms) var(--ls-ease-standard,cubic-bezier(.2,.8,.2,1)),opacity var(--ls-motion-enter,180ms) ease;pointer-events:none}
 .ls-deck-card[data-visible=false]{opacity:0;visibility:hidden}
 .ls-image-deck:not([aria-disabled=true])[data-expanded=false]:hover .ls-deck-card[data-front=true]{translate:0 -4px}
 .ls-deck-card .ls-image-card-media{flex:1;min-height:0;width:100%}
 .ls-deck-card .ls-image-card-media img{position:absolute;inset:0;width:100%;height:100%}
-.ls-deck-open{position:absolute;appearance:none;margin:0;padding:0;border:0;border-radius:14px;background:transparent;cursor:pointer;color:inherit;font:inherit;-webkit-tap-highlight-color:transparent}
+.ls-deck-open{position:absolute;appearance:none;margin:0;padding:0;border:0;border-radius:var(--ls-media-radius,var(--ls-control-middle-popup-radius,12px));background:transparent;cursor:pointer;color:inherit;font:inherit;-webkit-tap-highlight-color:transparent}
 .ls-deck-open{z-index:100;outline-offset:4px}
-.ls-deck-open:focus-visible{outline:2px solid var(--ui-accent);outline-offset:3px}
+.ls-deck-open:focus-visible{outline:2px solid var(--ls-media-focus,var(--ui-accent,#0085ff));outline-offset:3px}
 .ls-deck-open:disabled{cursor:default}
 .ls-image-deck[data-expanded=true] .ls-deck-card{pointer-events:auto}
-.ls-deck-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:40px;padding:4px 0 0;border-top:1px solid var(--ui-line)}
+.ls-deck-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:40px;padding:4px 0 0;border-top:1px solid var(--ls-media-line,var(--ui-line,#ededf0))}
 .ls-deck-caption{display:flex;align-items:center;gap:10px;min-width:0}
-.ls-deck-position{flex-shrink:0;font-size:11px;color:var(--ui-secondary);font-variant-numeric:tabular-nums;letter-spacing:.04em}
+.ls-deck-position{flex-shrink:0;font-size:11px;color:var(--ls-media-secondary,var(--ui-secondary,#565860));font-variant-numeric:tabular-nums;letter-spacing:.04em}
 .ls-deck-current-title{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px}
 .ls-deck-actions{display:flex;align-items:center;flex-shrink:0;gap:2px}
-.ls-deck-divider{height:14px;width:1px;background:var(--ui-line);margin:0 4px}
-.ls-deck-empty{display:grid;place-items:center;min-height:160px;border:1px dashed var(--ui-line);border-radius:14px;background:var(--ui-canvas);color:var(--ui-secondary)}
+.ls-deck-divider{height:14px;width:1px;background:var(--ls-media-line,var(--ui-line,#ededf0));margin:0 4px}
+.ls-deck-empty{display:grid;place-items:center;min-height:160px;border:1px dashed var(--ls-media-line,var(--ui-line,#ededf0));border-radius:var(--ls-media-radius,var(--ls-control-middle-popup-radius,12px));background:var(--ls-media-canvas,var(--ui-canvas,#f7f7f8));color:var(--ls-media-secondary,var(--ui-secondary,#565860))}
 .ls-deck-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 @media(prefers-reduced-motion:reduce){.ls-image-deck *{transition:none!important;animation:none!important}}
 [data-ls-motion=reduce] .ls-image-deck *{transition:none!important;animation:none!important}

@@ -19,7 +19,7 @@ it("keeps failure and retry caller controlled and forwards accessible attributes
  expect(screen.getByRole("alert").getAttribute("aria-live")).toBe("assertive");
  expect(screen.getByText("0")).toBeTruthy();fireEvent.click(screen.getByRole("button"));expect(retry).toHaveBeenCalledOnce();
  expect(screen.getByText("加载失败")).toBeTruthy();expect(ref.current?.getAttribute("aria-label")).toBe("文件读取");
- rerender(<ContentState loading title="加载中"/>);expect(screen.getByRole("status").getAttribute("aria-busy")).toBe("true");
+ rerender(<ContentState loading title="加载中"/>);expect(screen.getByRole("status").textContent).toContain("加载中");expect(screen.getByRole("status").closest('[aria-busy="true"]')).toBeNull();
 });
 it("preserves metadata values, links and list attributes",()=>{
  const ref=createRef<HTMLDListElement>();render(<MetadataList ref={ref} aria-label="项目信息" className="custom" items={[{key:"count",label:"数量",value:0},{key:"link",label:"项目",value:<a href="/project">查看</a>}]}/>);

@@ -1,0 +1,22 @@
+.ls-workspace-panels,.ls-workspace-panels *{box-sizing:border-box}
+.ls-workspace-panels{isolation:isolate;display:flex;flex-direction:column;flex:1;width:100%;height:100%;min-width:0;min-height:0;overflow:hidden;color:var(--ui-text);background:var(--ui-shell-canvas,var(--ui-canvas));font-family:var(--ds-font)}
+.ls-workspace-panel-toolbar{display:flex;flex:none;align-items:center;flex-wrap:wrap;gap:4px;padding:6px 8px;border-bottom:1px solid var(--ui-shell-line,var(--ui-line));background:var(--ui-shell-canvas,var(--ui-canvas))}
+.ls-workspace-panel-toolbar .ls-workspace-immersive{margin-inline-start:auto;flex-shrink:0}
+.ls-workspace-panel-toolbar .ant-btn{max-width:100%;white-space:normal;height:auto;min-height:var(--ls-control-middle-height,32px);overflow-wrap:anywhere}
+.ls-workspace-panel-toolbar [aria-pressed=true]{background:var(--ui-selected)}
+.ls-workspace-panel-body{display:flex;flex:1;min-width:0;min-height:0;overflow:hidden}
+.ls-workspace-pane{display:flex;flex-direction:column;flex:0 0 var(--ls-panel-width,220px);min-width:0;min-height:0;overflow:hidden;background:var(--ui-shell-sidebar,var(--ui-raised))}
+.ls-workspace-pane.is-main{flex:1;background:var(--ui-shell-canvas,var(--ui-canvas))}
+.ls-workspace-pane[hidden]{display:none}
+.ls-workspace-panels[data-narrow=false][data-immersive=false] .ls-workspace-pane[data-fixed-seam=start]{border-inline-end:1px solid var(--ui-shell-line,var(--ui-line))}
+.ls-workspace-panels[data-narrow=false][data-immersive=false] .ls-workspace-pane[data-fixed-seam=end]{border-inline-start:1px solid var(--ui-shell-line,var(--ui-line))}
+.ls-workspace-pane-header,.ls-workspace-pane-footer{flex:none;min-width:0;padding:10px 12px;overflow-wrap:anywhere}
+.ls-workspace-pane-header{border-bottom:1px solid var(--ui-shell-line,var(--ui-line));font-size:13px}
+.ls-workspace-pane-footer{border-top:1px solid var(--ui-shell-line,var(--ui-line));font-size:12px;color:var(--ui-muted)}
+.ls-workspace-pane-scroll{flex:1;min-width:0;min-height:0;overflow:auto;overscroll-behavior:contain;padding:12px;overflow-wrap:anywhere;scrollbar-gutter:stable}
+.ls-workspace-pane-scroll:focus-visible{outline:2px solid var(--ui-focus-ring);outline-offset:-2px}
+.ls-workspace-panel-resize{flex:0 0 9px;position:relative;cursor:col-resize;touch-action:none;outline:none;background:var(--ui-shell-canvas,var(--ui-canvas))}
+.ls-workspace-panel-resize:before{content:'';position:absolute;inset:0 4px;background:var(--ui-shell-line,var(--ui-line))}
+.ls-workspace-panel-resize:is(:hover,:focus-visible):before{inset:0 3px;background:var(--ui-secondary)}
+.ls-workspace-panel-resize:focus-visible{box-shadow:inset 0 0 0 2px var(--ui-focus-ring)}
+.ls-workspace-panels[data-narrow=true] .ls-workspace-pane{flex:1;width:100%}

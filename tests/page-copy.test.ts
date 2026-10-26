@@ -15,7 +15,8 @@ it('keeps installation and API details aligned with the visible page',()=>{
  const button=pages.find(item=>item.id==='components/button')!;
  const buttonCopy=pageMarkdown(button);
  expect(buttonCopy).toContain('## 安装与接入');
- expect(buttonCopy).toContain('该组件尚未发布');
+ expect(buttonCopy).not.toContain('该组件尚未发布');
+ expect(buttonCopy).toContain('r/lanshang-provider.json');
  expect(buttonCopy).toContain('| 属性 | 类型 | 说明 |');
  expect(buttonCopy).toContain('button \\| submit \\| reset');
  const block=pages.find(item=>item.id==='blocks/list')!;
@@ -34,4 +35,13 @@ it('publishes chart installation with its optional engine and public source entr
  expect(markdown).toContain('npm install @ant-design/plots@2.6.8');
  expect(markdown).toContain("from '@lanshang-labs/ui/charts'");
  expect(markdown).not.toContain('../dist/charts.js');
+});
+
+
+it('publishes Dock installation and copies its optional public entry and styles',()=>{
+ const page=pages.find(item=>item.id==='components/dock')!;
+ const markdown=pageMarkdown(page);
+ expect(markdown).not.toContain('尚未发布');expect(markdown).toContain('motion@14.6.0');expect(markdown).toContain('r/lanshang-provider.json');
+ expect(markdown).toContain("from '@lanshang-labs/ui/dock'");expect(markdown).toContain('@lanshang-labs/ui/dock.css');
+ expect(markdown).not.toContain('../dist/dock');expect(markdown).toContain('dock-preview.css');
 });

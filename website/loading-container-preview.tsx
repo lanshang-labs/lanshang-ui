@@ -32,17 +32,17 @@ export function LoadingContainerPreview(){
       <ButtonGroup aria-label="首次加载外观">{(['skeleton','indicator'] as const).map((value,index)=><RowActionButton key={value} aria-pressed={presentation===value} onClick={()=>setPresentation(value)}>{['骨架','像素提示'][index]}</RowActionButton>)}</ButtonGroup>
     </div>
     <div className="ls-loading-example-scenarios" role="group" aria-label="模拟读取场景">
-      <MotionButton disabled={loading} onClick={()=>read(true)}>重新首次加载</MotionButton>
-      <MotionButton disabled={loading} onClick={()=>read(true,true)}>模拟首次失败</MotionButton>
-      <MotionButton disabled={loading||!hasContent} onClick={()=>read(false,true)}>模拟刷新失败</MotionButton>
-      <MotionButton disabled={loading||!hasContent} aria-pressed={empty} onClick={()=>setEmpty(value=>!value)}>空结果</MotionButton>
+      <MotionButton aria-disabled={loading} onClick={()=>read(true)}>重新首次加载</MotionButton>
+      <MotionButton aria-disabled={loading} onClick={()=>read(true,true)}>模拟首次失败</MotionButton>
+      <MotionButton disabled={!hasContent} aria-disabled={loading} onClick={()=>read(false,true)}>模拟刷新失败</MotionButton>
+      <MotionButton disabled={!hasContent} aria-disabled={loading} aria-pressed={empty} onClick={()=>setEmpty(value=>!value)}>空结果</MotionButton>
     </div>
     <div className="ls-loading-example-stage">
       <LoadingContainer ref={host} tabIndex={-1} aria-label="生产概览加载示例" variant={variant} title="生产概览"
         hasContent={hasContent} loading={loading} error={error} presentation={presentation}
         loadingLabel="正在读取生产概览" refreshingLabel="正在更新概览，保留上次内容"
-        onRetry={()=>{retryFocused.current=host.current?.contains(document.activeElement)??false;read(!hasContent);}}
-        actions={<MotionButton motionIcon="refresh" aria-label="刷新概览" title="刷新概览" aria-busy={loading&&hasContent} disabled={loading||!hasContent} onClick={()=>read()}/>}
+        onRetry={()=>{retryFocused.current=host.current?.contains(document.activeElement)??false;read(!hasContent);if(retryFocused.current)requestAnimationFrame(()=>{if(document.activeElement===document.body)host.current?.focus()});}}
+        actions={<MotionButton motionIcon="refresh" aria-label="刷新概览" title="刷新概览" aria-busy={loading&&hasContent} aria-disabled={loading} disabled={!hasContent} onClick={()=>read()}/>}
         skeleton={<div className="ls-loading-example-placeholder"><div className="ls-loading-example-metrics">{[0,1,2].map(key=><SkeletonBlock key={key} active title={{width:'55%'}} paragraph={{rows:1}}/>)}</div><SkeletonBlock active title={false} paragraph={{rows:3}}/></div>}>
         {empty?<ContentState title="暂无生产记录" description="读取已成功，空结果不会继续显示加载动画。"/>:<>
           <div className="ls-loading-example-metrics">{[['分集','95'],['已完成',String(30+revision)],['待处理','18']].map(([label,value])=><div key={label}><span>{label}</span><strong>{value}</strong></div>)}</div>

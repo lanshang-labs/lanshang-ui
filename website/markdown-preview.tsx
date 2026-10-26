@@ -1,6 +1,6 @@
 import landscapeUrl from './markdown-landscape.svg?url&no-inline';
 import {useState} from 'react';
-import {Markdown,Dialog,MotionButton,TabStrip,SegmentedControl,Stack,type MarkdownImage} from '../dist/index.js';
+import {Markdown,Dialog,TabStrip,SegmentedControl,Stack,type MarkdownImage} from '../dist/index.js';
 
 const prompt=`## 硬约束
 
@@ -38,7 +38,7 @@ export function MarkdownPreview(){
    {key:'document',label:'完整语法',children:<Markdown aria-label="Markdown 完整语法" onImagePreview={setPreview}>{document.replace('./markdown-landscape.svg',landscapeUrl)}</Markdown>},
   ]}/>
   </div>
-  <Dialog open={!!preview} title={preview?.title??preview?.alt} onCancel={()=>setPreview(null)} footer={<MotionButton onClick={()=>setPreview(null)}>关闭</MotionButton>} width={760}>
+  <Dialog open={!!preview} title={preview?.title??preview?.alt} onCancel={()=>setPreview(null)} footer={null} closeAriaLabel="关闭预览" width={760}>
    {preview&&<img src={preview.src} alt={preview.alt} style={{display:'block',width:'100%',maxHeight:'70vh',objectFit:'contain'}}/>}
   </Dialog>
  </Stack>;

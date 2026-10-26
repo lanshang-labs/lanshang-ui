@@ -1,0 +1,14 @@
+.docs-complex-workspace.ls-workspace-layout{height:680px;border:1px solid var(--ui-shell-line,var(--ui-line));border-radius:14px;box-shadow:var(--ls-surface-shadow)}
+.docs-workspace-heading{justify-content:space-between}
+.docs-complex-workspace h3,.docs-complex-workspace h4,.docs-complex-workspace p{margin:0}
+.docs-complex-workspace .ls-workspace-pane-scroll>.bui-navigation{margin-inline:-8px}
+.docs-complex-workspace .ls-workspace-pane-scroll>.bui-navigation .sidebar-row{width:calc(100% - 16px)}
+.docs-workspace-resource{padding:14px;border:1px solid var(--ui-shell-line,var(--ui-line));border-radius:10px;background:var(--ui-raised)}
+.docs-workspace-reading{max-width:760px;margin-inline:auto;display:grid;gap:24px}
+.docs-workspace-reading section{display:grid;gap:12px}
+.docs-workspace-demo-intro{font-size:12px;color:var(--ui-muted)}
+@media(max-width:600px){.docs-complex-workspace.ls-workspace-layout{height:640px}.docs-complex-workspace .ls-workspace-header{gap:8px}}
+
+.docs-workspace-brand{padding:16px 8px;text-align:center;font-size:14px}
+.docs-workspace-nav-toggle{margin-top:auto;margin-bottom:8px;align-self:center}
+.docs-complex-workspace>.ls-workspace-body>.ls-workspace-sidebar .sidebar-row{margin-inline:4px;padding-inline:6px}

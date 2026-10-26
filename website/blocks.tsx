@@ -61,7 +61,7 @@ export function ProjectListBlock({rows=[],total=rows.length,query='',status='all
  const [archiveOpen,setArchiveOpen]=useState(false);
  const busy=refreshing||archiving;
  const filter=(next:{query:string;status:string})=>{onSelectionChange?.([]);setArchiveOpen(false);onFilterChange?.(next)};
- return <BlockFrame><PageHeader title="项目空间" description="所有项目，各有进展。" meta={state==='ready'?`${total} 个项目`:undefined} actions={<Inline className="ls-block-actions">{onRefresh&&<Button motionIcon="refresh" loading={refreshing} disabled={archiving||state==='loading'} onClick={onRefresh}>刷新</Button>}{onCreate&&<Button motionIcon="add" disabled={busy||state==='loading'} type="primary" onClick={onCreate}>新建项目</Button>}</Inline>}/>
+ return <BlockFrame><PageHeader title="项目空间" description="所有项目，各有进展。" meta={state==='ready'?`${total} 个项目`:undefined} actions={<Inline className="ls-block-actions">{onRefresh&&<Button motionIcon="refresh" loading={refreshing} disabled={archiving||state==='loading'} onClick={onRefresh} aria-label="刷新" title="刷新"/>}{onCreate&&<Button motionIcon="add" disabled={busy||state==='loading'} type="primary" onClick={onCreate}>新建项目</Button>}</Inline>}/>
  {notice&&<FeedbackPanel type="success" message={notice}/>}
  {refreshError&&<FeedbackPanel role="alert" type="warning" message={refreshError} description="保留上次结果，数据可能不是最新。" action={onRefresh&&<Button motionIcon="retry" disabled={busy} onClick={onRefresh}>重试刷新</Button>}/>}
  {state!=='ready'?<BlockStatePanel state={state} subject="项目" onRetry={onRetry} action={onCreate&&<Button motionIcon="add" type="primary" onClick={onCreate}>创建第一个项目</Button>}/>:<>
@@ -72,7 +72,7 @@ export function ProjectListBlock({rows=[],total=rows.length,query='',status='all
  <div aria-busy={busy}><DataTable<ProjectRecord> rowSelection={onSelectionChange?{selectedRowKeys:selectedKeys,onChange:keys=>{onSelectionChange(keys);setArchiveOpen(false)},preserveSelectedRowKeys:true,getCheckboxProps:row=>({'aria-label':`选择${row.name}`,disabled:busy})}:undefined} locale={{emptyText:<ContentState title={query||status!=='all'?'没有匹配的项目':'暂无项目'} description="试试其他关键词或创建新项目。" action={query||status!=='all'?<Button disabled={busy} onClick={()=>filter({query:'',status:'all'})}>清除筛选</Button>:onCreate&&<Button disabled={busy} onClick={onCreate}>创建项目</Button>}/>}} rowKey="id" scroll={{x:590}} dataSource={rows} pagination={{current:page,pageSize,total,disabled:busy,onChange:onPageChange,showSizeChanger:false,showTotal:total=>`${total} 个项目`}} columns={[
  {title:'项目',dataIndex:'name',render:(_,row)=><div className="ls-block-name"><span className="ls-block-avatar">{row.name.slice(0,1)}</span>{onOpen?<RowActionButton size="small" disabled={busy} onClick={()=>onOpen(row)}>{row.name}</RowActionButton>:row.name}</div>},
  {title:'类别',dataIndex:'category'}, {title:'负责人',dataIndex:'owner'}, {title:'状态',dataIndex:'status',render:status=><ProjectStatus status={status}/>},
- ...(onEdit?[{title:'操作',width:72,render:(_:unknown,row:ProjectRecord)=><RowActionButton size="small" disabled={busy} onClick={()=>onEdit(row)} aria-label={`编辑${row.name}`}>编辑</RowActionButton>}]:[])
+ ...(onEdit?[{title:'操作',width:72,render:(_:unknown,row:ProjectRecord)=><RowActionButton size="small" disabled={busy} onClick={()=>onEdit(row)} aria-label={`编辑${row.name}`} motionIcon="edit" title="编辑"/>}]:[])
  ]}/></div></>}</BlockFrame>;
 }
 

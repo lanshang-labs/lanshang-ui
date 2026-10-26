@@ -1,0 +1,1 @@
+.ls-feedback-result:focus-visible{outline:2px solid var(--ui-focus-ring,var(--ui-accent));outline-offset:3px;border-radius:var(--ls-control-middle-popup-radius,12px)}

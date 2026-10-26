@@ -1,6 +1,6 @@
 {
   "name": "@lanshang-labs/ui",
-  "version": "0.2.11",
+  "version": "0.2.12",
   "description": "Lanshang UI: compact interfaces built on Ant Design, Beautiful UI and Iconoir",
   "type": "module",
   "license": "MIT",
@@ -31,7 +31,17 @@
     "./charts": {
       "types": "./dist/charts.d.ts",
       "import": "./dist/charts.js"
-    }
+    },
+    "./media": {
+      "types": "./dist/media.d.ts",
+      "import": "./dist/media.js"
+    },
+    "./media.css": "./dist/media.css",
+    "./dock": {
+      "types": "./dist/dock.d.ts",
+      "import": "./dist/dock.js"
+    },
+    "./dock.css": "./dist/dock.css"
   },
   "scripts": {
     "build": "node scripts/clean-dist.mjs && tsc && node scripts/bundle-markdown-math.mjs && node scripts/copy-styles.mjs",
@@ -39,19 +49,21 @@
     "dev": "vite --host 127.0.0.1",
     "check:examples": "tsc --noEmit -p tsconfig.examples.json",
     "prepack": "npm run build",
-    "build:docs": "npm run build && npm run check:examples && LANSHANG_REGISTRY_OUT=.registry-build/public LANSHANG_REGISTRY_BASE=https://lanshang-labs.github.io/lanshang-ui/ node scripts/build-registry.mjs && vite build --config vite.docs.config.ts && node scripts/docs-notices.mjs",
+    "build:docs": "npm run build && npm run check:examples && LANSHANG_REGISTRY_OUT=.registry-build/public LANSHANG_REGISTRY_BASE=https://lanshang-labs.github.io/lanshang-ui/ node scripts/build-registry.mjs && npm run build:lab-template && vite build --config vite.docs.config.ts && node scripts/docs-notices.mjs",
     "preview:docs": "vite preview --config vite.docs.config.ts --host 127.0.0.1",
     "build:registry": "npm run build && node scripts/build-registry.mjs",
     "test:registry": "node scripts/verify-registry.mjs",
     "test:registry:ci": "node scripts/registry-ci.mjs",
     "check:published-history": "node scripts/check-published-history.mjs",
-    "archive:published": "node scripts/archive-published.mjs"
+    "archive:published": "node scripts/archive-published.mjs",
+    "build:lab-template": "node scripts/build-lab-template.mjs"
   },
   "peerDependencies": {
+    "@ant-design/plots": "^2.6.8",
     "antd": "^5.22.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "@ant-design/plots": "^2.6.8"
+    "motion": "^14.6.0"
   },
   "dependencies": {
     "iconoir-react": "7.12.1",
@@ -64,21 +76,41 @@
     "@ant-design/plots": "2.6.8",
     "@fontsource-variable/inter": "^5.3.0",
     "@fontsource-variable/noto-sans-sc": "^5.3.1",
+    "@radix-ui/react-avatar": "1.1.11",
+    "@radix-ui/react-collapsible": "1.1.12",
+    "@radix-ui/react-dialog": "1.1.15",
+    "@radix-ui/react-dropdown-menu": "2.1.16",
+    "@radix-ui/react-progress": "1.1.8",
+    "@radix-ui/react-select": "2.2.6",
+    "@radix-ui/react-separator": "1.1.8",
+    "@radix-ui/react-slot": "1.2.4",
+    "@radix-ui/react-tabs": "1.1.13",
+    "@radix-ui/react-tooltip": "1.2.8",
+    "@tailwindcss/cli": "4.1.18",
     "@testing-library/react": "16.3.2",
     "@types/prismjs": "^1.26.5",
     "@types/react": "18.3.12",
     "@types/react-dom": "18.3.1",
     "@vitejs/plugin-react": "4.3.4",
     "antd": "5.22.5",
+    "class-variance-authority": "0.7.1",
+    "clsx": "2.1.1",
     "dayjs": "^1.11.23",
     "esbuild": "0.25.12",
     "jsdom": "26.1.0",
     "katex": "0.19.0",
+    "lucide-react": "0.562.0",
+    "motion": "14.6.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",
+    "react-router-dom": "7.18.4",
+    "recharts": "3.6.0",
     "rehype-katex": "7.0.1",
     "remark-math": "6.0.0",
     "shadcn": "4.21.4",
+    "tailwind-merge": "3.4.0",
+    "tailwindcss": "4.1.18",
+    "tw-animate-css": "1.4.0",
     "typescript": "5.7.2",
     "vite": "6.4.4",
     "vitest": "5.0.3"
@@ -92,6 +124,9 @@
   },
   "peerDependenciesMeta": {
     "@ant-design/plots": {
+      "optional": true
+    },
+    "motion": {
       "optional": true
     }
   }

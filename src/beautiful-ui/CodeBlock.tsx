@@ -181,16 +181,17 @@ export default function CodeBlock({
         ) : (
           <RowActionButton
             aria-label={text.copy}
+            title={copied ? text.copied : text.copy}
+            size="middle"
             onClick={copy}
             data-copied={copied || undefined}
             className="bui-code-copy ml-auto"
             icon={copied ? <Check width={14} height={14} strokeWidth={1.8}/> : <Copy width={14} height={14} strokeWidth={1.8}/>}
-          >
-            {copied ? text.copied : text.copy}
-          </RowActionButton>
+          />
         )}
       </div>
 
+      <span className="bui-code-copy-status" role="status">{copied ? text.copied : ''}</span>
       {/* body — equal 12px inset on top / left / right; lines wrap */}
       {copyFailed && <p role="alert">复制失败，请手动选择日志文本。</p>}
       <div className="py-3 font-mono text-[12.5px] leading-[1.65] text-ink-2">

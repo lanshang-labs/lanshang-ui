@@ -56,3 +56,30 @@ it.each(['light','dark'] as const)('publishes the same three control sizes to th
   expect(vars[`--ls-control-${size}-switch-handle`]).toBe(`${values.switchHandle}px`);
  }
 });
+
+it.each(['light','dark'] as const)('shares compact checkbox geometry and distinct item states (%s)',mode=>{
+ const components=designTheme(mode).components!,vars=themeVariables(mode),p=palettes[mode];
+ expect(components.Checkbox!.controlInteractiveSize).toBe(16);
+ expect(components.Checkbox!.borderRadiusSM).toBe(5);
+ expect(components.Checkbox!.colorPrimary).toBe(p.text);
+ expect(vars['--ls-checkbox-size']).toBe(`${foundations.checkboxSize}px`);
+ expect(vars['--ls-checkbox-radius']).toBe(`${foundations.checkboxRadius}px`);
+ expect(components.Menu!.itemSelectedBg).toBe(p['item-selected']);
+ expect(components.Menu!.itemHoverBg).toBe(p['item-hover']);
+ expect(components.Select!.optionSelectedBg).toBe('transparent');
+ expect(p['item-selected']).not.toBe(p['item-hover']);
+ expect(vars['--ls-item-selected-shadow']==='none').toBe(mode==='dark');
+});
+
+it.each(['light','dark'] as const)('keeps field boundaries and persistent selection coherent without changing focus semantics (%s)',mode=>{
+ const components=designTheme(mode).components!,p=palettes[mode];
+ for(const key of ['Input','Select','InputNumber','DatePicker'] as const){
+  expect(components[key]!.colorBorder).toBe(p['line-strong']);
+  expect(components[key]!.activeBorderColor).toBe(p.accent);
+ }
+ const selected=mode==='light'?p.surface:p.selected;
+ expect(components.Segmented!.itemSelectedBg).toBe(selected);
+ expect(components.Radio!.buttonSolidCheckedBg).toBe(selected);
+ expect(components.Radio!.buttonSolidCheckedHoverBg).toBe(selected);
+ expect(components.Radio!.buttonSolidCheckedActiveBg).toBe(selected);
+});

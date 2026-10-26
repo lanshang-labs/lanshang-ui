@@ -9,23 +9,33 @@
 .ds-data-table .ls-table-filter-icon svg{width:14px;height:14px;stroke-width:1.8}
 .ds-data-table .ls-table-filter-label{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
 .ds-data-table .ant-table-tbody>tr>td {font-size:13px;font-variant-numeric:tabular-nums;}
-.ds-data-table .ant-pagination {margin:0!important;padding:8px 12px;border-top:1px solid var(--ui-line);background:var(--ui-canvas);}
+.ds-data-table .ant-pagination {margin:0!important;padding:6px 10px;border-top:1px solid var(--ui-line);background:var(--ui-canvas);}
 .ds-column-label {display:inline-block;max-width:100%;overflow:hidden;text-overflow:ellipsis;vertical-align:middle;}
 .ds-column-label:focus-visible {outline:2px solid var(--ui-accent);outline-offset:2px;}
 /* Pagination shares the table's neutral hierarchy; accent is reserved for focus. */
-.ds-data-table .ant-pagination {display:flex;flex-wrap:wrap;align-items:center;gap:4px;row-gap:8px;}
+.ds-data-table .ant-pagination {display:flex;flex-wrap:wrap;align-items:center;gap:2px;row-gap:6px;}
 .ds-data-table .ant-pagination > li {margin-inline-end:0;}
 .ds-data-table .ant-pagination .ant-pagination-total-text {margin-inline-end:auto;color:var(--ui-secondary);font-size:12px;}
-.ds-data-table .ant-pagination .ant-pagination-item {border-color:transparent;border-radius:var(--ls-control-middle-radius,10px);}
-.ds-data-table .ant-pagination .ant-pagination-item-active {background:var(--ui-selected);border-color:var(--ui-line-strong);font-weight:500;}
+.ds-data-table .ant-pagination .ant-pagination-item {background:transparent;border-color:transparent;border-radius:999px;}
+.ds-data-table .ant-pagination .ant-pagination-item-active {background:var(--ui-selected);border-color:transparent;font-weight:500;}
 .ds-data-table .ant-pagination .ant-pagination-item:not(.ant-pagination-item-active):hover {background:var(--ui-raised);}
-.ds-data-table .ant-pagination .ant-pagination-options {margin-inline-start:8px;}
-.ds-data-table .ant-pagination .ant-pagination-options-quick-jumper input {background:var(--ls-surface-face);border-color:var(--ls-surface-edge);border-radius:var(--ls-control-middle-radius,10px);box-shadow:var(--ls-surface-shadow-compact);}
+.ds-data-table .ant-pagination .ant-pagination-options {margin-inline-start:6px;}
+.ds-data-table .ant-pagination .ant-pagination-options-quick-jumper input {background:var(--ls-surface-face);border-color:var(--ls-control-edge,var(--ui-line-strong));border-radius:var(--ls-control-small-radius,8px);box-shadow:none;}
 .ds-data-table .ant-pagination .ant-pagination-options-quick-jumper input:focus-visible {outline:2px solid var(--ui-accent);outline-offset:2px;}
+.ds-data-table .ant-pagination.ant-pagination-mini :is(.ant-pagination-item,.ant-pagination-prev,.ant-pagination-next,.ant-pagination-jump-prev,.ant-pagination-jump-next){min-width:26px;height:26px;line-height:26px;font-size:12px;}
+.ds-data-table .ant-pagination.ant-pagination-mini .ant-pagination-item-link{width:26px;height:26px;display:inline-grid;place-items:center;background:transparent;border:0;border-radius:999px;color:inherit;}
+.ds-data-table .ant-pagination.ant-pagination-mini .ant-pagination-item a{padding:0;}
+.ds-data-table .ant-pagination.ant-pagination-mini .ant-pagination-total-text{height:auto;min-height:0;line-height:20px;}
+.ds-data-table .ant-pagination.ant-pagination-mini .ant-pagination-options{font-size:12px;}
+.ds-data-table .ant-pagination.ant-pagination-mini .ant-pagination-options-quick-jumper{height:26px;line-height:26px;}
+.ds-data-table .ant-pagination.ant-pagination-mini .ant-pagination-options-quick-jumper input{width:40px;height:26px;margin-inline:6px;font-size:12px;}
+.ds-data-table .ant-pagination :is(.ant-pagination-item,.ant-pagination-jump-prev,.ant-pagination-jump-next):focus-visible{outline:2px solid var(--ui-focus-ring);outline-offset:-2px;}
+.ds-data-table .ant-pagination :is(.ant-pagination-prev,.ant-pagination-next) button:focus-visible{outline:2px solid var(--ui-focus-ring);outline-offset:-2px;}
 .ds-data-table .ant-pagination.ant-pagination-disabled .ant-pagination-item:hover {background:transparent;}
 .ds-data-table .ant-pagination.ant-pagination-disabled .ant-pagination-item-active {background:var(--ui-raised);}
 @media(max-width:600px) {
  .ds-data-table .ant-pagination .ant-pagination-total-text {flex-basis:100%;}
+ .ds-data-table .ant-pagination.ant-pagination-mini .ant-pagination-total-text {flex-basis:auto;}
  .ds-data-table .ant-pagination .ant-pagination-options {display:flex;flex-wrap:wrap;gap:8px;margin-inline-start:0;max-width:100%;}
  .ds-data-table .ant-pagination .ant-pagination-options-quick-jumper {margin-inline-start:0;}
 }
@@ -63,7 +73,7 @@
 }
 .ds-table-expanded-content {
  min-width:0;padding:8px 14px;background:var(--ls-surface-face);
- border:1px solid var(--ls-surface-edge);border-radius:var(--ls-control-middle-radius,10px);box-shadow:var(--ls-surface-shadow);
+ border:1px solid var(--ls-surface-edge);border-radius:var(--ls-control-middle-radius,10px);box-shadow:none;
 }
 .ds-table-expanded-content > .bui-metadata-list > .bui-metadata-row {
  grid-template-columns:80px minmax(0,1fr);gap:12px;padding:5px 0;border:0;
@@ -84,4 +94,4 @@
 .ds-data-table.ant-table-wrapper .ant-table-tbody > .ant-table-row:has(+ .ant-table-expanded-row:not([style*="display: none"])) > td {border-bottom-color:transparent;}
 
 /* A code panel already owns its frame and spacing. */
-.ds-table-expanded-content:has(> .ls-code-block:only-child){padding:0;border:0;background:transparent;}
+.ds-table-expanded-content:has(> :is(.ls-code-block,.ds-data-table):only-child){padding:0;border:0;background:transparent;}

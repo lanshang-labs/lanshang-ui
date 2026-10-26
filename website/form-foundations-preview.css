@@ -7,6 +7,3 @@
 .ls-form-advanced {margin-top:4px;}
 .ls-form-example .ant-radio-wrapper,.ls-form-example .ant-checkbox-wrapper {white-space:normal;}
 @media(max-width:480px){.ls-form-example{padding:14px;}.ls-form-example .ant-btn{max-width:100%;height:auto;min-height:var(--ls-control-middle-height,32px);white-space:normal;}}
-
-/* Reserve a line for the textarea counter before help/error text. */
-.ls-form-example .ant-input-textarea-show-count {margin-bottom:22px;}

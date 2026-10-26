@@ -6,7 +6,8 @@ export type ContentStateProps = Omit<HTMLAttributes<HTMLDivElement>, "title" | "
 };
 /** No inferred errors or timers: callers supply state and recovery actions. */
 export const ContentState = forwardRef<HTMLDivElement, ContentStateProps>(function ContentState({title, description, icon, action, loading=false, role="status", className="", "aria-live": live, ...props}, ref) {
-  return <div {...props} ref={ref} className={`bui-content-state ${className}`} role={role} aria-live={live ?? (role === "alert" ? "assertive" : "polite")} aria-busy={loading}>
+  // This is the live feedback, not the busy data region. Explicit caller ARIA still passes through.
+  return <div {...props} ref={ref} className={`bui-content-state ${className}`} role={role} aria-live={live ?? (role === "alert" ? "assertive" : "polite")}>
     {icon != null && <span className="bui-content-state-icon" aria-hidden="true">{icon}</span>}
     {loading ? <div className="bui"><LoadingLabel label={title} announce={false}/></div> : <strong>{title}</strong>}
     {description != null && <div className="bui-content-state-description">{description}</div>}

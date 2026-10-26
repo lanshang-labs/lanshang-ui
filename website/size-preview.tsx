@@ -23,7 +23,7 @@ function SizeCard({size,label,onAction}:{size:ControlSize;label:string;onAction:
  return <div className="ls-size-card" data-size={size}>
   <header><strong>{label}号 · {size}</strong><span>{tokens.height}px 高 · {tokens.radius}px 圆角</span></header>
   <span className="ls-size-label">输入与按钮组合</span>
-  <InputGroup size={size} aria-label={`${label}号输入与操作`} control={<TextInput size={size} aria-label={`${label}号搜索关键词`} placeholder="搜索项目"/>} actions={<ButtonGroup><RowActionButton size={size} motionIcon="search" onClick={()=>onAction('搜索')}>搜索</RowActionButton></ButtonGroup>}/>
+  <InputGroup size={size} aria-label={`${label}号输入与操作`} control={<TextInput size={size} aria-label={`${label}号搜索关键词`} placeholder="搜索项目"/>} actions={<ButtonGroup><RowActionButton size={size} motionIcon="search" onClick={()=>onAction('搜索')} aria-label="搜索" title="搜索"/></ButtonGroup>}/>
   <span className="ls-size-label">选择器</span>
   <Select size={size} aria-label={`${label}号选择器`} defaultValue="design" options={options} getPopupContainer={node=>node.parentElement!}/>
   <span className="ls-size-label">日期选择</span>

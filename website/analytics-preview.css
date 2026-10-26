@@ -8,3 +8,5 @@
 .ls-analytics-boundary[data-variant=page]>.ls-loading-container-stage>.ls-loading-container-body{padding-top:0}
 .ls-analytics-boundary .ls-loading-container-notice[data-visible=true]{padding-bottom:16px}
 @media(max-width:760px){.ls-analytics-metrics{grid-template-columns:1fr}.ls-analytics-secondary{grid-template-columns:1fr}.ls-analytics-toolbar{gap:10px}}
+
+.ls-analytics-boundary:focus-visible{outline:2px solid var(--ui-accent);outline-offset:3px;border-radius:var(--ls-control-middle-popup-radius,12px)}

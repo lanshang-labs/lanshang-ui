@@ -1,0 +1,31 @@
+/* One configurable frame for Dock workbenches, tables, editors and dashboards. */
+.ls-workspace-layout[data-layout=dock]{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto;--ls-workbench-gutter:16px;--ls-workbench-gap:16px;--ls-workbench-radius:12px;--ls-workbench-body-padding:20px;--ls-workbench-dock-height:76px;--ls-workbench-dock-width:640px}
+.ls-workspace-layout[data-layout=dock]>.ls-workspace-topbar{grid-column:1 / -1;grid-row:1}
+.ls-workspace-layout[data-layout=dock]>.ls-workspace-body{display:contents}
+.ls-workspace-layout[data-layout=dock]>.ls-workspace-body>.ls-workspace-sidebar{grid-column:1;grid-row:2 / 4}
+.ls-workspace-layout[data-layout=dock]>.ls-workspace-body>.ls-workspace-main{grid-column:2;grid-row:2}
+.ls-workspace-layout[data-layout=dock][data-sidebar=false]>.ls-workspace-body>.ls-workspace-main{grid-column:1 / -1}
+.ls-workspace-layout[data-layout=dock]>.ls-workspace-body>.ls-workspace-main>.ls-workspace-content{display:flex;flex-direction:column;margin:0;max-width:none;padding:var(--ls-workbench-gutter);overflow:hidden;scrollbar-gutter:auto}
+.ls-workspace-layout[data-layout=dock]>.ls-workspace-footer{grid-column:2;grid-row:3;z-index:5;position:relative;overflow:visible;padding:0 var(--ls-workbench-gutter) max(8px,env(safe-area-inset-bottom));border:0;background:var(--ui-shell-canvas,var(--ui-canvas))}
+.ls-workspace-layout[data-layout=dock][data-sidebar=false]>.ls-workspace-footer{grid-column:1 / -1}
+.ls-workspace-layout[data-layout=dock]>.ls-workspace-footer .ls-dock-host{height:var(--ls-workbench-dock-height);padding-block:8px;overflow:visible;max-width:var(--ls-workbench-dock-width);margin-inline:auto}
+.ls-workspace-layout[data-layout=dock]>.ls-workspace-footer .ls-dock-host[data-overflow=true]{height:calc(var(--ls-workbench-dock-height) + 40px);padding-top:40px;overflow-x:auto;overflow-y:hidden}
+.ls-workbench-page,.ls-workbench-page *{box-sizing:border-box}
+.ls-workbench-page{display:flex;flex-direction:column;gap:var(--ls-workbench-gap,16px);flex:1;min-width:0;min-height:0;height:100%;color:var(--ui-text)}
+.ls-workbench-toolbar{flex:none;min-width:0}
+.ls-workbench-toolbar>*{max-width:100%}
+.ls-workbench-panel{display:flex;flex-direction:column;flex:1;min-width:0;min-height:0;overflow:hidden;border:1px solid var(--ls-workbench-edge,var(--ls-surface-edge,var(--ui-line)));border-radius:var(--ls-workbench-radius,12px);background:var(--ls-workbench-surface,var(--ls-surface-face,var(--ui-surface)));box-shadow:var(--ls-workbench-shadow,var(--ls-surface-shadow))}
+.ls-workbench-navigation,.ls-workbench-status{flex:none;min-width:0;padding:8px 12px}
+.ls-workbench-navigation{border-bottom:1px solid var(--ls-surface-edge,var(--ui-line))}
+.ls-workbench-status{border-top:1px solid var(--ls-surface-edge,var(--ui-line));color:var(--ui-secondary);font-size:12px}
+.ls-workbench-content{flex:1;min-width:0;min-height:0;padding:var(--ls-workbench-body-padding,20px);overflow:auto;overscroll-behavior:contain}
+.ls-workbench-content[data-padding=none]{padding:0}
+.ls-workbench-content[data-scroll=managed]{display:flex;flex-direction:column;overflow:hidden}
+/* A TabStrip with panels owns scrolling; its bar joins the shared content face. */
+.ls-workbench-content[data-scroll=managed]>.ls-tab-strip{flex:1;min-width:0;min-height:0;margin:0;border:0;border-radius:0;background:transparent}
+.ls-workbench-content[data-scroll=managed]>.ls-tab-strip>.ant-tabs-nav{flex:none;min-height:0;margin:0;padding:8px 12px;border-bottom:1px solid var(--ls-surface-edge,var(--ui-line));background:transparent}
+.ls-workbench-content[data-scroll=managed]>.ls-tab-strip>.ant-tabs-nav::before{border:0}
+.ls-workbench-content[data-scroll=managed]>.ls-tab-strip>.ant-tabs-content-holder{min-height:0;overflow:hidden;background:transparent}
+.ls-workbench-content[data-scroll=managed]>.ls-tab-strip>.ant-tabs-content-holder>.ant-tabs-content{height:100%}
+.ls-workbench-content[data-scroll=managed]>.ls-tab-strip>.ant-tabs-content-holder .ant-tabs-tabpane{height:100%;overflow:auto;padding:var(--ls-workbench-body-padding,20px)}
+@media(max-width:700px){.ls-workspace-layout[data-layout=dock]{--ls-workbench-gutter:12px;--ls-workbench-body-padding:12px;--ls-workbench-dock-height:68px}}

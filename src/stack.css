@@ -5,15 +5,28 @@
 /* Long validation messages must wrap inside their own field, including identifiers. */
 .ls-form-grid .ant-form-item-explain,
 .ls-form-grid .ant-form-item-extra {overflow-wrap:anywhere;}
-/* Opt-in form dialogs keep actions outside the scrollable content at short heights. */
-.ls-form-dialog.ant-modal {top:clamp(16px,8dvh,100px);padding-bottom:16px;}
-.ls-form-dialog .ant-modal-content {display:flex;flex-direction:column;max-height:calc(100dvh - clamp(16px,8dvh,100px) - 16px);}
-.ls-form-dialog .ant-modal-body {min-height:0;overflow:auto;overscroll-behavior:contain;}
-.ls-form-dialog .ant-modal-footer {flex-shrink:0;display:flex;justify-content:flex-end;flex-wrap:wrap;gap:8px;}
-.ls-form-dialog .ant-modal-footer>.ant-btn+.ant-btn {margin-inline-start:0;}
-.ls-form-drawer .ant-drawer-body {min-height:0;overflow:auto;overscroll-behavior:contain;}
-.ls-form-drawer .ant-drawer-footer {flex-shrink:0;}
-.ls-form-drawer .ant-drawer-footer .ls-inline {justify-content:flex-end;}
+/* Counters occupy their own line before help/errors, also inside grouped forms. */
+.ls-form .ant-input-textarea-show-count {margin-bottom:20px;}
+.ls-form :is(.ant-form-item-explain,.ant-form-item-extra) {overflow-wrap:anywhere;}
+/* Shared overlays own their frame and scroll; form classes remain compatible. */
+:is(.ls-dialog,.ls-form-dialog).ant-modal {top:clamp(16px,8dvh,100px);padding-bottom:16px;}
+:is(.ls-dialog,.ls-form-dialog) .ant-modal-content {display:flex;flex-direction:column;max-height:calc(100dvh - clamp(16px,8dvh,100px) - 16px);}
+.ant-modal-centered :is(.ls-dialog,.ls-form-dialog).ant-modal {top:0;}
+:is(.ls-dialog,.ls-form-dialog) .ant-modal-body {min-height:0;overflow:auto;overscroll-behavior:contain;}
+:is(.ls-dialog,.ls-form-dialog) .ant-modal-header {flex-shrink:0;padding-bottom:16px;margin-bottom:16px;border-bottom:1px solid var(--ui-line);background:transparent;}
+:is(.ls-dialog,.ls-form-dialog) .ant-modal-title {padding-inline-end:24px;overflow-wrap:anywhere;}
+:is(.ls-dialog,.ls-form-dialog) .ant-modal-footer {flex-shrink:0;display:flex;justify-content:flex-end;flex-wrap:wrap;gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid var(--ui-line);}
+:is(.ls-dialog,.ls-form-dialog) .ant-modal-footer>.ant-btn+.ant-btn {margin-inline-start:0;}
+:is(.ls-drawer-panel,.ls-form-drawer) :is(.ant-drawer-header,.ant-drawer-footer) {flex-shrink:0;padding:16px 20px;border-color:var(--ui-line);}
+:is(.ls-drawer-panel,.ls-form-drawer) .ant-drawer-title {overflow-wrap:anywhere;}
+:is(.ls-drawer-panel,.ls-form-drawer) .ant-drawer-body {min-height:0;padding:20px;overflow:auto;overscroll-behavior:contain;}
+:is(.ls-drawer-panel,.ls-form-drawer) .ant-drawer-footer {display:flex;justify-content:flex-end;flex-wrap:wrap;gap:8px;}
+:is(.ls-dialog,.ls-form-dialog) .ant-modal-footer>.ls-inline,
+:is(.ls-drawer-panel,.ls-form-drawer) .ant-drawer-footer>.ls-inline {width:100%;justify-content:flex-end;}
+@media(max-width:600px){
+ :is(.ls-dialog,.ls-form-dialog) .ant-modal-content {padding:16px;}
+ :is(.ls-drawer-panel,.ls-form-drawer) :is(.ant-drawer-header,.ant-drawer-body,.ant-drawer-footer) {padding:16px;}
+}
 .ls-keyboard-key {display:inline-flex;flex-shrink:0;align-items:center;justify-content:center;min-width:38px;height:22px;padding:0 5px;border:1px solid var(--ui-line);border-radius:5px;background:var(--ui-canvas);color:var(--ui-secondary);font-family:inherit;line-height:1;font-size:12px;letter-spacing:0;white-space:nowrap;box-sizing:border-box;}
 /* Disclosure is one card; native details keeps form state and keyboard behavior. */
 .ls-disclosure {min-width:0;border:1px solid var(--ls-surface-edge,var(--ui-line));border-radius:12px;background:var(--ls-surface-face,var(--ui-surface));box-shadow:var(--ls-surface-shadow,none);}

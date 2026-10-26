@@ -19,7 +19,7 @@ it('keeps focus during loading and prevents disabled or repeated actions',()=>{
 
 it('keeps primary button text contrast above 4.5 in both themes and all action states',()=>{
  const luminance=(hex:string)=>{const rgb=hex.replace('#','').match(/../g)!.map(c=>parseInt(c,16)/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4);return rgb[0]*.2126+rgb[1]*.7152+rgb[2]*.0722};
- for(const mode of ['light','dark'] as const){const b=designTheme(mode).components!.Button!;for(const key of ['colorPrimary','colorPrimaryHover','colorPrimaryActive'] as const){expect(1.05/(luminance(b[key] as string)+.05)).toBeGreaterThanOrEqual(4.5)}}
+ for(const mode of ['light','dark'] as const){const b=designTheme(mode).components!.Button!;for(const key of ['colorPrimary','colorPrimaryHover','colorPrimaryActive'] as const){const ink=luminance(b.primaryColor as string),fill=luminance(b[key] as string);expect((Math.max(ink,fill)+.05)/(Math.min(ink,fill)+.05)).toBeGreaterThanOrEqual(4.5)}}
 });
 it('separates readable danger text from filled danger button colors',()=>{
  const luminance=(hex:string)=>{const rgb=hex.replace('#','').match(/../g)!.map(c=>parseInt(c,16)/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4);return rgb[0]*.2126+rgb[1]*.7152+rgb[2]*.0722};
@@ -30,4 +30,13 @@ it('separates readable danger text from filled danger button colors',()=>{
    expect(1.05/(luminance(p[key])+.05)).toBeGreaterThanOrEqual(4.5);
   }
  }
+});
+
+it.each(['light','dark'] as const)('keeps primary actions neutral while links, focus and danger retain their semantics (%s)',mode=>{
+ const config=designTheme(mode),button=config.components!.Button!,palette=palettes[mode];
+ expect(button.colorPrimary).toBe(palette.text);
+ expect(button.primaryColor).toBe(palette.surface);
+ expect(config.token!.colorLink).toBe(palette['link-text']);
+ expect(config.token!.colorPrimary).toBe(palette.accent);
+ expect(button.colorPrimary).not.toBe(button.colorError);
 });

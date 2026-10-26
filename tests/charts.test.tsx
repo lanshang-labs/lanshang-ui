@@ -103,3 +103,41 @@ it('uses one coherent cumulative snapshot and derives the fixed seven-day compar
     if(index>0)expect(Number(rows[index][1])).toBeGreaterThanOrEqual(Number(rows[index-2][1]));
   }
 });
+
+it('keeps refresh focus, blocks duplicate reads and preserves the expanded data table through recovery',()=>{
+  vi.useFakeTimers();render(<AnalyticsPreview/>);act(()=>vi.advanceTimersByTime(1200));
+  const details=document.querySelector('details')!;details.open=true;fireEvent(details,new Event('toggle'));
+  const table=screen.getByRole('table',{name:'生产趋势原始数据'});
+  fireEvent.click(screen.getByRole('checkbox',{name:'模拟读取失败'}));
+  const refresh=screen.getByRole('button',{name:'刷新统计'});refresh.focus();fireEvent.click(refresh);
+  expect(document.activeElement).toBe(refresh);expect(refresh.getAttribute('aria-disabled')).toBe('true');
+  fireEvent.click(screen.getByRole('button',{name:'近 14 天'}));
+  expect(screen.getByRole('button',{name:'近 7 天'}).getAttribute('aria-pressed')).toBe('true');
+  act(()=>vi.advanceTimersByTime(1200));
+  expect(screen.getByRole('table',{name:'生产趋势原始数据'})).toBe(table);
+  const retry=screen.getByRole('button',{name:'重试'});retry.focus();fireEvent.click(retry);
+  act(()=>vi.advanceTimersByTime(20));
+  expect(document.activeElement).toBe(screen.getByLabelText('统计成功快照'));
+  act(()=>vi.advanceTimersByTime(1200));
+  expect(screen.queryByRole('alert')).toBeNull();expect(details.open).toBe(true);
+  expect(screen.getByRole('table',{name:'生产趋势原始数据'})).toBe(table);
+  expect(screen.getByRole('button',{name:'近 7 天'}).getAttribute('aria-pressed')).toBe('true');
+});
+it('does not take focus away from another control when retry was triggered without focus ownership',()=>{
+  vi.useFakeTimers();render(<AnalyticsPreview/>);act(()=>vi.advanceTimersByTime(1200));
+  const checkbox=screen.getByRole('checkbox',{name:'模拟读取失败'});
+  fireEvent.click(checkbox);fireEvent.click(screen.getByRole('button',{name:'刷新统计'}));act(()=>vi.advanceTimersByTime(1200));
+  checkbox.focus();fireEvent.click(screen.getByRole('button',{name:'重试'}));act(()=>vi.advanceTimersByTime(20));
+  expect(document.activeElement).toBe(checkbox);
+});
+
+it('keeps the empty-result trigger focused while blocking another request during the pending read',()=>{
+  vi.useFakeTimers();render(<AnalyticsPreview/>);act(()=>vi.advanceTimersByTime(1200));
+  const empty=screen.getByRole('checkbox',{name:'请求空结果'}) as HTMLInputElement;
+  empty.focus();fireEvent.click(empty);expect(document.activeElement).toBe(empty);
+  expect(empty.getAttribute('aria-disabled')).toBe('true');expect(empty.checked).toBe(true);
+  fireEvent.click(empty);expect(empty.checked).toBe(true);
+  act(()=>vi.advanceTimersByTime(1200));
+  expect(document.activeElement).toBe(empty);expect(empty.checked).toBe(true);
+  expect(screen.getAllByText('暂无图表数据')).toHaveLength(2);expect(screen.getByText('暂无排行数据')).toBeTruthy();
+});

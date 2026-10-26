@@ -1,0 +1,33 @@
+{
+  "repository": "https://github.com/cosscom/ui",
+  "commit": "3d8ca28e7d90123e9e0f44665944dc240b026ccb",
+  "catalog": "https://21st.dev/@coss.com",
+  "licenseScope": "apps/ui and apps/origin are MIT per upstream LICENSING.md. Other repository directories are excluded.",
+  "use": "Visual reference and explicit AntD token adaptation; upstream Base UI components are not executed.",
+  "files": [
+    {
+      "path": "LICENSING.md",
+      "sha256": "bdc4f6e1e67ebf59372ea6498e5b93a4c6d6b177a82e59e1e28cd542219182f8"
+    },
+    {
+      "path": "apps/ui/package.json",
+      "sha256": "b3fc573724f671aa54bc1ca82165eddac5c80917ef033a0062f1c1f54e6a97ac"
+    },
+    {
+      "path": "apps/origin/LICENSE.md",
+      "sha256": "4fe705509418993f1ad677f91108c2df676228d7b0a758b42ebe79e8b5ad5a4b"
+    },
+    {
+      "path": "apps/ui/registry/default/ui/button.tsx",
+      "sha256": "1e65556bde3071f90f61825cf573aec74bdd8695824470bea3dae4d68a6b8fc8"
+    },
+    {
+      "path": "apps/ui/registry/default/ui/input.tsx",
+      "sha256": "3d488d491eb4e63642adc8b9354b0b0cc5b8ec4e284bbc26da7e2516f24980a4"
+    },
+    {
+      "path": "apps/ui/public/r/colors-neutral.json",
+      "sha256": "35850dc9359ad200f21746efaa5e038c3a3fad29ea1f47063a091cdecba85d1a"
+    }
+  ]
+}

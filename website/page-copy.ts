@@ -4,6 +4,7 @@ import {registryCommand} from './registry';
 
 export function pageInstallation(page:DocPage):{description:string;command?:string}|undefined {
  if(!page.id.startsWith('components/')&&!page.id.startsWith('blocks/'))return;
+ if(page.id==='components/dock')return {description:'Dock 自 0.2.12 正式提供。先通过 Registry 安装共享包与 Provider，再显式安装可选 Motion peer；基础入口不加载 Motion。',command:registryCommand('lanshang-provider')+'\nnpm install motion@14.6.0'};
  if(page.localOnly)return {description:'该组件尚未发布。请在本地仓库执行 npm run build 和 npm pack，再安装生成的 tgz；当前线上 Registry 尚不包含此组件。'};
  const command=registryCommand(page.id==='components/analytics'?'lanshang-provider':page.source?'lanshang-blocks':'lanshang-provider');
  return {description:'使用 shadcn CLI 安装；首次接入先配置 components.json，再将生成的 Provider 挂到应用根部。'+(page.id==='components/analytics'?' 绘图还需显式安装可选 peer @ant-design/plots；只用指标与排行不需要图表引擎。':''),command:command+(page.id==='components/analytics'?'\nnpm install @ant-design/plots@2.6.8':'')};

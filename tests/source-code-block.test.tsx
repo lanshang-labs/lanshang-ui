@@ -35,10 +35,13 @@ it('legacy code block handles unavailable clipboard and clears failure after ret
  Object.defineProperty(navigator,'clipboard',{configurable:true,value:undefined});
  render(<LegacyCodeBlock code="const a = 1;"/>);
  expect(screen.getByRole('button',{name:'Copy'}).classList.contains('bui-row-action')).toBe(true);
+ expect(screen.getByRole('button',{name:'Copy'}).textContent).toBe('');
+ expect(screen.getByRole('button',{name:'Copy'}).title).toBe('Copy');
  fireEvent.click(screen.getByRole('button',{name:'Copy'}));await screen.findByRole('alert');
  Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:vi.fn().mockResolvedValue(undefined)}});
  fireEvent.click(screen.getByRole('button',{name:'Copy'}));await waitFor(()=>expect(screen.queryByRole('alert')).toBeNull());
  expect(screen.getByRole('button',{name:'Copy'}).getAttribute('data-copied')).toBe('true');
+ expect(screen.getByRole('status').textContent).toBe('Copied');
 });
 it('copies large JSON exactly in collapsed, expanded and wrapped states and resets scroll',async()=>{
  const writeText=vi.fn().mockResolvedValue(undefined);Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText}});

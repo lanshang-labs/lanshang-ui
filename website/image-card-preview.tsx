@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {Dialog,ImageCard,MotionButton,Stack} from '../dist/index.js';
+import {Dialog,ImageCard,Stack} from '../dist/index.js';
 import './image-card-preview.css';
 
 function scene(width:number,height:number,sky:string,hill:string,front:string){
@@ -14,7 +14,7 @@ export function ImageCardPreview(){
  return <Stack gap="lg">
   <div className="docs-image-card-heading"><span>LANSHANG · IMAGE CARD</span><h3>让画面决定比例。</h3><p>与叠卡共用纸片边框和内嵌标题。完整显示，不再把横图塞进灰色方块。</p></div>
   <div className="docs-image-card-grid">{references.map((image,i)=><ImageCard key={image.src} {...image} index={String(i+1).padStart(2,'0')} onPreview={()=>setPreview(image)}/>)}</div>
-  <Dialog title={preview?.title} open={!!preview} onCancel={()=>setPreview(null)} footer={<MotionButton onClick={()=>setPreview(null)}>关闭</MotionButton>} width={760}>
+  <Dialog title={preview?.title} open={!!preview} onCancel={()=>setPreview(null)} footer={null} closeAriaLabel="关闭预览" width={760}>
    {preview&&<img className="docs-image-card-original" src={preview.src} alt={preview.alt}/>}
   </Dialog>
  </Stack>;

@@ -1,11 +1,15 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "noEmit": true
+    "noEmit": true,
+    "rootDir": "."
   },
   "include": [
     "examples",
-    "website"
+    "website",
+    "experiments/workbench",
+    "experiments/shadcn-dashboard/src",
+    "experiments/shadcn-dashboard/main.tsx"
   ],
   "exclude": [
     "examples/registry-consumer"

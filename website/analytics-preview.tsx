@@ -10,6 +10,7 @@ type Query={days:number;empty:boolean};
 export function AnalyticsPreview(){
   const [snapshot,setSnapshot]=useState<Query|null>(null),[kind,setKind]=useState<'line'|'area'|'column'|'bar'>('line');
   const [loading,setLoading]=useState(true),[error,setError]=useState<string>();
+  const host=useRef<HTMLElement>(null);
   const [fail,setFail]=useState(false),[requestedEmpty,setRequestedEmpty]=useState(false);
   const timer=useRef<ReturnType<typeof setTimeout>>(),lock=useRef(false),request=useRef<Query>({days:7,empty:false});
   function read(target:Query,simulateFailure=fail){
@@ -34,15 +35,19 @@ export function AnalyticsPreview(){
   const Plot=kind==='area'?AreaChart:kind==='column'?ColumnChart:kind==='bar'?BarChart:LineChart;
   return <div className="ls-analytics-example">
     <div className="ls-analytics-toolbar">
-      <ButtonGroup aria-label="统计时间范围">{[7,14].map(value=><RowActionButton key={value} disabled={loading} aria-pressed={days===value} onClick={()=>read({days:value,empty:requestedEmpty})}>近 {value} 天</RowActionButton>)}</ButtonGroup>
+      <ButtonGroup aria-label="统计时间范围">{[7,14].map(value=><RowActionButton key={value} aria-disabled={loading} aria-pressed={days===value} onClick={()=>read({days:value,empty:requestedEmpty})}>近 {value} 天</RowActionButton>)}</ButtonGroup>
       <Checkbox checked={fail} disabled={loading} onChange={e=>setFail(e.target.checked)}>模拟读取失败</Checkbox>
-      <Checkbox checked={requestedEmpty} disabled={loading} onChange={e=>{setRequestedEmpty(e.target.checked);read({days,empty:e.target.checked});}}>请求空结果</Checkbox>
-      <MotionButton disabled={loading} onClick={()=>{setSnapshot(null);read({days,empty:requestedEmpty});}}>重新首次加载</MotionButton>
-      <MotionButton motionIcon="refresh" aria-label="刷新统计" title="刷新统计" disabled={loading} onClick={()=>read({days,empty:requestedEmpty})}/>
+      <Checkbox checked={requestedEmpty} aria-disabled={loading} onChange={e=>{if(loading)return;setRequestedEmpty(e.target.checked);read({days,empty:e.target.checked});}}>请求空结果</Checkbox>
+      <MotionButton aria-disabled={loading} onClick={()=>{setSnapshot(null);read({days,empty:requestedEmpty});}}>重新首次加载</MotionButton>
+      <MotionButton motionIcon="refresh" aria-label="刷新统计" title="刷新统计" aria-disabled={loading} onClick={()=>read({days,empty:requestedEmpty})}/>
     </div>
-    <LoadingContainer className="ls-analytics-boundary" variant="page" aria-label="统计成功快照" hasContent={snapshot!==null} loading={loading} error={error}
+    <LoadingContainer ref={host} tabIndex={-1} className="ls-analytics-boundary" variant="page" aria-label="统计成功快照" hasContent={snapshot!==null} loading={loading} error={error}
       loadingLabel="正在读取统计概览" refreshingLabel="正在更新统计，保留上次完整快照"
-      onRetry={()=>{setFail(false);read(request.current,false);}}
+      onRetry={()=>{
+        const ownedFocus=host.current?.contains(document.activeElement)??false;
+        setFail(false);read(request.current,false);
+        if(ownedFocus)requestAnimationFrame(()=>{if(document.activeElement===document.body)host.current?.focus()});
+      }}
       skeleton={<div className="ls-analytics-placeholder"><div className="ls-analytics-metrics">{[0,1,2].map(key=><SkeletonBlock key={key} active paragraph={{rows:2}}/>)}</div><SkeletonBlock active paragraph={{rows:5}}/></div>}>
     <div className="ls-analytics-content"><div className="ls-analytics-metrics">
       <StatisticCard label="分集总数" value={empty?0:95} unit="集" description="当前项目 · 示例快照"/>

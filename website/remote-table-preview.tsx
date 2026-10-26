@@ -30,7 +30,7 @@ export function RemoteTablePreview(){
   <h3>异步分页与错误恢复</h3>
   <Space wrap>
    <SearchField aria-label="异步搜索项目" placeholder="输入项目或团队后按 Enter" value={input} onChange={setInput} onSearch={value=>load(1,value.trim())}/>
-   <RowActionButton motionIcon="refresh" disabled={loading} onClick={()=>load(result.page,result.query)}>刷新当前页</RowActionButton>
+   <RowActionButton motionIcon="refresh" disabled={loading} onClick={()=>load(result.page,result.query)} aria-label="刷新当前页" title="刷新当前页"/>
    <Checkbox checked={failNext} onChange={e=>setFailNext(e.target.checked)}>下次请求失败</Checkbox>
   </Space>
   <p className="docs-muted">模拟 650ms 延迟，无网络请求。加载时保留已有数据；失败后保留原页码与记录，重试成功才切换。</p>

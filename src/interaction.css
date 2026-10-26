@@ -42,27 +42,39 @@
 :is(.bui-navigation,.bui-nav-popup,.bui-top-nav) .sidebar-row:focus-visible:not(:disabled) {background:var(--hover);}
 /* Navigation keeps the current route visible while other destinations are explored. */
 :is(.bui-navigation,.bui-nav-popup,.bui-top-nav) .sidebar-row[aria-current=page]:is(:hover,:focus-visible) {background:var(--hover-2);}
+/* Persistent destinations keep their raised face under pointer and keyboard focus. */
+:root[data-theme] :is(.bui-navigation,.bui-nav-popup) .sidebar-row[aria-current=page]:is(:hover,:focus-visible) {background:var(--ui-item-selected);box-shadow:var(--ls-item-selected-shadow);}
 :is(.bui-navigation,.bui-nav-popup,.bui-top-nav) .sidebar-row {transition:background-color var(--ls-motion-state,150ms) var(--ls-ease-standard,ease),color var(--ls-motion-state,150ms) var(--ls-ease-standard,ease);transform:none;scale:1;}
 @media(prefers-reduced-motion:reduce) {:is(.bui-navigation,.bui-nav-popup,.bui-top-nav) .sidebar-row {transition:none;}}
 
-/* Selection remains legible; only pointer/keyboard exploration paints a menu row. */
-:root[data-theme] .ant-dropdown-menu-item-selected {color:var(--ui-text);font-weight:500;background:transparent;}
+/* Selected menu items share the persistent neutral selection surface. */
+:root[data-theme] .ant-dropdown-menu-item-selected:not(.ant-dropdown-menu-item-disabled) {color:var(--ui-text);font-weight:500;background:var(--ui-item-selected);box-shadow:var(--ls-item-selected-shadow);}
 :root[data-theme] .ant-dropdown-menu-item-selected .ant-dropdown-menu-title-content::after {content:"✓";margin-inline-start:16px;float:right;color:var(--ui-secondary);}
-:root[data-theme] .ant-dropdown-menu-item:not(.ant-dropdown-menu-item-disabled):is(:hover,:focus-visible) {background:color-mix(in srgb,var(--ui-selected) 45%,var(--ui-surface));}
+:root[data-theme] .ant-dropdown-menu-item:not(.ant-dropdown-menu-item-disabled):not(.ant-dropdown-menu-item-selected):is(:hover,:focus-visible,.ant-dropdown-menu-item-active) {background:var(--ui-item-hover);}
 
 /* Keep the active panel identifiable while exploring another tab. */
 :root[data-theme] .ant-tabs-tab-active .ant-tabs-tab-btn {text-shadow:none;}
 :root[data-theme] .ant-tabs-tab:not(.ant-tabs-tab-active):not(.ant-tabs-tab-disabled):is(:hover,:has(.ant-tabs-tab-btn:focus-visible)) {color:var(--ui-text);}
 
-:root[data-theme] .ant-tabs:not(.ant-tabs-top):not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-tab-active {background:var(--ui-selected);}
+:root[data-theme] .ant-tabs:not(:is(.ant-tabs-top,.ant-tabs-bottom)):not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-tab-active {background:var(--ui-item-selected);box-shadow:var(--ls-item-selected-shadow);}
 
-:root[data-theme] .ant-tabs:not(.ant-tabs-top):not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-ink-bar {display:none;}
+:root[data-theme] .ant-tabs:not(:is(.ant-tabs-top,.ant-tabs-bottom)):not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-ink-bar {display:none;}
 
 /* Compact content tabs share the navigation surface; card tabs retain their panel shape. */
-:root[data-theme] .ant-tabs:not(.ant-tabs-top):not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-tab {min-height:var(--ls-control-middle-height,32px);padding:4px 12px;margin-block:4px;border-radius:var(--ls-control-middle-radius,10px);}
-:root[data-theme] .ant-tabs.ant-tabs-small:not(.ant-tabs-top):not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-tab {min-height:var(--ls-control-small-height,26px);padding-inline:var(--ls-control-small-padding-inline,7px);border-radius:var(--ls-control-small-radius,8px);}
-:root[data-theme] .ant-tabs.ant-tabs-large:not(.ant-tabs-top):not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-tab {min-height:var(--ls-control-large-height,38px);padding-inline:var(--ls-control-large-padding-inline,14px);border-radius:var(--ls-control-large-radius,12px);}
-:root[data-theme] .ant-tabs:not(.ant-tabs-top):not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-tab + .ant-tabs-tab {margin-inline-start:8px;}
+:root[data-theme] .ant-tabs:not(:is(.ant-tabs-top,.ant-tabs-bottom)):not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-tab {min-height:var(--ls-control-middle-height,32px);padding:4px 12px;margin-block:4px;border-radius:var(--ls-control-middle-radius,10px);}
+:root[data-theme] .ant-tabs.ant-tabs-small:not(:is(.ant-tabs-top,.ant-tabs-bottom)):not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-tab {min-height:var(--ls-control-small-height,26px);padding-inline:var(--ls-control-small-padding-inline,7px);border-radius:var(--ls-control-small-radius,8px);}
+:root[data-theme] .ant-tabs.ant-tabs-large:not(:is(.ant-tabs-top,.ant-tabs-bottom)):not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-tab {min-height:var(--ls-control-large-height,38px);padding-inline:var(--ls-control-large-padding-inline,14px);border-radius:var(--ls-control-large-radius,12px);}
+:root[data-theme] .ant-tabs:not(:is(.ant-tabs-top,.ant-tabs-bottom)):not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-tab + .ant-tabs-tab {margin-inline-start:0;}
+:root[data-theme] .ant-tabs:not(:is(.ant-tabs-top,.ant-tabs-bottom)):not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-tab:not(.ant-tabs-tab-active):not(.ant-tabs-tab-disabled):hover {background:var(--ui-item-hover);}
+
+/* Popup destinations use the same navigation row, with native menu behavior. */
+:root[data-theme] .ls-menu-dropdown .ant-dropdown-menu :is(.ant-dropdown-menu-item,.ant-dropdown-menu-submenu-title) {min-height:var(--ls-control-middle-height,32px);padding:6px 8px;border-radius:var(--ls-control-middle-radius,10px);font-size:13px;line-height:20px;}
+:root[data-theme] .ls-menu-dropdown .ant-dropdown-menu {max-width:calc(100vw - 24px);}
+:root[data-theme] .ls-menu-dropdown .ant-dropdown-menu-title-content {min-width:0;white-space:normal;overflow-wrap:anywhere;}
+/* Overflow tabs are a native listbox, styled at the same density as other popup destinations. */
+:root[data-theme] .ant-tabs-dropdown-menu {max-width:calc(100vw - 24px);padding:4px;background:var(--ls-surface-face);border:1px solid var(--ls-surface-edge);border-radius:var(--ls-control-middle-popup-radius,12px);box-shadow:var(--ls-overlay-shadow);}
+:root[data-theme] .ant-tabs-dropdown-menu .ant-tabs-dropdown-menu-item {min-height:var(--ls-control-middle-height,32px);padding:6px 8px;border-radius:var(--ls-control-middle-radius,10px);font-size:13px;line-height:20px;white-space:normal;overflow-wrap:anywhere;}
+:root[data-theme] .ant-tabs-dropdown-menu .ant-tabs-dropdown-menu-item:not(.ant-tabs-dropdown-menu-item-disabled):is(:hover,.ant-tabs-dropdown-menu-item-active) {background:var(--ui-item-hover);}
 
 :root[data-theme] .ant-segmented-item:has(input:focus-visible) {outline:2px solid var(--ui-focus-ring);outline-offset:-2px;border-radius:999px;}
 :root[data-theme] .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {font-weight:600;}
@@ -107,10 +119,10 @@
 .bui-top-nav .sidebar-row[aria-current=page] .sidebar-copy {font-weight:500;}
 :root[data-theme=dark] .ls-nav-indicator {background:color-mix(in srgb,var(--ui-selected) 92%,var(--ui-text));box-shadow:none;}
 /* AntD retains ownership of tab roles, keyboard handling and indicator geometry. */
-:root[data-theme] .ant-tabs-top:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-nav-list {isolation:isolate;}
-:root[data-theme] .ant-tabs-top:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-tab {z-index:1;border-radius:999px;background:transparent;transition:color var(--ls-motion-state,150ms) var(--ls-ease-standard,ease);}
-:root[data-theme] .ant-tabs-top:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-tab-active {background:transparent;}
-:root[data-theme] .ant-tabs-top:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-ink-bar {display:block;top:4px;bottom:4px;height:auto;border-radius:999px;background:var(--ui-selected);z-index:0;pointer-events:none;transition:left var(--ls-motion-selection,280ms) var(--ls-ease-selection,ease),width var(--ls-motion-selection,280ms) var(--ls-ease-selection,ease),transform var(--ls-motion-selection,280ms) var(--ls-ease-selection,ease);}
+:root[data-theme] :is(.ant-tabs-top,.ant-tabs-bottom):not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-nav-list {isolation:isolate;}
+:root[data-theme] :is(.ant-tabs-top,.ant-tabs-bottom):not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-tab {z-index:1;border-radius:999px;background:transparent;transition:color var(--ls-motion-state,150ms) var(--ls-ease-standard,ease);}
+:root[data-theme] :is(.ant-tabs-top,.ant-tabs-bottom):not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-tab-active {background:transparent;}
+:root[data-theme] :is(.ant-tabs-top,.ant-tabs-bottom):not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-ink-bar {display:block;top:4px;bottom:4px;height:auto;border-radius:999px;background:var(--ui-selected);z-index:0;pointer-events:none;transition:left var(--ls-motion-selection,280ms) var(--ls-ease-selection,ease),width var(--ls-motion-selection,280ms) var(--ls-ease-selection,ease),transform var(--ls-motion-selection,280ms) var(--ls-ease-selection,ease);}
 :root[data-theme] .ant-tabs-tab-active .ant-tabs-tab-btn {font-weight:500;}
 .ls-disclosure-arrow {flex:none;color:var(--ui-secondary);transition:transform var(--ls-motion-chevron,200ms) var(--ls-ease-standard,ease);}
 .bui-task-rows .ls-task-row {transition:background-color var(--ls-motion-state,150ms) var(--ls-ease-standard,ease);}
@@ -119,7 +131,7 @@
 .bui-task-rows button[aria-expanded=true] {box-shadow:none;}
 .ls-task-row-details {transition:grid-template-rows var(--ls-motion-selection,280ms) var(--ls-ease-standard,ease),opacity var(--ls-motion-enter,180ms) var(--ls-ease-standard,ease);}
 @media(prefers-reduced-motion:reduce) {
- .ls-nav-indicator,.ls-disclosure-arrow,.bui-task-rows .ls-task-row,.bui-task-rows .ls-task-row-trigger,.ls-task-row-details,:root[data-theme] .ant-tabs-top:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-ink-bar {transition:none;}
+ .ls-nav-indicator,.ls-disclosure-arrow,.bui-task-rows .ls-task-row,.bui-task-rows .ls-task-row-trigger,.ls-task-row-details,:root[data-theme] :is(.ant-tabs-top,.ant-tabs-bottom):not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-ink-bar {transition:none;}
  .bui-task-rows * {animation:none!important;}
 }
 
@@ -167,18 +179,19 @@
 :root[data-theme=dark] .ls-radio-indicator,:root[data-theme=dark] .ant-segmented .ant-segmented-item-selected,:root[data-theme=dark] .ant-segmented .ant-segmented-thumb {background:color-mix(in srgb,var(--ui-selected) 92%,var(--ui-text));box-shadow:none;}
 @media(prefers-reduced-motion:reduce){.ls-radio-indicator,:root[data-theme] .ant-segmented .ant-segmented-thumb,:root[data-theme] .ant-segmented .ant-segmented-item {transition:none!important;}}
 
-/* Opening a menu may give its selected row rc-menu's active class. That is not hover. */
-:root[data-theme] .ant-dropdown-menu .ant-dropdown-menu-item-selected:not(:hover):not(:focus-visible) {background:transparent;}
+/* Keep route selection visible when pointer or keyboard focus returns to it. */
+:is(.bui-navigation,.bui-nav-popup) .sidebar-row[aria-current=page]:is(:hover,:focus-visible) {background:var(--ui-item-selected);}
+:is(.bui-navigation,.bui-nav-popup) .sidebar-row:focus-visible:not(:disabled):not([aria-current=page]) {background:var(--ui-item-hover);}
 /* One selection surface across horizontal navigation, tabs, segmented and radios. */
-:root[data-theme] .ant-tabs-top:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-nav-list {padding:3px;gap:2px;border-radius:999px;background:var(--ui-raised);}
-:root[data-theme] .ant-tabs-top:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-tab {margin:0;height:calc(var(--ls-control-middle-height,32px) - 6px);padding:0 12px;}
-:root[data-theme] .ant-tabs-top.ant-tabs-small:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-nav-list {padding:2px;}
-:root[data-theme] .ant-tabs-top.ant-tabs-small:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-tab {height:calc(var(--ls-control-small-height,26px) - 4px);padding-inline:var(--ls-control-small-padding-inline,7px);}
-:root[data-theme] .ant-tabs-top.ant-tabs-large:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-tab {height:calc(var(--ls-control-large-height,38px) - 6px);padding-inline:var(--ls-control-large-padding-inline,14px);}
-:root[data-theme] .ant-tabs-top:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-tab + .ant-tabs-tab {margin-inline-start:0;}
-:root[data-theme] .ant-tabs-top:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-ink-bar {top:3px;bottom:3px;background:var(--ui-surface);box-shadow:var(--ls-selection-shadow);}
-:root[data-theme] .ant-tabs-top.ant-tabs-small:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-ink-bar {top:2px;bottom:2px;}
-:root[data-theme=dark] .ant-tabs-top:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-ink-bar {background:color-mix(in srgb,var(--ui-selected) 92%,var(--ui-text));box-shadow:none;}
+:root[data-theme] :is(.ant-tabs-top,.ant-tabs-bottom):not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-nav-list {padding:3px;gap:2px;border-radius:999px;background:var(--ui-raised);}
+:root[data-theme] :is(.ant-tabs-top,.ant-tabs-bottom):not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-tab {margin:0;height:calc(var(--ls-control-middle-height,32px) - 6px);padding:0 12px;}
+:root[data-theme] :is(.ant-tabs-top,.ant-tabs-bottom).ant-tabs-small:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-nav-list {padding:2px;}
+:root[data-theme] :is(.ant-tabs-top,.ant-tabs-bottom).ant-tabs-small:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-tab {height:calc(var(--ls-control-small-height,26px) - 4px);padding-inline:var(--ls-control-small-padding-inline,7px);}
+:root[data-theme] :is(.ant-tabs-top,.ant-tabs-bottom).ant-tabs-large:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-tab {height:calc(var(--ls-control-large-height,38px) - 6px);padding-inline:var(--ls-control-large-padding-inline,14px);}
+:root[data-theme] :is(.ant-tabs-top,.ant-tabs-bottom):not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-tab + .ant-tabs-tab {margin-inline-start:0;}
+:root[data-theme] :is(.ant-tabs-top,.ant-tabs-bottom):not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-ink-bar {top:3px;bottom:3px;background:var(--ui-surface);box-shadow:var(--ls-selection-shadow);}
+:root[data-theme] :is(.ant-tabs-top,.ant-tabs-bottom).ant-tabs-small:not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-ink-bar {top:2px;bottom:2px;}
+:root[data-theme=dark] :is(.ant-tabs-top,.ant-tabs-bottom):not(.ant-tabs-card) > .ant-tabs-nav .ant-tabs-ink-bar {background:color-mix(in srgb,var(--ui-selected) 92%,var(--ui-text));box-shadow:none;}
 :root[data-theme] .ls-radio-group .ant-radio-button-wrapper-checked {font-weight:500;}
 
 /* Theme choices use the same persistent surface as other single-selection controls. */

@@ -112,8 +112,8 @@ export function ImageDeck({items,activeId,defaultActiveId,onActiveChange,expande
    <div className="ls-deck-footer">
     <div className="ls-deck-caption"><span className="ls-deck-position" role="status" aria-live="polite" aria-atomic="true">{open?`${items.length} 张图片`:`${String(index+1).padStart(2,'0')} / ${String(items.length).padStart(2,'0')}`}</span>{!open&&<span className="ls-deck-current-title">{current?.title??current?.alt}</span>}</div>
     <div className="ls-deck-actions">
-     {!open&&items.length>1&&<><HintTooltip title="上一张"><MotionButton type="text" aria-label="上一张图片" disabled={disabled} icon={<ChevronLeftOutlined/>} onClick={()=>select(index-1)}/></HintTooltip><HintTooltip title="下一张"><MotionButton type="text" aria-label="下一张图片" disabled={disabled} icon={<ChevronRightOutlined/>} onClick={()=>select(index+1)}/></HintTooltip><span className="ls-deck-divider" aria-hidden/></>}
-     <HintTooltip title={open?'收起图片':'展开图片'}><MotionButton ref={toggle} type="text" aria-label={open?'收起图片':'展开图片'} aria-expanded={open} aria-controls={panelId} disabled={disabled} icon={open?<CompressOutlined/>:<ExpandOutlined/>} onClick={()=>setOpen(!open)}/></HintTooltip>
+     {!open&&items.length>1&&<><HintTooltip title="上一张"><MotionButton className="ls-media-control" type="text" aria-label="上一张图片" disabled={disabled} icon={<ChevronLeftOutlined/>} onClick={()=>select(index-1)}/></HintTooltip><HintTooltip title="下一张"><MotionButton className="ls-media-control" type="text" aria-label="下一张图片" disabled={disabled} icon={<ChevronRightOutlined/>} onClick={()=>select(index+1)}/></HintTooltip><span className="ls-deck-divider" aria-hidden/></>}
+     <HintTooltip title={open?'收起图片':'展开图片'}><MotionButton className="ls-media-control" ref={toggle} type="text" aria-label={open?'收起图片':'展开图片'} aria-expanded={open} aria-controls={panelId} disabled={disabled} icon={open?<CompressOutlined/>:<ExpandOutlined/>} onClick={()=>setOpen(!open)}/></HintTooltip>
     </div>
    </div>
    <span id={helpId} className="ls-deck-sr">悬停图片后滚动滚轮切换，或使用方向键与上一张、下一张按钮。点击展开，Escape 收起。</span>

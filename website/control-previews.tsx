@@ -20,7 +20,7 @@ export function SkeletonPreview() {
     <div className="control-demo-panel" aria-label="项目摘要">
       {state === 'error' ? <ContentState role="alert" title="读取失败" description="保留筛选条件，重试只重新加载当前项目。" action={<MotionButton motionIcon="retry" onClick={() => { setState('loading'); later(() => setState('ready')); }}>重试读取</MotionButton>}/> : state === 'empty' ? <ContentState title="暂无项目" description="加载已经完成，没有可展示的记录。"/> :
             <Skeleton loading={state === 'loading'} avatar paragraph={{ rows: 2 }} template={custom ? <div className="control-demo-placeholder"><SkeletonAvatar active shape="square" size={40}/><SkeletonBlock active title={{ width: '45%' }} paragraph={{ rows: 2, width: ['100%', '65%'] }}/></div> : undefined}>
-        <div aria-busy={refreshing}><h3>设计系统工作台</h3><p>组件、使用约定与交互示例保持同步。</p><Inline><StatusTag tone="success">运行正常</StatusTag><MotionButton motionIcon="refresh" disabled={refreshing} onClick={() => { setRefreshing(true); later(() => setRefreshing(false)); }}>刷新摘要</MotionButton>{refreshing && <LoadingLabel label="正在刷新"/>}</Inline></div>
+        <div aria-busy={refreshing}><h3>设计系统工作台</h3><p>组件、使用约定与交互示例保持同步。</p><Inline><StatusTag tone="success">运行正常</StatusTag><MotionButton motionIcon="refresh" disabled={refreshing} onClick={() => { setRefreshing(true); later(() => setRefreshing(false)); }} aria-label="刷新摘要" title="刷新摘要"/>{refreshing && <LoadingLabel label="正在刷新"/>}</Inline></div>
       </Skeleton>}
     </div>
     <p className="docs-muted">首次加载延迟 150ms 显示骨架并预留空间；刷新保留现有内容。重试和刷新模拟耗时 700ms，不发送网络请求。</p>
@@ -32,10 +32,10 @@ export function ButtonPreview() {
     const later = useDemoTimer();
     function save() { if (lock.current)
         return; lock.current = true; setPending(true); setResult('正在保存'); later(() => { lock.current = false; setPending(false); setResult(fail ? '保存失败，内容已保留，可再次保存' : '保存成功'); }); }
-    return <div className="control-demo"><Inline><MotionButton motionIcon="save" type="primary" aria-label="保存修改" loading={pending} aria-busy={pending} onClick={save}>保存修改</MotionButton><MotionButton disabled={pending} onClick={() => setResult('已取消本次修改')}>取消</MotionButton><RowActionButton motionIcon="edit" onClick={() => setResult('已打开本地编辑示例')} disabled={pending}>编辑</RowActionButton><MotionButton motionIcon="delete" danger disabled>删除（无权限）</MotionButton></Inline>
+    return <div className="control-demo"><Inline><MotionButton motionIcon="save" type="primary" aria-label="保存修改" loading={pending} aria-busy={pending} onClick={save}>保存修改</MotionButton><MotionButton disabled={pending} onClick={() => setResult('已取消本次修改')}>取消</MotionButton><RowActionButton motionIcon="edit" onClick={() => setResult('已打开本地编辑示例')} disabled={pending} aria-label="编辑" title="编辑"/><MotionButton motionIcon="delete" danger disabled>删除（无权限）</MotionButton></Inline>
     <div role="group" aria-label="按钮样式与状态" style={{display:'grid',gap:12,marginTop:16}}>
       <Inline><MotionButton type="primary">主操作</MotionButton><MotionButton>次操作</MotionButton><MotionButton type="text">轻量操作</MotionButton><MotionButton danger>危险操作</MotionButton></Inline>
-      <Inline><MotionButton size="small">紧凑按钮</MotionButton><MotionButton size="middle">标准按钮</MotionButton><MotionButton size="large">大号按钮</MotionButton><MotionButton motionIcon="add" shape="circle" aria-label="添加项目"/></Inline>
+      <Inline><MotionButton size="small">紧凑按钮</MotionButton><MotionButton size="middle">标准按钮</MotionButton><MotionButton size="large">大号按钮</MotionButton><MotionButton motionIcon="add" shape="circle" aria-label="添加项目" title="添加项目"/></Inline>
       <Inline><MotionButton type="primary" loading aria-label="正在提交">正在提交</MotionButton><MotionButton loading aria-label="正在读取">正在读取</MotionButton><MotionButton type="primary" disabled>主操作不可用</MotionButton><MotionButton disabled>次操作不可用</MotionButton></Inline>
     </div>
     <label className="control-demo-switch"><ToggleSwitch checked={fail} disabled={pending} onChange={setFail}/> 模拟保存失败</label>
@@ -60,6 +60,10 @@ export function SelectPreview() {
     <Form layout="vertical"><Form.Item label="负责人团队" htmlFor="team-select" help={state === 'error' ? '选项读取失败，已保留当前选择。' : undefined} validateStatus={state === 'error' ? 'error' : undefined}>
       <Select id="team-select" value={value} onChange={setValue} allowClear showSearch optionFilterProp="label" placeholder="搜索或选择团队" loading={state === 'loading'} disabled={state !== 'ready'} options={state === 'empty' ? [] : options} style={{ width: '100%' }} notFoundContent="没有匹配的团队"/>
     </Form.Item></Form>
+    <div className="control-demo-grid">
+      <Form layout="vertical"><Form.Item label="错误状态选择器" htmlFor="team-select-error" validateStatus="error" help="该团队已不可用，请重新选择。"><Select id="team-select-error" status="error" aria-invalid="true" defaultValue="design" options={options} style={{width:'100%'}}/></Form.Item></Form>
+      <Form layout="vertical"><Form.Item label="警告状态选择器" htmlFor="team-select-warning" validateStatus="warning" help="该团队即将调整，请核对成员。"><Select id="team-select-warning" status="warning" defaultValue="design" options={options} style={{width:'100%'}}/></Form.Item></Form>
+    </div>
     {state === 'loading' && <LoadingLabel label="正在读取选项"/>}
     {state === 'empty' && <p role="status">暂无可选团队，请先添加团队。</p>}
     {state === 'error' && <MotionButton motionIcon="retry" onClick={() => { setState('loading'); later(() => setState('ready')); }}>重试选项</MotionButton>}

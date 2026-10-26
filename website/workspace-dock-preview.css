@@ -1,0 +1,15 @@
+.docs-dock-workspace{background:var(--ui-canvas)}
+.docs-dock-brand{display:grid;place-items:center;width:32px;height:32px;border-radius:10px;background:var(--ui-surface);box-shadow:var(--ls-selection-shadow-compact);font-weight:650}
+.docs-dock-context,.docs-dock-muted{font-size:12px;color:var(--ui-secondary)}
+.docs-dock-user{font-size:12px}
+.docs-dock-workspace .ls-select{width:180px}
+.docs-dock-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0}
+.docs-dock-heading h1{font-size:24px;letter-spacing:-.04em;margin:6px 0;font-weight:600}
+.docs-dock-heading p{font-size:10px;letter-spacing:.14em;margin:0;color:var(--ui-muted)}
+.docs-dock-view{min-width:0}
+.docs-dock-view[hidden]{display:none}
+.docs-dock-view .bui-surface-body{gap:20px}
+.docs-dock-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:18px}
+.docs-dock-version{font-size:28px;font-weight:550;letter-spacing:-.04em}
+.docs-dock-notice{font-size:12px;color:var(--ui-muted);margin:20px 0 0}
+@media(max-width:600px){.docs-dock-context,.docs-dock-user{display:none}.docs-dock-workspace .ls-workspace-header{gap:8px}.docs-dock-workspace .ls-select{width:150px}}

@@ -9,6 +9,14 @@ it('keeps navigation separate from the scrollable main landmark',()=>{
  expect(screen.getByRole('main').contains(screen.getByRole('button',{name:'Content action'}))).toBe(true);
  expect(screen.getByRole('main').textContent).not.toContain('Tabs');
 });
+it('places full-width bars outside the sidebar row and supports panel-owned scrolling',()=>{
+ const {container}=render(<WorkspaceLayout topbar={<WorkspaceHeader>Application bar</WorkspaceHeader>} sidebar={<aside>Navigation</aside>} header={<WorkspaceHeader>Workspace bar</WorkspaceHeader>} footer="Workspace status" contentMode="panels"><section>Panels</section></WorkspaceLayout>);
+ const root=container.firstElementChild!;expect(root.getAttribute('data-content-mode')).toBe('panels');
+ expect(root.querySelector(':scope > .ls-workspace-topbar')?.textContent).toBe('Application bar');
+ expect(root.querySelector(':scope > .ls-workspace-footer')?.textContent).toBe('Workspace status');
+ expect(root.querySelector('.ls-workspace-body > aside')?.textContent).toBe('Navigation');
+ expect(screen.getByRole('main').textContent).toBe('Panels');
+});
 it('restores the desktop sidebar preference after a narrow-screen collapse',()=>{
  let change:()=>void=()=>{};
  const query={matches:false,addEventListener:vi.fn((_:string,fn:()=>void)=>change=fn),removeEventListener:vi.fn()};

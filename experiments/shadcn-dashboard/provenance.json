@@ -1,0 +1,168 @@
+{
+  "template": "Shadcn Dashboard and Landing",
+  "author": "ShadcnStore",
+  "catalog": "https://21st.dev/@shadcnstore/templates/shadcn-dashboard-landing",
+  "repository": "https://github.com/shadcnstore/shadcn-dashboard-landing-template",
+  "commit": "65fc11224e96d56a62e224a58f7ed590aea5ac24",
+  "license": "MIT",
+  "licenseFile": "License.md",
+  "scope": "Vite dashboard-2 with selected UI and layout dependencies",
+  "files": [
+    {
+      "path": "License.md",
+      "sha256": "2b8ea9b26bf945b4e343ac6865e72549b41844c20eaa1c4177f40301ad1b7ba8"
+    },
+    {
+      "path": "vite-version/package.json",
+      "sha256": "45c021091c396e8dfd469356fd6573193b3f7907e7f1fc404773c690eca108f7"
+    },
+    {
+      "path": "vite-version/src/app/dashboard-2/components/customer-insights.tsx",
+      "sha256": "31496614f247c4b1e80bd86ab3aa882f0c8c39127841f20a0718ed83160276b7"
+    },
+    {
+      "path": "vite-version/src/app/dashboard-2/components/dashboard-header.tsx",
+      "sha256": "825922416f7bfe84e3120a5cf56e37afa3b207937cbbc8598ce0361e118a418a"
+    },
+    {
+      "path": "vite-version/src/app/dashboard-2/components/metrics-overview.tsx",
+      "sha256": "630b439afa3afe3b5e9a9909a652f27ff5b8ccfbd38acbb67ea5246504f0989e"
+    },
+    {
+      "path": "vite-version/src/app/dashboard-2/components/quick-actions.tsx",
+      "sha256": "0996ef8f48f9f6226da1e15dd3a16703f3d1d09848643fe5197e9a647340a10e"
+    },
+    {
+      "path": "vite-version/src/app/dashboard-2/components/recent-transactions.tsx",
+      "sha256": "81d87099a68f66770f26abbfbab19ec9c23c1cad88a72b9ea6346228d72b6f95"
+    },
+    {
+      "path": "vite-version/src/app/dashboard-2/components/revenue-breakdown.tsx",
+      "sha256": "c6163e032805cf9ff8c7af19e5bc5832514a84ecbe0c0894be75e3967935b29b"
+    },
+    {
+      "path": "vite-version/src/app/dashboard-2/components/sales-chart.tsx",
+      "sha256": "453ca577e29a7a131cd86734ef93e410626df28b50200891c21f723d08cd74b0"
+    },
+    {
+      "path": "vite-version/src/app/dashboard-2/components/top-products.tsx",
+      "sha256": "74a5a564f7fec4a8fdf167dafbf90fea68828ed82a6dca29b688c91bae8fa461"
+    },
+    {
+      "path": "vite-version/src/app/dashboard-2/data/dashboard-data.json",
+      "sha256": "997334c85cc69aac8f08b3fc51ac129a4c5488d72ca17c7c5c62104af82739b3"
+    },
+    {
+      "path": "vite-version/src/app/dashboard-2/page.tsx",
+      "sha256": "f036b803cf5cc03fe85051f89f1c8a240563dc682aec8ebb6d668c7b263c6742"
+    },
+    {
+      "path": "vite-version/src/components/app-sidebar.tsx",
+      "sha256": "9a4a74ffa6abfa929f65948164dc653935cc9481f28fe7aa84cd5ece06517c94"
+    },
+    {
+      "path": "vite-version/src/components/layouts/base-layout.tsx",
+      "sha256": "8eb82b6e95b51e13aa37ce5b6cbd457545ce209cc27f41d89f1a21eda0f6ee91"
+    },
+    {
+      "path": "vite-version/src/components/logo.tsx",
+      "sha256": "d7d393fed4b2f4255dcc1accab9865aa1a428df72cdb42471dce0211ffedfc39"
+    },
+    {
+      "path": "vite-version/src/components/nav-main.tsx",
+      "sha256": "cced1ed6350758250c08128eef945d82c6997108abb0bb1f79e047e5eab21c90"
+    },
+    {
+      "path": "vite-version/src/components/nav-user.tsx",
+      "sha256": "cdcfb62b09dac5497743536488f5f0858f2747ba5e0bc792f99caa6f9b6bb810"
+    },
+    {
+      "path": "vite-version/src/components/sidebar-notification.tsx",
+      "sha256": "eb3dc4d7a98ed553d172496102b88626f57213d3c3663fb5cf7fcfe13fb88733"
+    },
+    {
+      "path": "vite-version/src/components/site-header.tsx",
+      "sha256": "ab4aa3163f27f8adcc197a11172ce8e81ee92feaecd3ee0affeacc67d086051b"
+    },
+    {
+      "path": "vite-version/src/components/ui/avatar.tsx",
+      "sha256": "e637ab3522c01631eac2e456588ef301314e2bb7940ebf7cd96e698a868d47bc"
+    },
+    {
+      "path": "vite-version/src/components/ui/badge.tsx",
+      "sha256": "f41c11fc13e9a1f1b849349cb51b137ddd27de0a17c5339675c789d58f556cc4"
+    },
+    {
+      "path": "vite-version/src/components/ui/button.tsx",
+      "sha256": "82403231e33fd3d45b111e5e819df194cdfa7cef9a726770185724a60bd20932"
+    },
+    {
+      "path": "vite-version/src/components/ui/card.tsx",
+      "sha256": "78cdb63dff3ec7ef074ada630ff20a5d8004768b6cbe24ed134a8bfba12bafbb"
+    },
+    {
+      "path": "vite-version/src/components/ui/chart.tsx",
+      "sha256": "6b380e03757689b917277d1bac434f0b8b65908477846145db526860ad2a7e6b"
+    },
+    {
+      "path": "vite-version/src/components/ui/dropdown-menu.tsx",
+      "sha256": "65826642a4e6368f71c0701748b1fbd2939723e13803dad50cbe9b92a28038d5"
+    },
+    {
+      "path": "vite-version/src/components/ui/input.tsx",
+      "sha256": "6628e8fde207857b9ba08910d386eeea8213d7d745b4e0ae8b95332b52730db9"
+    },
+    {
+      "path": "vite-version/src/components/ui/progress.tsx",
+      "sha256": "9e36ca3f10bc56b69058d8edd342832b72c8c1b2d36cd142a0decb2445c3b724"
+    },
+    {
+      "path": "vite-version/src/components/ui/select.tsx",
+      "sha256": "550e7d09dda6d7d9f6740f60d95c178e9520fe63291533aa55c818e79b79660f"
+    },
+    {
+      "path": "vite-version/src/components/ui/separator.tsx",
+      "sha256": "e9dddbd8dbbc0eccd683306481b0f0bbc8e2b60ea97817416ebb9fe7fbbbdca8"
+    },
+    {
+      "path": "vite-version/src/components/ui/sheet.tsx",
+      "sha256": "fbe9b257fd95b9865e1aba651489899c959ed5c16cb8493fe8c2733f83b92ee1"
+    },
+    {
+      "path": "vite-version/src/components/ui/sidebar.tsx",
+      "sha256": "1036a305589cc22331e3dcf3b9d2b8fbe5dc0b6eb799b054a7e16b8271991164"
+    },
+    {
+      "path": "vite-version/src/components/ui/skeleton.tsx",
+      "sha256": "f2aea81d8baf2b621945382aabac150e3db40f20d19ac1abea7aff805f1dc33c"
+    },
+    {
+      "path": "vite-version/src/components/ui/tabs.tsx",
+      "sha256": "04898729c7430adad2dc2095d401a09fcaa0d1beb9441e4ff90747e3d200871d"
+    },
+    {
+      "path": "vite-version/src/components/ui/tooltip.tsx",
+      "sha256": "50d7b33805a88dc117e242b8545a15eae2ddf36c0c91d56b2c16a0cb65abeaeb"
+    },
+    {
+      "path": "vite-version/src/hooks/use-mobile.ts",
+      "sha256": "ad0936f84f1df79d3697bfbff9c18f8ad58431c1cbaf2359c6a853b0fcc9f28b"
+    },
+    {
+      "path": "vite-version/src/index.css",
+      "sha256": "878270fb8855e46fb2f20a8dee9beff26f2675a90af980503dbc65f466b77a61"
+    },
+    {
+      "path": "vite-version/src/lib/utils.ts",
+      "sha256": "fbd2db24d23fec0060ebfe45691faa7f731c2290d2445d30f20c5815be7841a6"
+    },
+    {
+      "path": "vite-version/src/components/ui/collapsible.tsx",
+      "sha256": "661444318605c90d19e47e4d21289a68b4c5f7f01782be70dafa80d3f7a4cd08"
+    },
+    {
+      "path": "vite-version/src/components/ui/table.tsx",
+      "sha256": "7b8c7a952cf49e78aafe5f628c3bd90f7e01bd5602eb5d3650bef5727a8186d7"
+    }
+  ]
+}

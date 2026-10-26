@@ -1,0 +1,9 @@
+{
+  "repository": "https://github.com/ibelick/motion-primitives",
+  "commit": "120f64f6ca60348e251f929e9c81f11ccbe45eda",
+  "files": {
+    "dock.tsx.txt": "5b624424f0fd8b66f174ecbd4e0d8c260f438d933963126bf34298eadcebf719",
+    "apple-style-dock.tsx.txt": "01c0c656fbed7ff294897c0b6867e48ea70db70deb1d92d81f98e96c4f9b64b9",
+    "LICENCE.md": "f668f5ef3635eb906f10b1eea9a32e449eb6e1a183ab6879ef6d56c0980dd2f3"
+  }
+}

@@ -16,7 +16,7 @@ function contrast(a:string,b:string){
 it.each(['light','dark'] as const)('keeps small semantic text readable on shared surfaces (%s)',mode=>{
  const palette=palettes[mode];
  for(const ink of ['text','secondary','muted'] as const){
-  for(const background of ['canvas','surface','raised','selected'] as const){
+  for(const background of ['canvas','surface','raised','selected','item-hover','item-selected'] as const){
    expect(contrast(palette[ink],palette[background]),`${mode} ${ink} on ${background}`).toBeGreaterThanOrEqual(4.5);
   }
  }

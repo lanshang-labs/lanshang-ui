@@ -1,17 +1,17 @@
 .ls-loading-container{min-width:0;color:var(--ui-text);font-family:var(--ds-font);overflow-wrap:anywhere;--ls-loading-stage-height:180px}
-.ls-loading-container[data-variant=block]{border:1px solid var(--ls-surface-edge,var(--ui-line));border-radius:14px;background:var(--ls-surface-face,var(--ui-surface));box-shadow:var(--ls-surface-shadow)}
+.ls-loading-container[data-variant=block]{border:1px solid var(--ls-surface-edge,var(--ui-line));border-radius:var(--ls-control-middle-popup-radius,12px);background:var(--ls-surface-face,var(--ui-surface));box-shadow:var(--ls-surface-shadow)}
 .ls-loading-container[data-variant=page]{--ls-loading-stage-height:320px}
-.ls-loading-container-header{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:56px;padding:12px 20px;border-bottom:1px solid var(--ui-line)}
+.ls-loading-container-header{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:56px;padding:12px 16px;border-bottom:1px solid var(--ui-line)}
 .ls-loading-container[data-variant=page]>.ls-loading-container-header{padding:0 0 16px;min-height:48px}
 .ls-loading-container-header>h2,.ls-loading-container-header>h3{margin:0;min-width:0;font-size:14px;font-weight:600;line-height:1.5}
 .ls-loading-container[data-variant=page]>.ls-loading-container-header>h2{font-size:20px;letter-spacing:-.02em}
 .ls-loading-container-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:8px;margin-left:auto;flex:none;max-width:100%}
 .ls-loading-container-stage{position:relative;min-width:0;min-height:var(--ls-loading-stage-height)}
-.ls-loading-container-body{padding:20px;min-width:0}
+.ls-loading-container-body{padding:16px;min-width:0}
 .ls-loading-container-body[hidden]{display:none}
 .ls-loading-container[data-variant=page]>.ls-loading-container-stage>.ls-loading-container-body{padding:20px 0 0}
 .ls-loading-container-notice{min-width:0}
-.ls-loading-container-notice[data-visible=true]{padding:14px 20px 0}
+.ls-loading-container-notice[data-visible=true]{padding:12px 16px 0}
 .ls-loading-container[data-variant=page]>.ls-loading-container-stage>.ls-loading-container-notice[data-visible=true]{padding-inline:0}
 .ls-loading-container-notice[data-full=true]{display:flex;align-items:center;justify-content:center;min-height:var(--ls-loading-stage-height);padding:24px}
 .ls-loading-container-pending{min-width:0;max-width:100%;font-size:13px}

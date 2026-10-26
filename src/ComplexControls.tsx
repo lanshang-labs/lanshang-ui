@@ -13,6 +13,7 @@ function useCloseLabel(open:boolean|undefined,label:string,selector:string){
    const button=document.querySelector(`.${scope} ${selector}`);
    if(!button)return false;
    button.setAttribute('aria-label',label);
+   button.setAttribute('title',label);
    return true;
   };
   if(update())return;

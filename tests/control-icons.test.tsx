@@ -66,17 +66,17 @@ it('keeps pagination jump behavior with the shared icon',()=>{
  view.rerender(<Pagination total={180} pageSize={5} showSizeChanger={{suffixIcon:<span data-testid="caller-size-arrow">自定义</span>}}/>);
  expect(screen.getByTestId('caller-size-arrow')).toBeTruthy();
 });
-it('keeps table pagination at the standard size unless the caller requests compact paging',()=>{
+it('uses compact table pagination while preserving an explicit standard size and page changes',()=>{
  const rows=Array.from({length:6},(_,index)=>({id:index,name:`项目 ${index+1}`}));
  const props={rowKey:'id' as const,columns:[{title:'项目',dataIndex:'name'}],dataSource:rows};
  const view=render(<DataTable {...props} pagination={{pageSize:2,showSizeChanger:true}}/>);
- expect(view.container.querySelector('.ant-pagination-mini')).toBeNull();
- expect(view.container.querySelector('.ant-pagination-options-size-changer.ant-select-sm')).toBeNull();
- fireEvent.click(view.container.querySelector('.ant-pagination-next button')!);
- expect(screen.getByText('项目 3')).toBeTruthy();
- view.rerender(<DataTable {...props} pagination={{pageSize:2,showSizeChanger:true,size:'small'}}/>);
  expect(view.container.querySelector('.ant-pagination-mini')).toBeTruthy();
  expect(view.container.querySelector('.ant-pagination-options-size-changer.ant-select-sm')).toBeTruthy();
+ fireEvent.click(view.container.querySelector('.ant-pagination-next button')!);
+ expect(screen.getByText('项目 3')).toBeTruthy();
+ view.rerender(<DataTable {...props} pagination={{pageSize:2,showSizeChanger:true,size:'default'}}/>);
+ expect(view.container.querySelector('.ant-pagination-mini')).toBeNull();
+ expect(view.container.querySelector('.ant-pagination-options-size-changer.ant-select-sm')).toBeNull();
 });
 it('expands exactly once without invoking row click and preserves custom expansion',()=>{
  const expand=vi.fn(),row=vi.fn();const props={rowKey:'id',dataSource:[{id:'a',name:'A'}],columns:[{title:'名称',dataIndex:'name'}],pagination:false as const,onRow:()=>({onClick:row}),expandable:{expandedRowRender:()=> <p>Details</p>,onExpand:expand}};

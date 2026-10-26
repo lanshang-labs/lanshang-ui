@@ -9,7 +9,8 @@ function ListHarness(){const [query,setQuery]=useState(''),[selected,setSelected
 
 it('hides stale detail and editing during loading, and exposes retry on failure',()=>{
  const retry=vi.fn();const {rerender}=render(<DetailBlock state="loading"/>);
- expect(screen.getByRole('status').getAttribute('aria-busy')).toBe('true');
+ expect(screen.getByRole('status').textContent).toContain('正在加载');
+ expect(screen.getByRole('status').closest('[aria-busy="true"]')).toBeNull();
  expect(screen.queryByRole('button',{name:'编辑项目'})).toBeNull();
  rerender(<DetailBlock state="error" onRetry={retry}/>);
  fireEvent.click(screen.getByRole('button',{name:'重新加载'}));expect(retry).toHaveBeenCalledOnce();

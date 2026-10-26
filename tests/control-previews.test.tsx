@@ -66,7 +66,7 @@ it('validates required input, focuses errors, submits and resets',async()=>{
 });
 it('selects by keyboard, preserves selection on failure and retries',async()=>{
  render(<SelectPreview/>);
- const input=screen.getByRole('combobox');fireEvent.keyDown(input,{key:'ArrowDown',keyCode:40});
+ const input=screen.getByRole('combobox',{name:'负责人团队'});fireEvent.keyDown(input,{key:'ArrowDown',keyCode:40});
  await screen.findByRole('listbox');fireEvent.keyDown(input,{key:'Enter',keyCode:13});
  await waitFor(()=>expect(screen.getByText('当前选择：设计团队')).toBeTruthy());
  fireEvent.click(screen.getByRole('button',{name:'选项失败'}));expect((input as HTMLInputElement).disabled).toBe(true);

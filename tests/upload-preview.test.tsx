@@ -49,14 +49,15 @@ it('isolates simultaneous files and ignores an old attempt after cancel and retr
 it('keeps duplicate filenames independent and long filenames out of visible action labels',()=>{
  render(<UploadPreview/>);fireEvent.click(screen.getByRole('button',{name:'添加长文件名样例'}));fireEvent.click(screen.getByRole('button',{name:'添加模拟图片与文档'}));
  const names=screen.getAllByRole('article');expect(names).toHaveLength(4);
- const long=screen.getByRole('button',{name:/预览 跨区域交付说明/});expect(long.textContent?.replace(/\s/g,'')).toBe('预览');
+ const long=screen.getByRole('button',{name:/预览 跨区域交付说明/});expect(long.textContent?.trim()).toBe('');expect(long.querySelector('.ls-motion-icon')).toBeTruthy();expect(long.getAttribute('title')).toBe('预览');
  fireEvent.click(screen.getAllByRole('button',{name:'取消上传 预览图片.png'})[0]);act(()=>vi.advanceTimersByTime(1600));
  const bars=screen.getAllByRole('progressbar',{name:'预览图片.png'});expect(bars[0].getAttribute('aria-valuetext')).toContain('已取消');expect(bars[1].getAttribute('aria-valuetext')).toContain('已完成');
 });
-it('returns focus to the preview trigger after closing while uploads finish',()=>{
+it('returns focus to the preview trigger after closing while uploads finish',async()=>{
  render(<UploadPreview/>);fireEvent.click(screen.getByRole('button',{name:'添加模拟图片与文档'}));
- const preview=screen.getByRole('button',{name:'预览 交付说明.txt'});preview.focus();fireEvent.click(preview);act(()=>vi.advanceTimersByTime(2000));
- fireEvent.click(screen.getByRole('button',{name:'关闭预览'}));act(()=>vi.advanceTimersByTime(1000));
+ const preview=screen.getByRole('button',{name:'预览 交付说明.txt'});preview.focus();fireEvent.click(preview);await act(async()=>{vi.advanceTimersByTime(2000)});
+ const close=screen.getByRole('button',{name:'关闭预览'});expect(document.querySelector('.ant-modal-footer')).toBeNull();expect(close.getAttribute('title')).toBe('关闭预览');
+ fireEvent.click(close);act(()=>vi.advanceTimersByTime(1000));
  expect(document.activeElement).toBe(preview);
 });
 it('targets mixed states and retains batch focus without restarting completed files',()=>{

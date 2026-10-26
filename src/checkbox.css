@@ -3,8 +3,13 @@
 :root[data-theme] .ant-checkbox {
  top:0;align-self:center;
 }
+/* The visible square is compact; the native input retains a 24px hit area. */
+:root[data-theme] .ant-checkbox-wrapper {min-height:24px;}
+:root[data-theme] .ant-checkbox .ant-checkbox-input {
+ inset:-4px;width:calc(100% + 8px);height:calc(100% + 8px);
+}
 :root[data-theme] .ant-checkbox .ant-checkbox-inner {
- width:20px;height:20px;border-radius:7px;
+ width:var(--ls-checkbox-size,16px);height:var(--ls-checkbox-size,16px);border-radius:var(--ls-checkbox-radius,5px);
  border:1px solid var(--ls-surface-edge,var(--ui-line-strong));
  background:var(--ls-surface-face,var(--ui-surface));
  box-shadow:var(--ls-surface-shadow);
@@ -18,7 +23,7 @@
  background:var(--ui-text);border-color:var(--ui-text);box-shadow:none;
 }
 :root[data-theme] .ant-checkbox .ant-checkbox-inner::after {
- content:"";position:absolute;inset:auto;left:50%;top:50%;width:14px;height:14px;
+ content:"";position:absolute;inset:auto;left:50%;top:50%;width:12px;height:12px;
  border:0;margin:0;transform:translate(-50%,-50%);opacity:0;
  background:var(--ui-surface);
  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='m3 8 3.3 3.2L13 4.8' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;
@@ -26,7 +31,7 @@
 }
 :root[data-theme] .ant-checkbox-checked .ant-checkbox-inner::after {opacity:1;}
 :root[data-theme] .ant-checkbox-indeterminate .ant-checkbox-inner::after {
- width:10px;height:2.5px;border-radius:999px;mask:none;opacity:1;
+ width:8px;height:2px;border-radius:999px;mask:none;opacity:1;
 }
 /* No AntD check zoom or expanding perimeter. */
 :root[data-theme] .ant-checkbox::after {display:none;}
@@ -34,7 +39,7 @@
  background:var(--ui-raised);border-color:var(--ui-line);box-shadow:none;
 }
 :root[data-theme] .ant-checkbox-disabled .ant-checkbox-inner::after {background:var(--ui-muted);}
-:root[data-theme] .ant-checkbox-wrapper > span:last-child {padding-inline:9px;}
+:root[data-theme] .ant-checkbox-wrapper > span:last-child {padding-inline:6px;}
 @media(prefers-reduced-motion:reduce){
  :root[data-theme] .ant-checkbox .ant-checkbox-inner,:root[data-theme] .ant-checkbox .ant-checkbox-inner::after{transition:none;}
 }

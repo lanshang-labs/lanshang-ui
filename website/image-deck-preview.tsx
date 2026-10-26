@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {Dialog,ImageDeck,Inline,MotionButton,SegmentedControl,Stack,type ImageDeckItem} from '../dist/index.js';
+import {Dialog,ImageDeck,Inline,SegmentedControl,Stack,type ImageDeckItem} from '../dist/index.js';
 import './image-deck-preview.css';
 
 // Local vector images keep this example usable offline without business resources.
@@ -18,7 +18,7 @@ export function ImageDeckPreview(){
  return <Stack gap="xl">
   <Inline style={{justifyContent:'space-between',alignItems:'flex-end'}}><div className="docs-deck-intro"><span className="docs-deck-eyebrow">L A N S H A N G · I M A G E  D E C K</span><h3>把一组画面，收进一叠卡片。</h3><p>滚轮翻到下一张，点击叠卡舒展开来。</p></div><SegmentedControl aria-label="预览容器" value={container} onChange={value=>setContainer(String(value))} options={[{label:'宽容器',value:'fluid'},{label:'窄容器',value:'card'}]}/></Inline>
   <div style={{width:container==='card'?280:'100%',maxWidth:'100%',alignSelf:'center'}}><ImageDeck aria-label="山间四时" items={images} cardWidth={228} onImageClick={setPreview}/></div>
-  <Dialog title={preview?.title} open={!!preview} onCancel={()=>setPreview(null)} footer={<MotionButton onClick={()=>setPreview(null)}>关闭</MotionButton>} width={520}>
+  <Dialog title={preview?.title} open={!!preview} onCancel={()=>setPreview(null)} footer={null} closeAriaLabel="关闭预览" width={520}>
    {preview&&<img className="docs-deck-original" src={preview.src} alt={preview.alt}/>}
   </Dialog>
  </Stack>;

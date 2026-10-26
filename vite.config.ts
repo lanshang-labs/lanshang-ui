@@ -5,8 +5,10 @@ import {fileURLToPath} from "node:url";
 // own output elsewhere so its watcher does not ignore those package modules.
 const packageBuildDir=fileURLToPath(new URL("./dist/",import.meta.url));
 let packageReload:ReturnType<typeof setTimeout>|undefined;
-export default defineConfig({plugins:[react(),{name:"docs-package-build-reload",hotUpdate({file,server}){
+export default defineConfig({plugins:[react(),{name:"docs-package-build-reload",hotUpdate({file,server,modules}){
  if(!file.startsWith(packageBuildDir))return;
+ // Filtering HMR boundaries must not keep stale transformed package modules.
+ for(const module of modules)this.environment.moduleGraph.invalidateModule(module);
  // A package build rewrites many modules; reload once after the write burst.
  clearTimeout(packageReload);
  packageReload=setTimeout(()=>server.ws.send({type:"full-reload"}),800);

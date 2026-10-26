@@ -26,7 +26,7 @@ export function OverlayControlsPreview(){
  function close(){setPopup(null);setKind(null)}
  const afterClose=()=>opener.current?.isConnected&&opener.current.focus();
  return <Stack><Inline><Button onClick={e=>{opener.current=e.currentTarget;setKind('modal')}}>Modal 内控件</Button><Button onClick={e=>{opener.current=e.currentTarget;setKind('drawer')}}>Drawer 内控件</Button></Inline>
- <Modal destroyOnClose rootClassName="ls-overlay-demo-popup" title="Modal 内的选择与操作" open={kind==='modal'} keyboard={!popup} maskClosable={!popup} onCancel={close} focusTriggerAfterClose={false} afterClose={afterClose} afterOpenChange={open=>{if(open)select.current?.focus()}} footer={<MotionButton motionIcon="close" ref={closeButton} onClick={close}>关闭控件示例</MotionButton>}>{content}</Modal>
- <Drawer destroyOnClose rootClassName="ls-overlay-demo-popup" title="Drawer 内的选择与操作" open={kind==='drawer'} width="min(460px,100vw)" keyboard={!popup} maskClosable={!popup} onClose={close} afterOpenChange={open=>{if(open)select.current?.focus();else afterClose()}} footer={<MotionButton motionIcon="close" ref={closeButton} onClick={close}>关闭控件示例</MotionButton>}>{content}</Drawer>
+ <Modal destroyOnClose rootClassName="ls-overlay-demo-popup" title="Modal 内的选择与操作" open={kind==='modal'} keyboard={!popup} maskClosable={!popup} onCancel={close} focusTriggerAfterClose={false} afterClose={afterClose} afterOpenChange={open=>{if(open)select.current?.focus()}} footer={<MotionButton ref={closeButton} onClick={close} aria-label="关闭控件示例" title="关闭控件示例">关闭控件示例</MotionButton>}>{content}</Modal>
+ <Drawer destroyOnClose rootClassName="ls-overlay-demo-popup" title="Drawer 内的选择与操作" open={kind==='drawer'} width="min(460px,100vw)" keyboard={!popup} maskClosable={!popup} onClose={close} afterOpenChange={open=>{if(open)select.current?.focus();else afterClose()}} footer={<MotionButton ref={closeButton} onClick={close} aria-label="关闭控件示例" title="关闭控件示例">关闭控件示例</MotionButton>}>{content}</Drawer>
  </Stack>;
 }

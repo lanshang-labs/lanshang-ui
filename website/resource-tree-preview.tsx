@@ -20,11 +20,11 @@ export function ResourceTreePreview(){
  <Checkbox checked={narrow} onChange={e=>setNarrow(e.target.checked)}>窄面板 220px</Checkbox>
  <RowActionButton onClick={()=>{setExpanded(stress?['level-1','level-2','level-3','level-4','level-5']:['connection','database','tables']);requestAnimationFrame(()=>tree.current?.scrollTo({key:selected[0]}));}}>定位选中项</RowActionButton>
  </div>
- <div style={{width:'100%',maxWidth:narrow?220:320,boxSizing:'border-box',padding:12,border:'1px solid var(--ls-surface-edge)',borderRadius:14,background:'var(--ls-surface-face)',boxShadow:'var(--ls-surface-shadow)'}}>
+ <div style={{width:'100%',maxWidth:narrow?220:320,boxSizing:'border-box',padding:12,border:'1px solid var(--ui-shell-line,var(--ui-line))',borderRadius:14,background:'var(--ui-shell-sidebar,var(--ui-raised))'}}>
  <ResourceTree ref={tree} selectedKeys={selected} onSelect={keys=>setSelected(keys)} expandedKeys={expanded} onExpand={keys=>setExpanded(keys)} key={String(stress)} defaultExpandedKeys={stress?['level-1','level-2','level-3','level-4','level-5']:['connection','database','tables']} defaultSelectedKeys={stress?['deep-leaf']:['projects']} treeData={stress?[nested(1)]:[
  {key:'connection',title:'本地开发',icon:<ResourceIcon kind="database"/>,children:[
  {key:'database',title:'workspace',icon:<ResourceIcon kind="database"/>,children:[
- {key:'tables',title:'表',icon:<ResourceIcon kind="folder"/>,children:['projects','documents','members'].map(key=>({key,title:key,icon:<ResourceIcon kind="table"/>}))}
+ {key:'tables',title:'表',icon:<ResourceIcon kind="folder"/>,children:[...['projects','documents','members'].map(key=>({key,title:key,icon:<ResourceIcon kind="table"/>})),{key:'restricted',title:'受限资源',disabled:true,icon:<ResourceIcon kind="table"/>}]}
  ]}]}]}/>
  </div>
  </div>;

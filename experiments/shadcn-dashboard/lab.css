@@ -1,0 +1,12 @@
+/* Integration fixes only. The template's classes, palette and typography live upstream. */
+:root{--font-inter:"Inter Variable","Noto Sans SC Variable",system-ui,sans-serif}
+html.dark{color-scheme:dark}
+body{margin:0;min-width:320px}
+[data-slot=sidebar-inset]{min-width:0}
+.sd-ant-table-wrapper,.sd-ant-table-container{min-width:0}
+.sd-ant-app{color:var(--foreground)}
+/* Embedded and mobile sections must scroll their own wide tables. */
+@media(max-width:640px){[data-slot=card-header].flex-row{flex-wrap:wrap;gap:1rem}[data-slot=card-header].flex-row>div{min-width:0}.sd-ant-modal{max-width:calc(100vw - 24px)}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:0s!important;transition-duration:0s!important;scroll-behavior:auto!important}}
+
+.sd-ant-app a{color:inherit}
