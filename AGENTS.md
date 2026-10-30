@@ -1,5 +1,7 @@
 # Lanshang UI
 
+- 前端接手先读 [统一接入指南](doc/frontend.md) 和项目 Design.md；默认采用 Lanshang，项目明确的差异在声明范围内执行，未声明部分沿用公共默认。
+- 本仓库工程入口见 [Design.md](Design.md)；样板、实验室及本地候选的边界见 [目录说明](doc/showcases.md)。
 - 本仓库拥有公共视觉 tokens、Provider 和通用展示组件；业务请求、权限、状态机归消费者。
 - 保留 Beautiful UI 的来源、原始快照和 MIT 声明。
 - 使用 npm ci / npm test / npm run build / npm pack；验证独立包和平台消费者。

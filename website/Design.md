@@ -1,6 +1,22 @@
+---
+schema_version: devctl.design.v1alpha1
+project: lanshang-ui-docs
+platform: web
+authority:
+  implementation: main.tsx
+routes:
+  implementation: main.tsx
+read_order:
+  - Design.md
+  - main.tsx
+  - catalog.tsx
+---
+
 # Lanshang UI 展示站结构
 
 展示站本身是 Lanshang UI 的消费者。它展示组件时必须保留真实键盘、禁用、浮层和主题行为；站点外壳优先使用组件包提供的控件，普通链接和标题继续使用原生语义元素。
+
+公共接手与默认规则见[前端指南](../doc/frontend.md)、[设计准则](../doc/design.md)。本页保留展示站的实现说明与消费约定；项目 Design.md 明确的差异在声明范围内执行，未声明部分沿用公共默认。站点的目录、断点和源码展示排布不强制成为业务页面模板。仓库级依赖与预览从根 Design.md 单独读取，本目录没有独立预览声明。
 
 
 ## 表面与空间层级

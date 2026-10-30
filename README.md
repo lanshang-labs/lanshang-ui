@@ -2,6 +2,8 @@
 
 `@lanshang-labs/ui` 是基于 Ant Design 5、Beautiful UI 适配源码和 Iconoir 的共享设计系统。当前验证 React 18.3.1 / AntD 5.22.5；尚未验证 AntD 6 或 React 19。
 
+AI 和新项目先读 [Lanshang 前端接入指南](doc/frontend.md)。默认采用 Lanshang，项目可在自己的 Design.md 正文中维护差异，未声明部分沿用公共默认。Codex 可使用可选的 [devctl-design Skill](skills/devctl-design/SKILL.md)；仓库自身的工程入口见 [Design.md](Design.md)。
+
 ## 接入
 
 ```tsx

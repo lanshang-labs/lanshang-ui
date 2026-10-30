@@ -1,0 +1,4 @@
+interface:
+  display_name: "devctl design"
+  short_description: "统一前端开发接手：读取项目设计声明、Lanshang 规范和原生验证入口。"
+  default_prompt: "使用 $devctl-design，以 Lanshang UI 为默认，遵守项目 Design.md 中的差异，完成前端开发并验证实际页面效果。"
